@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if lte IE 7 ]><html lang="en" class="ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"><![endif]-->
+<!--[if (gt IE 8)|!(IE)]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <title>TYSO French form</title>
+        <link href="frank.css" rel="stylesheet" type="text/css" />
+        
+        <link href="https://fonts.googleapis.com/css?family=Coiny|Dosis|Gloria+Hallelujah|Laila" rel="stylesheet">
+        <!--<link href="example.css" rel="stylesheet" type="text/css" />-->
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+       	
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script></script>
+        
+        <style>
+	
+
+
+		.font1
+		{
+			font-family: 'Coiny', cursive;
+		}
+		.font2
+		{
+			font-family: 'Dosis', sans-serif;
+		}
+		
+		#formdiv
+		{
+			padding:2em;
+			text-align:center;
+			margin:0 auto;
+			
+		}
+		form 
+		{
+			display: inline-block;
+			text-align:left;
+		}
+		.ques
+		{
+			font-family: 'Gloria Hallelujah', cursive;
+			font-size:1.1em;
+		}
+		
+		ul
+		{
+			line-height:1.5em;
+			padding-left:1em;
+				
+		}
+		li
+		{
+			list-style-type:none;
+			padding-left:1em;
+			
+		}
+		.space
+		{
+			padding-left:0.6em;
+			font-family: 'Laila', serif;
+		}
+		
+		@media screen and (min-width: 768px){}
+		
+		@media screen and (max-width: 767px){
+			
+			
+			
+			} 
+			
+		@media all and (orientation:landscape){}
+			
+			
+		</style>
+    </head>
+    <body>
+    <div id="formdiv">
+    	<form action="http://tysoyoga.com/forms/process.php" method="post">
+		
+		<input type="hidden" name="form_tools_form_id" value="1" />
+        	<p class="ques">Nom complet <input type="text" name="full_name"></p>
+            
+            <p class="ques">Nom de l'entreprise <input type="text" name="company_name"></p>
+        
+        	<p class="ques">Tapis de yoga disponible dans l’espace: <input type="text" name="mats"></p>
+           
+           
+            <p class="ques">Quel est l’objectif recherché dans la classe de yoga? </p>
+            
+            <p>
+            	<ul>
+                	<li><input type="checkbox" name="goal[]" value="Balance"><span class="space">Balance esprit et corps</span> </li>
+                    <li><input type="checkbox" name="goal[]" value="Force"><span class="space">Force physique</span> </li>
+                    <li><input type="checkbox" name="goal[]" value="Concentration"><span class="space">Amélioration de la concentration</span></li>
+                    <li><input type="checkbox" name="goal[]" value="Conscience"><span class="space">Travailler sur la pleine conscience</span> </li>
+                    <li><input type="checkbox" name="goal[]" value="Team building"><span class="space">Activités de "team building"</span> </li>
+                    <li><input type="checkbox" name="goal[]" value="Leadership"><span class="space">Ateliers sur le leadership en entreprise</span> </li>
+                    <li><input type="checkbox" name="goal[]" value="Intro to yoga"><span class="space">Introduction au yoga</span> </li>
+                    <li><input type="checkbox" name="goal[]" value="Intro to meditation"><span class="space">Introduction à la méditation</span> </li>
+                </ul>
+            </p>
+            
+            
+            <p class="ques"> Séries de classes:</p>
+            	<p>
+                	<ul>
+                    	<li><input type="checkbox" name="classes[]" value="Une classe"><span class="space">Une classe</span> </li>
+                        <li><input type="checkbox" name="classes[]" value="5 semaines"><span class="space">5 semaines</span> </li>
+                        <li><input type="checkbox" name="classes[]" value="10 semaines"><span class="space">10 semaines</span> </li>
+                        <li><input type="checkbox" name="classes[]" value="20 semaines"><span class="space">20 semaines</span> </li>
+                    </ul>
+                </p>
+                
+            
+           
+            
+        	<input type="submit"/>
+        
+        </form>
+    </div>  
+        <script></script>
+    </body>
+</html>

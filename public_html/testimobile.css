@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body
+			{
+				
+				
+				background: rgba(146, 222, 95, .5);
+				
+			}
+			.logo
+{
+	padding:0;
+	margin:0;
+	height:50px;
+	position:relative;
+	left:100px;
+	
+}
+h1
+{
+	text-align:center;
+	color:#043110;
+	font-family: 'Indie Flower', cursive;
+	font-weight:bold;
+	padding-top:60px;
+	
+}
+.icon
+{
+	height:30px;
+	position:relative;
+	top:-3px;
+	padding-top:10px;
+}
+.text
+{
+	position:relative;
+	padding-top:10px;
+	margin-top:10px;
+	
+}
+
+.testimonials
+{
+	
+	padding-top:130px;
+	
+	
+}
+
+
+#deco1
+{
+	
+	display:none;
+	
+}
+#deco2
+{
+	
+	display:none;
+	
+}

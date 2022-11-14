@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<!--[if lte IE 7 ]><html lang="en" class="ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"><![endif]-->
+<!--[if (gt IE 8)|!(IE)]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <title>TYSO yoga</title>
+        <link href="frank.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+        <!--<link href="example.css" rel="stylesheet" type="text/css" />-->
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <script src="respond.js"></script>
+
+        <!--[if lte IE 8]>
+        <script src="modernizr-2.7.1.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
+
+
+        <script>
+            jQuery(function($) {
+                var open = false;
+
+                function resizeMenu() {
+                    if ($(this).width() < 768) {
+                        if (!open) {
+                            $("#menu-list").hide();
+                        }
+                        $("#menubutt").show();
+                        $("#logo").attr("src", "image/newlogo.png");
+                    }
+                    else if ($(this).width() >= 768) {
+                        if (!open) {
+                            $("#menu-list").show();
+                        }
+                        $("#menubutt").hide();
+						$("#title").show();
+						$("#wrapper").removeClass("space");
+                        $("#logo").attr("src", "image/symbol3.png");
+                    }
+                }
+
+                function setupMenuButton() {
+                    $("#menubutt").click(function(e) {
+                        e.preventDefault();
+
+                        if (open) {
+                            $("#menu-list").fadeOut();
+                            $("#menubutt").toggleClass("selected");
+							$("#menu-button-inner").addClass("smaller");
+							$("#menu-button-inner").removeClass("bigger");
+							$("#wrapper").removeClass("space");
+							$("#menubutt").removeClass("repo");
+							$("#title").show();
+							
+							
+							
+                        }
+                        else {
+                            $("#menu-list").fadeIn();
+                            $("#menubutt").toggleClass("selected");
+							$("#menu-button-inner").addClass("bigger");
+							$("#menu-button-inner").removeClass("smaller");
+							$("#wrapper").addClass("space");
+							$("#menubutt").addClass("repo");
+							$("#title").hide();
+							}
+							
+							
+							
+                        
+                        open = !open;
+						
+						
+                    });
+					
+							
+					
+                }
+
+
+                $(window).resize(resizeMenu);
+
+                resizeMenu();
+                setupMenuButton();
+            });
+			
+			$(function(){
+    $(".navlink").click(function(){
+            //or $("#menu").slideUp() if you want it to slide up instead of just disappearing.
+		$("#menu-list").fadeOut();
+                            $("#menubutt").toggleClass("selected");
+							$("#menu-button-inner").addClass("smaller");
+							$("#menu-button-inner").removeClass("bigger");
+							$("#wrapper").removeClass("space");
+							$("#menubutt").removeClass("repo");
+							$("#title").show();
+    });
+});
+        </script>
+        
+        
+        <style>
+		@media screen and (max-width: 699px) {
+		
+			body 
+			{
+				/* line-height: 16px => 24px/16px=1.5em */
+				font-family: 'Architects Daughter', cursive;
+				font-size:1.5em;
+				background-color:rgba(34, 135, 55, 0.7);
+				color: rgba(194, 250, 260, 1);
+				padding:0;
+				margin:0 auto;
+	background-image:url(image/galaxy.png);
+	background-size:contain;
+		
+			}
+			#banner-wrapper 
+			{
+				
+				padding-top:1px;
+				background-image:url(image/bodybg3b.png);
+		background-size:cover;
+		background-repeat:no-repeat;
+		
+			}
+			#logobutt-wrapper 
+			{
+				display: table;
+				width: 96%;
+				margin: 0.375em auto; /* 6/16 = 0.375em; */
+			}
+			#logobutt 
+			{
+    			display: table-row;
+			}
+
+			.red0
+	{
+		color:red;
+	}
+	
+	.purple0
+	{
+		color:purple;
+	}
+	.orange
+	{
+		color:orange;
+	}
+	.black
+	{
+		color:#333;
+	}
+			
+			
+			
+
+	.red
+	{
+		color:rgba(220,20,90, 1);
+	}
+	.blue
+	{
+		color:blue;
+	}
+	.green
+	{
+		color:green;
+	}
+	.purple
+	{
+		color:rgba(186,85,211, 1);
+	}
+	.yellow
+	{
+		color:yellow;
+	}
+	footer.sclogodiv 
+	{
+		vertical-align: top;
+		display: inline-block;
+		text-align: center;
+		
+	}
+	.sclogo
+	{
+	max-width:100%;
+	height:4em;
+	position:relative;
+		
+	}
+	.sccaption 
+	{
+    display: block;
+	width:100%;
+	font-size:0.8em;
+	}
+	#sccontentinfo {
+    text-align: center;
+    padding: 2em 1em 1em 1em; /* 16/16 = 1em */
+	margin-left:1.5em;
+	
+}
+	
+	
+	
+	#ebutt
+	{
+		margin-top:0.5em;
+	}
+	
+	.pritit
+	{
+		padding-bottom:0.5em;
+	}
+	
+	.privimg
+	{
+		height:300px;
+		padding-bottom:0;
+		position:relative;
+	}
+	.up
+	{
+		position:relative;
+		top:-1em !important;
+		padding-bottom:0.5em;
+	}
+	.wrap
+	{
+		float: left;
+margin: 0.3em;
+	}
+	.bookimg
+	{
+		
+		height:300px;
+	}
+	h2
+	{
+		font-size:28px;
+		padding-bottom:0.5em;
+	}
+	#hereye
+	{
+		padding:0.5em 0.3em 0.3em 0.3em;
+	}
+	#contact
+	{
+		background-color:transparent;
+		height:600px;
+		background-image:url(image/ciao.png);
+		background-repeat:no-repeat;
+	}
+	.conbtt
+	{
+		padding-top:1em;
+	}
+	div.conbtt 
+	{
+		vertical-align: top;
+		display: inline-block;
+		text-align: center;
+		
+	}
+	.longbtt
+	{
+		padding-top:1em;
+		position:relative;
+		left:40vw;
+		padding-bottom:1em;
+	}
+	
+	div.longbtt 
+	{
+		vertical-align: top;
+		display: inline-block;
+		text-align: center;
+		
+	}
+	
+	
+	@media all and (orientation:landscape) 
+	{
+		#contact
+		{
+			
+			background-repeat:no-repeat;
+			background-position:center;
+		}
+		.bttdiv
+		{
+			position:relative;
+			left:44vw !important;
+		}
+		.longbtt
+		{
+			position:relative;
+			left:0;
+			
+		}
+		.sclogodiv
+		{
+			position:relative;
+			left:22vw;
+		}
+		#hy1
+		{
+			padding-bottom:1em;
+			position:relative;
+			top:-2em;
+		}
+		.up
+		{
+			padding-bottom:0.7em;
+			padding-top:0.3em;
+		}
+		#hy2
+		{
+		}
+		#aboutbutt
+{
+	
+	
+	position:relative;
+	
+	left:15vw !important;
+	
+	
+}
+
+#aboutlink
+{
+	position:relative;
+	left:37vw !important;
+	top:0.5em !important;
+}
+	}
+	
+	
+	#class p
+	{
+		position:relative;
+		top:-1em;
+	}
+	.center
+	{
+		text-align:center;
+	}
+	.pad
+	{
+		padding:0 0.3em 0 0.3em;
+	}
+	.text
+	{
+		font-size:0.8em;
+	}
+	.textmed
+	{
+		font-size:1em;
+	}
+	.images
+	{
+		max-width:100%;
+		padding:0;
+	}
+	h3
+	{
+		text-align:center;
+		padding-bottom:1em;
+	}
+	#longtext
+	{
+		width:100%;
+		margin-top:-0.45em;
+	}
+	#about
+	{
+		background-color:transparent;
+		
+		padding-bottom:1em;
+	}
+	#longevity
+	{
+		background-color:transparent;
+		
+		padding-bottom:1em;
+	}
+	.spacer
+	{
+		height:1em;
+	}
+	div.bttdiv 
+	{
+		vertical-align: top;
+		display: inline-block;
+		text-align: center;
+		
+	}
+	.bttdiv
+	{
+		position:relative;
+		left:40vw;
+		padding-bottom:1em;
+	}
+	.btt
+	{
+		height:2em;
+		position:relative;
+		
+		z-index:500;
+	}
+	.caption 
+	{
+    display: block;
+	width:100%;
+	font-size:0.5em;
+	}
+	.galleria
+	{ 
+		max-width: 700px; 
+		height: 500px; 
+		background: transparent; 
+		position:relative;
+		top:0.4em;
+		z-index:0;
+		
+	}
+	#gallery
+	{
+		
+		height:600px;
+		background-color:transparent;
+		width:100%;
+		margin:0 auto;
+		padding-top:0.4em;
+	padding-bottom:1.4em;
+	}
+	
+	
+#title {
+    display: table-cell;
+	text-align:center;
+}
+#logo {
+	max-width:100%;
+    width: 70%;
+	position:relative;
+	left:-10%;
+	
+	
+	clear:both;
+	float:right;
+}
+#menu-list li {
+    float: left;
+    width: 100%;
+}
+.space
+{
+	margin-top:38em; /* 185/24 = 7.7em */
+}
+
+#content {
+    margin: 0 auto;
+}
+#content p {
+    margin:  1em 0; /* 16/16 = 1em */
+}
+#contentinfo {
+    text-align: center;
+    padding: 3em 1em 1em 1em; /* 16/16 = 1em */
+    margin: 0 auto;
+}
+#aboutbutt
+{
+	
+	margin:0 auto;
+	position:relative;
+	top:-1em;
+	left:22vw;
+	clear:both;
+		}
+
+.buttshell
+{
+	padding:0.5em 0 0.5em 0;
+}
+.butt
+{
+	background-image:url(image/buttbg.png);
+		background-repeat:no-repeat;
+		background-size:cover;
+	text-decoration:none;
+	
+	border-radius:4em;
+	margin:0.5em;
+	padding:0.5em;
+	font-weight:bold;
+	color: rgba(194, 250, 260, 1);
+	
+}
+#aboutlink
+{
+	position:relative;
+	left:25vw;
+	top:0.3em;
+}
+#video
+{
+	
+	background-color:transparent;
+	padding-top:0.4em;
+	
+	
+}
+video::-webkit-media-controls-start-playback-button {
+  opacity:1;
+  background-color:teal;
+  position:relative;
+  top:-5.8em;
+  left:0.5em;
+  padding:0;
+  margin:0;
+  border-radius:50%;
+  
+}
+video
+{
+	padding:1em 0 1em 0;
+	position:relative;
+	top:-1em;
+}
+.vidcon
+		{
+			object-fit:cover;
+			max-width:100%;
+		}
+#menu-nav {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: right;
+	
+}
+#menubutt {
+	
+    vertical-align: bottom;
+    float: right;
+    clear:both;
+    padding:0.3em; /*.5em;  6/16 = 0.375em */
+    margin: 0.5em 1em;
+    
+    opacity: 1;
+    cursor: pointer;
+    
+    -moz-transition: all .2s linear;
+    -webkit-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear;
+    
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    -ms-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    -o-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    
+    background-color: green;
+    background-image: -moz-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: -webkit-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: -ms-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: -o-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-position: left bottom;
+    background-repeat: repeat-x;
+}
+
+#menubutt.selected,
+#menubutt:active {
+    opacity: 1;
+    
+    -moz-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
+    -webkit-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
+    -ms-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
+    -o-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
+    box-shadow: 0 1px  1px rgba(120, 120, 120, .2);
+    
+     background-color: green;
+    background-image: -moz-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: -webkit-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: -ms-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-image: -o-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-position: left bottom;
+    background-repeat: repeat-x;
+	
+    /* margin-bottom: -.375em; 6/16 = .375em */
+	
+	
+}
+/*#menu-button-inner.selected,
+#menu-button-inner:active,
+	{
+		width:176px;
+		height: 60px;
+	}*/
+.bigger
+{
+	
+	
+		width:80px;
+		height: 64px;
+		background-size:cover !important;
+		
+}
+.smaller
+{
+	width:63px;
+		height: 50px;
+		
+		background-size:cover !important;	
+}
+.repo
+{
+	position:relative;
+	left:-30%;
+}
+#menu-button-inner 
+	{
+		background: transparent url(image/menu-bg-zen.png) no-repeat 0 0;
+	}
+#menu-list 
+	{
+		clear: both;
+		display: none;
+		position: absolute;
+		width: 100%;
+		background-color: rgba(24, 120, 60, 1);
+		
+		-moz-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
+		-webkit-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
+		-ms-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
+		-o-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
+		box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
+	}
+#menu-list ul {
+    overflow: hidden;
+	position:relative;
+	z-index:5000;
+}
+
+#menu-list a {
+    color: #c2daeb;
+    white-space: nowrap;
+    text-decoration: none;
+    display: block;
+	text-align:center;
+	
+	line-height: 2.875em; /* 46/16 = 3.375em */
+    height: 2.875em; /* 46/16 = 3.375em */
+    padding: .375em; /* 6/16 = .375em */
+	
+	-moz-transition: color 0.3s linear, background-color 0.3s linear;
+    -o-transition: color 0.3s linear, background-color 0.3s linear;
+    -webkit-transition: color 0.3s linear, background-color 0.3s linear;
+    -ms-transition: color 0.3s linear, background-color 0.3s linear;
+    transition: color 0.3s linear, background-color 0.3s linear;
+    
+    -moz-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+    -o-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+    -webkit-box-shadow: 0 0 0.2em rgba(24, 150, 90, 1);
+    -ms-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+    box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+}
+	
+#menu-list a:hover,
+#menu-list a:active {
+    color: #fff;
+    background-color: rgba(245,245,245, 0.6);
+}
+.aboutli
+{
+	background:url(image/rainbow.png) no-repeat center, url(image/bfly.png) no-repeat left, url(image/bfly.png) no-repeat right;
+	background-size:contain;
+	/*background-position:center;
+	background-repeat:no-repeat;*/
+	background-color: rgba(176,224,230, 1);
+}
+.ytli
+{
+	background-image:url(image/classbg2.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color: rgba(0,0,100, 0.9);
+}
+.myoli
+{
+	background:url(image/move.png) no-repeat center, url(image/mol_left.png) no-repeat left, url(image/mol_right.png) no-repeat right;
+	background-size:contain;
+	/*background-position:center;
+	background-repeat:no-repeat;*/
+	background-color:rgba(255, 0, 102, 0.85);
+}
+.longli
+{
+	background: url(image/longevity.png) no-repeat left, url(image/longevity.png) no-repeat right;
+	background-size:contain;
+	/*background-position:center;
+	background-repeat:no-repeat;*/
+	background-color: rgba(102, 0, 153, 0.2); 
+	
+}
+.hyli
+{
+	background: url(image/book1.png) no-repeat left, url(image/book1.png) no-repeat right;
+	background-size:contain;
+	/*background-position:center;
+	background-repeat:no-repeat;*/
+	background-color:rgba(102, 0, 102, 1);
+}
+.camli
+{
+	background: url(image/camf.png) no-repeat left, url(image/camm.png) no-repeat right;
+	background-size:contain;
+	/*background-position:center;
+	background-repeat:no-repeat;*/
+	background-color:rgba(204, 153, 0, 1); 
+}
+.bodyli
+{
+	background-image:url(image/bodylogo.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:rgba(0,191,255,0.8);
+	
+}
+.surveyli
+{
+	background-image:url(image/surveybutt.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:white;
+}
+.vipli
+{
+	background-image:url(image/vipbutt.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:rgba(255,255,255,0.5);
+	
+}
+
+.watchli
+{
+	background-image:url(image/sparkbg7.png);
+	background-size:contain;
+	background-color: rgba(192,192,192, 1);
+
+	
+	
+}
+
+.testili
+{
+	background-image:url(image/libg1.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-color: rgba(0,0,0, 0.9);
+}
+.gli
+{
+	background-image:url(image/gallerybg2.png);
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-color: rgba(255,127,80, 1);
+	
+}
+.classli
+{
+	background-image:url(image/posebg.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-color: rgba(147,112,219, 1);
+	
+	
+}
+.foodli
+{
+	background-image:url(image/foodbg1.png);
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-color: rgba(0,128,0, 1);
+	
+	
+}
+.conli
+{
+	background-image:url(image/conbg4.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color: rgba(245,245,245, 1);
+	
+}
+.conli a
+{
+	
+}
+
+
+
+
+
+#holly
+	{
+		display:none;
+	}
+	
+	.blurb
+{
+	color: rgba(194, 250, 260, 1);
+	
+	position: relative;
+	
+	margin:0 auto;
+	font-family: 'Marck Script', cursive;
+	top:-2em;
+	padding:0.2em;
+	
+	
+	
+	
+	
+}
+.blurb p {
+	line-height:1.3em;
+	font-size:1.3em;
+	font-weight:500;
+	float:right;
+	position:relative;
+	
+}
+
+
+.blurblist
+{
+	float:right;
+	position:relative;
+	top:-1em;
+	padding-bottom:1.2em;
+	padding-left:1.3em;
+	font-size:1.2em;
+}
+li:before
+{
+	color:red;
+}
+
+.list
+{
+	position:relative;
+	left:-0.4em;
+	line-height:1.3em;
+}
+.blurbbottom
+{
+	position:relative;
+	top:-1em;
+	text-align:right;
+	width:70%;
+}
+.newfont
+{
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight:bold;
+	font-size:0.8em;
+}
+
+.blurbsign
+{
+	
+	font-size:1.5em;
+}
+.repoup
+{
+	position:relative;
+	top:-1em;
+	left:-0.5em;
+	padding-top:2em;
+}
+
+}
+
+
+	
+		</style>
+    </head>
+    <body>
+        <div id="banner-wrapper">
+        
+            <header id="banner">
+            
+                <div id="logobutt-wrapper">
+                
+                    <div id="logobutt">
+                    
+                        <hgroup id="title">
+                        
+                            <a href="#"><img id="logo" src="image/newlogo.png" title="TYSO logo" /></a>
+                            
+                        </hgroup>
+                        <!--MOBILE COLLAPSE BUTTON-->
+                        <nav id="menu-nav">
+                        
+                            <div id="menubutt">
+                            
+                                <div id="menu-button-inner" class="smaller"></div><!--MOBILE COLLAPSE BUTTON-->
+                                
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                
+                
+                <nav id="menu-list">
+                    <ul class="primary-nav">
+                    <li class="aboutli">
+                            <a class="navlink" href="#about"><span class="icon"></span><span class="purple">A</span><span class="blue">b</span><span class="green">o</span><span class="yellow">u</span><span class="red">t</span></a>
+                        </li>
+                        <li class="ytli">
+                            <a class="navlink" href="#yt"><span class="icon"></span>Yoga Therapy</a>
+                        </li>
+                        <li class="myoli">
+                            <a class="navlink" href="#myo"><span class="icon"></span>Myokines</a>
+                        </li>
+                        <li class="longli">
+                            <a class="navlink" href="#longevity"><span class="icon"></span>Longevity</a>
+                        </li>
+                        <li class="hyli">
+                            <a class="navlink" href="#hy1"><span class="icon"></span>Book Event</a>
+                        </li>
+                        <li class="camli">
+                            <a class="navlink" href="#hy2"><span class="icon"></span>Camera-ready Intensives</a>
+                        </li>
+                        <li class="bodyli">
+                            <a class="navlink" href="../../body/body.html"><span class="icon"></span></a>
+                        </li>
+                        <li class="surveyli">
+                            <a class="navlink" href="../survey_lp.html"><span class="icon"></span></a>
+                        </li>
+                        <li class="vipli">
+                            <a class="navlink" href="../../vip/vip.html" target="_blank"><span class="icon"></span></a>
+                        </li>
+                        <li class="watchli">
+                            <a class="navlink" href="#video"><span class="icon"></span><span class="purple">Videos</span></a>
+                        </li>
+                        <li class="gli">
+                            <a class="navlink" href="#gallery"><span class="icon"></span>Gallery</a>
+                        </li>
+                        <li class="classli">
+                            <a class="navlink" href="#class"><span class="icon"></span>Private &amp; PopUp Classes</a>
+                        </li>
+                        <li class="foodli">
+                            <a class="navlink" href="../food.html" ><span class="icon"></span>Nutrition</a>
+                        </li>
+                        <li class="testili">
+                            <a class="navlink" href="testimo.html"><span class="icon"></span>Testimonials</a>
+                        </li>
+                        <li class="conli">
+                            <a class="navlink" href="#contact"><span class="icon"></span><span class="red0">C</span><span class="green">o</span><span class="blue">n</span><span class="orange">t</span><span class="purple0">a</span><span class="red0">c</span><span class="green">t</span></a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <div id="content" role="main">
+        <div id="wrapper">
+        	
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_follow_toolbox"></div>            
+            
+            <div id="hereye">
+            
+            <div class="blurb">
+            
+            	 <p class="blurbp">Le but de  <em><span class="newfont">TYSO yoga</span></em> est de cultiver l’énergie naturelle de l’univers ou <em><i><span class="newfont">Ch'i</span></i></em>; TYSO yoga cultive cette force de vie primaire à travers le corps tels que les anciens alchimistes le faisaient en utilisant 3 domaines :
+                </p>
+            
+                <ol class="blurblist">
+                	<li><span class="list"><em><span class="newfont">La Santé</span></em></span></li>
+                    <li><span class="list"><em><span class="newfont">Les pouvoirs</span></em> du mental &amp; du physique</span></li>
+                    <li><span class="list"><em><span class="newfont">L’évolution</span></em> Spirituelle </span></li>
+                </ol>
+            	<div class="blurbbottom">
+                    <em><span class="newfont">Vivez votre Chi</span></em><br><span class="blurbsign">-Anthony</span>
+                </div>
+            
+            
+            
+                <p class="blurbp">The goal of <em><span class="newfont">TYSO yoga</span></em> is to harness the natural energy of the universe, or  <em><i><span class="newfont">Ch'i</span></i></em>; cultivating this primal life-force within the body, as did the ancient alchemists, through 3 areas:
+                </p>
+            
+                <ol class="blurblist">
+                	<li><span class="list"><em><span class="newfont">Health</span></em></span></li>
+                    <li><span class="list">Developing mental &amp; physical <em><span class="newfont">power</span></em></span></li>
+                    <li><span class="list"><em>Spiritual <span class="newfont">growth </span></em></span></li>
+                </ol>
+                
+                <div class="blurbbottom">
+                    <em><span class="newfont">Live YOUR Chi</span></em><br><span class="blurbsign">-Anthony</span>
+                </div>
+        		<img class="images" src="image/about.png"/>
+            </div>
+            <div class="buttshell repoup"><a href="#about" id="aboutbutt" class="butt" role="button" >Who is Anthony?</a></div>
+            	
+                <div id="yt">
+                
+                	<h2>Yoga Thérapie et maladie de Parkinson</h2>
+                    <p class="textmed ">
+                    Le yoga est l'un des traitements les plus bénéfiques et complémentaire pour la maladie de Parkinson (MP). <br><br> Contribuant ainsi à:
+                    <ul>
+                    	<li> - Accroître la flexibilité; </li> 
+                        <li> - Améliorer la posture;</li>  
+                        <li> - Relâchez les muscles tendus et douloureux; </li> 
+                        <li> - Construire  ou (reconstruire) la confiance en soi; </li> 
+                        <li> - Et, grâce à ces avantages, améliorer la qualité de vie de la personne.</li>
+                    </ul>
+                    </p>
+                    <img class="images" src="image/YT1.jpg"/>
+                    <br><br>
+                    <h2>Yoga Therapy and Parkinson's Disease</h2>
+                    <p class="textmed "> 
+                    Yoga is one of the most beneficial complementary therapies for Parkinson's disease (PD).<br><br> Helping to:
+                    <ul>
+                    	<li> - Increase flexibility; </li>
+                        <li> - Improve posture; </li>
+                        <li> - Loosen tight, painful muscles; </li>
+                        <li> - Build (or rebuild) confidence; </li>
+                        <li> - And, through these benefits, enhance quality of life.</li>
+                    </ul>    
+                    </p>
+                    <img class="images" src="image/YT2.jpg"/>
+                    <div class="longbtt">
+                	<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    <span class="caption">Back to top!</span>
+                	</div>
+                </div>
+                <br>
+                <div id="myo">
+                
+                	<img class="images" src="image/myokines.png"/>
+                
+                	<h2>Le yoga et l'exercice sont deux aspects cruciaux pour améliorer la santé et favoriser la guérison des maladies.</h2>
+                    
+                    <p class="textmed ">
+                    	Mais pourquoi ça? <br><br>
+                        
+						Réponse courte: <br><br>Yoga = Mouvement; <br><br>Mouvement = Contractions Musculaires <br><br>et <br><br>Contractions Musculaires = Myokines<br><br>
+                        
+						Les Myokines sont une classe de petites protéines, libérées par les muscles à chaque contraction, qui agissent dans une gamme de fonctions; soutenir et renforcer les systèmes de base comme votre cœur, votre cerveau, vos systèmes immunitaire et digestif, vos os et vos muscles. <br><br>
+                        
+						Les protéines fonctionnent comme des clés; ne s'insérant que dans certaines serrures en forme, appelées récepteurs. Les cellules communiquent en envoyant des protéines (clés) et en les recevant dans leurs propres récepteurs (verrous). <br><br>
+                        
+						Les récepteurs des Myokines se trouvent sur les cellules musculaires, graisseuses, hépatiques, pancréatiques, osseuses, cardiaques, sanguines et cérébrales; cela nous indique que ces protéines sont nécessaires à toute une série de processus biologiques. <br><br> Les clés Myokine ouvrent de nombreuses portes à la santé et à la réparation; à l'inverse, sans libération optimale de ces protéines, ces systèmes souffrent considérablement. <br><br>
+                        
+						Nous pouvons donc commencer à voir comment le yoga aide à une santé parfaite. Mais alors pourrions-nous dire que le yoga peut nous rendre heureux ? <br><br>
+                        
+						Comme mentionné ci-dessus, les récepteurs des Myokines sont situés sur nos cellules cérébrales, cela signifie que les Myokynes ont un rôle à jouer pour la fonction cérébrale saine; des études récentes ont montré que ces protéines sont liées à la fonction cognitive et à l'humeur. <br><br>
+                        
+						En d'autres termes, notre système musculo-squelettique et notre système nerveux central sont interdépendants de ces mécanismes moléculaires.<br><br> Nos muscles se contractent et libèrent des protéines qui interagissent avec notre cerveau ce qui a comme effet d'atténuer la dépression, l'anxiété et la solitude; ce regain d'humeur et de cognition nous motive vers de nouvelles actions De cette façon, chaque étape du cycle renforce les autres. <br><br>
+                        
+						Le yoga nous permet de percevoir notre univers à travers des lunettes roses et à l’opposé un manque de mouvement jette notre regard sur le monde dans une teinte grise et monotone. <br><br>
+                        
+						Lorsque les Myokines s'activent, notre cerveau libère à son tour des niveaux plus élevés de produits cérébraux tels que les bêtas-endorphines, le cortisol, l'hormone de croissance humaine et les neurotransmetteurs; conduisant à une plus grande concentration, attitude et santé mentale globale. <br><br>
+                        
+						C'est pourquoi le régime alimentaire est si critique; une mauvaise alimentation sabotera même les efforts les plus héroïques déployés par les systèmes de notre corps <br><br>Ces processus étonnants de guérison interne fonctionnent de manière optimale lorsqu'ils ne gaspillent pas les ressources et l'énergie en essayant de traiter les poisons et les contaminants trouvés dans les aliments transformés et le fast-food. <br><br>
+						
+                        Le yoga et une alimentation saine sont deux composantes essentiels à la santé et à la longévité globale de notre corps et de notre esprit. <br><br><br> 
+
+						Namaste
+                    
+                    </p>
+                
+                	<br><br>
+                	<h2>Yoga & Exercise is crucial for health and healing.</h2>
+                    <p class="textmed ">
+                    	But why is that? <br><br>
+                        
+						Short answer: <br><br>Yoga = Movement; <br><br>Movement=Muscle Contractions <br><br>and <br><br>Muscle Contractions=Myokines. <br><br>
+                        
+						Myokines are a class of small proteins, released by muscles each time they contract, which act in a range of functions; supporting and 						strengthening core systems like your heart, brain, immune and digestive systems, bones and muscles. <br><br>
+                        
+						Proteins work like keys; fitting into only certain shaped locks, called receptors. Cells communicate by sending proteins (keys) and 
+                        receiving them in their own receptors (locks). <br><br>
+                        
+						Myokine receptors are found on muscle, fat, liver, pancreatic, bone, heart,blood and brain cells; this tells us that these proteins
+                        are necessary for a whole host of biological processes. <br>Myokine keys open many doors to health and repair; conversely, without optimal	
+                        release of these proteins, these systems suffer significantly. <br><br>
+                        
+						So we can start to see how yoga makes us healthier; but how does it make is happier? <br><br>
+                        
+						As stated above, myokine receptors are located on our brain cells, this means that myokines have a role to play in healthy brain 	
+                        function; recent studies have found these proteins are linked to cognitive function and mood. <br><br>
+                        
+						In other words our musculoskeletal systems and our central nervous systems are interdependent on these molecular mechanisms.<br><br> Our 
+                        muscles contracting release proteins which interact with our brains; mitigating depression, anxiety and loneliness; this boost in mood 						and cognition motivates us towards further action and activities. In this way each stage of the cycle reinforces the others. <br><br>
+                        
+						Yoga lets us see through rose coloured glasses and a lack of movement casts the world in a grey hue. <br><br>
+                        
+						When myokines activate ,our brains in turn release greater levels of cerebral goodies such as beta-endorphins, cortisol, human growth 	
+                        hormone and neurotransmitters; leading to greater focus, attitude and overall mental health. <br><br>
+                        
+						This is why diet is so critical; a poor diet will sabotage even the most heroic efforts made by our body’s systems. <br>These amazing 	
+                        processes of internal healing operate optimally when not wasting resources and energy attempting to process poisons and contaminants 	
+                        found in processed and fast foods. <br><br>
+						
+                        Yoga and a healthy diet are crucial to the overall health and longevity of our bodies and minds. <br><br><br> 
+
+						Namaste
+                    
+                    </p>
+                    
+                    
+                    
+                    
+                    
+                    <div class="longbtt">
+                	<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    <span class="caption">Back to top!</span>
+                	</div>
+                </div>
+                
+                <br>
+                <div id="hy1">
+                    <h2>Réservez Anthony pour votre prochain événement!</h2><img class="images bookimg wrap" src="image/tytue.png"/>
+                    <p class="textmed up">
+                        Cherchez pour une façon <b>originale</b> d’ajouter du <b>Chi</b> dans votre prochain événement caritatif, ouverture de galerie ou party privé?<br><br>
+                        Pourquoi-pas du <b>yoga</b>? <br><br>Démarrez votre Stella McCartney's ! Indulgez-vous dans un nettoyage de l’âme à travers des poses de yoga- fait sur mesure- chorégraphiés pour votre événement en particulier.  
+                        
+                    </p>
+                    
+                    
+                    <h2>Book Anthony for your next event!</h2>
+                    <p class="textmed up">
+                        Looking for something <b>original</b> to inject some <b>Chi</b> into your next charity function, gallery opening or private party?<br><br>
+                        How about some <b>yoga</b>? <br><br>Kick off your Stella McCartney's and indulge in soul-cleansing poses custom-tailored to your particular event.  
+                        
+                    </p>
+                	
+                	
+                </div>
+                <div class="longbtt">
+                		<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    	<span class="caption">Back to top!</span>
+                	</div>
+                <div id="hy2">
+                    <h2>Camera-ready Intensives </h2><img class="images" src="image/muscle1.png">
+                    
+                    <p class="textmed">
+                       Vous avez besoin de perdre du poids rapidement tout comme une vedette de Hollywood?<br><br>Vous venez de décrocher un rôle et vous avez besoin d’apparaître à votre meilleur; vous voulez créer un effet WOW à cette première/ événement ?<br><br> Peut-être avez-vous seulement besoin d’une détoxification?<br><br>
+                        <b>Privé</b> et <b>discret</b>, votre entrainement personnalisé vous projettera dans l’action- comme une étoile ASAP.<br><br>
+                        Au-delà de l’entrainement: l’attention est donnée à tous les aspects de la santé et le bien-être; conférant les outils nécessaires afin que les étudiants puissent vivre la transformation aujourd’hui et dans tous les jours à venir. 
+                    </p>
+                    
+                    
+                    <p class="textmed">
+                        Need to be Hollywood fit, fast? <br><br>Snagged a role and need to look awesome; want to wow at that premiere/event?<br><br> Maybe just yearning for a detox.<br><br>
+                        <b>Private</b> and <b>discrete</b>, your personalized intensive will whip you into action-star shape ASAP.<br><br>
+                        Way beyond a workout: attention is given to all aspects of health and well-being; imparting the student with the tools necessary to live their change each day forward. 
+                    </p>
+                </div>
+            </div>
+            
+            <div id="about">
+            	<div class="longbtt">
+                	<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    <span class="caption">Back to top!</span>
+                </div>
+                <h2 class="center">About Anthony</h2>
+                <img class="images" src="image/aboutpic.jpg"/>
+                
+                <p class="text center pad">En tant que professeur de yoga certifié E-RYT500 and ETY500. Anthony Kamanos a eu le privilège d’étudier et de participer aux ateliers de Darby, T.K.V Desikachar, Shanhara, Sivananda, B.K . Iyengar , et beaucoup d’autres étudiants dérivant de la lignée du GURU, Sri Tirumalai Krishnamacharya.</p>
+                <p class="text center pad">Avant d’être un professeur de yoga, Anthony était un homme d’affaire. Il a passé 18 ans à voyager à travers le monde dont l’Asie ou il a passé la majeure partie du temps. <br/>À travers ces voyages; il a découvert les joies de manger du Dim Sum à Hong-Kong; s’asseoir dans un café à Paris; rouler en motocyclette; faire du patin à roulette; découvrir le TANTRA de l’est et la philosophie TAO et finalement apprendre à réduire son empreinte de carbone.</p>
+            	<p class="text center pad">Dans so chapitre de vie le plus récent; Anthony s’est mis à enseigner la longévité et illuminer le chemin vers la sagesse. Trouvant ainsi des déplacements de paradigme accompagnant les étapes de la foi, à travers l’inconnu, ce qui nous garde spontané et jeune; L’apothéose de l’enseignement d’Anthony à travers TYSO yoga c’est son style avec un focus tout-spécifiquement sur la longévité.</p>
+                
+                
+                
+                <p class="text center pad">As a certified E-RYT500 and ETY500 Yoga Teacher Anthony Kamanos has had the privilege of studying and participating in workshops with Darby, T.K.V Desikachar, Shanhara, Sivananda, B.K . Iyengar , and many other great students of the most prodigious Guru of them all, Sri Tirumalai Krishnamacharya.</p>
+                <p class="text center pad">Starting out as a businessman Anthony spent 18 years travelling the globe, much of it spent living in Asia. <br/>Through these journeys he discovered the joys of eating dim sum in Hong-Kong; sitting at a cafe in Paris; riding motorbikes; roller blading; discovering Eastern TANTRA and TAO philosophy and learning how to reduce his carbon footprint.</p>
+            	<p class="text center pad">His most recent chapter finds Anthony teaching longevity and illuminating the way to enlightenment and the paradigm shifts that accompany the leaps of faith, into the unknown, that keep us fresh and youthful; the cornerstone of his teachings is Anthony's novel TYSO Yoga style, designed specifically with a focus on longevity.</p>
+                <div class="buttshell"><a href="about.html" id="aboutlink" class="butt" role="button" >Learn More</a></div>
+            </div>
+            
+            <div id="longevity">
+            	<div class="longbtt">
+                	<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    <span class="caption">Back to top!</span>
+                </div>
+                <h2 class="center">Longevity</h2>
+                <img class="images" src="image/long1.jpg"/>
+                <div id="longtext">
+                <p class="text center">L’âge est juste un nombre!<br> Faites-le Yoga aussi arbitraire que vous le souhaitez.</p>
+                <p class="text center">Laissez Anthony vous montrer à quel point l'âge peut être négligeable!</p>
+                <p class="text center">Age truly is just a number!<br> Make it as arbitrary as you wish.</p>
+                <p class="text center">Let Anthony show you just how insignificant age can be!</p>
+                </div>	
+            </div>    
+                   
+            
+            
+            <div id="video">
+                <div class="bttdiv">
+                	<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    <span class="caption">Back to top!</span>
+                </div>
+                <h2 class="center">Videos</h2>
+                <video controls class="vidcon" poster="image/poster3.png"  src="image/tysovid2.mp4" frameborder="0" allowfullscreen></video>
+            	<video controls class="vidcon" poster="image/poster.png"  src="image/tysovid003.mp4" frameborder="0" allowfullscreen></video>
+                <video controls class="vidcon" poster="image/poster2b.png"  src="image/gymvid2.mp4" frameborder="0" allowfullscreen></video>
+            </div>
+           
+           
+            <div id="gallery">
+            
+            <div class="bttdiv">
+                	<a href="#"><img class="btt" src="image/symbol.png"/></a>
+                    <span class="caption">Back to top!</span>
+                </div>
+                <h2 class="center">Gallery</h2>
+            <div id="galleria" class="galleria">
+    <a href="gallerymo/20.jpg"><img src="gallerymo/thumbs/t20.jpg" data-big="gallerymo/20.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/21.jpg"><img src="gallerymo/thumbs/t21.jpg" data-big="gallerymo/21.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/22.jpg"><img src="gallerymo/thumbs/t22.jpg" data-big="gallerymo/22.jpg" data-title="My title" data-description="My description"></a>        
+    <a href="gallerymo/18.jpg"><img src="gallerymo/thumbs/t18.jpg" data-big="gallerymo/18.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/19.jpg"><img src="gallerymo/thumbs/t19.jpg" data-big="gallerymo/19.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/1.jpg"><img src="gallerymo/thumbs/t1.jpg" data-big="gallerymo/1.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/2.jpg"><img src="gallerymo/thumbs/t2.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/3.jpg"><img src="gallerymo/thumbs/t3.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/4.jpg"><img src="gallerymo/thumbs/t4.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/5.jpg"><img src="gallerymo/thumbs/t5.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/6.jpg"><img src="gallerymo/thumbs/t6.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/7.jpg"><img src="gallerymo/thumbs/t7.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/8.jpg"><img src="gallerymo/thumbs/t8.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/9.jpg"><img src="gallerymo/thumbs/t9.jpg" data-big="gallerymo/1.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/10.jpg"><img src="gallerymo/thumbs/t10.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/11.jpg"><img src="gallerymo/thumbs/t11.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/12.jpg"><img src="gallerymo/thumbs/t12.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/13.jpg"><img src="gallerymo/thumbs/t13.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/14.jpg"><img src="gallerymo/thumbs/t14.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/15.jpg"><img src="gallerymo/thumbs/t15.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/16.jpg"><img src="gallerymo/thumbs/t16.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    <a href="gallerymo/17.jpg"><img src="gallerymo/thumbs/t17.jpg" data-big="gallerymo/2.jpg" data-title="My title" data-description="My description"></a>
+    		</div>
+			</div>
+            
+            <div class="spacer"></div>
+
+            <div id="class">
+                <div class="bttdiv">
+                        <a href="#"><img class="btt" src="image/symbol.png"/></a>
+                        <span class="caption">Back to top!</span>
+                </div>
+                
+                <div class="center">
+                    <h2 class="pritit">Private Classes Privés</h2>
+                    <img class="images privimg" src="image/private.jpg"/>
+                    <p>1 sur 1 sessions <br> Coach de vie inclus</p>
+                    <p>1 on 1 sessions <br> Life coaching included</p>
+               	
+                    <h2 class="pritit">Pop-Up Classes</h2>
+                    <img class="images privimg" src="image/popup.png"/>
+                    <p>Invitez vos amis et adoptez une certaine spontanéité!</p>
+                    <p>Grab your friends and embrace some spontaneity!</p>
+               	</div>
+                
+            </div>
+            
+            <div class="spacer"></div>
+            
+            <div id="contact">
+                
+                <div class="center">
+                	<button id="ebutt"><a href="mailto:tysoyoga@outlook.com">Email Anthony</a></button>
+                </div>
+                
+                
+                
+                
+            </div>
+            <div class="center">
+            <div class=" conbtt">
+                        <a href="#"><img class="btt" src="image/symbol.png"/></a>
+                        <span class="caption">Back to top!</span>
+                </div>
+                </div>
+        </div>
+        </div>
+        <footer class="sclogodiv" id="sccontentinfo" role="contentinfo">
+             <a href="mailto:socherrywebdev@outlook.com"><img class="sclogo" src="image/sclogo.png"><span class="sccaption">2017 So Cherry Web Design</span></a> 
+        </footer>
+        
+        <script>
+(function() { 
+    Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
+    Galleria.run('.galleria');
+}());
+
+
+
+</script>
+        
+     <script type="text/javascript"> 
+  var addthis_share = addthis_share || {} 
+  addthis_share = { passthrough : 
+  						{ twitter: 
+							{ via: "anthonykamanos #TYSO #yoga" } 
+						}
+  				  } 
+</script> 
+    
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59725d19fb4b88e1"></script>         
+        
+    </body>
+</html>
