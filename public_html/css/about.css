@@ -1,0 +1,129 @@
+@media (max-width: 640px) {
+  body {
+    background: rgba(146, 222, 95, 0.5);
+  }
+  .logo {
+    padding: 0;
+    margin: 0;
+    height: 50px;
+    position: relative;
+    left: 100px;
+  }
+  .blurb {
+    padding-top: 80px;
+  }
+  h1 {
+    display: none;
+  }
+
+  .newfont {
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+  }
+  .blurbbottom {
+    position: relative;
+  }
+  .blurbsign {
+    font-family: "Marck Script", cursive;
+    font-size: 40px;
+    position: relative;
+    left: 100px;
+  }
+}
+
+@media (min-width: 641px) {
+  html {
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+    background: rgba(146, 222, 95, 0.5);
+  }
+
+  .container {
+    margin-top: 12px;
+    position: relative;
+    left: -20px;
+  }
+  nav {
+    font-family: "Oswald", sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+  }
+  nav a {
+    color: #054516;
+  }
+
+  .testiButt:hover {
+    color: white;
+    text-shadow: 1px 1px black;
+    font-family: "Indie Flower", cursive;
+    font-weight: bold;
+    font-size: 150%;
+    background: rgba(67, 200, 310, 1);
+  }
+  .signature {
+    color: black;
+    font-family: "Marck Script", cursive;
+    font-size: 26px;
+  }
+  .logo {
+    padding: 0;
+    margin: 0;
+    height: 100px;
+  }
+  .blurb {
+    color: #3d8646;
+    font-size: 26px;
+    position: relative;
+    width: 810px;
+    margin: 0 auto;
+    font-family: "Marck Script", cursive;
+    top: 160px;
+  }
+  .blurb p {
+    width: 810px;
+    line-height: 28px;
+    float: right;
+    position: relative;
+  }
+  .bgcolor {
+    background-color: green;
+  }
+  .newfont {
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+  }
+  .blurblist {
+    float: right;
+    position: relative;
+    left: -190px;
+    padding-top: 10px;
+  }
+  .blurbbottom {
+    text-align: center;
+    position: relative;
+  }
+  .blurbsign {
+    padding-left: 300px;
+
+    font-size: 40px;
+  }
+  h1 {
+    text-align: center;
+    color: #3d8646;
+  }
+  .abouttext {
+    position: relative;
+    margin: 20px auto;
+    padding-top: 150px;
+    float: left;
+    font-size: 150%;
+  }
+  .break {
+    clear: both;
+    float: left;
+  }
+}
