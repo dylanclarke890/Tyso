@@ -1,0 +1,231 @@
+@media screen and (max-width: 767px) {
+  .pan {
+    width: 100%;
+    height: 26vh;
+  }
+
+  .text {
+    color: rgba(240, 248, 255, 1);
+    font-size: 2em;
+    position: relative;
+  }
+
+  #logo {
+    position: relative;
+    height: 25vh;
+    float: left;
+    top: 0.2em;
+    left: 0.3em;
+  }
+
+  #pan1 {
+    background-color: blue;
+    background-image: url(images/gal2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    text-align: left;
+  }
+
+  #text1b {
+    top: 0.2em;
+    left: 0.9em;
+  }
+
+  #pan2 {
+    background-color: blue;
+    background-image: url(images/relax.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    text-align: right;
+  }
+
+  #pan3 {
+    background-color: pink;
+    background-image: url(images/dude.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+
+  #text3a {
+    top: 0.4em;
+    left: 7vw;
+  }
+
+  #text3b {
+    top: 0.45em;
+    left: 8vw;
+  }
+
+  #pan4 {
+    background-color: purple;
+    background-image: url(images/beach.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+  }
+
+  #text4b {
+    top: 2vh;
+    left: 1.5em;
+  }
+
+  #pan5 {
+    background-color: red;
+    background-image: url(images/newguru.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;
+  }
+
+  #text5a {
+    top: 1.6em;
+  }
+
+  #text5b {
+    top: 2em;
+  }
+
+  #info {
+    height: 18vh;
+    text-align: center;
+    background-color: #000;
+  }
+
+  #info a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  #info a img {
+    vertical-align: middle;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pan {
+    width: 100%;
+    height: 75vh;
+  }
+
+  #pan1 {
+    background-color: blue;
+    background-image: url(images/gal2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    text-align: center;
+  }
+
+  #logo {
+    position: relative;
+    height: 74vh;
+    float: left;
+  }
+
+  .text {
+    color: rgba(240, 248, 255, 1);
+    font-size: 4.3em;
+    position: relative;
+  }
+
+  #text1a {
+    top: 0.17em;
+  }
+
+  #text1b {
+    left: 5.2em;
+    top: 0.6em;
+  }
+
+  #pan2 {
+    background-color: blue;
+    background-image: url(images/relax.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    text-align: right;
+  }
+
+  #text2 {
+    left: -0.5em;
+    top: 0.2em;
+  }
+
+  #pan3 {
+    background-color: pink;
+    background-image: url(images/dude.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+
+  #text3a {
+    top: 0.3em;
+    left: 7vw;
+  }
+
+  #text3b {
+    top: 0.45em;
+    left: 16vw;
+  }
+
+  #pan4 {
+    background-color: purple;
+    background-image: url(images/beach.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+  }
+
+  #text4a {
+    top: 0.3em;
+    left: -1.2em;
+  }
+
+  #text4b {
+    top: 16vh;
+    left: 1em;
+  }
+
+  #pan5 {
+    background-color: red;
+    background-image: url(images/newguru.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;
+  }
+
+  #text5a {
+    top: 25vh;
+    left: 1em;
+  }
+
+  #text5b {
+    top: 25vh;
+    left: 1em;
+  }
+
+  #info {
+    height: 18vh;
+    text-align: center;
+    background-color: #000;
+  }
+
+  #info a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  #info a img {
+    vertical-align: middle;
+  }
+}
