@@ -1,0 +1,23 @@
+@media (min-width: 641px) {
+  .center {
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  .adjust {
+    position: absolute;
+    left: 68%;
+    top: -20%;
+  }
+  h1 {
+    font-size: 400%;
+  }
+  .enlarge {
+    height: 400px;
+  }
+}
+@media (max-width: 640px) {
+  .adjust {
+    display: none;
+  }
+}
