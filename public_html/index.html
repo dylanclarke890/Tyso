@@ -35,9 +35,13 @@
   <body>
     <div class="container-fluid">
       <nav class="navbar navbar-default navbar-fixed-top">
-        <a class="navbar-brand" href="#top"
-          ><img class="logo" src="symbol2.png" /><img class="logomobile" src="symbol3.png"
-        /></a>
+        <a class="navbar-brand" href="#top">
+          <picture>
+            <source class="logo" srcset="symbol2.png" media="(min-width: 699px)" />
+            <source class="logomobile" srcset="symbol3.png" media="(max-width: 700px)" />
+						<img src="symbol2.png"/>
+          </picture>
+        </a>
         <div class="container" id="navSpy">
           <ul class="nav navbar-nav">
             <li class="nav-item" id="about">
