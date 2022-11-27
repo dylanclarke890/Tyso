@@ -1,727 +1,112 @@
-
 <!DOCTYPE html>
-<!--[if lte IE 7 ]><html lang="en" class="ie7"><![endif]-->
-<!--[if IE 8 ]><html lang="en" class="ie8"><![endif]-->
-<!--[if (gt IE 8)|!(IE)]><!-->
 <html lang="en">
-    <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <title>Nutrition</title>
-        <link href="mobile/frank.css" rel="stylesheet" type="text/css" />
-        <!--<link href="example.css" rel="stylesheet" type="text/css" />-->
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <script src="mobile/respond.js"></script>
-<title>Videos</title>
-	<script>
-            jQuery(function($) {
-                var open = false;
-
-                function resizeMenu() {
-                    if ($(this).width() < 768) {
-                        if (!open) {
-                            $("#menu-list").hide();
-                        }
-                        $("#menubutt").show();
-                        $("#logo").attr("src", "image/logo_def.png");
-                    }
-                    else if ($(this).width() >= 768) {
-                        if (!open) {
-                            $("#menu-list").show();
-                        }
-                        $("#menubutt").hide();
-						$("#title").show();
-						$("#wrapper").removeClass("space");
-                        $("#logo").attr("src", "image/logo.png");
-                    }
-                }
-
-                function setupMenuButton() {
-                    $("#menubutt").click(function(e) {
-                        e.preventDefault();
-
-                        if (open) {
-                            $("#menu-list").slideUp();
-                            $("#menubutt").toggleClass("selected");
-							
-							$("#wrapper").removeClass("space");
-							
-							$("#title").show();
-							
-							
-							
-                        }
-                        else {
-                            $("#menu-list").slideDown();
-                            $("#menubutt").toggleClass("selected");
-							
-							$("#wrapper").addClass("space");
-							$("#title").hide();
-							}
-							
-                        open = !open;
-						
-                    });
-					
-					$(".navlink").click(function()
-					{
-                        if (open) 
-						{
-							$("#menu-list").slideUp();
-							
-							$("#wrapper").removeClass("space");
-							
-							$("#title").show();
-							
-							open=!open;
-                        }
-						
-					});
-				
-                }
-
-                $(window).resize(resizeMenu);
-                resizeMenu();
-                setupMenuButton();
-            });
-			
-			
-        </script>
-        
-	<style>
-		
-		body
-		{
-			
-			text-align:center;
-			background:url(images/foodbg1.png) no-repeat, -webkit-radial-gradient(center, ellipse cover, rgba(0,36,0,1) 0%,rgba(0,87,0,1) 17%,rgba(0,138,0,1) 33%,rgba(82,177,82,1) 67%,rgba(131,199,131,1) 83%,rgba(180,221,180,1) 100%); /* Chrome10-25,Safari5.1-6 */
-			background:url(images/foodbg1.png) no-repeat, radial-gradient(ellipse at center, rgba(0,36,0,1) 0%,rgba(0,87,0,1) 17%,rgba(0,138,0,1) 33%,rgba(82,177,82,1) 67%,rgba(131,199,131,1) 83%,rgba(180,221,180,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			
-			background-size:cover;
-		}
-		h1
-		{
-			padding:0 0.5em 0.5em 0.5em;
-			font-family: 'Josefin Sans', sans-serif;
-			font-size:2.5em;
-		}
-		
-		#charts
-			{
-				text-align:center;
-				padding:0;
-			}
-			.foodchart
-			{
-				text-align:center;
-				padding:0;
-			}
-			.acid
-			{
-				
-			}
-			#acidimg
-			{
-				padding:0.5em 0 2em 0;
-				width:75%;
-			}
-			.base
-			{
-				
-			}
-			#baseimg
-			{
-				padding:0.5em 0 0.5em 0;
-				width:80%;
-			}
-
-		
-		
-		#banner-wrapper 
-			{
-				background-color: rgba(24, 120, 60, 0.6);
-				padding: 10px 0;
-				background-image:url(image/bodybg3b.png);
-				background-size:cover;
-				background-repeat:no-repeat;
-		
-			}
-			#banner
-			{
-				width: 92%;
-				margin: 1em auto; /* 16/16 = 1em; */
-			}
-			 
-    
-   
-    
-			#logobutt-wrapper 
-			{
-				display: block; /* table2block */
-				width: auto;
-				margin: 0.375em auto; /* 6/16 = 0.375em; */
-				float:left;
-			}
-		
-			#logobutt 
-			{
-    			display: block; /* table-row2block */
-			}
-			#title 
-			{
-				display: block; /* table-cell2block */
-				text-align:center;
-			}
-			
-			header
-			{
-				display:none;
-			}
-			.hide
-			{
-				display:block;
-			}
-			nav
-	{
-		font-family: 'Oswald', sans-serif;
-		font-size:28px;
-		letter-spacing:1px;
-		word-spacing:1px;
-		
-		
-	}
-	
-		@media screen and (min-width: 768px) 
-		{
-			h1
-			{
-				font-size:3em;
-			}
-			footer
-			{
-				text-align:center;
-				clear:both;
-				padding:none;
-				position:relative;
-				left:-2.5em;
-				top:-2em;
-			}
-			.hide
-			{
-				display:none;
-			}
-			#charts
-		{
-			text-align:center;
-			background-color:pink;
-		}
-		.foodchart
-		{
-			float:left;
-		}
-		.acid
-		{
-			padding-left:8em;
-			padding-top:3.5em;
-		}
-		#acidimg
-		{
-			width:110%;
-		}
-		.base
-		{
-			position:relative;
-			top:-1em;
-			left:2em;
-		}
-		#baseimg
-		{
-			width:61%;
-		}
-			}	
-		@media screen and (max-width: 767px) 
-		{
-			header
-			{
-				display:block;
-			}
-			footer
-			{
-				display:none;
-				
-			}
-			.hide
-			{
-				display:none;
-			}
-			
-			
-			h1
-			{
-				padding:0.5em 0 0 0;
-				font-family: 'Josefin Sans', sans-serif;
-				font-size:2.5em;
-			}
-			
-			#banner-wrapper 
-			{
-				background-color: rgba(24, 120, 60, 0.6);
-				padding: 10px 0;
-				background-image:url(mobile/image/bodybg3b.png);
-				background-size:cover;
-				background-repeat:no-repeat;
-		
-			}
-			#banner
-			{
-			}
-			#logobutt-wrapper 
-			{
-				display: table;
-				width: 96%;
-				margin: 0.375em auto; /* 6/16 = 0.375em; */
-			}
-			#logobutt 
-			{
-    			display: table-row;
-			}
-
-			#title 
-			{
-				display: table-cell;
-				text-align:center;
-			}
-			
-			#logo 
-			{
-				max-width:100%;
-				width:7em;
-				position:relative;
-				padding:0;
-				clear:both;
-				float:left;
-				background-color:white;
-			}
-			
-			#menu-nav 
-			{
-				display: table-cell;
-				vertical-align: center;
-				text-align: right;
-				position:relative;
-				left:0.5em;
-				padding:0;
-			}
-			
-			
-			#menubutt 
-			{
-				vertical-align: bottom;
-				float: right;
-				clear:both;
-				padding:0.3em; /*.5em;  6/16 = 0.375em */
-				margin: 0.5em 1em;
-				
-				opacity: 1;
-				cursor: pointer;
-				
-				-moz-transition: all .2s linear;
-				-webkit-transition: all .2s linear;
-				-ms-transition: all .2s linear;
-				-o-transition: all .2s linear;
-				transition: all .2s linear;
-				
-				-moz-border-radius: 2px;
-				-webkit-border-radius: 2px;
-				-ms-border-radius: 2px;
-				-o-border-radius: 2px;
-				border-radius: 2px;
-				
-				-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-				-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-				-ms-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-				-o-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-				box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-				
-				background-color: green;
-				background-image: -moz-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: -webkit-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: -ms-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: -o-linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-position: left bottom;
-				background-repeat: repeat-x;
-				
-				
-			}
-			
-			#menubutt.selected,
-			#menubutt:active 
-			{
-				opacity: 1;
-				
-				-moz-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
-				-webkit-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
-				-ms-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
-				-o-box-shadow: 0 1px 1px rgba(120, 120, 120, .2);
-				box-shadow: 0 1px  1px rgba(120, 120, 120, .2);
-				
-				background-color: blue;
-				background-image: -moz-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: -webkit-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: -ms-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-image: -o-linear-gradient(bottom,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
-				background-position: left bottom;
-				background-repeat: repeat-x;
-				
-			}
-			
-			#menubutt-inner 
-			{
-				background: transparent url(mobile/image/menu-bg-zen.png) no-repeat 0 0;
-				background-size:contain;
-				padding-bottom:0.5em;
-				
-			}
-
-			.smaller
-			{
-				width:63px;
-				height: 50px;	
-				background-size:cover;	
-			}
-			.bigger
-			{
-				width:80px;
-				height: 64px;
-				background-size:cover;	
-			}
-
-			.repo
-			{
-				position:relative;
-				left:-30%;
-			}
-			.space
-			{
-				margin-top:21.7em; /* 185/24 = 7.7em */
-			}
-			
-			#menu-list 
-			{
-				clear: both;
-				display: none;
-				position: absolute;
-				width:100%;
-				background-color: rgba(24, 120, 60, 1);
-				
-				-moz-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
-				-webkit-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
-				-ms-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
-				-o-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
-				box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, .4);
-				
-				top:5em;
-				left:0.01em;
-			}
-			
-			#menu-list ul 
-			{
-				overflow: hidden;
-			}
-			#menu-list li 
-			{
-				float: left;
-				width: 100%;
-			}
-			.icon
-			{
-				height:1.25em;
-				position:relative;
-				top:0.2em;
-			}
-			
-			#menu-list a 
-			{
-				color: #c2daeb;
-				white-space: nowrap;
-				text-decoration: none;
-				display: block;
-				text-align:center;
-				
-				line-height: 2.875em; /* 46/16 = 3.375em */
-				height: 2.875em; /* 46/16 = 3.375em */
-				padding: .375em; /* 6/16 = .375em */
-				
-				-moz-transition: color 0.3s linear, background-color 0.3s linear;
-				-o-transition: color 0.3s linear, background-color 0.3s linear;
-				-webkit-transition: color 0.3s linear, background-color 0.3s linear;
-				-ms-transition: color 0.3s linear, background-color 0.3s linear;
-				transition: color 0.3s linear, background-color 0.3s linear;
-				
-				-moz-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-				-o-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-				-webkit-box-shadow: 0 0 0.2em rgba(24, 150, 90, 1);
-				-ms-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-				box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-			}
-			#menu-list a:hover,
-			#menu-list a:active 
-			{
-				color: #fff;
-				background-color: rgba(245,245,245, 0.6);
-				
-			}
-			.longli
-{
-	background-image:url(mobile/image/classbg2.png);
-	background-size:contain;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-color: rgba(0,0,100, 0.9);
-}
-.aboutli
-{
-	background:url(mobile/image/rainbow.png) no-repeat center, url(mobile/image/bfly.png) no-repeat left, url(mobile/image/bfly.png) no-repeat right;
-	background-size:contain;
-	/*background-position:center;
-	background-repeat:no-repeat;*/
-	background-color: rgba(176,224,230, 1);
-	
-}
-.red0
-	{
-		color:red;
-	}
-	
-	.purple0
-	{
-		color:purple;
-	}
-	.orange
-	{
-		color:orange;
-	}
-			
-			
-			
-			
-
-	.red
-	{
-		color:rgba(220,20,90, 1);
-	}
-	.blue
-	{
-		color:blue;
-	}
-	.green
-	{
-		color:green;
-	}
-	.purple
-	{
-		color:rgba(186,85,211, 1);
-	}
-	.yellow
-	{
-		color:yellow;
-	}
-
-.watchli
-{
-	background-image:url(mobile/image/sparkbg7.png);
-	background-size:contain;
-	background-color: rgba(192,192,192, 1);
-
-	
-	
-}
-.testili
-{
-	background-image:url(mobile/image/libg1.png);
-	background-size:contain;
-	background-repeat:no-repeat;
-	background-position:center;
-	background-color: rgba(0,0,0, 0.9);
-}
-.homeli
-{
-	background-image:url(mobile/image/foodbg1.png);
-	background-size:cover;
-	background-repeat:no-repeat;
-	background-position:center;
-	background-color: rgba(0,128,0, 1);
-}
-.gli
-{
-	background-image:url(mobile/image/gallerybg2.png);
-	background-size:cover;
-	background-repeat:no-repeat;
-	background-color: rgba(255,127,80, 1);
-	
-}
-.classli
-{
-	background-image:url(mobile/image/posebg.png);
-	background-size:contain;
-	background-repeat:no-repeat;
-	background-position:center;
-	background-color: rgba(147,112,219, 1);
-	
-	
-}
-.conli
-{
-	background-image:url(mobile/image/conbg4.png);
-	background-size:contain;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-color: rgba(245,245,245, 1);
-	
-}
-
-		}
-	</style>
-    </head>
-        <body>
-        
-        <nav class="navbar hide">
-     
-        
-        <div class="goaway">
-        
-  			<ul class="nav navbar-nav">
-            
-  			  	<li class="nav-item" id="about" > 
-                
-   				  <a class="nav-link" href="about.html" target="_blank">About</a> 
-                  
-    			</li>
-                
-    			<li class="nav-item " data-toggle="modal" data-target="#vidModal">
-                
-     				<a class="nav-link" href="#">Videos</a>
-                    
-    			</li>
-                
-    			<li class="nav-item ">
-                
-      				<a class="nav-link" href="gallery.html" target="_blank">Gallery</a>
-                    
-    			</li>
-                
-    			<li class="nav-item " data-toggle="modal" data-target="#classModal">
-                
-      				<a class="nav-link" href="#">Classes</a>
-                    
-    			</li>
-                
-                <li class="nav-item">
-                
-      				<a class="nav-link" href="food.html" target="_blank">Good Eats</a>
-                    
-    			</li>
-                
-    			<li class="nav-item">
-                
-      				<a class="nav-link" href="testimonials.html" target="_blank">Testimonials</a>
-                    
-    			</li>
-                
-                <li class="nav-item ">
-                
-      				<a class="nav-link floatl" href="mailto:tysoyoga@outlook.com">Email</a>
-                    <div id="emailbutt" class="addthis_inline_follow_toolbox floatr" title="Email"></div>
-                    
-                    
-    			</li>
-                
-                
-                
-			</ul>
-            
- 		</div><!--navspy div-->
-			
-	</nav>
-        
-        
-        
-        <header id="banner">
-            
-                <div id="logobutt-wrapper">
-                
-                    <div id="logobutt">
-                    
-                        
-                        <!--MOBILE COLLAPSE BUTTON-->
-                        <nav id="menu-nav">
-                        
-                            <div id="menubutt" class="repo">
-                            
-                                <div id="menubutt-inner" class="bigger"></div><!--MOBILE COLLAPSE BUTTON-->
-                                
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-                
-                
-                <nav id="menu-list">
-                    <ul>
-                    	<li class="homeli">
-                            <a class="navlink" href="mobile/mobile.html"><span class="icon"></span>Home</a>
-                        </li>
-                        <li class="aboutli">
-                            <a class="navlink" href="mobile/about.html"><span class="icon"></span><span class="purple">A</span><span class="blue">b</span><span class="green">o</span><span class="yellow">u</span><span class="red">t</span></a>
-                        </li>
-                        <li class="longli">
-                            <a class="navlink" href="mobile/mobile.html#longevity"><span class="icon"></span>Longevity</a>
-                        </li>
-                        <li class="watchli">
-                            <a class="navlink" href="mobile/mobile.html#video"><span class="icon"></span>Videos</a>
-                        </li>
-                        <li class="gli">
-                            <a class="navlink" href="mobile/mobile.html#gallery"><span class="icon"></span>Gallery</a>
-                        </li>
-                        <li class="classli">
-                            <a class="navlink" href="mobile/mobile.html#class"><span class="icon"></span>Classes</a>
-                        </li>
-                        <li class="testili">
-                            <a class="navlink" href="mobile/testimo.html"><span class="icon"></span>Testimonials</a>
-                        </li>
-                        <li class="conli">
-                            <a class="navlink" href="mobile/mobile.html#contact"><span class="icon"></span><span class="red0">C</span><span class="green">o</span><span class="blue">n</span><span class="orange">t</span><span class="purple0">a</span><span class="red">c</span><span class="green">t</span></a>
-                        </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-        
-         <div id="goodeats" >
-            
-                        <h1 >Understanding how to combine &amp; sequence food for energy is a key pillar of health.</h1>
-                    
-                    <div id="charts">
-                        <div class="foodchart acid">
-                            <img id="acidimg" src="images/acid-vs-alkaline-food-chart.png"/>
-                        </div>
-                        <div class="foodchart base">
-                            <img id="baseimg" src="images/Alkaline-Foods-for-acid-reflux.jpg"/>
-                        </div>
-                    </div>
-               
-                
+  <head>
+    <meta charset="utf-8" />
+    <title>Nutrition</title>
+    <link href="mobile/frank.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="mobile/respond.js"></script>
+    <link rel="stylesheet" href="css/food.css" />
+    <title>Videos</title>
+  </head>
+  <body>
+    <nav class="navbar hide">
+      <div class="goaway">
+        <ul class="nav navbar-nav">
+          <li class="nav-item" id="about">
+            <a class="nav-link" href="about.html" target="_blank">About</a>
+          </li>
+          <li class="nav-item" data-toggle="modal" data-target="#vidModal">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html" target="_blank">Gallery</a>
+          </li>
+          <li class="nav-item" data-toggle="modal" data-target="#classModal">
+            <a class="nav-link" href="#">Classes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="food.html" target="_blank">Good Eats</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="testimonials.html" target="_blank">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link floatl" href="mailto:tysoyoga@outlook.com">Email</a>
+            <div id="emailbutt" class="addthis_inline_follow_toolbox floatr" title="Email"></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <header id="banner">
+      <div id="logobutt-wrapper">
+        <div id="logobutt">
+          <nav id="menu-nav">
+            <div id="menubutt" class="repo">
+              <div id="menubutt-inner" class="bigger"></div>
             </div>
-        
-       
-        <footer>
-        	<a href="index.html"><h2>Back 2 Home</h2></a>
-        </footer>
-            
-        </body>
+          </nav>
+        </div>
+      </div>
+      <nav id="menu-list">
+        <ul>
+          <li class="homeli">
+            <a class="navlink" href="mobile/mobile.html"><span class="icon"></span>Home</a>
+          </li>
+          <li class="aboutli">
+            <a class="navlink" href="mobile/about.html"
+              ><span class="icon"></span><span class="purple">A</span><span class="blue">b</span
+              ><span class="green">o</span><span class="yellow">u</span
+              ><span class="red">t</span></a
+            >
+          </li>
+          <li class="longli">
+            <a class="navlink" href="mobile/mobile.html#longevity"
+              ><span class="icon"></span>Longevity</a
+            >
+          </li>
+          <li class="watchli">
+            <a class="navlink" href="mobile/mobile.html#video"><span class="icon"></span>Videos</a>
+          </li>
+          <li class="gli">
+            <a class="navlink" href="mobile/mobile.html#gallery"
+              ><span class="icon"></span>Gallery</a
+            >
+          </li>
+          <li class="classli">
+            <a class="navlink" href="mobile/mobile.html#class"><span class="icon"></span>Classes</a>
+          </li>
+          <li class="testili">
+            <a class="navlink" href="mobile/testimo.html"><span class="icon"></span>Testimonials</a>
+          </li>
+          <li class="conli">
+            <a class="navlink" href="mobile/mobile.html#contact"
+              ><span class="icon"></span><span class="red0">C</span><span class="green">o</span
+              ><span class="blue">n</span><span class="orange">t</span><span class="purple0">a</span
+              ><span class="red">c</span><span class="green">t</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div id="goodeats">
+      <h1>
+        Understanding how to combine &amp; sequence food for energy is a key pillar of health.
+      </h1>
+      <div id="charts">
+        <div class="foodchart acid">
+          <img id="acidimg" src="images/acid-vs-alkaline-food-chart.png" />
+        </div>
+        <div class="foodchart base">
+          <img id="baseimg" src="images/Alkaline-Foods-for-acid-reflux.jpg" />
+        </div>
+      </div>
+    </div>
+    <footer>
+      <a href="index.html"><h2>Back 2 Home</h2></a>
+    </footer>
+		<script src="js/food.js"></script>
+  </body>
 </html>
