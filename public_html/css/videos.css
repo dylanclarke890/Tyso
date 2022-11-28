@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  background: url(images/foodbg1.png) no-repeat,
+  background: url(../images/foodbg1.png) no-repeat,
     -webkit-radial-gradient(center, ellipse cover, rgba(0, 36, 0, 1) 0%, rgba(0, 87, 0, 1) 17%, rgba(
             0,
             138,
@@ -8,7 +8,7 @@ body {
             1
           )
           33%, rgba(82, 177, 82, 1) 67%, rgba(131, 199, 131, 1) 83%, rgba(180, 221, 180, 1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: url(images/foodbg1.png) no-repeat,
+  background: url(../images/foodbg1.png) no-repeat,
     radial-gradient(
       ellipse at center,
       rgba(0, 36, 0, 1) 0%,
@@ -57,7 +57,7 @@ video {
 #banner-wrapper {
   background-color: rgba(24, 120, 60, 0.6);
   padding: 10px 0;
-  background-image: url(image/bodybg3b.png);
+  background-image: url(../images/bodybg3b.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
