@@ -1,11 +1,9 @@
-h1 {
+.content {
+  font-family: sans-serif;
   text-align: center;
-}
-@media screen and (min-width: 768px) {
-}
-
-@media screen and (max-width: 767px) {
+  padding: 2rem;
 }
 
-@media all and (orientation: landscape) {
+.content h1 {
+  margin-bottom: 1rem;
 }
