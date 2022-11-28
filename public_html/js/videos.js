@@ -1,60 +1,16 @@
-jQuery(function ($) {
-  var open = false;
+document.addEventListener("DOMContentLoaded", addVideos);
 
-  function resizeMenu() {
-    if ($(this).width() < 768) {
-      if (!open) {
-        $("#menu-list").hide();
-      }
-      $("#menubutt").show();
-      $("#logo").attr("src", "image/logo_def.png");
-    } else if ($(this).width() >= 768) {
-      if (!open) {
-        $("#menu-list").show();
-      }
-      $("#menubutt").hide();
-      $("#title").show();
-      $("#wrapper").removeClass("space");
-      $("#logo").attr("src", "image/logo.png");
-    }
-  }
+function createVideo({ src, poster } = {}) {
+  return `<video controls src="${src}" ${poster ? `poster="${poster}"` : ""}></video>`;
+}
 
-  function setupMenuButton() {
-    $("#menubutt").click(function (e) {
-      e.preventDefault();
-
-      if (open) {
-        $("#menu-list").slideUp();
-        $("#menubutt").toggleClass("selected");
-
-        $("#wrapper").removeClass("space");
-
-        $("#title").show();
-      } else {
-        $("#menu-list").slideDown();
-        $("#menubutt").toggleClass("selected");
-
-        $("#wrapper").addClass("space");
-        $("#title").hide();
-      }
-
-      open = !open;
-    });
-
-    $(".navlink").click(function () {
-      if (open) {
-        $("#menu-list").slideUp();
-
-        $("#wrapper").removeClass("space");
-
-        $("#title").show();
-
-        open = !open;
-      }
-    });
-  }
-
-  $(window).resize(resizeMenu);
-  resizeMenu();
-  setupMenuButton();
-});
+function addVideos() {
+  const videos = [
+    { src: "assets/videos/tyso-vid-1.mp4", poster: "" },
+    { src: "assets/videos/tyso-vid-2.mp4", poster: "assets/images/poster-1.png" },
+    { src: "assets/videos/tyso-vid-3.mp4", poster: "assets/images/poster-2.png" },
+  ];
+  const videoElements = videos.map((v) => createVideo(v)).join("");
+  const content = document.getElementsByClassName("content");
+  if (content.length >= 1) content[0].innerHTML = videoElements;
+}
