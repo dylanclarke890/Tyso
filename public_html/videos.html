@@ -1,122 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Videos</title>
-    <link href="mobile/frank.css" rel="stylesheet" type="text/css" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="mobile/respond.js"></script>
-    <link rel="stylesheet" href="css/videos.css">
-    <title>Videos</title>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Videos</title>
+  <link href="mobile/frank.css" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="mobile/respond.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/videos.css">
+  <title>Videos</title>
   </head>
-  <body>
-    <nav class="navbar hide">
-      <div class="goaway">
-        <ul class="nav navbar-nav">
-          <li class="nav-item" id="about">
-            <a class="nav-link" href="about.html" target="_blank">About</a>
-          </li>
-          <li class="nav-item" data-toggle="modal" data-target="#vidModal">
-            <a class="nav-link" href="#">Videos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="gallery.html" target="_blank">Gallery</a>
-          </li>
-          <li class="nav-item" data-toggle="modal" data-target="#classModal">
-            <a class="nav-link" href="#">Classes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="food.html" target="_blank">Good Eats</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="testimonials.html" target="_blank">Testimonials</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link floatl" href="mailto:tysoyoga@outlook.com">Email</a>
-            <div id="emailbutt" class="addthis_inline_follow_toolbox floatr" title="Email"></div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <header id="banner">
-      <div id="logobutt-wrapper">
-        <div id="logobutt">
-          <nav id="menu-nav">
-            <div id="menubutt" class="repo">
-              <div id="menubutt-inner" class="bigger"></div>
-            </div>
-          </nav>
-        </div>
-      </div>
-      <nav id="menu-list">
-        <ul>
-          <li class="homeli">
-            <a class="navlink" href="mobile/mobile.html"><span class="icon"></span>Home</a>
-          </li>
-          <li class="aboutli">
-            <a class="navlink" href="mobile/about.html"
-              ><span class="icon"></span><span class="purple">A</span><span class="blue">b</span
-              ><span class="green">o</span><span class="yellow">u</span
-              ><span class="red">t</span></a
-            >
-          </li>
-          <li class="longli">
-            <a class="navlink" href="mobile/mobile.html#longevity"
-              ><span class="icon"></span>Longevity</a
-            >
-          </li>
-          <li class="watchli">
-            <a class="navlink" href="mobile/mobile.html#video"><span class="icon"></span>Videos</a>
-          </li>
-          <li class="gli">
-            <a class="navlink" href="mobile/mobile.html#gallery"
-              ><span class="icon"></span>Gallery</a
-            >
-          </li>
-          <li class="classli">
-            <a class="navlink" href="mobile/mobile.html#class"><span class="icon"></span>Classes</a>
-          </li>
-          <li class="testili">
-            <a class="navlink" href="mobile/testimo.html"><span class="icon"></span>Testimonials</a>
-          </li>
-          <li class="conli">
-            <a class="navlink" href="mobile/mobile.html#contact"
-              ><span class="icon"></span><span class="red0">C</span><span class="green">o</span
-              ><span class="blue">n</span><span class="orange">t</span><span class="purple0">a</span
-              ><span class="red">c</span><span class="green">t</span></a
-            >
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <div id="video">
-      <h1>Videos</h1>
-      <video
-        controls
-        class="vidcon vid1"
-        src="mobile/image/tysovid2.MOV"
-        frameborder="0"
-        allowfullscreen></video>
-      <video
-        controls
-        class="vidcon vid1"
-        poster="mobile/image/poster.png"
-        src="mobile/image/tysovid003.mp4"
-        frameborder="0"
-        allowfullscreen></video>
-      <video
-        controls
-        class="vidcon vid2"
-        poster="mobile/image/poster2b.png"
-        src="mobile/image/gymvid2.mp4"
-        frameborder="0"
-        allowfullscreen></video>
-    </div>
-    <footer>
-      <a href="index.html"><h2>Back 2 Home</h2></a>
+
+<body>
+  <nav id="navbar">
+    <a href="index.html"><img class="logo" src="images/tyso-logo.png" /></a>
+    <h1 class="text-center">Videos</h1>
+  </nav>
+  <div class="content">
+    <video controls src="mobile/image/tysovid2.MOV"></video>
+    <video controls poster="mobile/image/poster.png" src="mobile/image/tysovid003.mp4"></video>
+    <video controls poster="mobile/image/poster2b.png" src="mobile/image/gymvid2.mp4"></video>
+  </div>
+  <footer>
+    <a href="index.html">
+      <h2>Back 2 Home</h2>
+    </a>
     </footer>
     <script src="js/videos.js"></script>
-  </body>
+    </body>
+
 </html>
