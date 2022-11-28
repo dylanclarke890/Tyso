@@ -7,12 +7,19 @@ body {
 :root {
   --font-primary: "Marck Script", cursive;
   --font-secondary: Verdana, Geneva, sans-serif;
+  --font-size: 26px;
 }
 
 .text-secondary {
   font-family: var(--font-secondary);
   font-weight: bold;
   font-style: italic;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --font-size: 18px;
+  }
 }
 
 /* END GENERAL */
@@ -26,7 +33,7 @@ body {
   top: 0;
   width: 100%;
   font-family: "Oswald", sans-serif;
-  font-size: 26px;
+  font-size: var(--font-size);
   letter-spacing: 1px;
   word-spacing: 1px;
 }
@@ -45,6 +52,12 @@ body {
   position: fixed;
 }
 
+@media (max-width: 640px) {
+  .logo {
+    height: 3.75rem;
+  }
+}
+
 /* END NAVBAR */
 
 /* CONTENT */
@@ -54,14 +67,21 @@ body {
   top: 10rem;
 }
 
+@media (max-width: 640px) {
+  .content {
+    top: 5rem;
+  }
+}
+
 /* INTRO */
 
 #intro {
   color: #3d8646;
-  font-size: 26px;
   font-family: var(--font-primary);
-  width: 810px;
+  font-size: var(--font-size);
   margin-inline: auto;
+  max-width: 810px;
+  padding: 1rem;
 }
 
 #three-areas {
@@ -92,7 +112,7 @@ body {
     sans-serif;
   line-height: 1.5;
   color: #373a3c;
-  font-size: 150%;
+  font-size: calc(var(--font-size) - 2px);
   padding: 1rem;
 }
 
@@ -103,36 +123,3 @@ body {
 /* END MAIN */
 
 /* END CONTENT */
-
-@media (max-width: 640px) {
-  body {
-    background: rgba(146, 222, 95, 0.5);
-  }
-  .logo {
-    padding: 0;
-    margin: 0;
-    height: 50px;
-    position: relative;
-    left: 100px;
-  }
-  .blurb {
-    padding-top: 80px;
-  }
-  h1 {
-    display: none;
-  }
-
-  .newfont {
-    font-family: Verdana, Geneva, sans-serif;
-    font-weight: bold;
-  }
-  .blurbbottom {
-    position: relative;
-  }
-  .blurbsign {
-    font-family: "Marck Script", cursive;
-    font-size: 40px;
-    position: relative;
-    left: 100px;
-  }
-}
