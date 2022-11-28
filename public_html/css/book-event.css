@@ -1,134 +1,27 @@
-@media (max-width: 640px) {
-  body {
-    background: rgba(146, 222, 95, 0.5);
-  }
-  .logo {
-    padding: 0;
-    margin: 0;
-    height: 50px;
-    position: relative;
-    left: 100px;
-  }
-  .blurb {
-    padding-top: 80px;
-  }
-  h1 {
-    display: none;
-  }
-
-  .newfont {
-    font-family: Verdana, Geneva, sans-serif;
-    font-weight: bold;
-  }
-  .blurbbottom {
-    position: relative;
-  }
-  .blurbsign {
-    font-family: "Marck Script", cursive;
-    font-size: 40px;
-    position: relative;
-    left: 100px;
-  }
+body {
+  background: purple;
 }
 
-@media (min-width: 641px) {
-  html {
-    margin: 0;
-    padding: 0;
-  }
+#navbar {
+  background-color: black;
+  padding-bottom: 1rem;
+}
 
-  body {
-    background: purple;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
+#navbar h1 {
+  font-size: 3em;
+  color: rgba(10, 79, 26, 1);
+}
 
-  .container {
-    text-align: center;
+.logo {
+  top: 0.5rem;
+}
 
-    position: relative;
-  }
-  .navbar {
-    background-color: black;
-  }
-  nav {
-    font-family: "Oswald", sans-serif;
-    font-size: 26px;
-    letter-spacing: 1px;
-    word-spacing: 1px;
-  }
-  nav a {
-    color: #054516;
-  }
-  #landing {
-    text-align: center;
-  }
-  #contact {
-    background-color: red;
-    height: 3em;
-    position: relative;
-  }
-  #bep1 {
-    height: 81vh;
-    text-align: center;
-    position: relative;
-    top: 5em;
-  }
+.content {
+  top: 8rem;
+  text-align: center;
+}
 
-  .testiButt:hover {
-    color: white;
-    text-shadow: 1px 1px black;
-    font-family: "Indie Flower", cursive;
-    font-weight: bold;
-    font-size: 150%;
-    background: rgba(67, 200, 310, 1);
-  }
-  .signature {
-    color: black;
-    font-family: "Marck Script", cursive;
-    font-size: 26px;
-  }
-  .logo {
-    padding: 0;
-    margin: 0;
-    height: 5em;
-  }
-  .blurb {
-    color: white;
-    font-size: 2.5em;
-    position: relative;
-
-    font-family: "Marck Script", cursive;
-  }
-
-  .newfont {
-    font-family: Verdana, Geneva, sans-serif;
-    font-weight: bold;
-  }
-
-  .blurbbottom {
-    text-align: center;
-    position: relative;
-    top: -14em;
-    left: 20em;
-    width: 50%;
-  }
-  .blurbsign {
-    padding-left: 300px;
-    background-color: transparent;
-    font-size: 40px;
-  }
-  h1 {
-    text-align: center;
-    color: rgba(10, 79, 26, 1);
-    position: relative;
-    right: 0.5em;
-    font-size: 3em;
-  }
-
-  .break {
-    clear: both;
-    float: left;
-  }
+.quote {
+  font-size: 2.5rem;
+  color: white;
 }

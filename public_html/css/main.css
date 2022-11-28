@@ -1,3 +1,27 @@
+/* GENERAL */
+
+body {
+  background: rgba(146, 222, 95, 0.5);
+}
+
+:root {
+  --font-primary: "Marck Script", cursive;
+  --font-secondary: Verdana, Geneva, sans-serif;
+  --font-size: 26px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --font-size: 18px;
+  }
+}
+
+.text-secondary {
+  font-family: var(--font-secondary);
+  font-weight: bold;
+  font-style: italic;
+}
+
 *,
 *::after,
 *::before {
@@ -22,3 +46,62 @@ h6 {
   line-height: 1.1;
   color: inherit;
 }
+
+.quote {
+  text-align: center;
+  font-family: var(--font-secondary);
+}
+
+.signature {
+  font-family: var(--font-primary);
+  font-size: 150%;
+  padding-left: 30%;
+}
+
+/* END GENERAL */
+
+/* NAVBAR */
+
+#navbar {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  font-family: "Oswald", sans-serif;
+  font-size: var(--font-size);
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  z-index: 1000;
+}
+
+#navbar h1 {
+  margin-top: 1rem;
+  color: #3d8646;
+  flex-grow: 1;
+}
+
+.logo {
+  padding: 0;
+  top: 1rem;
+  left: 0.5rem;
+  height: 6.5rem;
+  position: fixed;
+}
+
+.content {
+  position: relative;
+  top: 10rem;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    height: 3.75rem;
+  }
+
+  .content {
+    top: 5rem;
+  }
+}
+
+/* END NAVBAR */
