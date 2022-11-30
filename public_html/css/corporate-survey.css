@@ -1,0 +1,19 @@
+#gallery {
+  margin: 0 auto;
+}
+
+button {
+  line-height: 2.2em;
+  width: 9em;
+  font-size: 1.2em;
+}
+
+.langs {
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  button {
+    width: 12em;
+  }
+}
