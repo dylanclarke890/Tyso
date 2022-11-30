@@ -1,6 +1,6 @@
 .content {
   margin: 0 auto;
-  top: 8rem;
+  top: 7rem;
   width: 50%;
 }
 
@@ -10,8 +10,18 @@ input {
   font-size: calc(var(--font-size) - 3px);
 }
 
-input[type=checkbox] {
-  margin-right: 4px;
+input[type="checkbox"] {
+  margin-right: 0.25rem;
+}
+
+input[type="text"] {
+  border-radius: 4px;
+  padding: 0.25rem;
+}
+
+.center {
+  display: grid;
+  place-items: center;
 }
 
 .form-input {
