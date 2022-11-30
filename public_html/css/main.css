@@ -47,6 +47,10 @@ h6 {
   color: inherit;
 }
 
+img {
+  vertical-align: middle;
+}
+
 .quote {
   text-align: center;
   font-family: var(--font-secondary);

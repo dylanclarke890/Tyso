@@ -1,5 +1,9 @@
 /* GENERAL */
 
+:root {
+  --font-testimonials: "Indie Flower", cursive;
+}
+
 body {
   background: rgba(140, 200, 95, 1);
 }
@@ -14,99 +18,91 @@ body {
 }
 
 #navbar h1 {
-  text-align: center;
   color: #043110;
-  font-family: "Indie Flower", cursive;
+  font-family: var(--font-testimonials);
   font-weight: bold;
 }
 
 .logo {
   height: 6rem;
+  margin-left: 1rem;
 }
 
 /* END NAVBAR */
 
-@media (max-width: 480px) {
-  .logo {
-    padding: 0;
-    margin: 0;
-    height: 50px;
-    position: relative;
-    left: 100px;
-  }
+/* CONTENT */
 
-  .icon {
-    height: 30px;
-    position: relative;
-    top: -3px;
-    padding-top: 10px;
-  }
-
-  .text {
-    position: relative;
-    padding-top: 10px;
-    margin-top: 10px;
-  }
-
-  .testimonials {
-    padding-top: 130px;
-  }
-
-  #deco1 {
-    display: none;
-  }
-
-  #deco2 {
-    display: none;
-  }
+.content {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@media (min-width: 481px) {
-  .container {
-    margin-top: 12px;
-    position: relative;
-    left: -20px;
+/* END CONTENT */
+
+/* TESTIMONIAL */
+
+.icon {
+  height: 30px;
+  position: relative;
+  top: -3px;
+}
+
+.testimonial {
+  isolation: isolate;
+  margin: 1rem;
+}
+
+.testimonial > p:not(.signature) {
+  font-family: var(--font-testimonials);
+  font-size: calc(var(--font-size) - 2px);
+  font-weight: 900;
+  color: black;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+#handstand-pic {
+  position: absolute;
+  left: -250px;
+}
+
+#yoga-pose-pic {
+  position: absolute;
+  left: 540px;
+  top: -70px;
+}
+
+.signature {
+  font-weight: bold;
+  font-size: calc(var(--font-size) - 1px);
+  color: black;
+  position: relative;
+  text-align: center;
+}
+
+/* END TESTIMONIAL */
+
+@media (max-width: 600px) {
+  #navbar {
+    height: 4rem;
   }
 
-  #deco1 {
-    position: absolute;
-    height: 500px;
-    left: -250px;
-  }
-
-  #deco2 {
-    position: absolute;
-    left: 540px;
-    top: 70px;
-  }
-
-  .testimonials {
-    position: relative;
-    padding-top: 150px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  p {
-    font-family: "Indie Flower", cursive;
-    font-size: 24px;
-    font-weight: 900;
-    color: black;
-    letter-spacing: 2px;
-  }
-
-  .signature {
-    font-weight: bold;
-    font-size: 25px;
-    color: black;
-    position: relative;
-    text-align: center;
+  .logo {
+    height: 3rem;
+    margin-left: 0.5rem;
   }
 
   .icon {
-    height: 30px;
-    position: relative;
     top: -3px;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  #handstand-pic,
+  #yoga-pose-pic {
+    display: none;
   }
 }
