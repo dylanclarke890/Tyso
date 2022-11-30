@@ -1,54 +1,132 @@
+#navbar h1 {
+  padding-right: 5rem;
+}
 
+#vip-logo {
+  position: relative;
+  height: 74vh;
+  float: left;
+}
+
+.section {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+  width: 100%;
+  height: 75vh;
+}
+
+.section > span {
+  color: rgba(240, 248, 255, 1);
+  font-size: 4.3em;
+  position: relative;
+}
+
+#section-1 {
+  background-image: url(../images/leaping-girl.png);
+  text-align: center;
+}
+
+#section-1 span:first-of-type {
+  top: 0.17em;
+}
+
+#section-1 span:last-of-type {
+  left: 5.2em;
+  top: 0.6em;
+}
+
+#section-2 {
+  background-image: url(../images/relaxing-guy-2.png);
+  text-align: right;
+}
+
+#section-2 span:first-of-type {
+  left: -0.5em;
+  top: 0.2em;
+}
+
+#section-3 {
+  background-image: url(../images/relaxing-guy-1.png);
+}
+
+#section-3 span:first-of-type {
+  top: 0.3em;
+  left: 7vw;
+}
+
+#section-3 span:last-of-type {
+  top: 0.45em;
+  left: 16vw;
+}
+
+#section-4 {
+  background-image: url(../images/beach.png);
+  text-align: center;
+}
+
+#section-4 span:first-of-type {
+  top: 0.3em;
+  left: -1.2em;
+}
+
+#section-4 span:last-of-type {
+  top: 16vh;
+  left: 1em;
+}
+
+#section-5 {
+  background-image: url(../images/guru.png);
+  background-position: right top;
+}
+
+#section-5 span:first-of-type {
+  top: 25vh;
+  left: 1em;
+}
+
+#section-5 span:last-of-type {
+  top: 25vh;
+  left: 1em;
+}
+
+#info {
+  height: 18vh;
+  text-align: center;
+  background-color: #000;
+}
+
+#info a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
 
 @media screen and (max-width: 767px) {
-  .pan {
+  .section {
     width: 100%;
     height: 26vh;
   }
 
-  .text {
-    color: rgba(240, 248, 255, 1);
+  .section > span {
     font-size: 2em;
-    position: relative;
+  }
+
+  #section-1 {
+    text-align: left;
   }
 
   #logo {
-    position: relative;
     height: 25vh;
-    float: left;
     top: 0.2em;
     left: 0.3em;
-  }
-
-  #pan1 {
-    background-color: blue;
-    background-image: url(images/gal2.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-    text-align: left;
   }
 
   #text1b {
     top: 0.2em;
     left: 0.9em;
-  }
-
-  #pan2 {
-    background-color: blue;
-    background-image: url(images/relax.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-    text-align: right;
-  }
-
-  #pan3 {
-    background-color: pink;
-    background-image: url(images/dude.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
   }
 
   #text3a {
@@ -61,25 +139,9 @@
     left: 8vw;
   }
 
-  #pan4 {
-    background-color: purple;
-    background-image: url(images/beach.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
-  }
-
   #text4b {
     top: 2vh;
     left: 1.5em;
-  }
-
-  #pan5 {
-    background-color: red;
-    background-image: url(images/newguru.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right top;
   }
 
   #text5a {
@@ -102,132 +164,5 @@
     text-align: center;
     font-size: 1em;
     font-weight: bold;
-  }
-
-  #info a img {
-    vertical-align: middle;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .pan {
-    width: 100%;
-    height: 75vh;
-  }
-
-  #pan1 {
-    background-color: blue;
-    background-image: url(images/gal2.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-    text-align: center;
-  }
-
-  #logo {
-    position: relative;
-    height: 74vh;
-    float: left;
-  }
-
-  .text {
-    color: rgba(240, 248, 255, 1);
-    font-size: 4.3em;
-    position: relative;
-  }
-
-  #text1a {
-    top: 0.17em;
-  }
-
-  #text1b {
-    left: 5.2em;
-    top: 0.6em;
-  }
-
-  #pan2 {
-    background-color: blue;
-    background-image: url(images/relax.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-    text-align: right;
-  }
-
-  #text2 {
-    left: -0.5em;
-    top: 0.2em;
-  }
-
-  #pan3 {
-    background-color: pink;
-    background-image: url(images/dude.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-  }
-
-  #text3a {
-    top: 0.3em;
-    left: 7vw;
-  }
-
-  #text3b {
-    top: 0.45em;
-    left: 16vw;
-  }
-
-  #pan4 {
-    background-color: purple;
-    background-image: url(images/beach.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
-  }
-
-  #text4a {
-    top: 0.3em;
-    left: -1.2em;
-  }
-
-  #text4b {
-    top: 16vh;
-    left: 1em;
-  }
-
-  #pan5 {
-    background-color: red;
-    background-image: url(images/newguru.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right top;
-  }
-
-  #text5a {
-    top: 25vh;
-    left: 1em;
-  }
-
-  #text5b {
-    top: 25vh;
-    left: 1em;
-  }
-
-  #info {
-    height: 18vh;
-    text-align: center;
-    background-color: #000;
-  }
-
-  #info a {
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-  }
-
-  #info a img {
-    vertical-align: middle;
   }
 }
