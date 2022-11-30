@@ -60,3 +60,10 @@ button,
 .checkbox-list {
   margin-bottom: 1rem;
 }
+
+@media (max-width: 600px) {
+  .content {
+    width: 100%;
+    padding: 1rem;
+  }
+}
