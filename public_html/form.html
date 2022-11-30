@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald:400,300,700|Coiny|Dosis|Gloria+Hallelujah|Laila"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/form.css" />
+    <title>TYSO Yoga Form</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="index.html"><img class="logo" src="assets/images/tyso-logo.png" /></a>
+      <h1 class="text-center">Yoga Form</h1>
+    </nav>
+    <div class="content">
+      <form action="forms/process.php" method="post">
+        <input type="hidden" name="form_tools_form_id" value="3" />
+        <div class="form-input">
+          <label>Full Name:</label>
+          <input type="text" name="full_name" />
+        </div>
+        <div class="form-input">
+          <label>Company Name:</label>
+          <input type="text" name="company_name" />
+        </div>
+        <div class="form-input">
+          <label>Available yoga mats in space:</label>
+          <input type="text" name="mats" autocomplete="off" />
+        </div>
+        <label class="text-center">What are the goal(s) of the Yoga class?</label>
+        <div class="checkbox-list">
+          <div><input type="checkbox" name="goal[]" value="Balance" />Body-mind Balance</div>
+          <div><input type="checkbox" name="goal[]" value="Force" />Physical Strength</div>
+          <div><input type="checkbox" name="goal[]" value="Concentration" />Enhanced Focus</div>
+          <div><input type="checkbox" name="goal[]" value="Conscience" />Fostering Mindfulness</div>
+          <div><input type="checkbox" name="goal[]" value="Team building" />Team Building</div>
+          <div>
+            <input type="checkbox" name="goal[]" value="Leadership" />Corporate Leadership Workshop
+          </div>
+          <div>
+            <input type="checkbox" name="goal[]" value="Intro to yoga" />Introduction to Yoga
+          </div>
+          <div>
+            <input type="checkbox" name="goal[]" value="Intro to meditation" />Introduction to
+            Meditation
+          </div>
+        </div>
+        <label class="text-center">Series of classes:</label>
+        <div class="checkbox-list">
+          <div>
+            <input type="checkbox" name="classes[]" value="Une classe" />One class
+          </div>
+          <div>
+            <input type="checkbox" name="classes[]" value="5 semaines" />5 weeks
+          </div>
+          <div>
+            <input type="checkbox" name="classes[]" value="10 semaines" />10 weeks
+          </div>
+          <div>
+            <input type="checkbox" name="classes[]" value="20 semaines" />20 weeks
+          </div>
+        </div>
+        <div class="submit-btn">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

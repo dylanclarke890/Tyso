@@ -1,0 +1,43 @@
+.content {
+  margin: 0 auto;
+  top: 8rem;
+  width: 50%;
+}
+
+label,
+input {
+  font-family: "Gloria Hallelujah", cursive;
+  font-size: calc(var(--font-size) - 3px);
+}
+
+input[type=checkbox] {
+  margin-right: 4px;
+}
+
+.form-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+}
+
+button,
+.checkbox-list {
+  padding: 0.25rem;
+  font-family: "Laila", serif;
+  font-size: calc(var(--font-size) - 3px);
+}
+
+.checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form-input,
+.checkbox-list {
+  margin-bottom: 1rem;
+}
