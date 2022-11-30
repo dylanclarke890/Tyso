@@ -1,6 +1,5 @@
-var api;
 $(document).ready(function () {
-  api = $("#gallery").unitegallery({
+  $("#gallery").unitegallery({
     slider_scale_mode: "fit",
     thumb_fixed_size: false,
     strip_thumbs_align: "center",
