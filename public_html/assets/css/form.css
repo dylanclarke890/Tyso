@@ -1,3 +1,12 @@
+#lang {
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.lang-option.active {
+  color: var(--font-color-nav);
+}
+
 .content {
   margin: 0 auto;
   top: 7rem;

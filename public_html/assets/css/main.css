@@ -8,6 +8,7 @@ body {
   --font-primary: "Marck Script", cursive;
   --font-secondary: Verdana, Geneva, sans-serif;
   --font-size: 26px;
+  --font-color-nav: #3d8646;
 }
 
 @media (max-width: 640px) {
@@ -81,7 +82,7 @@ img {
 
 #navbar h1 {
   margin-top: 1rem;
-  color: #3d8646;
+  color: var(--font-color-nav);
   flex-grow: 1;
 }
 
