@@ -58,7 +58,8 @@ class Translator {
   }
 
   static getLanguage() {
-    return localStorage.getItem("preferredLanguage") ?? "EN";
+    const params = new URLSearchParams(window.location.search);
+    return params.get("lang") ?? localStorage.getItem("preferredLanguage") ?? "EN";
   }
 
   static constructHTML(lang) {
@@ -145,4 +146,5 @@ function addEvents() {
     else lang.classList.remove("active");
   }
   Translator.constructHTML(language);
+  Translator.saveLanguage(language);
 }
