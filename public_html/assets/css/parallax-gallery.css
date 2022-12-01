@@ -103,7 +103,7 @@ ul.pxs_thumbnails li.selected img {
 }
 
 .pxs_bg {
-  background: transparent url(../images/gallery/line.png) repeat top left;
+  background: transparent url(../images/parallax/line.png) repeat top left;
 }
 
 .pxs_bg div {
@@ -118,15 +118,15 @@ ul.pxs_thumbnails li.selected img {
 }
 
 .pxs_bg .pxs_bg1 {
-  background-image: url(../images/gallery/solid-blue-bg.jpeg);
+  background-image: url(../images/parallax/solid-blue-bg.jpeg);
 }
 
 .pxs_bg .pxs_bg2 {
-  background-image: url(../images/gallery/lace-bg.png);
+  background-image: url(../images/parallax/lace-bg.png);
 }
 
 .pxs_bg .pxs_bg3 {
-  background-image: url(../images/gallery/collage-bg.png);
+  background-image: url(../images/parallax/collage-bg.png);
 }
 
 .pxs_slider_wrapper {
