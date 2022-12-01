@@ -21,11 +21,11 @@ ul.pxs_thumbnails li img {
 
 .pxs_navigation span.pxs_prev {
   position: absolute;
-  background: #000 url(../images/prev.png) no-repeat center center;
+  background: #000 url(../images/icons/prev.png) no-repeat center center;
 }
 
 .pxs_navigation span.pxs_next {
-  background: #000 url(../images/next.png) no-repeat center center;
+  background: #000 url(../images/icons/next.png) no-repeat center center;
 }
 
 ul.pxs_thumbnails li.selected img {
@@ -101,7 +101,7 @@ p {
 }
 
 .pxs_bg {
-  background: transparent url(../images/bg.png) repeat top left;
+  background: transparent url(../images/gallery/bg.png) repeat top left;
 }
 
 .pxs_bg div {
@@ -116,15 +116,15 @@ p {
 }
 
 .pxs_bg .pxs_bg1 {
-  background-image: url(../images/bg4.jpeg);
+  background-image: url(../images/gallery/bg4.jpeg);
 }
 
 .pxs_bg .pxs_bg2 {
-  background-image: url(../images/bglace.png);
+  background-image: url(../images/gallery/bglace.png);
 }
 
 .pxs_bg .pxs_bg3 {
-  background-image: url(../images/bg6.png);
+  background-image: url(../images/gallery/bg6.png);
 }
 
 .pxs_slider_wrapper {
@@ -182,7 +182,7 @@ ul.pxs_slider li img {
   font-size: 20px;
   padding: 15px 15px 15px 50px;
   position: absolute;
-  background: #333 url(../images/ajax-loader.gif) no-repeat 10px 50%;
+  background: #333 url(../images/icons/loading.gif) no-repeat 10px 50%;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
   border-radius: 15px;
@@ -281,7 +281,7 @@ ul.pxs_slider li img {
   }
 
   .pxs_bg {
-    background: transparent url(../images/bg.png) repeat top left;
+    background: transparent url(../images/gallery/bg.png) repeat top left;
   }
 
   .pxs_bg div {
@@ -296,15 +296,15 @@ ul.pxs_slider li img {
   }
 
   .pxs_bg .pxs_bg1 {
-    background-image: url(../images/bg4.jpeg);
+    background-image: url(../images/gallery/bg4.jpeg);
   }
 
   .pxs_bg .pxs_bg2 {
-    background-image: url(../images/bglace.png);
+    background-image: url(../images/gallery/bglace.png);
   }
 
   .pxs_bg .pxs_bg3 {
-    background-image: url(../images/bg6.png);
+    background-image: url(../images/gallery/bg6.png);
   }
 
   .pxs_slider_wrapper {
@@ -362,7 +362,7 @@ ul.pxs_slider li img {
     font-size: 20px;
     padding: 15px 15px 15px 50px;
     position: absolute;
-    background: #333 url(../images/ajax-loader.gif) no-repeat 10px 50%;
+    background: #333 url(../images/icons/loading.gif) no-repeat 10px 50%;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
