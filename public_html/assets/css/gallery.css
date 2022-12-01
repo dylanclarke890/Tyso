@@ -100,7 +100,7 @@
     box-shadow: 0px 0px 1px #000;
   }
   .pxs_bg {
-    background: transparent url(gallery/bg.png) repeat top left;
+    background: transparent url(../images/backgrounds/line.png) repeat top left;
   }
   .pxs_bg div {
     position: absolute;
@@ -113,13 +113,13 @@
     background-color: transparent;
   }
   .pxs_bg .pxs_bg1 {
-    background-image: url(gallery/bg4.jpg);
+    background-image: url(../images/backgrounds/solid-blue.jpeg);
   }
   .pxs_bg .pxs_bg2 {
-    background-image: url(gallery/bglacemin.png);
+    background-image: url(../images/backgrounds/line.png);
   }
   .pxs_bg .pxs_bg3 {
-    background-image: url(gallery/bg6min.png);
+    background-image: url(../images/backgrounds/collage.png);
   }
   .pxs_slider_wrapper {
     display: none;
@@ -299,7 +299,7 @@
   }
 
   .pxs_bg {
-    background: transparent url(gallery/bg.png) repeat top left;
+    background: transparent url(../images/backgrounds/line.png) repeat top left;
   }
 
   .pxs_bg div {
@@ -314,15 +314,15 @@
   }
 
   .pxs_bg .pxs_bg1 {
-    background-image: url(gallery/bg4.jpg);
+    background-image: url(../images/backgrounds/solid-blue.jpeg);
   }
 
   .pxs_bg .pxs_bg2 {
-    background-image: url(gallery/bglacemin.png);
+    background-image: url(../images/backgrounds/lace.png);
   }
 
   .pxs_bg .pxs_bg3 {
-    background-image: url(gallery/bg6min.png);
+    background-image: url(../images/backgrounds/solid-blue.jpeg);
   }
 
   .pxs_slider_wrapper {
