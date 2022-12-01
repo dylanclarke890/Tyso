@@ -40,11 +40,12 @@ class GalleryImage {
 }
 
 class ParallaxGalleryBuilder {
-  constructor({ images, dimensions = {} } = {}) {
+  constructor({ images, dimensions = {}, onLoadComplete } = {}) {
     this.images = images;
     const { thumbnail, mainImage } = dimensions;
     this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
     this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
+    this.onLoadComplete = onLoadComplete ?? (() => null);
     this.build();
     this.#fill("#gallery");
     this.#scaleImages();
@@ -86,7 +87,9 @@ class ParallaxGalleryBuilder {
     mainCanvas.height = this.mainImageDimensions.h;
     const mainCtx = mainCanvas.getContext("2d");
 
-    for (let img of container.children)
+    const images = container.children;
+    let loaded = 0;
+    for (let img of images)
       img.onload = () => {
         this.#drawImageScaled(img, thumbCtx);
         thumbTarget.innerHTML = `${thumbTarget.innerHTML}<img src=${thumbCanvas.toDataURL(
@@ -99,6 +102,8 @@ class ParallaxGalleryBuilder {
         )} />`;
 
         container.removeChild(img);
+        loaded++;
+        if (loaded === images.length) onLoadComplete();
       };
   }
 
@@ -128,14 +133,7 @@ class ParallaxGalleryBuilder {
   }
 }
 
-function onReady() {
-  const settings = {
-    images: [new GalleryImage({ name: "1" })],
-    sharedClassThumbnails: "resize_vertical", // applied to all thumbnail images
-    sharedClassImages: "", // applied to all "main" images
-  };
-  new ParallaxGalleryBuilder(settings);
-
+function onLoadComplete() {
   (function ($) {
     $.fn.parallaxSlider = function (options) {
       var opts = $.extend({}, $.fn.parallaxSlider.defaults, options);
@@ -421,6 +419,25 @@ function onReady() {
     [".pxs_loading", { textShadow: "1px 1px #000" }],
   ];
   for (let [target, styles] of cufonReplacements) Cufon.replace(target, styles);
+}
+
+function onReady() {
+  const settings = {
+    images: [],
+    sharedClassThumbnails: "resize_vertical", // applied to all thumbnail images
+    sharedClassImages: "", // applied to all "main" images
+    onLoadComplete,
+  };
+
+  const now = performance.now();
+
+  for (let i = 1; i < 22; i++) {
+    settings.images.push(new GalleryImage({ name: i.toString() }));
+  }
+
+  new ParallaxGalleryBuilder(settings);
+  const after = performance.now();
+  console.log(after - now);
 }
 
 document.addEventListener("DOMContentLoaded", onReady);
