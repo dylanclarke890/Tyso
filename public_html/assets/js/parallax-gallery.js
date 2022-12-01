@@ -169,8 +169,8 @@
               });
             }
           })
-          .error(function () {
-            alert("here");
+          .error(function (e) {
+            console.log(e);
           })
           .attr("src", $img.attr("src"));
       });
