@@ -4,10 +4,12 @@
     position: absolute;
     left: 50%;
   }
+
   ul.pxs_thumbnails li {
     position: absolute;
     display: block;
   }
+
   ul.pxs_thumbnails li img {
     border: 5px solid #ffffff;
     -moz-box-shadow: 1px 1px 7px #555;
@@ -22,6 +24,7 @@
     position: absolute;
     background: #000 url(../images/prev.png) no-repeat center center;
   }
+
   .pxs_navigation span.pxs_next {
     background: #000 url(../images/next.png) no-repeat center center;
   }
@@ -33,14 +36,10 @@
     opacity: 0.9;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
   .sob img {
     height: 25px;
   }
+
   body {
     font-family: "Trebuchet MS", "Myriad Pro", Arial, sans-serif;
     font-size: 14px;
@@ -50,35 +49,44 @@
     overflow-x: hidden;
     min-height: 100%;
   }
+
   .resize_horizontal {
     width: 100%;
   }
+
   .resize_vertical {
     height: 100%;
   }
+
   h1 {
     font-size: 56px;
     color: #ccc;
   }
+
   h2 {
     font-size: 20px;
     padding: 10px 0px 10px 0px;
     margin: 15px 0px 20px 0px;
   }
+
   a {
     color: #555;
     text-decoration: none;
   }
+
   a:hover {
     color: #222;
   }
+
   p {
     padding: 5px 0px;
   }
+
   .wrapper {
     width: 100vh;
     margin: 20px auto;
   }
+
   .clear {
     clear: both;
   }
@@ -88,14 +96,15 @@
     width: 100%;
     height: 100vh;
     position: relative;
-
     -moz-box-shadow: 0px 0px 1px #000;
     -webkit-box-shadow: 0px 0px 1px #000;
     box-shadow: 0px 0px 1px #000;
   }
+
   .pxs_bg {
     background: transparent url(../images/bg.png) repeat top left;
   }
+
   .pxs_bg div {
     position: absolute;
     top: 0px;
@@ -106,18 +115,23 @@
     background-position: top left;
     background-color: transparent;
   }
+
   .pxs_bg .pxs_bg1 {
     background-image: url(../images/bg4.jpeg);
   }
+
   .pxs_bg .pxs_bg2 {
     background-image: url(../images/bglace.png);
   }
+
   .pxs_bg .pxs_bg3 {
     background-image: url(../images/bg6.png);
   }
+
   .pxs_slider_wrapper {
     display: none;
   }
+
   .pxs_container ul {
     margin: 0px;
     padding: 0px;
@@ -129,11 +143,13 @@
     left: 0px;
     top: 0px;
   }
+
   ul.pxs_slider li {
     float: left;
     position: relative;
     height: 90vh;
   }
+
   ul.pxs_slider li img {
     display: block;
     margin: 35px auto 0 auto;

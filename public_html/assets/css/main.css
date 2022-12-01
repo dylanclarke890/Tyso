@@ -1,9 +1,5 @@
 /* GENERAL */
 
-body {
-  background: rgba(146, 222, 95, 0.5);
-}
-
 :root {
   --font-primary: "Marck Script", cursive;
   --font-secondary: Verdana, Geneva, sans-serif;
@@ -17,12 +13,6 @@ body {
   }
 }
 
-.text-secondary {
-  font-family: var(--font-secondary);
-  font-weight: bold;
-  font-style: italic;
-}
-
 *,
 *::after,
 *::before {
@@ -31,8 +21,12 @@ body {
   margin: 0;
 }
 
-.text-center {
-  text-align: center;
+body {
+  background: rgba(146, 222, 95, 0.5);
+}
+
+img {
+  vertical-align: middle;
 }
 
 h1,
@@ -48,8 +42,17 @@ h6 {
   color: inherit;
 }
 
-img {
-  vertical-align: middle;
+.text-primary {
+  font-family: var(--font-primary);
+}
+
+.text-secondary {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .quote {
