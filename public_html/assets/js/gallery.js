@@ -40,31 +40,72 @@ class GalleryImage {
 }
 
 class ParallaxGalleryBuilder {
-  constructor({ images, thumbnailWidth, imageWidth }) {
+  constructor({ images, dimensions = {} } = {}) {
     this.images = images;
+    const { thumbnail, mainImage } = dimensions;
+    this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
+    this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
     this.build();
+    this.#fill("#gallery");
+    this.#scaleImages();
+  }
+
+  #drawImageScaled(img, ctx) {
+    const canvas = ctx.canvas;
+    const hRatio = canvas.width / img.width;
+    const vRatio = canvas.height / img.height;
+    const ratio = Math.min(hRatio, vRatio);
+    const centerShift_x = (canvas.width - img.width * ratio) / 2;
+    const centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
   }
 
   #scaleImages() {
-    const images = document.querySelectorAll(`#img-container > img`);
+    const container = document.getElementById("img-container");
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.height = 300;
-    canvas.width = 300;
+    const thumbCanvas = document.createElement("canvas");
+    thumbCanvas.width = this.thumbnailDimensions.w;
+    thumbCanvas.height = this.thumbnailDimensions.h;
+    const thumbCtx = thumbCanvas.getContext("2d");
+    const thumbTarget = document.getElementById("thumbs");
+    const mainTarget = document.getElementById("main-imgs");
 
-    for (let img of images) {
-      console.log(img);
-      ctx.clearRect(0, 0, 300, 300);
-      ctx.drawImage(img, 0, 0, 300, 300);
-      const dataurl = canvas.toDataURL(img.type);
-      img.src = dataurl;
-    }
+    const mainCanvas = document.createElement("canvas");
+    mainCanvas.width = this.mainImageDimensions.w;
+    mainCanvas.height = this.mainImageDimensions.h;
+    const mainCtx = mainCanvas.getContext("2d");
+
+    for (let img of container.children)
+      img.onload = () => {
+        this.#drawImageScaled(img, thumbCtx);
+        thumbTarget.innerHTML = `${thumbTarget.innerHTML}<img src=${thumbCanvas.toDataURL(
+          img.type
+        )} />`;
+
+        this.#drawImageScaled(img, mainCtx);
+        mainTarget.innerHTML = `${mainTarget.innerHTML}<img src=${mainCanvas.toDataURL(
+          img.type
+        )} />`;
+
+        container.removeChild(img);
+      };
   }
 
-  #setHTML(target, html) {
-    target.innerHTML = html;
-    this.#scaleImages();
+  #fill(selector) {
+    const target = this.#isValidSelector(selector);
+    if (!target) return;
+    target.innerHTML = `${target.innerHTML}${this.html}`;
   }
 
   #isValidSelector(selector) {
@@ -85,18 +126,6 @@ class ParallaxGalleryBuilder {
     <div>
     `;
   }
-
-  appendTo(selector) {
-    const target = this.#isValidSelector(selector);
-    if (!target) return;
-    this.#setHTML(target, `${this.html}`);
-  }
-
-  fill(selector) {
-    const target = this.#isValidSelector(selector);
-    if (!target) return;
-    this.#setHTML(target, `${target.innerHTML}${this.html}`);
-  }
 }
 
 function onReady() {
@@ -105,8 +134,7 @@ function onReady() {
     sharedClassThumbnails: "resize_vertical", // applied to all thumbnail images
     sharedClassImages: "", // applied to all "main" images
   };
-  const parallaxGallery = new ParallaxGalleryBuilder(settings);
-  parallaxGallery.fill("#gallery");
+  new ParallaxGalleryBuilder(settings);
 
   (function ($) {
     $.fn.parallaxSlider = function (options) {
