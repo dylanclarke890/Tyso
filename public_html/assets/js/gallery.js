@@ -39,7 +39,7 @@ class GalleryImage {
   }
 }
 
-class ParallaxGalleryBuilder {
+class ParallaxGallery {
   constructor({ images, dimensions = {}, onLoadComplete } = {}) {
     this.images = images;
     const { thumbnail, mainImage } = dimensions;
@@ -62,24 +62,17 @@ class ParallaxGalleryBuilder {
   }
 
   #drawImgToScale(img, ctx) {
-    const canvas = ctx.canvas;
-    const hRatio = canvas.width / img.width;
-    const vRatio = canvas.height / img.height;
+    const cw = ctx.canvas.width,
+      ch = ctx.canvas.height,
+      iw = img.width,
+      ih = img.height;
+    const hRatio = cw / iw;
+    const vRatio = ch / ih;
     const ratio = Math.min(hRatio, vRatio);
-    const centerShift_x = (canvas.width - img.width * ratio) / 2;
-    const centerShift_y = (canvas.height - img.height * ratio) / 2;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(
-      img,
-      0,
-      0,
-      img.width,
-      img.height,
-      centerShift_x,
-      centerShift_y,
-      img.width * ratio,
-      img.height * ratio
-    );
+    const centerShift_x = (cw - iw * ratio) / 2;
+    const centerShift_y = (ch - ih * ratio) / 2;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, 0, 0, iw, ih, centerShift_x, centerShift_y, iw * ratio, ih * ratio);
   }
 
   #insertContent() {
@@ -467,8 +460,8 @@ function onReady() {
   const now = performance.now();
 
   // TIMED CODE
-  for (let i = 1; i < 5; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
-  new ParallaxGalleryBuilder(settings);
+  for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
+  new ParallaxGallery(settings);
   // END OF TIMED CODE
 
   const after = performance.now();
