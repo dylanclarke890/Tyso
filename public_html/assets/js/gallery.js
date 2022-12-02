@@ -46,12 +46,22 @@ class ParallaxGalleryBuilder {
     this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
     this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
     this.onLoadComplete = onLoadComplete ?? (() => null);
-    this.build();
-    this.#fill("#gallery");
-    this.#scaleImages();
+    this.tempDivId = GalleryImage.randomID();
+    this.#insertIntoTempDiv();
+    this.#scaleImgs();
   }
 
-  #drawImageScaled(img, ctx) {
+  #insertIntoTempDiv() {
+    const target = document.createElement("div");
+    target.id = this.tempDivId;
+    target.style.opacity = 0;
+    target.style.position = "absolute";
+    target.innerHTML = this.images.map((i) => i.html).join("");
+    this.target = target;
+    document.body.appendChild(target);
+  }
+
+  #drawImgToScale(img, ctx) {
     const canvas = ctx.canvas;
     const hRatio = canvas.width / img.width;
     const vRatio = canvas.height / img.height;
@@ -72,64 +82,89 @@ class ParallaxGalleryBuilder {
     );
   }
 
-  #scaleImages() {
-    const container = document.getElementById("img-container");
+  #insertContent() {
+    const container = document.createElement("div");
+    container.id = "pxs_container";
+    container.classList.add("pxs_container");
+    container.innerHTML = this.html;
+    document.body.prepend(container);
+  }
+
+  #build() {
+    this.html = `
+      <div class="pxs_bg">
+        <div class="pxs_bg1"></div>
+        <div class="pxs_bg2"></div>
+        <div class="pxs_bg3"></div>
+      </div>
+      <div class="pxs_loading">Loading images...</div>
+      <div class="container-fluid wall">
+        <div class="pxs_slider_wrapper">
+          <div id="wmf">
+            <ul class="pxs_slider">
+              ${this.mainImages.join(" ")}
+            </ul>
+          </div>
+          <div class="pxs_navigation go">
+            <span class="pxs_next"></span>
+            <span class="pxs_prev"></span>
+          </div>
+          <ul class="pxs_thumbnails away">
+            ${this.thumbnails.join(" ")}
+          </ul>
+        </div>
+      </div>
+    `;
+    this.#insertContent();
+  }
+
+  #buildGalleryImg(dataURL) {
+    return `
+      <li>
+        <img src="${dataURL}" />
+      </li>
+    `;
+  }
+
+  #scaleImgs() {
+    this.thumbnails = [];
+    this.mainImages = [];
+
+    const container = document.getElementById(this.tempDivId);
+    const images = container.children;
 
     const thumbCanvas = document.createElement("canvas");
     thumbCanvas.width = this.thumbnailDimensions.w;
     thumbCanvas.height = this.thumbnailDimensions.h;
     const thumbCtx = thumbCanvas.getContext("2d");
-    const thumbTarget = document.getElementById("thumbs");
-    const mainTarget = document.getElementById("main-imgs");
 
     const mainCanvas = document.createElement("canvas");
     mainCanvas.width = this.mainImageDimensions.w;
     mainCanvas.height = this.mainImageDimensions.h;
     const mainCtx = mainCanvas.getContext("2d");
 
-    const images = container.children;
     let loaded = 0;
+    const totalToLoad = images.length;
     for (let img of images)
       img.onload = () => {
-        this.#drawImageScaled(img, thumbCtx);
-        thumbTarget.innerHTML = `${thumbTarget.innerHTML}<img src=${thumbCanvas.toDataURL(
-          img.type
-        )} />`;
+        this.#drawImgToScale(img, thumbCtx);
+        this.#drawImgToScale(img, mainCtx);
 
-        this.#drawImageScaled(img, mainCtx);
-        mainTarget.innerHTML = `${mainTarget.innerHTML}<img src=${mainCanvas.toDataURL(
-          img.type
-        )} />`;
+        this.thumbnails.push(this.#buildGalleryImg(thumbCanvas.toDataURL(img.type)));
+        this.mainImages.push(this.#buildGalleryImg(mainCanvas.toDataURL(img.type)));
 
         container.removeChild(img);
         loaded++;
-        if (loaded === images.length) onLoadComplete();
+
+        if (loaded === totalToLoad) {
+          this.#build();
+          onLoadComplete();
+          if (this.target) {
+            document.body.removeChild(this.target);
+            this.target = null;
+          }
+        }
       };
-  }
-
-  #fill(selector) {
-    const target = this.#isValidSelector(selector);
-    if (!target) return;
-    target.innerHTML = `${target.innerHTML}${this.html}`;
-  }
-
-  #isValidSelector(selector) {
-    if (!selector) {
-      console.error(`${selector} was not provided.`);
-      return false;
-    }
-    const target = document.querySelector(selector);
-    if (target && target instanceof HTMLElement) return target;
-    else console.error(`${target} was not an instance of HTMLElement.`);
-    return false;
-  }
-
-  build() {
-    this.html = `
-    <div id="img-container">
-      ${this.images.map((i) => i.html).join("")}
-    <div>
-    `;
   }
 }
 
@@ -431,11 +466,11 @@ function onReady() {
 
   const now = performance.now();
 
-  for (let i = 1; i < 22; i++) {
-    settings.images.push(new GalleryImage({ name: i.toString() }));
-  }
-
+  // TIMED CODE
+  for (let i = 1; i < 5; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
   new ParallaxGalleryBuilder(settings);
+  // END OF TIMED CODE
+
   const after = performance.now();
   console.log(after - now);
 }
