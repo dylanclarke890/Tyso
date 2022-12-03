@@ -69,6 +69,12 @@ class ParallaxSlider {
       if (!container) throw new Error(`Container was not a valid selector or HTML element.`);
     }
 
+    /* For a consistent and cheap way of finding the container later we can append a random ID
+    to the classlist. Make sure to add the generated id to the DOMElementRefs. */
+    const rand = GalleryImage.randomID();
+    container.classList.add(rand);
+    this.opts.DOMElementRefs.container = `.${rand}`;
+
     this.elements = { container };
     this.#getElements();
     this.#build();
@@ -77,17 +83,19 @@ class ParallaxSlider {
   #getElements() {
     const refs = this.opts.DOMElementRefs;
     this.elements = Object.assign(this.elements, {
-      slider: document.querySelector(refs.slider),
-      sliderWrapper: document.querySelector(refs.sliderWrapper),
-      thumbnails: document.querySelector(refs.thumbnails),
-      prev: document.querySelector(refs.prev),
-      next: document.querySelector(refs.next),
-      bg: document.querySelector(refs.bg),
-      loading: document.querySelector(refs.loading),
+      slider: document.querySelector(`${refs.container} ${refs.slider}`),
+      sliderWrapper: document.querySelector(`${refs.container} ${refs.sliderWrapper}`),
+      thumbnails: document.querySelector(`${refs.container} ${refs.thumbnails}`),
+      prev: document.querySelector(`${refs.container} ${refs.prev}`),
+      next: document.querySelector(`${refs.container} ${refs.next}`),
+      bg: document.querySelector(`${refs.container} ${refs.bg}`),
+      loading: document.querySelector(`${refs.container} ${refs.loading}`),
     });
   }
 
   #build() {
+    console.log(document.querySelector(this.opts.DOMElementRefs.container));
+    console.log(this.elements);
     const { slider, sliderWrapper, thumbnails, prev, next, bg, loading } = this.elements;
   }
 }
