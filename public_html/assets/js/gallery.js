@@ -3,11 +3,21 @@ class DOMHelper {
   static uniqueId = () =>
     Array.from({ length: 10 }, () => this.#chars.charAt(Math.floor(Math.random() * 52))).join("");
 
-  static hide = (element) => (element.style.display = "none");
-  static show = (element) => element.style.removeProperty("display");
+  static hide = (/** @type {HTMLElement} */ element) => (element.style.display = "none");
+  static show = (/** @type {HTMLElement} */ element) => element.style.removeProperty("display");
 
-  static forEach = (elements, cb) => {
+  static forEach = (/** @type {HTMLCollection} */ elements, cb) => {
     for (let i = 0; i < elements.length; i++) cb(elements[i], i);
+  };
+
+  static siblings = (/** @type {HTMLElement} */ element) => {
+    const parent = element.parentElement;
+    const siblings = [];
+    DOMHelper.forEach(parent.children, (e) => {
+      if (e !== element) siblings.push(e);
+    });
+
+    return siblings;
   };
 }
 
@@ -128,6 +138,8 @@ class ParallaxSlider {
         el.style["transform"] = style;
       }
     });
+
+    this.#highlight(thumbnails.firstChild);
   }
 
   #preloadImages() {
@@ -145,7 +157,11 @@ class ParallaxSlider {
 
   #slide() {}
 
-  #highlight() {}
+  #highlight(/** @type {HTMLElement} */ element) {
+    const siblings = DOMHelper.siblings(element);
+    DOMHelper.forEach(siblings, (e) => e.classList.remove("selected"));
+    element.classList.add("selected");
+  }
 
   #setWidths() {
     const { slider, bg } = this.elements;
