@@ -10,6 +10,8 @@ class DOMHelper {
     for (let i = 0; i < elements.length; i++) cb(elements[i], i);
   };
 
+  static nthChild = (/** @type {HTMLCollection} */ elements, i) => elements.item(i);
+
   static siblings = (/** @type {HTMLElement} */ element) => {
     const parent = element.parentElement;
     const siblings = [];
@@ -158,7 +160,7 @@ class ParallaxSlider {
     next.style.right = `${offsetNavBy}px`;
   }
 
-  #highlight(/** @type {HTMLElement} */ element) {
+  #selectThumbnail(/** @type {HTMLElement} */ element) {
     DOMHelper.forEach(DOMHelper.siblings(element), (e) => e.classList.remove("selected"));
     element.classList.add("selected");
   }
@@ -171,29 +173,31 @@ class ParallaxSlider {
 
     DOMHelper.addEvent(next, "click", () => {
       if (++this.slide.current >= this.slide.total) {
-        if (circular) current = 0;
+        if (circular) this.slide.current = 0;
         else {
-          --current;
+          --this.slide.current;
           return;
         }
       }
+      this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
     });
 
     DOMHelper.addEvent(prev, "click", () => {
       if (--this.slide.current < 0) {
-        if (circular) current = this.slide.total - 1;
+        if (circular) this.slide.current = this.slide.total - 1;
         else {
-          ++current;
+          ++this.slide.current;
           return;
         }
       }
+      this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
     });
 
     DOMHelper.forEach(thumbnails.children, (e, i) => {
       DOMHelper.addEvent(e, "click", () => {
-        this.#highlight(e);
+        this.#selectThumbnail(e);
         if (autoplay) clearInterval(this.slideshow);
         this.slide.current = i;
         this.#slideChanged();
@@ -231,7 +235,7 @@ class ParallaxSlider {
       }
     });
 
-    this.#highlight(thumbnails.firstElementChild);
+    this.#selectThumbnail(thumbnails.firstElementChild);
     this.#addEvents();
   }
 }
