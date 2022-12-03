@@ -5,6 +5,10 @@ class DOMHelper {
 
   static hide = (element) => (element.style.display = "none");
   static show = (element) => element.style.removeProperty("display");
+
+  static forEach = (elements, cb) => {
+    for (let el of elements) cb(el);
+  };
 }
 
 class GalleryImage {
@@ -51,6 +55,7 @@ class ParallaxSlider {
       bg: ".pxs_bg",
       loading: ".pxs_loading",
     },
+    imageWidth: 400, // in px
   };
 
   constructor(options = {}) {
@@ -98,6 +103,7 @@ class ParallaxSlider {
     const elems = this.elements;
     DOMHelper.hide(elems.loading);
     DOMHelper.show(elems.sliderWrapper);
+    this.#setWidths();
   }
 
   #preloadImages() {
@@ -117,7 +123,28 @@ class ParallaxSlider {
 
   #highlight() {}
 
-  #setWidths() {}
+  #setWidths() {
+    const { slider, bg } = this.elements;
+    const screenWidth = window.innerWidth;
+    const totalWidth = screenWidth * this.slide.total;
+    slider.style.width = `${totalWidth}px`;
+    DOMHelper.forEach(slider.children, (el) => {
+      el.style.width = `${screenWidth}px`;
+      el.style.paddingTop = `65px`;
+    });
+
+    DOMHelper.forEach(bg.children, (el) => {
+      el.style.width = `${totalWidth}`;
+    });
+
+    /* both the right and left of the navigation next and previous buttons will be:
+    windowWidth/2 - imgWidth/2 + some margin (not to touch the image borders) */
+    const { imageWidth } = this.opts;
+    const offsetNavBy = screenWidth / 2 - imageWidth / 2 - 150;
+    const { prev, next } = this.elements;
+    prev.style.left = `${offsetNavBy}px`;
+    next.style.right = `${offsetNavBy}px`;
+  }
 }
 
 class ParallaxGallery {
@@ -291,7 +318,6 @@ function onLoadComplete() {
                 $pxs_slider_wrapper.show();
 
                 var one_image_w = $pxs_slider.find("img:first").width();
-
                 setWidths(
                   $pxs_slider,
                   $elems,
