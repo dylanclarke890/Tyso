@@ -39,6 +39,59 @@ class GalleryImage {
   }
 }
 
+class ParallaxSlider {
+  #defaults = {
+    DOMElementRefs: {
+      container: ".pxs_container",
+      slider: ".pxs_slider",
+      sliderWrapper: ".pxs_slider_wrapper",
+      thumbnails: ".pxs_thumbnails",
+      prev: ".pxs_prev",
+      next: ".pxs_next",
+      bg: ".pxs_bg",
+      loading: ".pxs_loading",
+    },
+  };
+
+  constructor(options = {}) {
+    this.opts = Object.assign({}, this.#defaults, options);
+
+    const c = this.opts.container;
+    let container = null;
+    if (c)
+      if (typeof c === "string") {
+        container = document.querySelector(c);
+        this.opts.DOMElementRefs.container = c;
+      } else if (c instanceof Element) container = c;
+
+    if (!c || !container) {
+      container = document.querySelector(this.opts.DOMElementRefs.container);
+      if (!container) throw new Error(`Container was not a valid selector or HTML element.`);
+    }
+
+    this.elements = { container };
+    this.#getElements();
+    this.#build();
+  }
+
+  #getElements() {
+    const refs = this.opts.DOMElementRefs;
+    this.elements = Object.assign(this.elements, {
+      slider: document.querySelector(refs.slider),
+      sliderWrapper: document.querySelector(refs.sliderWrapper),
+      thumbnails: document.querySelector(refs.thumbnails),
+      prev: document.querySelector(refs.prev),
+      next: document.querySelector(refs.next),
+      bg: document.querySelector(refs.bg),
+      loading: document.querySelector(refs.loading),
+    });
+  }
+
+  #build() {
+    const { slider, sliderWrapper, thumbnails, prev, next, bg, loading } = this.elements;
+  }
+}
+
 class ParallaxGallery {
   constructor({ images, dimensions = {}, onLoadComplete } = {}) {
     this.images = images;
@@ -164,12 +217,12 @@ class ParallaxGallery {
 function onLoadComplete() {
   (function ($) {
     $.fn.parallaxSlider = function (options) {
-      var opts = $.extend({}, $.fn.parallaxSlider.defaults, options);
+      let opts = $.extend({}, $.fn.parallaxSlider.defaults, options);
       return this.each(function () {
-        var $pxs_container = $(this),
+        const $pxs_container = $(this),
           o = $.meta ? $.extend({}, opts, $pxs_container.data()) : opts;
         //the main slider
-        var $pxs_slider = $(".pxs_slider", $pxs_container),
+        let $pxs_slider = $(".pxs_slider", $pxs_container),
           //the elements in the slider
           $elems = $pxs_slider.children(),
           //total number of elements
@@ -194,11 +247,11 @@ function onLoadComplete() {
           $pxs_slider_wrapper = $(".pxs_slider_wrapper", $pxs_container);
 
         //first preload all the images
-        var loaded = 0,
+        let loaded = 0,
           $images = $pxs_slider_wrapper.find("img");
 
         $images.each(function () {
-          var $img = $(this);
+          let $img = $(this);
           $("<img/>")
             .load(function () {
               ++loaded;
@@ -225,14 +278,14 @@ function onLoadComplete() {
                   width: one_image_w + "px",
                   "margin-left": -one_image_w + 60, //move thumbnail row left or right//
                 });
-                var spaces = 70; //Adjust overlap//
+                let spaces = 70; //Adjust overlap//
                 $thumbs.each(function (i) {
-                  var $this = $(this);
-                  var left = spaces * (i - 5) + $this.width();
+                  let $this = $(this);
+                  let left = spaces * (i - 5) + $this.width();
                   $this.css("left", left + "px");
 
                   if (o.thumbRotation) {
-                    var angle = Math.floor(Math.random() * 41) - 20;
+                    let angle = Math.floor(Math.random() * 41) - 20;
                     $this.css({
                       "-moz-transform": "rotate(" + angle + "deg)",
                       "-webkit-transform": "rotate(" + angle + "deg)",
@@ -293,7 +346,7 @@ function onLoadComplete() {
                 });
 
                 $thumbs.bind("click", function () {
-                  var $thumb = $(this);
+                  let $thumb = $(this);
                   highlight($thumb);
                   if (o.auto) clearInterval(slideshow);
                   current = $thumb.index();
@@ -317,7 +370,7 @@ function onLoadComplete() {
                 }
 
                 $(window).resize(function () {
-                  w_w = $(window).width();
+                  w_w = window.innerWidth;
                   setWidths(
                     $pxs_slider,
                     $elems,
@@ -350,20 +403,10 @@ function onLoadComplete() {
       });
     };
 
-    //the current windows width
-    var w_w = $(window).width();
+    const w_w = window.innerWidth;
 
-    var slide = function (
-      current,
-      $pxs_slider,
-      $pxs_bg3,
-      $pxs_bg2,
-      $pxs_bg1,
-      speed,
-      easing,
-      easingBg
-    ) {
-      var slide_to = parseInt(-w_w * current);
+    function slide(current, $pxs_slider, $pxs_bg3, $pxs_bg2, $pxs_bg1, speed, easing, easingBg) {
+      const slide_to = parseInt(-w_w * current);
       $pxs_slider.stop().animate(
         {
           left: slide_to + "px",
@@ -392,14 +435,14 @@ function onLoadComplete() {
         speed,
         easingBg
       );
-    };
+    }
 
-    var highlight = function ($elem) {
+    function highlight($elem) {
       $elem.siblings().removeClass("selected");
       $elem.addClass("selected");
-    };
+    }
 
-    var setWidths = function (
+    function setWidths(
       $pxs_slider,
       $elems,
       total_elems,
@@ -410,7 +453,7 @@ function onLoadComplete() {
       $pxs_next,
       $pxs_prev
     ) {
-      var pxs_slider_w = w_w * total_elems;
+      const pxs_slider_w = w_w * total_elems;
       $pxs_slider.width(pxs_slider_w + "px");
 
       //each element will have a width = windows width Can also adjust height
@@ -426,7 +469,7 @@ function onLoadComplete() {
       var position_nav = w_w / 2 - one_image_w / 2 - 150;
       $pxs_next.css("right", position_nav + "px");
       $pxs_prev.css("left", position_nav + "px");
-    };
+    }
 
     $.fn.parallaxSlider.defaults = {
       auto: 0, // how many seconds to periodically slide the content. If set to 0 then autoplay is turned off.
@@ -440,6 +483,7 @@ function onLoadComplete() {
   })(jQuery);
 
   $("#pxs_container").parallaxSlider();
+  new ParallaxSlider();
   const cufonReplacements = [
     ["h1", { textShadow: "1px 1px #000" }],
     ["h2", { textShadow: "1px 1px #000" }],
