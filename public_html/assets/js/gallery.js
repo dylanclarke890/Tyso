@@ -19,6 +19,15 @@ class DOMHelper {
 
     return siblings;
   };
+
+  static addEvent = (/** @type {HTMLElement} */ element, event, cb) => {
+    if (element.addEventListener) element.addEventListener(event, cb, false);
+    else if (element.attachEvent) {
+      element["e" + event + cb] = cb;
+      element[event + cb] = () => element["e" + event + cb](window.event);
+      element.attachEvent("on" + event, element[event + cb]);
+    } else element["on" + event] = element["e" + event + cb];
+  };
 }
 
 class GalleryImage {
@@ -70,6 +79,32 @@ class ParallaxSlider {
     thumbRotation: false,
   };
 
+  #getElements() {
+    const refs = this.opts.DOMElementRefs;
+    this.elements = Object.assign(this.elements, {
+      slider: document.querySelector(`${refs.container} ${refs.slider}`),
+      sliderWrapper: document.querySelector(`${refs.container} ${refs.sliderWrapper}`),
+      thumbnails: document.querySelector(`${refs.container} ${refs.thumbnails}`),
+      prev: document.querySelector(`${refs.container} ${refs.prev}`),
+      next: document.querySelector(`${refs.container} ${refs.next}`),
+      bg: document.querySelector(`${refs.container} ${refs.bg}`),
+      loading: document.querySelector(`${refs.container} ${refs.loading}`),
+    });
+  }
+
+  #preloadImages() {
+    let loaded = 0;
+    const total = this.slide.total * 2;
+    const images = this.elements.sliderWrapper.querySelectorAll("img");
+    for (let img of images) {
+      const i = new Image();
+      DOMHelper.addEvent(i, "load", () => {
+        if (++loaded === total) this.#setup();
+      });
+      i.src = img.src;
+    }
+  }
+
   constructor(options = {}) {
     this.opts = Object.assign({}, this.#defaults, options);
 
@@ -98,71 +133,6 @@ class ParallaxSlider {
     this.#preloadImages();
   }
 
-  #getElements() {
-    const refs = this.opts.DOMElementRefs;
-    this.elements = Object.assign(this.elements, {
-      slider: document.querySelector(`${refs.container} ${refs.slider}`),
-      sliderWrapper: document.querySelector(`${refs.container} ${refs.sliderWrapper}`),
-      thumbnails: document.querySelector(`${refs.container} ${refs.thumbnails}`),
-      prev: document.querySelector(`${refs.container} ${refs.prev}`),
-      next: document.querySelector(`${refs.container} ${refs.next}`),
-      bg: document.querySelector(`${refs.container} ${refs.bg}`),
-      loading: document.querySelector(`${refs.container} ${refs.loading}`),
-    });
-  }
-
-  #setup() {
-    const { loading, sliderWrapper, thumbnails } = this.elements;
-    const { imageWidth, spaces, thumbRotation } = this.opts;
-    DOMHelper.hide(loading);
-    DOMHelper.show(sliderWrapper);
-    this.#setWidths();
-    thumbnails.style.width = imageWidth;
-    thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
-
-    DOMHelper.forEach(thumbnails.children, (el, i) => {
-      el.style.left = `${spaces * (i - 5) + el.innerWidth}px`;
-
-      el.addEventListener("mouseenter", () => {
-        el.animate({ top: ["0px", "-10px"] }, { duration: 100, iterations: 1 });
-      });
-      el.addEventListener("mouseleave", () => {
-        el.animate({ top: ["-10px", "0px"] }, { duration: 100, iterations: 1 });
-      });
-
-      if (thumbRotation) {
-        const angle = Math.floor(Math.random() * 41) - 20;
-        const style = `rotate(${angle}deg)`;
-        el.style["-moz-transform"] = style;
-        el.style["-webkit-transform"] = style;
-        el.style["transform"] = style;
-      }
-    });
-
-    this.#highlight(thumbnails.firstChild);
-  }
-
-  #preloadImages() {
-    let loaded = 0;
-    const total = this.slide.total * 2;
-    const images = this.elements.sliderWrapper.querySelectorAll("img");
-    for (let img of images) {
-      const i = new Image();
-      i.addEventListener("load", () => {
-        if (++loaded === total) this.#setup();
-      });
-      i.src = img.src;
-    }
-  }
-
-  #slide() {}
-
-  #highlight(/** @type {HTMLElement} */ element) {
-    const siblings = DOMHelper.siblings(element);
-    DOMHelper.forEach(siblings, (e) => e.classList.remove("selected"));
-    element.classList.add("selected");
-  }
-
   #setWidths() {
     const { slider, bg } = this.elements;
     const screenWidth = window.innerWidth;
@@ -184,6 +154,49 @@ class ParallaxSlider {
     const { prev, next } = this.elements;
     prev.style.left = `${offsetNavBy}px`;
     next.style.right = `${offsetNavBy}px`;
+  }
+
+  #highlight(/** @type {HTMLElement} */ element) {
+    DOMHelper.forEach(DOMHelper.siblings(element), (e) => e.classList.remove("selected"));
+    element.classList.add("selected");
+  }
+
+  #slide() {}
+
+  #addEvents() {}
+
+  #setup() {
+    const { loading, sliderWrapper, thumbnails } = this.elements;
+    const { imageWidth, spaces, thumbRotation } = this.opts;
+
+    DOMHelper.hide(loading);
+    DOMHelper.show(sliderWrapper);
+    this.#setWidths();
+
+    thumbnails.style.width = imageWidth;
+    thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
+    DOMHelper.forEach(thumbnails.children, (el, i) => {
+      el.style.left = `${spaces * (i - 5) + el.innerWidth}px`;
+
+      DOMHelper.addEvent(el, "mouseenter", () => {
+        el.animate({ top: ["0px", "-10px"] }, { duration: 100, iterations: 1 });
+      });
+
+      DOMHelper.addEvent(el, "mouseenter", () => {
+        el.animate({ top: ["-10px", "0px"] }, { duration: 100, iterations: 1 });
+      });
+
+      if (thumbRotation) {
+        const angle = Math.floor(Math.random() * 41) - 20;
+        const style = `rotate(${angle}deg)`;
+        el.style["-moz-transform"] = style;
+        el.style["-webkit-transform"] = style;
+        el.style["transform"] = style;
+      }
+    });
+
+    this.#highlight(thumbnails.firstElementChild);
+    this.#addEvents();
   }
 }
 
