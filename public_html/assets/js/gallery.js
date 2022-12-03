@@ -77,6 +77,8 @@ class ParallaxSlider {
     imageWidth: 400, // in px
     spaces: 70,
     thumbRotation: false,
+    circular: true,
+    autoplay: false,
   };
 
   #getElements() {
@@ -161,9 +163,43 @@ class ParallaxSlider {
     element.classList.add("selected");
   }
 
-  #slide() {}
+  #slideChanged() {}
 
-  #addEvents() {}
+  #addEvents() {
+    const { prev, next, thumbnails } = this.elements;
+    const { circular, autoplay } = this.opts;
+
+    DOMHelper.addEvent(next, "click", () => {
+      if (++this.slide.current >= this.slide.total) {
+        if (circular) current = 0;
+        else {
+          --current;
+          return;
+        }
+      }
+      this.#slideChanged();
+    });
+
+    DOMHelper.addEvent(prev, "click", () => {
+      if (--this.slide.current < 0) {
+        if (circular) current = this.slide.total - 1;
+        else {
+          ++current;
+          return;
+        }
+      }
+      this.#slideChanged();
+    });
+
+    DOMHelper.forEach(thumbnails.children, (e, i) => {
+      DOMHelper.addEvent(e, "click", () => {
+        this.#highlight(e);
+        if (autoplay) clearInterval(this.slideshow);
+        this.slide.current = i;
+        this.#slideChanged();
+      });
+    });
+  }
 
   #setup() {
     const { loading, sliderWrapper, thumbnails } = this.elements;
