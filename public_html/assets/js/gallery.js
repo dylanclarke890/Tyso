@@ -1,3 +1,12 @@
+class DOMHelper {
+  static #chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  static uniqueId = () =>
+    Array.from({ length: 10 }, () => this.#chars.charAt(Math.floor(Math.random() * 52))).join("");
+
+  static hide = (element) => (element.style.display = "none");
+  static show = (element) => element.style.removeProperty("display");
+}
+
 class GalleryImage {
   constructor({ id, name, classes, alt, ext = ".jpg", isThumbNail = false } = {}) {
     this.id = id; // id
@@ -9,19 +18,10 @@ class GalleryImage {
     this.build();
   }
 
-  static CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  static randomID() {
-    let ID = "";
-    for (let i = 0; i < 12; i++) {
-      ID += GalleryImage.CHARS.charAt(Math.floor(Math.random() * 36));
-    }
-    return ID;
-  }
-
   build(rootDir = "assets/images/gallery/", thumbSuffix = "-thumb") {
     rootDir ??= "";
     thumbSuffix ??= "";
-    this.id ??= GalleryImage.randomID();
+    this.id ??= DOMHelper.uniqueId();
     this.srcPath =
       this.name && this.ext
         ? `${rootDir}${this.name}${this.isThumbNail ? thumbSuffix : ""}${this.ext}`
@@ -60,7 +60,7 @@ class ParallaxSlider {
     let container = null;
     if (c)
       if (typeof c === "string") {
-        container = document.querySelector(c);
+        container = DOM.querySelector(c);
         this.opts.DOMElementRefs.container = c;
       } else if (c instanceof Element) container = c;
 
@@ -71,13 +71,14 @@ class ParallaxSlider {
 
     /* For a consistent and cheap way of finding the container later we can append a random ID
     to the classlist. Make sure to add the generated id to the DOMElementRefs. */
-    const rand = GalleryImage.randomID();
+    const rand = DOMHelper.uniqueId();
     container.classList.add(rand);
     this.opts.DOMElementRefs.container = `.${rand}`;
 
     this.elements = { container };
     this.#getElements();
-    this.#build();
+    this.slide = { current: 0, total: this.elements.slider.children.length };
+    this.#preloadImages();
   }
 
   #getElements() {
@@ -93,11 +94,30 @@ class ParallaxSlider {
     });
   }
 
-  #build() {
-    console.log(document.querySelector(this.opts.DOMElementRefs.container));
-    console.log(this.elements);
-    const { slider, sliderWrapper, thumbnails, prev, next, bg, loading } = this.elements;
+  #setup() {
+    const elems = this.elements;
+    DOMHelper.hide(elems.loading);
+    DOMHelper.show(elems.sliderWrapper);
   }
+
+  #preloadImages() {
+    let loaded = 0;
+    const total = this.slide.total * 2;
+    const images = this.elements.sliderWrapper.querySelectorAll("img");
+    for (let img of images) {
+      const i = new Image();
+      i.addEventListener("load", () => {
+        if (++loaded === total) this.#setup();
+      });
+      i.src = img.src;
+    }
+  }
+
+  #slide() {}
+
+  #highlight() {}
+
+  #setWidths() {}
 }
 
 class ParallaxGallery {
@@ -107,7 +127,7 @@ class ParallaxGallery {
     this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
     this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
     this.onLoadComplete = onLoadComplete ?? (() => null);
-    this.tempDivId = GalleryImage.randomID();
+    this.tempDivId = DOMHelper.uniqueId();
     this.#insertIntoTempDiv();
     this.#scaleImgs();
   }
@@ -229,6 +249,8 @@ function onLoadComplete() {
       return this.each(function () {
         const $pxs_container = $(this),
           o = $.meta ? $.extend({}, opts, $pxs_container.data()) : opts;
+
+        //#region VARIABLE DECLARATION
         //the main slider
         let $pxs_slider = $(".pxs_slider", $pxs_container),
           //the elements in the slider
@@ -253,6 +275,7 @@ function onLoadComplete() {
           //the loading image
           $pxs_loading = $(".pxs_loading", $pxs_container),
           $pxs_slider_wrapper = $(".pxs_slider_wrapper", $pxs_container);
+        //#endregion VARIABLE DECLARATION
 
         //first preload all the images
         let loaded = 0,
@@ -517,7 +540,7 @@ function onReady() {
   // END OF TIMED CODE
 
   const after = performance.now();
-  console.log(after - now);
+  // console.log(after - now);
 }
 
 document.addEventListener("DOMContentLoaded", onReady);
