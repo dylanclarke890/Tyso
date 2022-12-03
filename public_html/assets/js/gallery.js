@@ -7,7 +7,7 @@ class DOMHelper {
   static show = (element) => element.style.removeProperty("display");
 
   static forEach = (elements, cb) => {
-    for (let el of elements) cb(el);
+    for (let i = 0; i < elements.length; i++) cb(elements[i], i);
   };
 }
 
@@ -56,6 +56,8 @@ class ParallaxSlider {
       loading: ".pxs_loading",
     },
     imageWidth: 400, // in px
+    spaces: 70,
+    thumbRotation: false,
   };
 
   constructor(options = {}) {
@@ -100,10 +102,32 @@ class ParallaxSlider {
   }
 
   #setup() {
-    const elems = this.elements;
-    DOMHelper.hide(elems.loading);
-    DOMHelper.show(elems.sliderWrapper);
+    const { loading, sliderWrapper, thumbnails } = this.elements;
+    const { imageWidth, spaces, thumbRotation } = this.opts;
+    DOMHelper.hide(loading);
+    DOMHelper.show(sliderWrapper);
     this.#setWidths();
+    thumbnails.style.width = imageWidth;
+    thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
+
+    DOMHelper.forEach(thumbnails.children, (el, i) => {
+      el.style.left = `${spaces * (i - 5) + el.innerWidth}px`;
+
+      el.addEventListener("mouseenter", () => {
+        el.animate({ top: ["0px", "-10px"] }, { duration: 100, iterations: 1 });
+      });
+      el.addEventListener("mouseleave", () => {
+        el.animate({ top: ["-10px", "0px"] }, { duration: 100, iterations: 1 });
+      });
+
+      if (thumbRotation) {
+        const angle = Math.floor(Math.random() * 41) - 20;
+        const style = `rotate(${angle}deg)`;
+        el.style["-moz-transform"] = style;
+        el.style["-webkit-transform"] = style;
+        el.style["transform"] = style;
+      }
+    });
   }
 
   #preloadImages() {
