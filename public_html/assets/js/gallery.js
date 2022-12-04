@@ -33,6 +33,15 @@ class DOMHelper {
 
   static triggerEvent = (/** @type {HTMLElement} */ element, event) =>
     element.dispatchEvent(new Event(event));
+
+  static animate(element, transitions, duration, easing, iterations = 1) {
+    const keyframes = {};
+    transitions.forEach((t) => {
+      t.from ??= element.styles[t.style] ?? "0px";
+      keyframes[t.style] = [t.from, t.to];
+    });
+    element.animate(keyframes, { duration, iterations, easing });
+  }
 }
 
 class GalleryImage {
@@ -84,7 +93,7 @@ class ParallaxSlider {
     thumbRotation: false,
     circular: true,
     autoplay: 0,
-    speed: 1,
+    speed: 100, // ms
     easing: "ease-in-out",
     easingBg: "ease-in",
   };
@@ -174,11 +183,11 @@ class ParallaxSlider {
   #slideChanged() {
     const { speed, easing, easingBg } = this.opts;
     const { slider, bg } = this.elements;
+
     const offset = window.innerWidth * this.slide.current;
-    el.animate({ top: ["0px", "-10px"] }, { duration: 100, iterations: 1 });
-    slider.style.left = `${offset}px`;
+    DOMHelper.animate(slider, { style: "left", to: `${offset}px` }, speed, easing);
     DOMHelper.forEach(bg.children, (e, i) => {
-      e.style.left = `${offset / (i + 1) ** 2}px`;
+      DOMHelper.animate(e, { style: "left", to: `${offset / (i + 1) ** 2}px` }, speed, easingBg);
     });
   }
 
@@ -242,23 +251,22 @@ class ParallaxSlider {
 
     thumbnails.style.width = imageWidth;
     thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
-    DOMHelper.forEach(thumbnails.children, (el, i) => {
-      el.style.left = `${spaces * (i - 5) + el.innerWidth}px`;
+    DOMHelper.forEach(thumbnails.children, (tn, i) => {
+      tn.style.left = `${spaces * (i - 5) + tn.innerWidth}px`;
 
-      DOMHelper.addEvent(el, "mouseenter", () => {
-        el.animate({ top: ["0px", "-10px"] }, { duration: 100, iterations: 1 });
+      DOMHelper.addEvent(tn, "mouseenter", () => {
+        DOMHelper.animate(tn, { style: "top", to: "-10px", from: "0px" }, 100);
       });
-
-      DOMHelper.addEvent(el, "mouseenter", () => {
-        el.animate({ top: ["-10px", "0px"] }, { duration: 100, iterations: 1 });
+      DOMHelper.addEvent(tn, "mouseenter", () => {
+        DOMHelper.animate(tn, { style: "top", from: "-10px", to: "0px" }, 100);
       });
 
       if (thumbRotation) {
         const angle = Math.floor(Math.random() * 41) - 20;
         const style = `rotate(${angle}deg)`;
-        el.style["-moz-transform"] = style;
-        el.style["-webkit-transform"] = style;
-        el.style["transform"] = style;
+        tn.style["-moz-transform"] = style;
+        tn.style["-webkit-transform"] = style;
+        tn.style["transform"] = style;
       }
     });
 
@@ -390,275 +398,6 @@ class ParallaxGallery {
 }
 
 function onLoadComplete() {
-  (function ($) {
-    $.fn.parallaxSlider = function (options) {
-      let opts = $.extend({}, $.fn.parallaxSlider.defaults, options);
-      return this.each(function () {
-        const $pxs_container = $(this),
-          o = $.meta ? $.extend({}, opts, $pxs_container.data()) : opts;
-
-        //#region VARIABLE DECLARATION
-        //the main slider
-        let $pxs_slider = $(".pxs_slider", $pxs_container),
-          //the elements in the slider
-          $elems = $pxs_slider.children(),
-          //total number of elements
-          total_elems = $elems.length,
-          //the navigation buttons
-          $pxs_next = $(".pxs_next", $pxs_container),
-          $pxs_prev = $(".pxs_prev", $pxs_container),
-          //the bg images
-          $pxs_bg1 = $(".pxs_bg1", $pxs_container),
-          $pxs_bg2 = $(".pxs_bg2", $pxs_container),
-          $pxs_bg3 = $(".pxs_bg3", $pxs_container),
-          //current image
-          current = 0,
-          //the thumbs container
-          $pxs_thumbnails = $(".pxs_thumbnails", $pxs_container),
-          //the thumbs
-          $thumbs = $pxs_thumbnails.children(),
-          //the interval for the autoplay mode
-          slideshow,
-          //the loading image
-          $pxs_loading = $(".pxs_loading", $pxs_container),
-          $pxs_slider_wrapper = $(".pxs_slider_wrapper", $pxs_container);
-        //#endregion VARIABLE DECLARATION
-
-        //first preload all the images
-        let loaded = 0,
-          $images = $pxs_slider_wrapper.find("img");
-
-        $images.each(function () {
-          let $img = $(this);
-          $("<img/>")
-            .load(function () {
-              ++loaded;
-              if (loaded == total_elems * 2) {
-                $pxs_loading.hide();
-                $pxs_slider_wrapper.show();
-
-                var one_image_w = $pxs_slider.find("img:first").width();
-                setWidths(
-                  $pxs_slider,
-                  $elems,
-                  total_elems,
-                  $pxs_bg1,
-                  $pxs_bg2,
-                  $pxs_bg3,
-                  one_image_w,
-                  $pxs_next,
-                  $pxs_prev
-                );
-
-                //CHANGE THUMBNAIL WIDTHS HERE//
-                $pxs_thumbnails.css({
-                  width: one_image_w + "px",
-                  "margin-left": -one_image_w + 60, //move thumbnail row left or right//
-                });
-                let spaces = 70; //Adjust overlap//
-                $thumbs.each(function (i) {
-                  let $this = $(this);
-                  let left = spaces * (i - 5) + $this.width();
-                  $this.css("left", left + "px");
-
-                  if (o.thumbRotation) {
-                    let angle = Math.floor(Math.random() * 41) - 20;
-                    $this.css({
-                      "-moz-transform": "rotate(" + angle + "deg)",
-                      "-webkit-transform": "rotate(" + angle + "deg)",
-                      transform: "rotate(" + angle + "deg)",
-                    });
-                  }
-                  //hovering the thumbs animates them up and down
-                  $this
-                    .bind("mouseenter", function () {
-                      $(this).stop().animate({ top: "-10px" }, 100);
-                    })
-                    .bind("mouseleave", function () {
-                      $(this).stop().animate({ top: "0px" }, 100);
-                    });
-                });
-
-                highlight($thumbs.eq(0));
-
-                $pxs_next.bind("click", function () {
-                  ++current;
-                  if (current >= total_elems)
-                    if (o.circular) current = 0;
-                    else {
-                      --current;
-                      return false;
-                    }
-                  highlight($thumbs.eq(current));
-                  slide(
-                    current,
-                    $pxs_slider,
-                    $pxs_bg3,
-                    $pxs_bg2,
-                    $pxs_bg1,
-                    o.speed,
-                    o.easing,
-                    o.easingBg
-                  );
-                });
-                $pxs_prev.bind("click", function () {
-                  --current;
-                  if (current < 0)
-                    if (o.circular) current = total_elems - 1;
-                    else {
-                      ++current;
-                      return false;
-                    }
-                  highlight($thumbs.eq(current));
-                  slide(
-                    current,
-                    $pxs_slider,
-                    $pxs_bg3,
-                    $pxs_bg2,
-                    $pxs_bg1,
-                    o.speed,
-                    o.easing,
-                    o.easingBg
-                  );
-                });
-
-                $thumbs.bind("click", function () {
-                  let $thumb = $(this);
-                  highlight($thumb);
-                  if (o.auto) clearInterval(slideshow);
-                  current = $thumb.index();
-                  slide(
-                    current,
-                    $pxs_slider,
-                    $pxs_bg3,
-                    $pxs_bg2,
-                    $pxs_bg1,
-                    o.speed,
-                    o.easing,
-                    o.easingBg
-                  );
-                });
-
-                if (o.auto != 0) {
-                  o.circular = true;
-                  slideshow = setInterval(function () {
-                    $pxs_next.trigger("click");
-                  }, o.auto);
-                }
-
-                $(window).resize(function () {
-                  w_w = window.innerWidth;
-                  setWidths(
-                    $pxs_slider,
-                    $elems,
-                    total_elems,
-                    $pxs_bg1,
-                    $pxs_bg2,
-                    $pxs_bg3,
-                    one_image_w,
-                    $pxs_next,
-                    $pxs_prev
-                  );
-                  slide(
-                    current,
-                    $pxs_slider,
-                    $pxs_bg3,
-                    $pxs_bg2,
-                    $pxs_bg1,
-                    1,
-                    o.easing,
-                    o.easingBg
-                  );
-                });
-              }
-            })
-            .error(function () {
-              console.log("Error occured while loading parallaxSlider");
-            })
-            .attr("src", $img.attr("src"));
-        });
-      });
-    };
-
-    const w_w = window.innerWidth;
-
-    function slide(current, $pxs_slider, $pxs_bg3, $pxs_bg2, $pxs_bg1, speed, easing, easingBg) {
-      const slide_to = parseInt(-w_w * current);
-      $pxs_slider.stop().animate(
-        {
-          left: slide_to + "px",
-        },
-        speed,
-        easing
-      );
-      $pxs_bg3.stop().animate(
-        {
-          left: slide_to / 2 + "px",
-        },
-        speed,
-        easingBg
-      );
-      $pxs_bg2.stop().animate(
-        {
-          left: slide_to / 4 + "px",
-        },
-        speed,
-        easingBg
-      );
-      $pxs_bg1.stop().animate(
-        {
-          left: slide_to / 8 + "px",
-        },
-        speed,
-        easingBg
-      );
-    }
-
-    function highlight($elem) {
-      $elem.siblings().removeClass("selected");
-      $elem.addClass("selected");
-    }
-
-    function setWidths(
-      $pxs_slider,
-      $elems,
-      total_elems,
-      $pxs_bg1,
-      $pxs_bg2,
-      $pxs_bg3,
-      one_image_w,
-      $pxs_next,
-      $pxs_prev
-    ) {
-      const pxs_slider_w = w_w * total_elems;
-      $pxs_slider.width(pxs_slider_w + "px");
-
-      //each element will have a width = windows width Can also adjust height
-      $elems.width(w_w + "px");
-      //$elems.height(400 + 'px');
-      $elems.css({ paddingTop: 65 });
-      $pxs_bg1.width(pxs_slider_w + "px");
-      $pxs_bg2.width(pxs_slider_w + "px");
-      $pxs_bg3.width(pxs_slider_w + "px");
-
-      /* both the right and left of the navigation next and previous buttons will be:
-    windowWidth/2 - imgWidth/2 + some margin (not to touch the image borders) */
-      var position_nav = w_w / 2 - one_image_w / 2 - 150;
-      $pxs_next.css("right", position_nav + "px");
-      $pxs_prev.css("left", position_nav + "px");
-    }
-
-    $.fn.parallaxSlider.defaults = {
-      auto: 0, // how many seconds to periodically slide the content. If set to 0 then autoplay is turned off.
-      speed: 850, //speed of each slide animation
-      easing: "jswing", //easing effect for the slide animation
-      easingBg: "jswing", //easing effect for the background animation
-      circular: true, //circular slider
-      thumbRotation: false, //the thumbs will be randomly rotated
-    };
-    //easeInOutExpo,easeInBack
-  })(jQuery);
-
   $("#pxs_container").parallaxSlider();
   new ParallaxSlider();
   const cufonReplacements = [
