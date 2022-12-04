@@ -30,6 +30,9 @@ class DOMHelper {
       element.attachEvent("on" + event, element[event + cb]);
     } else element["on" + event] = element["e" + event + cb];
   };
+
+  static triggerEvent = (/** @type {HTMLElement} */ element, event) =>
+    element.dispatchEvent(new Event(event));
 }
 
 class GalleryImage {
@@ -80,7 +83,7 @@ class ParallaxSlider {
     spaces: 70,
     thumbRotation: false,
     circular: true,
-    autoplay: false,
+    autoplay: 0,
   };
 
   #getElements() {
@@ -203,6 +206,18 @@ class ParallaxSlider {
         this.#slideChanged();
       });
     });
+
+    DOMHelper.addEvent(window, "resize", () => {
+      this.#setWidths();
+      this.#slideChanged();
+    });
+
+    if (autoplay !== 0) {
+      this.opts.circular = true;
+      this.slideshow = setInterval(function () {
+        DOMHelper.triggerEvent(next, "click");
+      }, autoplay);
+    }
   }
 
   #setup() {
