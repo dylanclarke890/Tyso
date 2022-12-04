@@ -84,6 +84,9 @@ class ParallaxSlider {
     thumbRotation: false,
     circular: true,
     autoplay: 0,
+    speed: 1,
+    easing: "ease-in-out",
+    easingBg: "ease-in",
   };
 
   #getElements() {
@@ -168,7 +171,16 @@ class ParallaxSlider {
     element.classList.add("selected");
   }
 
-  #slideChanged() {}
+  #slideChanged() {
+    const { speed, easing, easingBg } = this.opts;
+    const { slider, bg } = this.elements;
+    const offset = window.innerWidth * this.slide.current;
+    el.animate({ top: ["0px", "-10px"] }, { duration: 100, iterations: 1 });
+    slider.style.left = `${offset}px`;
+    DOMHelper.forEach(bg.children, (e, i) => {
+      e.style.left = `${offset / (i + 1) ** 2}px`;
+    });
+  }
 
   #addEvents() {
     const { prev, next, thumbnails } = this.elements;
