@@ -154,10 +154,6 @@ ul.pxs_thumbnails li.selected img {
   background-color: transparent;
 }
 
-.pxs_slider_wrapper {
-  display: none;
-}
-
 .pxs_container ul {
   margin: 0px;
   padding: 0px;

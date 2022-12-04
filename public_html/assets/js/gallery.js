@@ -98,6 +98,29 @@ class ParallaxSlider {
     easingBg: "ease-in",
   };
 
+  #getContainer() {
+    const c = this.opts.container;
+    let container = null;
+    if (c)
+      if (typeof c === "string") {
+        container = DOM.querySelector(c);
+        this.opts.DOMElementRefs.container = c;
+      } else if (c instanceof Element) container = c;
+
+    if (!c || !container) {
+      container = document.querySelector(this.opts.DOMElementRefs.container);
+      if (!container) throw new Error(`Container was not a valid selector or HTML element.`);
+    }
+
+    /* For a consistent and cheap way of finding the container later we can append a random ID
+    to the classlist. Make sure to update the generated id in the DOMElementRefs. */
+    const rand = DOMHelper.uniqueId();
+    container.classList.add(rand);
+    this.opts.DOMElementRefs.container = `.${rand}`;
+
+    this.elements = { container };
+  }
+
   #getElements() {
     const refs = this.opts.DOMElementRefs;
     this.elements = Object.assign(this.elements, {
@@ -126,27 +149,7 @@ class ParallaxSlider {
 
   constructor(options = {}) {
     this.opts = Object.assign({}, this.#defaults, options);
-
-    const c = this.opts.container;
-    let container = null;
-    if (c)
-      if (typeof c === "string") {
-        container = DOM.querySelector(c);
-        this.opts.DOMElementRefs.container = c;
-      } else if (c instanceof Element) container = c;
-
-    if (!c || !container) {
-      container = document.querySelector(this.opts.DOMElementRefs.container);
-      if (!container) throw new Error(`Container was not a valid selector or HTML element.`);
-    }
-
-    /* For a consistent and cheap way of finding the container later we can append a random ID
-    to the classlist. Make sure to add the generated id to the DOMElementRefs. */
-    const rand = DOMHelper.uniqueId();
-    container.classList.add(rand);
-    this.opts.DOMElementRefs.container = `.${rand}`;
-
-    this.elements = { container };
+    this.#getContainer();
     this.#getElements();
     this.slide = { current: 0, total: this.elements.slider.children.length };
     this.#preloadImages();
@@ -185,7 +188,7 @@ class ParallaxSlider {
     const { slider, bg } = this.elements;
 
     const offset = window.innerWidth * this.slide.current;
-    DOMHelper.animate(slider, { style: "left", to: `${offset}px` }, speed, easing);
+    DOMHelper.animate(slider, [{ style: "left", to: `${offset}px` }], speed, easing);
     DOMHelper.forEach(bg.children, (e, i) => {
       DOMHelper.animate(e, { style: "left", to: `${offset / (i + 1) ** 2}px` }, speed, easingBg);
     });
@@ -252,13 +255,14 @@ class ParallaxSlider {
     thumbnails.style.width = imageWidth;
     thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
     DOMHelper.forEach(thumbnails.children, (tn, i) => {
-      tn.style.left = `${spaces * (i - 5) + tn.innerWidth}px`;
+      console.log(`${spaces * (i - 5) + tn.offsetWidth}px`);
+      tn.style.left = `${spaces * (i - 5) + tn.offsetWidth}px`;
 
       DOMHelper.addEvent(tn, "mouseenter", () => {
-        DOMHelper.animate(tn, { style: "top", to: "-10px", from: "0px" }, 100);
+        DOMHelper.animate(tn, [{ style: "top", to: "-10px", from: "0px" }], 100);
       });
       DOMHelper.addEvent(tn, "mouseenter", () => {
-        DOMHelper.animate(tn, { style: "top", from: "-10px", to: "0px" }, 100);
+        DOMHelper.animate(tn, [{ style: "top", from: "-10px", to: "0px" }], 100);
       });
 
       if (thumbRotation) {
@@ -397,9 +401,7 @@ class ParallaxGallery {
   }
 }
 
-function onLoadComplete() {
-  $("#pxs_container").parallaxSlider();
-  new ParallaxSlider();
+function addCufonStyles() {
   const cufonReplacements = [
     ["h1", { textShadow: "1px 1px #000" }],
     ["h2", { textShadow: "1px 1px #000" }],
@@ -409,11 +411,14 @@ function onLoadComplete() {
   for (let [target, styles] of cufonReplacements) Cufon.replace(target, styles);
 }
 
+function onLoadComplete() {
+  new ParallaxSlider();
+  addCufonStyles();
+}
+
 function onReady() {
   const settings = {
     images: [],
-    sharedClassThumbnails: "resize_vertical", // applied to all thumbnail images
-    sharedClassImages: "", // applied to all "main" images
     onLoadComplete,
   };
 
@@ -425,7 +430,7 @@ function onReady() {
   // END OF TIMED CODE
 
   const after = performance.now();
-  // console.log(after - now);
+  console.log(after - now);
 }
 
 document.addEventListener("DOMContentLoaded", onReady);
