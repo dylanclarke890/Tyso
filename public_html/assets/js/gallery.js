@@ -1,7 +1,7 @@
 class DOMHelper {
   static #chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   static uniqueId = () =>
-    Array.from({ length: 10 }, () => this.#chars.charAt(Math.floor(Math.random() * 52))).join("");
+    Array.from({ length: 10 }, () => this.#chars[Math.floor(Math.random() * 52)]).join("");
 
   static hide = (/** @type {HTMLElement} */ element) => (element.style.display = "none");
   static show = (/** @type {HTMLElement} */ element) => element.style.removeProperty("display");
@@ -13,12 +13,10 @@ class DOMHelper {
   static nthChild = (/** @type {HTMLCollection} */ elements, i) => elements.item(i);
 
   static siblings = (/** @type {HTMLElement} */ element) => {
-    const parent = element.parentElement;
     const siblings = [];
-    DOMHelper.forEach(parent.children, (e) => {
+    DOMHelper.forEach(element.parentElement.children, (e) => {
       if (e !== element) siblings.push(e);
     });
-
     return siblings;
   };
 
@@ -37,42 +35,40 @@ class DOMHelper {
   static animate(
     /** @type {HTMLElement} */ element,
     keyframes,
-    duration,
-    easing,
-    iterations = 1,
+    speed,
+    effect,
+    times = 1,
     fill = "forwards"
   ) {
-    element.animate(keyframes, { duration, iterations, easing, fill });
+    element.animate(keyframes, { duration: speed, iterations: times, easing: effect, fill });
     keyframes.forEach((kf) => Object.keys(kf).forEach((t) => (element.style[t] = kf[t])));
   }
+
+  static addStyles = (/** @type {HTMLElement} */ element, styles) =>
+    Object.keys(styles).forEach((s) => (element.style[s] = styles[s]));
 }
 
 class GalleryImage {
-  constructor({ id, name, classes, alt, ext = ".jpg", isThumbNail = false } = {}) {
+  constructor({ id, name, classes, alt, ext = ".jpg" } = {}) {
     this.id = id; // id
     this.name = name; // src
     this.classes = classes; // individual class(es) to apply
     this.alt = alt ?? name; // alt text if image not found
     this.ext = ext; // image extension (i.e ".jpg")
-    this.isThumbNail = isThumbNail;
     this.build();
   }
 
-  build(rootDir = "assets/images/gallery/", thumbSuffix = "-thumb") {
+  build(rootDir = "assets/images/gallery/") {
     rootDir ??= "";
     thumbSuffix ??= "";
     this.id ??= DOMHelper.uniqueId();
-    this.srcPath =
-      this.name && this.ext
-        ? `${rootDir}${this.name}${this.isThumbNail ? thumbSuffix : ""}${this.ext}`
-        : "";
+    this.srcPath = this.name && this.ext ? `${rootDir}${this.name}${this.ext}` : "";
     this.attributes = {
       id: this.id ? `id="${this.id}"` : "",
       classes: this.classes && this.classes.length ? `class="${this.classes.join(" ")}"` : "",
       alt: this.alt ? `alt="${this.alt}"` : "",
       src: this.srcPath ? `src="${this.srcPath}"` : "",
     };
-
     this.html = `
       <img ${Object.values(this.attributes).join(" ")} />
     `;
@@ -97,8 +93,8 @@ class ParallaxSlider {
     circular: true,
     autoplay: 0,
     speed: 850, // ms
-    easing: "ease-in-out",
-    easingBg: "ease-in",
+    effect: "ease-in-out",
+    bgEffect: "ease-in",
   };
 
   #getContainer() {
@@ -106,34 +102,31 @@ class ParallaxSlider {
     let container = null;
     if (c)
       if (typeof c === "string") {
-        container = DOM.querySelector(c);
+        container = document.querySelector(c);
         this.opts.DOMElementRefs.container = c;
       } else if (c instanceof Element) container = c;
-
-    if (!c || !container) {
-      container = document.querySelector(this.opts.DOMElementRefs.container);
-      if (!container) throw new Error(`Container was not a valid selector or HTML element.`);
-    }
+    if (!c || !container) container = document.querySelector(this.opts.DOMElementRefs.container);
+    if (!container) throw new Error(`opts.container was not a valid selector or HTML element.`);
 
     /* For a consistent and cheap way of finding the container later we can append a random ID
     to the classlist. Make sure to update the generated id in the DOMElementRefs. */
     const rand = DOMHelper.uniqueId();
     container.classList.add(rand);
     this.opts.DOMElementRefs.container = `.${rand}`;
-
     this.elements = { container };
   }
 
   #getElements() {
-    const refs = this.opts.DOMElementRefs;
+    const { container, slider, sliderWrapper, thumbnails, prev, next, bg, loading } =
+      this.opts.DOMElementRefs;
     this.elements = Object.assign(this.elements, {
-      slider: document.querySelector(`${refs.container} ${refs.slider}`),
-      sliderWrapper: document.querySelector(`${refs.container} ${refs.sliderWrapper}`),
-      thumbnails: document.querySelector(`${refs.container} ${refs.thumbnails}`),
-      prev: document.querySelector(`${refs.container} ${refs.prev}`),
-      next: document.querySelector(`${refs.container} ${refs.next}`),
-      bg: document.querySelector(`${refs.container} ${refs.bg}`),
-      loading: document.querySelector(`${refs.container} ${refs.loading}`),
+      slider: document.querySelector(`${container} ${slider}`),
+      sliderWrapper: document.querySelector(`${container} ${sliderWrapper}`),
+      thumbnails: document.querySelector(`${container} ${thumbnails}`),
+      prev: document.querySelector(`${container} ${prev}`),
+      next: document.querySelector(`${container} ${next}`),
+      bg: document.querySelector(`${container} ${bg}`),
+      loading: document.querySelector(`${container} ${loading}`),
     });
   }
 
@@ -163,22 +156,16 @@ class ParallaxSlider {
     const screenWidth = window.innerWidth;
     const totalWidth = screenWidth * this.slide.total;
     slider.style.width = `${totalWidth}px`;
-    DOMHelper.forEach(slider.children, (el) => {
-      el.style.width = `${screenWidth}px`;
-      el.style.paddingTop = `65px`;
-    });
-
-    DOMHelper.forEach(bg.children, (el) => {
-      el.style.width = `${totalWidth}px`;
-    });
-
+    DOMHelper.forEach(slider.children, (el) =>
+      DOMHelper.addStyles(el, { width: `${screenWidth}px`, paddingTop: `65px` })
+    );
+    DOMHelper.forEach(bg.children, (el) => DOMHelper.addStyles(el, { width: `${totalWidth}px` }));
     /* both the right and left of the navigation next and previous buttons will be:
     windowWidth/2 - imgWidth/2 + some margin (not to touch the image borders) */
-    const { imageWidth } = this.opts;
-    const offsetNavBy = screenWidth / 2 - imageWidth / 2 - 150;
+    const offsetNavBy = screenWidth / 2 - this.opts.imageWidth / 2 - 150;
     const { prev, next } = this.elements;
-    prev.style.left = `${offsetNavBy}px`;
-    next.style.right = `${offsetNavBy}px`;
+    DOMHelper.addStyles(prev, { left: `${offsetNavBy}px` });
+    DOMHelper.addStyles(next, { right: `${offsetNavBy}px` });
   }
 
   #selectThumbnail(/** @type {HTMLElement} */ element) {
@@ -187,18 +174,21 @@ class ParallaxSlider {
   }
 
   #slideChanged() {
-    const { speed, easing, easingBg } = this.opts;
+    const { speed, effect, bgEffect } = this.opts;
     const { slider, bg } = this.elements;
 
     const offset = -window.innerWidth * this.slide.current;
-    if (!slider.style.left) slider.style.left = "0px";
-    const currentLeft = slider.style.left;
-    DOMHelper.animate(slider, [{ left: `${currentLeft}` }, { left: `${offset}px` }], speed, easing);
+    if (!slider.style.left) DOMHelper.addStyles(slider, { left: "0px" });
+    DOMHelper.animate(
+      slider,
+      [{ left: `${slider.style.left}` }, { left: `${offset}px` }],
+      speed,
+      effect
+    );
     DOMHelper.forEach(bg.children, (e, i) => {
       const to = offset / Math.pow(2, i + 1);
-      if (!e.style.left) e.style.left = "0px";
-      const current = e.style.left;
-      DOMHelper.animate(e, [{ left: `${current}` }, { left: `${to}px` }], speed, easingBg);
+      if (!e.style.left) DOMHelper.addStyles(e, { left: "0px" });
+      DOMHelper.animate(e, [{ left: `${e.style.left}` }, { left: `${to}px` }], speed, bgEffect);
     });
   }
 
@@ -246,9 +236,7 @@ class ParallaxSlider {
 
     if (autoplay !== 0) {
       this.opts.circular = true;
-      this.slideshow = setInterval(function () {
-        DOMHelper.triggerEvent(next, "click");
-      }, autoplay);
+      this.slideshow = setInterval(() => DOMHelper.triggerEvent(next, "click"), autoplay);
     }
   }
 
@@ -259,25 +247,23 @@ class ParallaxSlider {
     DOMHelper.hide(loading);
     DOMHelper.show(sliderWrapper);
     this.#setWidths();
-
-    thumbnails.style.width = imageWidth;
-    thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
+    DOMHelper.addStyles(thumbnails, { width: imageWidth, marginLeft: `${-imageWidth + 60}px` });
     DOMHelper.forEach(thumbnails.children, (tn, i) => {
-      tn.style.left = `${spaces * (i - 8) + tn.offsetWidth}px`;
-
-      DOMHelper.addEvent(tn, "mouseenter", () => {
-        DOMHelper.animate(tn, [{ style: "top", to: "-10px", from: "0px" }], 100);
-      });
-      DOMHelper.addEvent(tn, "mouseenter", () => {
-        DOMHelper.animate(tn, [{ style: "top", from: "-10px", to: "0px" }], 100);
-      });
-
+      DOMHelper.addStyles(tn, { left: `${spaces * (i - 8) + tn.offsetWidth}px` });
+      DOMHelper.addEvent(tn, "mouseenter", () =>
+        DOMHelper.animate(tn, [{ style: "top", to: "-10px", from: "0px" }], 100)
+      );
+      DOMHelper.addEvent(tn, "mouseenter", () =>
+        DOMHelper.animate(tn, [{ style: "top", from: "-10px", to: "0px" }], 100)
+      );
       if (thumbRotation) {
         const angle = Math.floor(Math.random() * 41) - 20;
         const style = `rotate(${angle}deg)`;
-        tn.style["-moz-transform"] = style;
-        tn.style["-webkit-transform"] = style;
-        tn.style["transform"] = style;
+        DOMHelper.addStyles(tn, {
+          "-moz-transform": style,
+          "-webkit-transform": style,
+          transform: style,
+        });
       }
     });
 
@@ -299,13 +285,11 @@ class ParallaxGallery {
   }
 
   #insertIntoTempDiv() {
-    const target = document.createElement("div");
-    target.id = this.tempDivId;
-    target.style.opacity = 0;
-    target.style.position = "absolute";
-    target.innerHTML = this.images.map((i) => i.html).join("");
-    this.target = target;
-    document.body.appendChild(target);
+    this.target = document.createElement("div");
+    this.target.id = this.tempDivId;
+    DOMHelper.addStyles(this.target, { opacity: 0, position: "absolute" });
+    this.target.innerHTML = this.images.map((i) => i.html).join("");
+    document.body.appendChild(this.target);
   }
 
   #drawImgToScale(img, ctx) {
@@ -411,7 +395,6 @@ class ParallaxGallery {
 function onReady() {
   const now = performance.now();
   // TIMED CODE
-  for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
   const settings = {
     images: [],
     onLoadComplete: () => {
@@ -425,6 +408,7 @@ function onReady() {
       for (let [target, styles] of cufonReplacements) Cufon.replace(target, styles);
     },
   };
+  for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
   new ParallaxGallery(settings);
   // END OF TIMED CODE
   const after = performance.now();
