@@ -292,7 +292,7 @@ class ParallaxGallery {
     const { thumbnail, mainImage } = dimensions;
     this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
     this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
-    this.onLoadComplete = onLoadComplete ?? (() => null);
+    this.#onLoadComplete = onLoadComplete ?? (() => null);
     this.tempDivId = DOMHelper.uniqueId();
     this.#insertIntoTempDiv();
     this.#scaleImgs();
@@ -398,7 +398,7 @@ class ParallaxGallery {
 
         if (loaded === totalToLoad) {
           this.#build();
-          onLoadComplete();
+          this.#onLoadComplete();
           if (this.target) {
             document.body.removeChild(this.target);
             this.target = null;
@@ -408,34 +408,25 @@ class ParallaxGallery {
   }
 }
 
-function addCufonStyles() {
-  const cufonReplacements = [
-    ["h1", { textShadow: "1px 1px #000" }],
-    ["h2", { textShadow: "1px 1px #000" }],
-    [".footer", { textShadow: "1px 1px #000" }],
-    [".pxs_loading", { textShadow: "1px 1px #000" }],
-  ];
-  for (let [target, styles] of cufonReplacements) Cufon.replace(target, styles);
-}
-
-function onLoadComplete() {
-  new ParallaxSlider();
-  addCufonStyles();
-}
-
 function onReady() {
-  const settings = {
-    images: [],
-    onLoadComplete,
-  };
-
   const now = performance.now();
-
   // TIMED CODE
   for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
+  const settings = {
+    images: [],
+    onLoadComplete: () => {
+      new ParallaxSlider();
+      const cufonReplacements = [
+        ["h1", { textShadow: "1px 1px #000" }],
+        ["h2", { textShadow: "1px 1px #000" }],
+        [".footer", { textShadow: "1px 1px #000" }],
+        [".pxs_loading", { textShadow: "1px 1px #000" }],
+      ];
+      for (let [target, styles] of cufonReplacements) Cufon.replace(target, styles);
+    },
+  };
   new ParallaxGallery(settings);
   // END OF TIMED CODE
-
   const after = performance.now();
   console.log(after - now);
 }
