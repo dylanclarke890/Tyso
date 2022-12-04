@@ -200,7 +200,6 @@ class ParallaxSlider {
       this.#setWidths();
       this.#slideChanged();
     });
-
     DOMHelper.addEvent(next, "click", () => {
       if (++this.slide.current >= this.slide.total) {
         if (circular) this.slide.current = 0;
@@ -212,7 +211,6 @@ class ParallaxSlider {
       this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
     });
-
     DOMHelper.addEvent(prev, "click", () => {
       if (--this.slide.current < 0) {
         if (circular) this.slide.current = this.slide.total - 1;
@@ -224,7 +222,6 @@ class ParallaxSlider {
       this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
     });
-
     DOMHelper.forEach(thumbnails.children, (e, i) => {
       DOMHelper.addEvent(e, "click", () => {
         this.#selectThumbnail(e);
@@ -233,7 +230,6 @@ class ParallaxSlider {
         this.#slideChanged();
       });
     });
-
     if (autoplay !== 0) {
       this.opts.circular = true;
       this.slideshow = setInterval(() => DOMHelper.triggerEvent(next, "click"), autoplay);
@@ -394,7 +390,7 @@ class ParallaxGallery {
 
 function onReady() {
   const now = performance.now();
-  // TIMED CODE
+  //#region TIMED CODE
   const settings = {
     images: [],
     onLoadComplete: () => {
@@ -410,7 +406,7 @@ function onReady() {
   };
   for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
   new ParallaxGallery(settings);
-  // END OF TIMED CODE
+  //#endregion END OF TIMED CODE
   const after = performance.now();
   console.log(after - now);
 }
