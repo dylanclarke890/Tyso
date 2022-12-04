@@ -34,15 +34,16 @@ class DOMHelper {
   static triggerEvent = (/** @type {HTMLElement} */ element, event) =>
     element.dispatchEvent(new Event(event));
 
-  static animate(element, transitions, duration, easing, iterations = 1) {
-    const keyframes = {};
-    transitions.forEach((t) => {
-      if (!t.from) t.from = element.style[t.style];
-      if (!t.from) t.from = "0px";
-      keyframes[t.style] = [t.from, t.to];
-    });
-    console.log(keyframes);
-    element.animate(keyframes, { duration, iterations, easing });
+  static animate(
+    /** @type {HTMLElement} */ element,
+    keyframes,
+    duration,
+    easing,
+    iterations = 1,
+    fill = "forwards"
+  ) {
+    element.animate(keyframes, { duration, iterations, easing, fill });
+    keyframes.forEach((kf) => Object.keys(kf).forEach((t) => (element.style[t] = kf[t])));
   }
 }
 
@@ -168,7 +169,7 @@ class ParallaxSlider {
     });
 
     DOMHelper.forEach(bg.children, (el) => {
-      el.style.width = `${totalWidth}`;
+      el.style.width = `${totalWidth}px`;
     });
 
     /* both the right and left of the navigation next and previous buttons will be:
@@ -189,16 +190,26 @@ class ParallaxSlider {
     const { speed, easing, easingBg } = this.opts;
     const { slider, bg } = this.elements;
 
-    const offset = window.innerWidth * this.slide.current;
-    DOMHelper.animate(slider, [{ style: "left", to: `${offset}px` }], speed, easing);
+    const offset = -window.innerWidth * this.slide.current;
+    if (!slider.style.left) slider.style.left = "0px";
+    const currentLeft = slider.style.left;
+    DOMHelper.animate(slider, [{ left: `${currentLeft}` }, { left: `${offset}px` }], speed, easing);
     DOMHelper.forEach(bg.children, (e, i) => {
-      DOMHelper.animate(e, [{ style: "left", to: `${offset / (i + 1) ** 2}px` }], speed, easingBg);
+      const to = offset / Math.pow(2, i + 1);
+      if (!e.style.left) e.style.left = "0px";
+      const current = e.style.left;
+      DOMHelper.animate(e, [{ left: `${current}` }, { left: `${to}px` }], speed, easingBg);
     });
   }
 
   #addEvents() {
     const { prev, next, thumbnails } = this.elements;
     const { circular, autoplay } = this.opts;
+
+    DOMHelper.addEvent(window, "resize", () => {
+      this.#setWidths();
+      this.#slideChanged();
+    });
 
     DOMHelper.addEvent(next, "click", () => {
       if (++this.slide.current >= this.slide.total) {
@@ -231,11 +242,6 @@ class ParallaxSlider {
         this.slide.current = i;
         this.#slideChanged();
       });
-    });
-
-    DOMHelper.addEvent(window, "resize", () => {
-      this.#setWidths();
-      this.#slideChanged();
     });
 
     if (autoplay !== 0) {
