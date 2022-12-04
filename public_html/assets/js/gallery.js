@@ -37,9 +37,11 @@ class DOMHelper {
   static animate(element, transitions, duration, easing, iterations = 1) {
     const keyframes = {};
     transitions.forEach((t) => {
-      t.from ??= element.styles[t.style] ?? "0px";
+      if (!t.from) t.from = element.style[t.style];
+      if (!t.from) t.from = "0px";
       keyframes[t.style] = [t.from, t.to];
     });
+    console.log(keyframes);
     element.animate(keyframes, { duration, iterations, easing });
   }
 }
@@ -93,7 +95,7 @@ class ParallaxSlider {
     thumbRotation: false,
     circular: true,
     autoplay: 0,
-    speed: 100, // ms
+    speed: 850, // ms
     easing: "ease-in-out",
     easingBg: "ease-in",
   };
@@ -190,7 +192,7 @@ class ParallaxSlider {
     const offset = window.innerWidth * this.slide.current;
     DOMHelper.animate(slider, [{ style: "left", to: `${offset}px` }], speed, easing);
     DOMHelper.forEach(bg.children, (e, i) => {
-      DOMHelper.animate(e, { style: "left", to: `${offset / (i + 1) ** 2}px` }, speed, easingBg);
+      DOMHelper.animate(e, [{ style: "left", to: `${offset / (i + 1) ** 2}px` }], speed, easingBg);
     });
   }
 
@@ -255,8 +257,7 @@ class ParallaxSlider {
     thumbnails.style.width = imageWidth;
     thumbnails.style.marginLeft = `${-imageWidth + 60}px`;
     DOMHelper.forEach(thumbnails.children, (tn, i) => {
-      console.log(`${spaces * (i - 5) + tn.offsetWidth}px`);
-      tn.style.left = `${spaces * (i - 5) + tn.offsetWidth}px`;
+      tn.style.left = `${spaces * (i - 8) + tn.offsetWidth}px`;
 
       DOMHelper.addEvent(tn, "mouseenter", () => {
         DOMHelper.animate(tn, [{ style: "top", to: "-10px", from: "0px" }], 100);
@@ -274,7 +275,7 @@ class ParallaxSlider {
       }
     });
 
-    this.#selectThumbnail(thumbnails.firstElementChild);
+    this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, 0));
     this.#addEvents();
   }
 }
