@@ -223,12 +223,12 @@ class ParallaxBuilder {
       <div class="${UI.getFromDOMQuery(sliderWrapper)}">
         <ul class="${UI.getFromDOMQuery(slider)}">
           ${this.mainImages
-            .map((v) => `<li><img style='width: 300px;' src=${v.src} /></li>`)
+            .map((v) => `<li><img style='height: 550px;' src=${v.src} /></li>`)
             .join("")}
         </ul>
         <ul class="${UI.getFromDOMQuery(thumbnails)}">
           ${this.thumbnails
-            .map((v) => `<li><img style='height: 80px;' src=${v.src} /></li>`)
+            .map((v) => `<li><img style='height: 110px;' src=${v.src} /></li>`)
             .join("")}
         </ul>
         <button class="${UI.getFromDOMQuery(next)}"></button>
@@ -260,7 +260,7 @@ class ParallaxSlider {
     autoplay: 0,
     circular: true,
     speed: 850, // ms
-    overlapInPixels: 0,
+    overlapInPixels: 7,
     centerThumbnails: true,
     thumbRotation: false,
     effect: "ease-out",
@@ -353,13 +353,13 @@ class ParallaxSlider {
     if (!slider.style.left) UI.addStyles(slider, { left: "0px" });
     UI.animate(slider, [{ left: `${offset}px` }], speed, effect);
 
+    const bgLen = bg.children.length;
     UI.forEach(bg.children, (e, i) => {
-      const to = offset / Math.pow(2, i + 1);
+      const to = offset / Math.pow(2, bgLen - i);
       if (!e.style.left) UI.addStyles(e, { left: "0px" });
       UI.animate(e, [{ left: `${to}px` }], speed, bgEffect);
     });
   }
-
   #addEvents() {
     const { prev, next, thumbnails } = this.elements;
     const { circular, autoplay } = this.opts;
@@ -417,8 +417,6 @@ class ParallaxSlider {
       UI.forEach(thumbnails.children, (tn, i) => {
         totalOffset += tn.offsetWidth;
       });
-      console.log(totalOffset);
-      console.log(window.innerWidth);
     }
     UI.forEach(thumbnails.children, (tn, i) => {
       if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
@@ -438,7 +436,6 @@ class ParallaxSlider {
         });
       }
     });
-    console.log(currentOffset);
 
     this.#selectThumbnail(UI.nthChild(thumbnails.children, 0));
     this.#addEvents();
