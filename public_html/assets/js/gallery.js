@@ -17,6 +17,31 @@ class UI {
     else element.style.display = "none";
   };
 
+  static map = (/** @type {HTMLCollection} */ elements, cb) => {
+    const mapped = [];
+    for (let i = 0; i < elements.length; i++) {
+      const result = cb(elements[i], i, elements);
+      mapped.push(result);
+    }
+    return mapped;
+  };
+
+  static filter = (/** @type {HTMLCollection} */ elements, cb) => {
+    const filtered = [];
+    for (let i = 0; i < elements.length; i++) {
+      const result = cb(elements[i], i, elements);
+      if (result) filtered.push(elements[i]);
+    }
+    return filtered;
+  };
+
+  static reduce = (/** @type {HTMLCollection} */ elements, reducer, initialValue) => {
+    let accumulator = initialValue === undefined ? 0 : initialValue;
+    for (let i = 0; i < elements.length; i++)
+      accumulator = reducer(accumulator, elements[i], i, elements);
+    return accumulator;
+  };
+
   static forEach = (/** @type {HTMLCollection} */ elements, cb) => {
     for (let i = 0; i < elements.length; i++) cb(elements[i], i);
   };
@@ -236,9 +261,10 @@ class ParallaxSlider {
     circular: true,
     speed: 850, // ms
     overlapInPixels: 0,
+    centerThumbnails: true,
     thumbRotation: false,
-    effect: "ease-in-out",
-    bgEffect: "ease-in",
+    effect: "ease-out",
+    bgEffect: "ease-out",
     imageWidth: 400, // in px
   };
 
@@ -380,12 +406,20 @@ class ParallaxSlider {
 
   #setup() {
     const { loading, sliderWrapper, thumbnails } = this.elements;
-    const { imageWidth, overlapInPixels, thumbRotation } = this.opts;
+    const { imageWidth, overlapInPixels, centerThumbnails, thumbRotation } = this.opts;
 
     this.#setWidths();
     UI.addStyles(thumbnails, { width: imageWidth });
 
     let currentOffset = 0;
+    if (centerThumbnails) {
+      let totalOffset = 0;
+      UI.forEach(thumbnails.children, (tn, i) => {
+        totalOffset += tn.offsetWidth;
+      });
+      console.log(totalOffset);
+      console.log(window.innerWidth);
+    }
     UI.forEach(thumbnails.children, (tn, i) => {
       if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
       UI.addStyles(tn, { left: `${currentOffset}px` });
@@ -404,6 +438,7 @@ class ParallaxSlider {
         });
       }
     });
+    console.log(currentOffset);
 
     this.#selectThumbnail(UI.nthChild(thumbnails.children, 0));
     this.#addEvents();
