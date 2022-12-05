@@ -77,51 +77,6 @@ class DOMHelper {
   };
 }
 
-class ImageWrapper {
-  constructor({ src, id, className }) {
-    this.src = src;
-    this.id = id ?? DOMHelper.uniqueId();
-    this.className = className;
-  }
-
-  load(cb = null) {
-    this.image = new Image();
-    if (this.cb) DOMHelper.addEvent(this.image, "load", cb);
-    this.image.src = this.src;
-    return this.image;
-  }
-}
-
-class GalleryImage {
-  constructor({ id, name, classes, alt, ext = ".jpg", rootDir = "assets/images/gallery/" } = {}) {
-    this.id = id; // id
-    this.name = name; // src
-    this.classes = classes; // individual class(es) to apply
-    this.alt = alt ?? name; // alt text if image not found
-    this.ext = ext; // image extension (i.e ".jpg")
-    this.rootDir = rootDir;
-    this.#getAttributes();
-    this.build();
-  }
-
-  #getAttributes() {
-    this.id ??= DOMHelper.uniqueId();
-    this.srcPath = this.name && this.ext ? `${this.rootDir}${this.name}${this.ext}` : "";
-    this.attributes = {
-      id: this.id ? `id="${this.id}"` : "",
-      classes: this.classes && this.classes.length ? `class="${this.classes.join(" ")}"` : "",
-      alt: this.alt ? `alt="${this.alt}"` : "",
-      src: this.srcPath ? `src="${this.srcPath}"` : "",
-    };
-  }
-
-  build() {
-    this.html = `
-      <img ${Object.values(this.attributes).join(" ")} />
-    `;
-  }
-}
-
 class ParallaxBuilder {
   #defaults = {
     DOMElementRefs: {
