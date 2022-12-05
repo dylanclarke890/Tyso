@@ -129,6 +129,8 @@ class ParallaxBuilder {
     ctx.drawImage(img, 0, 0, iw, ih, centerShift_x, centerShift_y, iw * ratio, ih * ratio);
   }
 
+  #buildGalleryImg() {}
+
   #scaleImgs() {
     this.thumbnails = [];
     this.mainImages = [];
@@ -152,20 +154,10 @@ class ParallaxBuilder {
       img.onload = () => {
         this.#drawImgToScale(img, thumbCtx);
         this.#drawImgToScale(img, mainCtx);
-
         this.thumbnails.push(this.#buildGalleryImg(thumbCanvas.toDataURL(img.type)));
         this.mainImages.push(this.#buildGalleryImg(mainCanvas.toDataURL(img.type)));
-
-        container.removeChild(img);
         loaded++;
-
         if (loaded === totalToLoad) {
-          this.#build();
-          // this.#onLoadComplete();
-          if (this.target) {
-            document.body.removeChild(this.target);
-            this.target = null;
-          }
         }
       };
   }
@@ -322,7 +314,7 @@ class ParallaxSlider {
     const totalWidth = screenWidth * this.slide.total;
     slider.style.width = `${totalWidth}px`;
     DOMHelper.forEach(slider.children, (el) =>
-      DOMHelper.addStyles(el, { width: `${screenWidth}px`, paddingTop: `65px` })
+      DOMHelper.addStyles(el, { width: `${screenWidth}px`, paddingTop: `100px` })
     );
     DOMHelper.forEach(bg.children, (el) => DOMHelper.addStyles(el, { width: `${totalWidth}px` }));
     /* both the right and left of the navigation next and previous buttons will be:
