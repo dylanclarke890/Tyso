@@ -241,7 +241,7 @@ class ParallaxSlider {
     autoplay: 0,
     circular: true,
     speed: 850, // ms
-    spaces: 70,
+    overlapInPixels: 0,
     thumbRotation: false,
     effect: "ease-in-out",
     bgEffect: "ease-in",
@@ -386,7 +386,7 @@ class ParallaxSlider {
 
   #setup() {
     const { loading, sliderWrapper, thumbnails } = this.elements;
-    const { imageWidth, spaces, thumbRotation } = this.opts;
+    const { imageWidth, overlapInPixels, thumbRotation } = this.opts;
 
     UI.hide(loading);
     UI.show(sliderWrapper);
@@ -396,8 +396,9 @@ class ParallaxSlider {
 
     let currentOffset = 0;
     UI.forEach(thumbnails.children, (tn, i) => {
+      if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
+      UI.addStyles(tn, { left: `${currentOffset}px` });
       currentOffset += tn.offsetWidth;
-      UI.addStyles(tn, { left: `${currentOffset + tn.offsetWidth}px` });
 
       UI.addEvent(tn, "mouseenter", () => UI.animate(tn, [{ top: "0px" }, { top: "-10px" }], 100));
       UI.addEvent(tn, "mouseleave", () => UI.animate(tn, [{ top: "-10px" }, { top: "0px" }], 100));
