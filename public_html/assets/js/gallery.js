@@ -1,4 +1,4 @@
-class DOMHelper {
+class UI {
   static #chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   static uniqueId = () =>
     Array.from({ length: 10 }, () => this.#chars[Math.floor(Math.random() * 52)]).join("");
@@ -25,7 +25,7 @@ class DOMHelper {
 
   static siblings = (/** @type {HTMLElement} */ element) => {
     const siblings = [];
-    DOMHelper.forEach(element.parentElement.children, (e) => {
+    UI.forEach(element.parentElement.children, (e) => {
       if (e !== element) siblings.push(e);
     });
     return siblings;
@@ -43,17 +43,14 @@ class DOMHelper {
   static triggerEvent = (/** @type {HTMLElement} */ element, event) =>
     element.dispatchEvent(new Event(event));
 
-  static animate(
+  static animate = (
     /** @type {HTMLElement} */ element,
     keyframes,
     speed,
     effect = "ease-in",
     times = 1,
     fill = "forwards"
-  ) {
-    element.animate(keyframes, { duration: speed, iterations: times, easing: effect, fill });
-    keyframes.forEach((kf) => Object.keys(kf).forEach((t) => (element.style[t] = kf[t])));
-  }
+  ) => element.animate(keyframes, { duration: speed, iterations: times, easing: effect, fill });
 
   static addStyles = (/** @type {HTMLElement} */ element, styles) =>
     Object.keys(styles).forEach((s) => (element.style[s] = styles[s]));
@@ -110,7 +107,7 @@ class ParallaxBuilder {
 
   #loadingScreen() {
     const loadingDiv = document.createElement("div");
-    loadingDiv.className = DOMHelper.getFromDOMQuery(this.opts.DOMElementRefs.loading, "class");
+    loadingDiv.className = UI.getFromDOMQuery(this.opts.DOMElementRefs.loading, "class");
     loadingDiv.innerHTML = "Loading images...";
     document.body.prepend(loadingDiv);
   }
@@ -164,7 +161,7 @@ class ParallaxBuilder {
 
   #loadImage(src, cb) {
     const image = new Image();
-    DOMHelper.addEvent(image, "load", cb);
+    UI.addEvent(image, "load", cb);
     image.src = src;
     return image;
   }
@@ -188,7 +185,7 @@ class ParallaxBuilder {
   #buildHTML() {
     const { DOMElementRefs, bgLayers, onComplete } = this.opts;
     const { container, slider, sliderWrapper, thumbnails, prev, next, bg } = DOMElementRefs;
-    const bgClass = DOMHelper.getFromDOMQuery(bg);
+    const bgClass = UI.getFromDOMQuery(bg);
     const bgs = Array.from(
       { length: bgLayers },
       (_, i) => `<div class="${bgClass}${i + 1}"></div>`
@@ -198,24 +195,24 @@ class ParallaxBuilder {
       <div class="${bgClass}">
         ${bgs.join("")}
       </div>
-      <div class="${DOMHelper.getFromDOMQuery(sliderWrapper)}">
-        <ul class="${DOMHelper.getFromDOMQuery(slider)}">
+      <div class="${UI.getFromDOMQuery(sliderWrapper)}">
+        <ul class="${UI.getFromDOMQuery(slider)}">
           ${this.mainImages
             .map((v) => `<li><img style='width: 300px;' src=${v.src} /></li>`)
             .join("")}
         </ul>
-        <ul class="${DOMHelper.getFromDOMQuery(thumbnails)}">
+        <ul class="${UI.getFromDOMQuery(thumbnails)}">
           ${this.thumbnails
             .map((v) => `<li><img style='height: 80px;' src=${v.src} /></li>`)
             .join("")}
         </ul>
-        <button class="${DOMHelper.getFromDOMQuery(next)}"></button>
-        <button class="${DOMHelper.getFromDOMQuery(prev)}"></button>
+        <button class="${UI.getFromDOMQuery(next)}"></button>
+        <button class="${UI.getFromDOMQuery(prev)}"></button>
       </div>
     `;
 
     const containerDiv = document.createElement("div");
-    containerDiv.className = DOMHelper.getFromDOMQuery(container);
+    containerDiv.className = UI.getFromDOMQuery(container);
     containerDiv.innerHTML = this.html;
     document.body.prepend(containerDiv);
     onComplete();
@@ -263,7 +260,7 @@ class ParallaxSlider {
     if (!container) throw new Error(`opts.container was not a valid selector or HTML element.`);
     /* For a consistent and cheap way of finding the container later we can append a random ID
     to the classlist. Make sure to update the generated id in the DOMElementRefs. */
-    const rand = DOMHelper.uniqueId();
+    const rand = UI.uniqueId();
     container.classList.add(rand);
     this.opts.DOMElementRefs.container = `.${rand}`;
     this.elements = { container };
@@ -289,7 +286,7 @@ class ParallaxSlider {
     const images = this.elements.sliderWrapper.querySelectorAll("img");
     for (let img of images) {
       const i = new Image();
-      DOMHelper.addEvent(i, "load", () => {
+      UI.addEvent(i, "load", () => {
         if (++loaded === total) this.#setup();
       });
       i.src = img.src;
@@ -313,20 +310,18 @@ class ParallaxSlider {
     const screenWidth = window.innerWidth;
     const totalWidth = screenWidth * this.slide.total;
     slider.style.width = `${totalWidth}px`;
-    DOMHelper.forEach(slider.children, (el) =>
-      DOMHelper.addStyles(el, { width: `${screenWidth}px`, paddingTop: `100px` })
+    UI.forEach(slider.children, (el) =>
+      UI.addStyles(el, { width: `${screenWidth}px`, paddingTop: `100px` })
     );
-    DOMHelper.forEach(bg.children, (el) => DOMHelper.addStyles(el, { width: `${totalWidth}px` }));
-    /* both the right and left of the navigation next and previous buttons will be:
-    windowWidth/2 - imgWidth/2 + some margin (not to touch the image borders) */
+    UI.forEach(bg.children, (el) => UI.addStyles(el, { width: `${totalWidth}px` }));
     const offsetNavBy = screenWidth / 3;
     const { prev, next } = this.elements;
-    DOMHelper.addStyles(prev, { left: `${offsetNavBy}px` });
-    DOMHelper.addStyles(next, { left: `${offsetNavBy * 2}px` });
+    UI.addStyles(prev, { left: `${offsetNavBy}px` });
+    UI.addStyles(next, { left: `${offsetNavBy * 2}px` });
   }
 
   #selectThumbnail(/** @type {HTMLElement} */ element) {
-    DOMHelper.forEach(DOMHelper.siblings(element), (e) => e.classList.remove("selected"));
+    UI.forEach(UI.siblings(element), (e) => e.classList.remove("selected"));
     element.classList.add("selected");
   }
 
@@ -335,17 +330,13 @@ class ParallaxSlider {
     const { slider, bg } = this.elements;
 
     const offset = -window.innerWidth * this.slide.current;
-    if (!slider.style.left) DOMHelper.addStyles(slider, { left: "0px" });
-    DOMHelper.animate(
-      slider,
-      [{ left: `${slider.style.left}` }, { left: `${offset}px` }],
-      speed,
-      effect
-    );
-    DOMHelper.forEach(bg.children, (e, i) => {
+    if (!slider.style.left) UI.addStyles(slider, { left: "0px" });
+    UI.animate(slider, [{ left: `${offset}px` }], speed, effect);
+
+    UI.forEach(bg.children, (e, i) => {
       const to = offset / Math.pow(2, i + 1);
-      if (!e.style.left) DOMHelper.addStyles(e, { left: "0px" });
-      DOMHelper.animate(e, [{ left: `${e.style.left}` }, { left: `${to}px` }], speed, bgEffect);
+      if (!e.style.left) UI.addStyles(e, { left: "0px" });
+      UI.animate(e, [{ left: `${to}px` }], speed, bgEffect);
     });
   }
 
@@ -353,11 +344,11 @@ class ParallaxSlider {
     const { prev, next, thumbnails } = this.elements;
     const { circular, autoplay } = this.opts;
 
-    DOMHelper.addEvent(window, "resize", () => {
+    UI.addEvent(window, "resize", () => {
       this.#setWidths();
       this.#slideChanged();
     });
-    DOMHelper.addEvent(next, "click", () => {
+    UI.addEvent(next, "click", () => {
       if (++this.slide.current >= this.slide.total) {
         if (circular) this.slide.current = 0;
         else {
@@ -365,10 +356,10 @@ class ParallaxSlider {
           return;
         }
       }
-      this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, this.slide.current));
+      this.#selectThumbnail(UI.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
     });
-    DOMHelper.addEvent(prev, "click", () => {
+    UI.addEvent(prev, "click", () => {
       if (--this.slide.current < 0) {
         if (circular) this.slide.current = this.slide.total - 1;
         else {
@@ -376,11 +367,11 @@ class ParallaxSlider {
           return;
         }
       }
-      this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, this.slide.current));
+      this.#selectThumbnail(UI.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
     });
-    DOMHelper.forEach(thumbnails.children, (e, i) => {
-      DOMHelper.addEvent(e, "click", () => {
+    UI.forEach(thumbnails.children, (e, i) => {
+      UI.addEvent(e, "click", () => {
         this.#selectThumbnail(e);
         if (autoplay) clearInterval(this.slideshow);
         this.slide.current = i;
@@ -389,7 +380,7 @@ class ParallaxSlider {
     });
     if (autoplay !== 0) {
       this.opts.circular = true;
-      this.slideshow = setInterval(() => DOMHelper.triggerEvent(next, "click"), autoplay);
+      this.slideshow = setInterval(() => UI.triggerEvent(next, "click"), autoplay);
     }
   }
 
@@ -397,22 +388,24 @@ class ParallaxSlider {
     const { loading, sliderWrapper, thumbnails } = this.elements;
     const { imageWidth, spaces, thumbRotation } = this.opts;
 
-    DOMHelper.hide(loading);
-    DOMHelper.show(sliderWrapper);
+    UI.hide(loading);
+    UI.show(sliderWrapper);
+
     this.#setWidths();
-    DOMHelper.addStyles(thumbnails, { width: imageWidth });
-    DOMHelper.forEach(thumbnails.children, (tn, i) => {
-      DOMHelper.addStyles(tn, { left: `${spaces + i * tn.offsetWidth}px` });
-      DOMHelper.addEvent(tn, "mouseenter", () =>
-        DOMHelper.animate(tn, [{ top: "0px" }, { top: "-10px" }], 100)
-      );
-      DOMHelper.addEvent(tn, "mouseleave", () =>
-        DOMHelper.animate(tn, [{ top: "-10px" }, { top: "0px" }], 100)
-      );
+    UI.addStyles(thumbnails, { width: imageWidth });
+
+    let currentOffset = 0;
+    UI.forEach(thumbnails.children, (tn, i) => {
+      currentOffset += tn.offsetWidth;
+      UI.addStyles(tn, { left: `${currentOffset + tn.offsetWidth}px` });
+
+      UI.addEvent(tn, "mouseenter", () => UI.animate(tn, [{ top: "0px" }, { top: "-10px" }], 100));
+      UI.addEvent(tn, "mouseleave", () => UI.animate(tn, [{ top: "-10px" }, { top: "0px" }], 100));
+
       if (thumbRotation) {
         const angle = Math.floor(Math.random() * 41) - 20;
         const style = `rotate(${angle}deg)`;
-        DOMHelper.addStyles(tn, {
+        UI.addStyles(tn, {
           "-moz-transform": style,
           "-webkit-transform": style,
           transform: style,
@@ -420,7 +413,7 @@ class ParallaxSlider {
       }
     });
 
-    this.#selectThumbnail(DOMHelper.nthChild(thumbnails.children, 0));
+    this.#selectThumbnail(UI.nthChild(thumbnails.children, 0));
     this.#addEvents();
   }
 }
@@ -441,7 +434,7 @@ function onReady() {
   //#endregion END OF TIMED CODE
 
   const after = performance.now();
-  console.log(after - now);
+  // console.log(after - now);
 }
 
 document.addEventListener("DOMContentLoaded", onReady);
