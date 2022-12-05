@@ -115,6 +115,61 @@ class ParallaxBuilder {
     document.body.prepend(loadingDiv);
   }
 
+  #drawImgToScale(img, ctx) {
+    const cw = ctx.canvas.width,
+      ch = ctx.canvas.height,
+      iw = img.width,
+      ih = img.height;
+    const hRatio = cw / iw;
+    const vRatio = ch / ih;
+    const ratio = Math.min(hRatio, vRatio);
+    const centerShift_x = (cw - iw * ratio) / 2;
+    const centerShift_y = (ch - ih * ratio) / 2;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, 0, 0, iw, ih, centerShift_x, centerShift_y, iw * ratio, ih * ratio);
+  }
+
+  #scaleImgs() {
+    this.thumbnails = [];
+    this.mainImages = [];
+
+    const container = document.getElementById(this.tempDivId);
+    const images = container.children;
+
+    const thumbCanvas = document.createElement("canvas");
+    thumbCanvas.width = this.thumbnailDimensions.w;
+    thumbCanvas.height = this.thumbnailDimensions.h;
+    const thumbCtx = thumbCanvas.getContext("2d");
+
+    const mainCanvas = document.createElement("canvas");
+    mainCanvas.width = this.mainImageDimensions.w;
+    mainCanvas.height = this.mainImageDimensions.h;
+    const mainCtx = mainCanvas.getContext("2d");
+
+    let loaded = 0;
+    const totalToLoad = images.length;
+    for (let img of images)
+      img.onload = () => {
+        this.#drawImgToScale(img, thumbCtx);
+        this.#drawImgToScale(img, mainCtx);
+
+        this.thumbnails.push(this.#buildGalleryImg(thumbCanvas.toDataURL(img.type)));
+        this.mainImages.push(this.#buildGalleryImg(mainCanvas.toDataURL(img.type)));
+
+        container.removeChild(img);
+        loaded++;
+
+        if (loaded === totalToLoad) {
+          this.#build();
+          // this.#onLoadComplete();
+          if (this.target) {
+            document.body.removeChild(this.target);
+            this.target = null;
+          }
+        }
+      };
+  }
+
   #loadImage(src, cb) {
     const image = new Image();
     DOMHelper.addEvent(image, "load", cb);
@@ -378,128 +433,9 @@ class ParallaxSlider {
   }
 }
 
-class ParallaxGallery {
-  constructor({ images, dimensions = {} } = {}) {
-    this.images = images;
-    const { thumbnail, mainImage } = dimensions;
-    this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
-    this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
-    this.tempDivId = DOMHelper.uniqueId();
-    this.#insertIntoTempDiv();
-    this.#scaleImgs();
-  }
-
-  // area to focus on.
-  #insertIntoTempDiv() {
-    this.target = document.createElement("div");
-    this.target.id = this.tempDivId;
-    DOMHelper.addStyles(this.target, { opacity: 0, position: "absolute" });
-    this.target.innerHTML = this.images.map((i) => i.html).join("");
-    document.body.appendChild(this.target);
-  }
-
-  #drawImgToScale(img, ctx) {
-    const cw = ctx.canvas.width,
-      ch = ctx.canvas.height,
-      iw = img.width,
-      ih = img.height;
-    const hRatio = cw / iw;
-    const vRatio = ch / ih;
-    const ratio = Math.min(hRatio, vRatio);
-    const centerShift_x = (cw - iw * ratio) / 2;
-    const centerShift_y = (ch - ih * ratio) / 2;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(img, 0, 0, iw, ih, centerShift_x, centerShift_y, iw * ratio, ih * ratio);
-  }
-
-  #insertContent() {
-    const container = document.createElement("div");
-    container.id = "pxs_container";
-    container.classList.add("pxs_container");
-    container.innerHTML = this.html;
-    document.body.prepend(container);
-  }
-
-  #build() {
-    this.html = `
-      <div class="pxs_bg">
-        <div class="pxs_bg1"></div>
-        <div class="pxs_bg2"></div>
-        <div class="pxs_bg3"></div>
-      </div>
-      <div class="pxs_loading">Loading images...</div>
-      <div class="container-fluid wall">
-        <div class="pxs_slider_wrapper">
-          <div id="wmf">
-            <ul class="pxs_slider">
-              ${this.mainImages.join(" ")}
-            </ul>
-          </div>
-          <div class="pxs_navigation go">
-            <span class="pxs_next"></span>
-            <span class="pxs_prev"></span>
-          </div>
-          <ul class="pxs_thumbnails away">
-            ${this.thumbnails.join(" ")}
-          </ul>
-        </div>
-      </div>
-    `;
-    this.#insertContent();
-  }
-
-  #buildGalleryImg(dataURL) {
-    return `
-      <li>
-        <img src="${dataURL}" />
-      </li>
-    `;
-  }
-
-  #scaleImgs() {
-    this.thumbnails = [];
-    this.mainImages = [];
-
-    const container = document.getElementById(this.tempDivId);
-    const images = container.children;
-
-    const thumbCanvas = document.createElement("canvas");
-    thumbCanvas.width = this.thumbnailDimensions.w;
-    thumbCanvas.height = this.thumbnailDimensions.h;
-    const thumbCtx = thumbCanvas.getContext("2d");
-
-    const mainCanvas = document.createElement("canvas");
-    mainCanvas.width = this.mainImageDimensions.w;
-    mainCanvas.height = this.mainImageDimensions.h;
-    const mainCtx = mainCanvas.getContext("2d");
-
-    let loaded = 0;
-    const totalToLoad = images.length;
-    for (let img of images)
-      img.onload = () => {
-        this.#drawImgToScale(img, thumbCtx);
-        this.#drawImgToScale(img, mainCtx);
-
-        this.thumbnails.push(this.#buildGalleryImg(thumbCanvas.toDataURL(img.type)));
-        this.mainImages.push(this.#buildGalleryImg(mainCanvas.toDataURL(img.type)));
-
-        container.removeChild(img);
-        loaded++;
-
-        if (loaded === totalToLoad) {
-          this.#build();
-          // this.#onLoadComplete();
-          if (this.target) {
-            document.body.removeChild(this.target);
-            this.target = null;
-          }
-        }
-      };
-  }
-}
-
 function onReady() {
   const now = performance.now();
+
   //#region TIMED CODE
   const settings = {
     buildSlides: true,
@@ -508,10 +444,10 @@ function onReady() {
       thumbnail: [],
     },
   };
-  for (let i = 1; i < 22; i++)
-    settings.slides.main.push(`assets/images/gallery/${i.toString()}.jpg`);
+  for (let i = 1; i < 22; i++) settings.slides.main.push(`assets/images/gallery/${i}.jpg`);
   new ParallaxSlider(settings);
   //#endregion END OF TIMED CODE
+
   const after = performance.now();
   console.log(after - now);
 }
