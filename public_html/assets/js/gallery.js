@@ -216,12 +216,6 @@ class ParallaxBuilder {
     containerDiv.innerHTML = this.html;
     document.body.prepend(containerDiv);
     onComplete();
-    this.#finishLoading();
-  }
-
-  #finishLoading() {
-    const { loading } = this.opts.DOMElementRefs;
-    document.body.removeChild(document.querySelector(loading));
   }
 }
 
@@ -276,7 +270,7 @@ class ParallaxSlider {
       prev: document.querySelector(`${container} ${prev}`),
       next: document.querySelector(`${container} ${next}`),
       bg: document.querySelector(`${container} ${bg}`),
-      loading: document.querySelector(`${container} ${loading}`),
+      loading: document.querySelector(`${loading}`),
     });
   }
 
@@ -388,9 +382,6 @@ class ParallaxSlider {
     const { loading, sliderWrapper, thumbnails } = this.elements;
     const { imageWidth, overlapInPixels, thumbRotation } = this.opts;
 
-    UI.hide(loading);
-    UI.show(sliderWrapper);
-
     this.#setWidths();
     UI.addStyles(thumbnails, { width: imageWidth });
 
@@ -416,6 +407,9 @@ class ParallaxSlider {
 
     this.#selectThumbnail(UI.nthChild(thumbnails.children, 0));
     this.#addEvents();
+
+    UI.hide(loading);
+    UI.show(sliderWrapper);
   }
 }
 
