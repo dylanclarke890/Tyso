@@ -222,7 +222,7 @@ class ParallaxBuilder {
 
   #finishLoading() {
     const { loading } = this.opts.DOMElementRefs;
-    // document.body.removeChild(document.querySelector(loading));
+    document.body.removeChild(document.querySelector(loading));
   }
 }
 
