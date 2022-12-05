@@ -47,7 +47,7 @@ class DOMHelper {
     /** @type {HTMLElement} */ element,
     keyframes,
     speed,
-    effect,
+    effect = "ease-in",
     times = 1,
     fill = "forwards"
   ) {
@@ -135,12 +135,8 @@ class ParallaxBuilder {
       loading: ".pxs_loading",
     },
     slides: {
-      main: [
-        "assets/images/gallery/1.jpg",
-        "assets/images/gallery/2.jpg",
-        "assets/images/gallery/3.jpg",
-      ],
-      thumbnail: ["assets/images/gallery/1.jpg", "assets/images/gallery/2.jpg"],
+      main: [],
+      thumbnail: [],
     },
     scaleImages: true,
     slideWidth: 400,
@@ -200,21 +196,19 @@ class ParallaxBuilder {
       <div class="${bgClass}">
         ${bgs.join("")}
       </div>
-      <div class="container-fluid wall">
-        <div class="${DOMHelper.getFromDOMQuery(sliderWrapper)}">
-          <div id="wmf">
-            <ul class="${DOMHelper.getFromDOMQuery(slider)}">
-              ${this.mainImages.map((v) => `<img src=${v.src} />`).join("")}
-            </ul>
-          </div>
-          <div class="pxs_navigation">
-            <span class="${DOMHelper.getFromDOMQuery(next)}"></span>
-            <span class="${DOMHelper.getFromDOMQuery(prev)}"></span>
-          </div>
-          <ul class="${DOMHelper.getFromDOMQuery(thumbnails)}">
-            ${this.thumbnails.map((v) => `<img src=${v.src} />`).join("")}
-          </ul>
-        </div>
+      <div class="${DOMHelper.getFromDOMQuery(sliderWrapper)}">
+        <ul class="${DOMHelper.getFromDOMQuery(slider)}">
+          ${this.mainImages
+            .map((v) => `<li><img style='width: 300px;' src=${v.src} /></li>`)
+            .join("")}
+        </ul>
+        <ul class="${DOMHelper.getFromDOMQuery(thumbnails)}">
+          ${this.thumbnails
+            .map((v) => `<li><img style='height: 80px;' src=${v.src} /></li>`)
+            .join("")}
+        </ul>
+        <button class="${DOMHelper.getFromDOMQuery(next)}"></button>
+        <button class="${DOMHelper.getFromDOMQuery(prev)}"></button>
       </div>
     `;
 
@@ -223,11 +217,12 @@ class ParallaxBuilder {
     containerDiv.innerHTML = this.html;
     document.body.prepend(containerDiv);
     onComplete();
+    this.#finishLoading();
   }
 
-  finishLoading() {
+  #finishLoading() {
     const { loading } = this.opts.DOMElementRefs;
-    document.body.removeChild(document.querySelector(loading));
+    // document.body.removeChild(document.querySelector(loading));
   }
 }
 
@@ -307,7 +302,7 @@ class ParallaxSlider {
       this.slide = { current: 0, total: this.elements.slider.children.length };
       this.#preloadImages();
     };
-    if (this.opts.buildSlides) new ParallaxBuilder({ onComplete: setup });
+    if (this.opts.buildSlides) new ParallaxBuilder({ slides: options.slides, onComplete: setup });
     else setup();
   }
 
@@ -322,10 +317,10 @@ class ParallaxSlider {
     DOMHelper.forEach(bg.children, (el) => DOMHelper.addStyles(el, { width: `${totalWidth}px` }));
     /* both the right and left of the navigation next and previous buttons will be:
     windowWidth/2 - imgWidth/2 + some margin (not to touch the image borders) */
-    const offsetNavBy = screenWidth / 2 - this.opts.imageWidth / 2 - 150;
+    const offsetNavBy = screenWidth / 3;
     const { prev, next } = this.elements;
     DOMHelper.addStyles(prev, { left: `${offsetNavBy}px` });
-    DOMHelper.addStyles(next, { right: `${offsetNavBy}px` });
+    DOMHelper.addStyles(next, { left: `${offsetNavBy * 2}px` });
   }
 
   #selectThumbnail(/** @type {HTMLElement} */ element) {
@@ -403,14 +398,14 @@ class ParallaxSlider {
     DOMHelper.hide(loading);
     DOMHelper.show(sliderWrapper);
     this.#setWidths();
-    DOMHelper.addStyles(thumbnails, { width: imageWidth, marginLeft: `${-imageWidth + 60}px` });
+    DOMHelper.addStyles(thumbnails, { width: imageWidth });
     DOMHelper.forEach(thumbnails.children, (tn, i) => {
-      DOMHelper.addStyles(tn, { left: `${spaces * (i - 8) + tn.offsetWidth}px` });
+      DOMHelper.addStyles(tn, { left: `${spaces + i * tn.offsetWidth}px` });
       DOMHelper.addEvent(tn, "mouseenter", () =>
-        DOMHelper.animate(tn, [{ style: "top", to: "-10px", from: "0px" }], 100)
+        DOMHelper.animate(tn, [{ top: "0px" }, { top: "-10px" }], 100)
       );
-      DOMHelper.addEvent(tn, "mouseenter", () =>
-        DOMHelper.animate(tn, [{ style: "top", from: "-10px", to: "0px" }], 100)
+      DOMHelper.addEvent(tn, "mouseleave", () =>
+        DOMHelper.animate(tn, [{ top: "-10px" }, { top: "0px" }], 100)
       );
       if (thumbRotation) {
         const angle = Math.floor(Math.random() * 41) - 20;
@@ -553,8 +548,13 @@ function onReady() {
   //#region TIMED CODE
   const settings = {
     buildSlides: true,
+    slides: {
+      main: [],
+      thumbnail: [],
+    },
   };
-  // for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
+  for (let i = 1; i < 22; i++)
+    settings.slides.main.push(`assets/images/gallery/${i.toString()}.jpg`);
   new ParallaxSlider(settings);
   //#endregion END OF TIMED CODE
   const after = performance.now();
