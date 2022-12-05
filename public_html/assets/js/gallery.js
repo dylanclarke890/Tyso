@@ -3,8 +3,19 @@ class DOMHelper {
   static uniqueId = () =>
     Array.from({ length: 10 }, () => this.#chars[Math.floor(Math.random() * 52)]).join("");
 
-  static hide = (/** @type {HTMLElement} */ element) => (element.style.display = "none");
-  static show = (/** @type {HTMLElement} */ element) => element.style.removeProperty("display");
+  static hide = (/** @type {HTMLElement} */ element) => {
+    if (element) element.style.display = "none";
+  };
+
+  static show = (/** @type {HTMLElement} */ element) => {
+    if (element) element.style.removeProperty("display");
+  };
+
+  static toggle = (/** @type {HTMLElement} */ element) => {
+    if (!element) return;
+    if (element.style.display === "none") element.style.removeProperty("display");
+    else element.style.display = "none";
+  };
 
   static forEach = (/** @type {HTMLCollection} */ elements, cb) => {
     for (let i = 0; i < elements.length; i++) cb(elements[i], i);
@@ -46,36 +57,72 @@ class DOMHelper {
 
   static addStyles = (/** @type {HTMLElement} */ element, styles) =>
     Object.keys(styles).forEach((s) => (element.style[s] = styles[s]));
+
+  static getFromDOMQuery = (/** @type {string} */ DOMQuery, type = "class") => {
+    switch (type) {
+      case "id":
+        return !DOMQuery || DOMQuery[0] !== "#" ? "" : DOMQuery.substring(1);
+      case "class":
+        return !DOMQuery || DOMQuery[0] !== "." ? "" : DOMQuery.substring(1);
+      default:
+        return "";
+    }
+  };
+
+  static newCanvasContext = (width, height, context) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    return canvas.getContext(context);
+  };
+}
+
+class ImageWrapper {
+  constructor({ src, id, className }) {
+    this.src = src;
+    this.id = id ?? DOMHelper.uniqueId();
+    this.className = className;
+  }
+
+  load(cb = null) {
+    this.image = new Image();
+    if (this.cb) DOMHelper.addEvent(this.image, "load", cb);
+    this.image.src = this.src;
+    return this.image;
+  }
 }
 
 class GalleryImage {
-  constructor({ id, name, classes, alt, ext = ".jpg" } = {}) {
+  constructor({ id, name, classes, alt, ext = ".jpg", rootDir = "assets/images/gallery/" } = {}) {
     this.id = id; // id
     this.name = name; // src
     this.classes = classes; // individual class(es) to apply
     this.alt = alt ?? name; // alt text if image not found
     this.ext = ext; // image extension (i.e ".jpg")
+    this.rootDir = rootDir;
+    this.#getAttributes();
     this.build();
   }
 
-  build(rootDir = "assets/images/gallery/") {
-    rootDir ??= "";
-    thumbSuffix ??= "";
+  #getAttributes() {
     this.id ??= DOMHelper.uniqueId();
-    this.srcPath = this.name && this.ext ? `${rootDir}${this.name}${this.ext}` : "";
+    this.srcPath = this.name && this.ext ? `${this.rootDir}${this.name}${this.ext}` : "";
     this.attributes = {
       id: this.id ? `id="${this.id}"` : "",
       classes: this.classes && this.classes.length ? `class="${this.classes.join(" ")}"` : "",
       alt: this.alt ? `alt="${this.alt}"` : "",
       src: this.srcPath ? `src="${this.srcPath}"` : "",
     };
+  }
+
+  build() {
     this.html = `
       <img ${Object.values(this.attributes).join(" ")} />
     `;
   }
 }
 
-class ParallaxSlider {
+class ParallaxBuilder {
   #defaults = {
     DOMElementRefs: {
       container: ".pxs_container",
@@ -87,14 +134,124 @@ class ParallaxSlider {
       bg: ".pxs_bg",
       loading: ".pxs_loading",
     },
-    imageWidth: 400, // in px
+    slides: {
+      main: [
+        "assets/images/gallery/1.jpg",
+        "assets/images/gallery/2.jpg",
+        "assets/images/gallery/3.jpg",
+      ],
+      thumbnail: ["assets/images/gallery/1.jpg", "assets/images/gallery/2.jpg"],
+    },
+    scaleImages: true,
+    slideWidth: 400,
+    slideHeight: 400,
+    thumbnailWidth: 50,
+    thumbnailHeight: 50,
+    bgLayers: 3,
+    onComplete: () => null,
+  };
+
+  constructor(options = {}) {
+    this.opts = Object.assign({}, this.#defaults, options);
+    this.#loadingScreen();
+    this.#loadImages();
+  }
+
+  #loadingScreen() {
+    const loadingDiv = document.createElement("div");
+    loadingDiv.className = DOMHelper.getFromDOMQuery(this.opts.DOMElementRefs.loading, "class");
+    loadingDiv.innerHTML = "Loading images...";
+    document.body.prepend(loadingDiv);
+  }
+
+  #loadImage(src, cb) {
+    const image = new Image();
+    DOMHelper.addEvent(image, "load", cb);
+    image.src = src;
+    return image;
+  }
+
+  #loadImages() {
+    const { main, thumbnail } = this.opts.slides;
+    this.thumbnails = [];
+    this.mainImages = [];
+
+    let loaded = 0;
+    let total = main.length * 2;
+    const cb = () => {
+      if (++loaded === total) this.#buildHTML();
+    };
+    for (let i = 0; i < main.length; i++) {
+      this.mainImages.push(this.#loadImage(main[i], cb));
+      this.thumbnails.push(this.#loadImage(thumbnail[i] ?? main[i], cb));
+    }
+  }
+
+  #buildHTML() {
+    const { DOMElementRefs, bgLayers, onComplete } = this.opts;
+    const { container, slider, sliderWrapper, thumbnails, prev, next, bg } = DOMElementRefs;
+    const bgClass = DOMHelper.getFromDOMQuery(bg);
+    const bgs = Array.from(
+      { length: bgLayers },
+      (_, i) => `<div class="${bgClass}${i + 1}"></div>`
+    );
+
+    this.html = `
+      <div class="${bgClass}">
+        ${bgs.join("")}
+      </div>
+      <div class="container-fluid wall">
+        <div class="${DOMHelper.getFromDOMQuery(sliderWrapper)}">
+          <div id="wmf">
+            <ul class="${DOMHelper.getFromDOMQuery(slider)}">
+              ${this.mainImages.map((v) => `<img src=${v.src} />`).join("")}
+            </ul>
+          </div>
+          <div class="pxs_navigation">
+            <span class="${DOMHelper.getFromDOMQuery(next)}"></span>
+            <span class="${DOMHelper.getFromDOMQuery(prev)}"></span>
+          </div>
+          <ul class="${DOMHelper.getFromDOMQuery(thumbnails)}">
+            ${this.thumbnails.map((v) => `<img src=${v.src} />`).join("")}
+          </ul>
+        </div>
+      </div>
+    `;
+
+    const containerDiv = document.createElement("div");
+    containerDiv.className = DOMHelper.getFromDOMQuery(container);
+    containerDiv.innerHTML = this.html;
+    document.body.prepend(containerDiv);
+    onComplete();
+  }
+
+  finishLoading() {
+    const { loading } = this.opts.DOMElementRefs;
+    document.body.removeChild(document.querySelector(loading));
+  }
+}
+
+class ParallaxSlider {
+  #defaults = {
+    buildSlides: true,
+    DOMElementRefs: {
+      container: ".pxs_container",
+      slider: ".pxs_slider",
+      sliderWrapper: ".pxs_slider_wrapper",
+      thumbnails: ".pxs_thumbnails",
+      prev: ".pxs_prev",
+      next: ".pxs_next",
+      bg: ".pxs_bg",
+      loading: ".pxs_loading",
+    },
+    autoplay: 0,
+    circular: true,
+    speed: 850, // ms
     spaces: 70,
     thumbRotation: false,
-    circular: true,
-    autoplay: 0,
-    speed: 850, // ms
     effect: "ease-in-out",
     bgEffect: "ease-in",
+    imageWidth: 400, // in px
   };
 
   #getContainer() {
@@ -107,7 +264,6 @@ class ParallaxSlider {
       } else if (c instanceof Element) container = c;
     if (!c || !container) container = document.querySelector(this.opts.DOMElementRefs.container);
     if (!container) throw new Error(`opts.container was not a valid selector or HTML element.`);
-
     /* For a consistent and cheap way of finding the container later we can append a random ID
     to the classlist. Make sure to update the generated id in the DOMElementRefs. */
     const rand = DOMHelper.uniqueId();
@@ -145,10 +301,14 @@ class ParallaxSlider {
 
   constructor(options = {}) {
     this.opts = Object.assign({}, this.#defaults, options);
-    this.#getContainer();
-    this.#getElements();
-    this.slide = { current: 0, total: this.elements.slider.children.length };
-    this.#preloadImages();
+    const setup = () => {
+      this.#getContainer();
+      this.#getElements();
+      this.slide = { current: 0, total: this.elements.slider.children.length };
+      this.#preloadImages();
+    };
+    if (this.opts.buildSlides) new ParallaxBuilder({ onComplete: setup });
+    else setup();
   }
 
   #setWidths() {
@@ -269,17 +429,17 @@ class ParallaxSlider {
 }
 
 class ParallaxGallery {
-  constructor({ images, dimensions = {}, onLoadComplete } = {}) {
+  constructor({ images, dimensions = {} } = {}) {
     this.images = images;
     const { thumbnail, mainImage } = dimensions;
     this.thumbnailDimensions = thumbnail ?? { w: 120, h: 120 };
     this.mainImageDimensions = mainImage ?? { w: 400, h: 400 };
-    this.#onLoadComplete = onLoadComplete ?? (() => null);
     this.tempDivId = DOMHelper.uniqueId();
     this.#insertIntoTempDiv();
     this.#scaleImgs();
   }
 
+  // area to focus on.
   #insertIntoTempDiv() {
     this.target = document.createElement("div");
     this.target.id = this.tempDivId;
@@ -378,7 +538,7 @@ class ParallaxGallery {
 
         if (loaded === totalToLoad) {
           this.#build();
-          this.#onLoadComplete();
+          // this.#onLoadComplete();
           if (this.target) {
             document.body.removeChild(this.target);
             this.target = null;
@@ -392,20 +552,10 @@ function onReady() {
   const now = performance.now();
   //#region TIMED CODE
   const settings = {
-    images: [],
-    onLoadComplete: () => {
-      new ParallaxSlider();
-      const cufonReplacements = [
-        ["h1", { textShadow: "1px 1px #000" }],
-        ["h2", { textShadow: "1px 1px #000" }],
-        [".footer", { textShadow: "1px 1px #000" }],
-        [".pxs_loading", { textShadow: "1px 1px #000" }],
-      ];
-      for (let [target, styles] of cufonReplacements) Cufon.replace(target, styles);
-    },
+    buildSlides: true,
   };
-  for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
-  new ParallaxGallery(settings);
+  // for (let i = 1; i < 22; i++) settings.images.push(new GalleryImage({ name: i.toString() }));
+  new ParallaxSlider(settings);
   //#endregion END OF TIMED CODE
   const after = performance.now();
   console.log(after - now);
