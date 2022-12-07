@@ -155,37 +155,6 @@ class ParallaxBuilder {
 
   #buildGalleryImg() {}
 
-  #scaleImgs() {
-    this.thumbnails = [];
-    this.mainImages = [];
-
-    const container = document.getElementById(this.tempDivId);
-    const images = container.children;
-
-    const thumbCanvas = document.createElement("canvas");
-    thumbCanvas.width = this.thumbnailDimensions.w;
-    thumbCanvas.height = this.thumbnailDimensions.h;
-    const thumbCtx = thumbCanvas.getContext("2d");
-
-    const mainCanvas = document.createElement("canvas");
-    mainCanvas.width = this.mainImageDimensions.w;
-    mainCanvas.height = this.mainImageDimensions.h;
-    const mainCtx = mainCanvas.getContext("2d");
-
-    let loaded = 0;
-    const totalToLoad = images.length;
-    for (let img of images)
-      img.onload = () => {
-        this.#drawImgToScale(img, thumbCtx);
-        this.#drawImgToScale(img, mainCtx);
-        this.thumbnails.push(this.#buildGalleryImg(thumbCanvas.toDataURL(img.type)));
-        this.mainImages.push(this.#buildGalleryImg(mainCanvas.toDataURL(img.type)));
-        loaded++;
-        if (loaded === totalToLoad) {
-        }
-      };
-  }
-
   #loadImage(src, cb) {
     const image = new Image();
     UI.addEvent(image, "load", cb);
@@ -345,13 +314,13 @@ class ParallaxSlider {
     const totalWidth = screenWidth * this.slide.total;
     slider.style.width = `${totalWidth}px`;
     UI.forEach(slider.children, (el) =>
-      UI.addStyles(el, { width: `${screenWidth}px`, paddingTop: `100px` })
+      UI.addStyles(el, { width: `${screenWidth}px`, paddingTop: `120px` })
     );
     UI.forEach(bg.children, (el) => UI.addStyles(el, { width: `${totalWidth}px` }));
-    const offsetNavBy = screenWidth / 3;
+    const offsetNavBy = screenWidth / 6;
     const { prev, next } = this.elements;
     UI.addStyles(prev, { left: `${offsetNavBy}px` });
-    UI.addStyles(next, { left: `${offsetNavBy * 2}px` });
+    UI.addStyles(next, { left: `${offsetNavBy * 5}px` });
   }
 
   #selectThumbnail(/** @type {HTMLElement} */ element) {
@@ -508,8 +477,6 @@ class ParallaxSlider {
 }
 
 function onReady() {
-  const now = performance.now();
-
   //#region TIMED CODE
   const settings = {
     buildSlides: true,
@@ -522,7 +489,6 @@ function onReady() {
   new ParallaxSlider(settings);
   //#endregion END OF TIMED CODE
 
-  const after = performance.now();
   // console.log(after - now);
 }
 
