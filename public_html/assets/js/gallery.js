@@ -226,10 +226,12 @@ class ParallaxGallery {
       slide: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
     },
     fitWithinScreen: true,
+    centerThumbnails: true,
     overlapInPixels: 0,
     speed: 1000, // ms
     thumbRotation: false,
   };
+  #initialising = true;
 
   #getContainer() {
     const c = this.opts.container;
@@ -289,6 +291,7 @@ class ParallaxGallery {
     };
     if (this.opts.buildSlides) new ParallaxBuilder({ ...builderOptions, onComplete: setup });
     else setup();
+    this.#initialising = false;
   }
 
   #setWidths() {
@@ -304,6 +307,49 @@ class ParallaxGallery {
     const { prev, next } = this.elements;
     UI.addStyles(prev, { left: `${offsetNavBy}px` });
     UI.addStyles(next, { left: `${offsetNavBy * 5}px` });
+  }
+
+  #setupThumbnails() {
+    const { thumbnails } = this.elements;
+    const screenWidth = window.innerWidth;
+
+    const totalOffset = UI.reduce(
+      thumbnails.children,
+      (total, curr) => total + curr.offsetWidth,
+      0
+    );
+    const thumbnailsAreWiderThanScreen = totalOffset > screenWidth;
+
+    if (this.opts.fitWithinScreen && thumbnailsAreWiderThanScreen) {
+      const totalSlides = thumbnails.children.length;
+      let offsetPerSlide = (totalOffset - screenWidth) / totalSlides;
+      // accounting for skipping the offset for the first item.
+      offsetPerSlide += offsetPerSlide / totalSlides;
+      this.opts.overlapInPixels = offsetPerSlide;
+    }
+
+    const { overlapInPixels, thumbRotation, centerThumbnails } = this.opts;
+
+    let currentOffset = 0;
+    if (centerThumbnails && !thumbnailsAreWiderThanScreen) {
+      const remainingSpace = screenWidth - totalOffset;
+      currentOffset = remainingSpace / 2;
+    }
+
+    UI.forEach(thumbnails.children, (tn, i) => {
+      if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
+      UI.addStyles(tn, { left: `${currentOffset}px` });
+      currentOffset += tn.offsetWidth;
+
+      if (this.#initialising && thumbRotation) {
+        const style = `rotate(${Math.floor(Math.random() * 41) - 20}deg)`;
+        UI.addStyles(tn, {
+          "-moz-transform": style,
+          "-webkit-transform": style,
+          transform: style,
+        });
+      }
+    });
   }
 
   #selectThumbnail(/** @type {HTMLElement} */ element) {
@@ -394,17 +440,20 @@ class ParallaxGallery {
 
     UI.addEvent(window, "resize", () => {
       this.#setWidths();
+      this.#setupThumbnails();
       this.#slideChanged();
     });
     UI.addEvent(next, "click", () => onSlideChange(true));
     UI.addEvent(prev, "click", () => onSlideChange(false));
-    UI.forEach(thumbnails.children, (e, i) => {
-      UI.addEvent(e, "click", () => {
-        this.#selectThumbnail(e);
+    UI.forEach(thumbnails.children, (tn, i) => {
+      UI.addEvent(tn, "click", () => {
+        this.#selectThumbnail(tn);
         if (autoplay) clearInterval(this.slideshow);
         this.slide.current = i;
         this.#slideChanged();
       });
+      UI.addEvent(tn, "mouseenter", () => UI.animate(tn, [{ top: "0px" }, { top: "-10px" }], 100));
+      UI.addEvent(tn, "mouseleave", () => UI.animate(tn, [{ top: "-10px" }, { top: "0px" }], 100));
     });
     UI.addEvent(play, "click", () => onAutoplayToggle(true));
     UI.addEvent(pause, "click", () => onAutoplayToggle(false));
@@ -412,43 +461,9 @@ class ParallaxGallery {
 
   #setup() {
     const { loading, sliderWrapper, thumbnails } = this.elements;
-    const { fitWithinScreen, thumbRotation } = this.opts;
 
     this.#setWidths();
-
-    let currentOffset = 0;
-    if (fitWithinScreen) {
-      const totalOffset = UI.reduce(
-        thumbnails.children,
-        (total, curr) => total + curr.offsetWidth,
-        0
-      );
-      const totalSlides = thumbnails.children.length;
-      let offsetPerSlide = (totalOffset - window.innerWidth) / totalSlides;
-      // accounting for skipping the offset for the first item.
-      offsetPerSlide += offsetPerSlide / totalSlides;
-      this.opts.overlapInPixels = offsetPerSlide;
-    }
-
-    const { overlapInPixels } = this.opts;
-    UI.forEach(thumbnails.children, (tn, i) => {
-      if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
-      UI.addStyles(tn, { left: `${currentOffset}px` });
-      currentOffset += tn.offsetWidth;
-
-      UI.addEvent(tn, "mouseenter", () => UI.animate(tn, [{ top: "0px" }, { top: "-10px" }], 100));
-      UI.addEvent(tn, "mouseleave", () => UI.animate(tn, [{ top: "-10px" }, { top: "0px" }], 100));
-
-      if (thumbRotation) {
-        const angle = Math.floor(Math.random() * 41) - 20;
-        const style = `rotate(${angle}deg)`;
-        UI.addStyles(tn, {
-          "-moz-transform": style,
-          "-webkit-transform": style,
-          transform: style,
-        });
-      }
-    });
+    this.#setupThumbnails();
 
     this.#selectThumbnail(UI.nthChild(thumbnails.children, 0));
     this.#toggleAutoplay();
@@ -468,7 +483,7 @@ function onReady() {
     slides: [],
   };
 
-  for (let i = 1; i < 22; i++)
+  for (let i = 1; i < 10; i++)
     builderSettings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
 
   new ParallaxGallery(parallaxSettings, builderSettings);
