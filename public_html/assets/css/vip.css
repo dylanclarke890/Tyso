@@ -133,7 +133,7 @@
     left: 0.9em;
   }
 
-  #section-2 br:not(:nth-child(2n)) {
+  #section-2 br:nth-child(2n) {
     display: none;
   }
 
