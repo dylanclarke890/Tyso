@@ -85,19 +85,43 @@ ul.pxs_thumbnails li.selected img {
   background: #000 url(../images/icons/next.png) no-repeat center center;
 }
 
+.pxs_pause {
+  background: #000 url(../images/icons/pause-grey.png) no-repeat center center;
+}
+
+.pxs_play {
+  background: #000 url(../images/icons/play-grey.png) no-repeat center center;
+}
+
 .pxs_prev,
-.pxs_next {
+.pxs_next,
+.pxs_play,
+.pxs_pause {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 40px;
-  height: 80px;
   border-radius: 4px;
   cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.pxs_next,
+.pxs_prev {
+  width: 40px;
+  height: 80px;
+}
+
+.pxs_play,
+.pxs_pause {
+  width: 50px;
+  height: 50px;
 }
 
 .pxs_prev:hover,
-.pxs_next:hover {
+.pxs_next:hover,
+.pxs_play:hover,
+.pxs_pause:hover {
   opacity: 0.9;
 }
 

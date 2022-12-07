@@ -106,10 +106,12 @@ class ParallaxBuilder {
       slider: ".pxs_slider",
       sliderWrapper: ".pxs_slider_wrapper",
       thumbnails: ".pxs_thumbnails",
-      prev: ".pxs_prev",
-      next: ".pxs_next",
       bg: ".pxs_bg",
       loading: ".pxs_loading",
+      prev: ".pxs_prev",
+      next: ".pxs_next",
+      pause: ".pxs_pause",
+      play: ".pxs_play",
     },
     slides: {
       main: [],
@@ -209,7 +211,8 @@ class ParallaxBuilder {
 
   #buildHTML() {
     const { DOMElementRefs, bgLayers, onComplete } = this.opts;
-    const { container, slider, sliderWrapper, thumbnails, prev, next, bg } = DOMElementRefs;
+    const { container, slider, sliderWrapper, thumbnails, prev, next, bg, pause, play } =
+      DOMElementRefs;
     const bgClass = UI.getFromDOMQuery(bg);
     const bgs = Array.from(
       { length: bgLayers },
@@ -233,6 +236,10 @@ class ParallaxBuilder {
         </ul>
         <button class="${UI.getFromDOMQuery(next)}"></button>
         <button class="${UI.getFromDOMQuery(prev)}"></button>
+        <div>
+          <button class="${UI.getFromDOMQuery(pause)}"></button>
+          <button class="${UI.getFromDOMQuery(play)}" style='display:none;'></button>
+        </div>
       </div>
     `;
 
@@ -256,9 +263,12 @@ class ParallaxSlider {
       next: ".pxs_next",
       bg: ".pxs_bg",
       loading: ".pxs_loading",
+      pause: ".pxs_pause",
+      play: ".pxs_play",
     },
     addKeyboardEvents: true,
-    autoplay: 0,
+    autoplay: true,
+    autoplayIntervalSec: 2,
     circular: true,
     speed: 850, // ms
     overlapInPixels: 0,
@@ -288,8 +298,9 @@ class ParallaxSlider {
   }
 
   #getElements() {
-    const { container, slider, sliderWrapper, thumbnails, prev, next, bg, loading } =
+    const { container, slider, sliderWrapper, thumbnails, prev, next, bg, loading, play, pause } =
       this.opts.DOMElementRefs;
+
     this.elements = Object.assign(this.elements, {
       slider: document.querySelector(`${container} ${slider}`),
       sliderWrapper: document.querySelector(`${container} ${sliderWrapper}`),
@@ -298,6 +309,8 @@ class ParallaxSlider {
       next: document.querySelector(`${container} ${next}`),
       bg: document.querySelector(`${container} ${bg}`),
       loading: document.querySelector(`${loading}`),
+      play: document.querySelector(`${container} ${play}`),
+      pause: document.querySelector(`${container} ${pause}`),
     });
   }
 
@@ -362,8 +375,20 @@ class ParallaxSlider {
     });
   }
 
+  #toggleAutoplay() {
+    const { autoplay, autoplayIntervalSec } = this.opts;
+
+    if (autoplay) {
+      this.opts.circular = true;
+      this.slideshow = setInterval(
+        () => UI.triggerEvent(next, "click"),
+        autoplayIntervalSec * 1000
+      );
+    }
+  }
+
   #addEvents() {
-    const { prev, next, thumbnails } = this.elements;
+    const { prev, next, thumbnails, play, pause } = this.elements;
     const { circular, autoplay, addKeyboardEvents } = this.opts;
 
     const onSlideChange = (/** @type {boolean}*/ increment) => {
@@ -417,10 +442,14 @@ class ParallaxSlider {
         this.#slideChanged();
       });
     });
-    if (autoplay !== 0) {
-      this.opts.circular = true;
-      this.slideshow = setInterval(() => UI.triggerEvent(next, "click"), autoplay);
-    }
+    UI.addEvent(play, "click", () => {
+      UI.hide(play);
+      UI.show(pause);
+    });
+    UI.addEvent(pause, "click", () => {
+      UI.hide(pause);
+      UI.show(play);
+    });
   }
 
   #setup() {
