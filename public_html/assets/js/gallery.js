@@ -99,6 +99,13 @@ class UI {
   };
 }
 
+class ParallaxSlide {
+  constructor({ mainSrc, thumbnailSrc } = {}) {
+    this.mainSrc = mainSrc;
+    this.thumbnailSrc = thumbnailSrc ?? mainSrc;
+  }
+}
+
 class ParallaxBuilder {
   #defaults = {
     DOMElementRefs: {
@@ -113,10 +120,7 @@ class ParallaxBuilder {
       pause: ".pxs_pause",
       play: ".pxs_play",
     },
-    slides: {
-      main: [],
-      thumbnail: [],
-    },
+    slides: [],
     scaleImages: true,
     slideWidth: 400,
     slideHeight: 400,
@@ -139,22 +143,6 @@ class ParallaxBuilder {
     document.body.prepend(loadingDiv);
   }
 
-  #drawImgToScale(img, ctx) {
-    const cw = ctx.canvas.width,
-      ch = ctx.canvas.height,
-      iw = img.width,
-      ih = img.height;
-    const hRatio = cw / iw;
-    const vRatio = ch / ih;
-    const ratio = Math.min(hRatio, vRatio);
-    const centerShift_x = (cw - iw * ratio) / 2;
-    const centerShift_y = (ch - ih * ratio) / 2;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(img, 0, 0, iw, ih, centerShift_x, centerShift_y, iw * ratio, ih * ratio);
-  }
-
-  #buildGalleryImg() {}
-
   #loadImage(src, cb) {
     const image = new Image();
     UI.addEvent(image, "load", cb);
@@ -163,18 +151,19 @@ class ParallaxBuilder {
   }
 
   #loadImages() {
-    const { main, thumbnail } = this.opts.slides;
+    const slides = this.opts.slides;
     this.thumbnails = [];
     this.mainImages = [];
 
     let loaded = 0;
-    let total = main.length * 2;
+    let total = slides.length * 2;
     const cb = () => {
       if (++loaded === total) this.#buildHTML();
     };
-    for (let i = 0; i < main.length; i++) {
-      this.mainImages.push(this.#loadImage(main[i], cb));
-      this.thumbnails.push(this.#loadImage(thumbnail[i] ?? main[i], cb));
+
+    for (let i = 0; i < slides.length; i++) {
+      this.mainImages.push(this.#loadImage(slides[i].mainSrc, cb));
+      this.thumbnails.push(this.#loadImage(slides[i].thumbnailSrc, cb));
     }
   }
 
@@ -182,6 +171,7 @@ class ParallaxBuilder {
     const { DOMElementRefs, bgLayers, onComplete } = this.opts;
     const { container, slider, sliderWrapper, thumbnails, prev, next, bg, pause, play } =
       DOMElementRefs;
+
     const bgClass = UI.getFromDOMQuery(bg);
     const bgs = Array.from(
       { length: bgLayers },
@@ -220,7 +210,7 @@ class ParallaxBuilder {
   }
 }
 
-class ParallaxSlider {
+class ParallaxGallery {
   #defaults = {
     buildSlides: true,
     DOMElementRefs: {
@@ -481,13 +471,12 @@ function onReady() {
   //#region TIMED CODE
   const settings = {
     buildSlides: true,
-    slides: {
-      main: [],
-      thumbnail: [],
-    },
+    slides: [],
   };
-  for (let i = 1; i < 22; i++) settings.slides.main.push(`assets/images/gallery/${i}.jpg`);
-  new ParallaxSlider(settings);
+  for (let i = 1; i < 22; i++)
+    settings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
+
+  new ParallaxGallery(settings);
   //#endregion END OF TIMED CODE
 
   // console.log(after - now);
