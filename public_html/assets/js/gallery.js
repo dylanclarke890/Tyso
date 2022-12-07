@@ -264,8 +264,8 @@ class ParallaxSlider {
     overlapInPixels: 0,
     fitWithinScreen: true,
     thumbRotation: false,
-    effect: "ease-out",
-    bgEffect: "ease-out",
+    effect: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
+    bgEffect: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
     imageWidth: 400, // in px
   };
 
