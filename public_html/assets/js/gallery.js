@@ -447,6 +447,7 @@ class ParallaxSlider {
       offsetPerSlide += offsetPerSlide / totalSlides;
       this.opts.overlapInPixels = offsetPerSlide;
     }
+
     const { overlapInPixels } = this.opts;
     UI.forEach(thumbnails.children, (tn, i) => {
       if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
