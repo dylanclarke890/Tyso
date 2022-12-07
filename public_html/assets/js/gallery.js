@@ -237,8 +237,8 @@ class ParallaxBuilder {
         <button class="${UI.getFromDOMQuery(next)}"></button>
         <button class="${UI.getFromDOMQuery(prev)}"></button>
         <div>
-          <button class="${UI.getFromDOMQuery(pause)}"></button>
-          <button class="${UI.getFromDOMQuery(play)}" style='display:none;'></button>
+          <button class="${UI.getFromDOMQuery(pause)}" style='display:none;' ></button>
+          <button class="${UI.getFromDOMQuery(play)}"></button>
         </div>
       </div>
     `;
@@ -376,6 +376,7 @@ class ParallaxSlider {
   }
 
   #toggleAutoplay() {
+    const { next, play, pause } = this.elements;
     const { autoplay, autoplayIntervalSec } = this.opts;
 
     if (autoplay) {
@@ -384,6 +385,12 @@ class ParallaxSlider {
         () => UI.triggerEvent(next, "click"),
         autoplayIntervalSec * 1000
       );
+      UI.hide(play);
+      UI.show(pause);
+    } else {
+      clearInterval(this.slideshow);
+      UI.show(play);
+      UI.hide(pause);
     }
   }
 
@@ -411,6 +418,11 @@ class ParallaxSlider {
       }
       this.#selectThumbnail(UI.nthChild(thumbnails.children, this.slide.current));
       this.#slideChanged();
+    };
+
+    const onAutoplayToggle = (/** @type {boolean}*/ on) => {
+      this.opts.autoplay = on;
+      this.#toggleAutoplay();
     };
 
     if (addKeyboardEvents) {
@@ -442,14 +454,8 @@ class ParallaxSlider {
         this.#slideChanged();
       });
     });
-    UI.addEvent(play, "click", () => {
-      UI.hide(play);
-      UI.show(pause);
-    });
-    UI.addEvent(pause, "click", () => {
-      UI.hide(pause);
-      UI.show(play);
-    });
+    UI.addEvent(play, "click", () => onAutoplayToggle(true));
+    UI.addEvent(pause, "click", () => onAutoplayToggle(false));
   }
 
   #setup() {
@@ -493,6 +499,7 @@ class ParallaxSlider {
     });
 
     this.#selectThumbnail(UI.nthChild(thumbnails.children, 0));
+    this.#toggleAutoplay();
     this.#addEvents();
 
     UI.hide(loading);
