@@ -227,7 +227,7 @@ class ParallaxGallery {
     },
     fitWithinScreen: true,
     centerThumbnails: true,
-    overlapInPixels: 0,
+    overlapInPixels: 5,
     speed: 1000, // ms
     thumbRotation: false,
   };
@@ -311,24 +311,26 @@ class ParallaxGallery {
 
   #setupThumbnails() {
     const { thumbnails } = this.elements;
-    const screenWidth = window.innerWidth;
+    const { overlapInPixels, thumbRotation, centerThumbnails, fitWithinScreen } = this.opts;
 
+    const screenWidth = window.innerWidth;
     const totalOffset = UI.reduce(
       thumbnails.children,
-      (total, curr) => total + curr.offsetWidth,
+      (total, curr) => total + curr.offsetWidth - overlapInPixels,
       0
     );
     const thumbnailsAreWiderThanScreen = totalOffset > screenWidth;
 
-    if (this.opts.fitWithinScreen && thumbnailsAreWiderThanScreen) {
-      const totalSlides = thumbnails.children.length;
-      let offsetPerSlide = (totalOffset - screenWidth) / totalSlides;
-      // accounting for skipping the offset for the first item.
-      offsetPerSlide += offsetPerSlide / totalSlides;
-      this.opts.overlapInPixels = offsetPerSlide;
+    let internalOverlapInPixels = 0;
+    if (fitWithinScreen) {
+      if (thumbnailsAreWiderThanScreen) {
+        const totalSlides = thumbnails.children.length;
+        let offsetPerSlide = (totalOffset - screenWidth) / totalSlides;
+        // accounting for skipping the offset for the first item.
+        offsetPerSlide += offsetPerSlide / totalSlides;
+        internalOverlapInPixels = offsetPerSlide;
+      } else internalOverlapInPixels = 0;
     }
-
-    const { overlapInPixels, thumbRotation, centerThumbnails } = this.opts;
 
     let currentOffset = 0;
     if (centerThumbnails && !thumbnailsAreWiderThanScreen) {
@@ -337,7 +339,8 @@ class ParallaxGallery {
     }
 
     UI.forEach(thumbnails.children, (tn, i) => {
-      if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
+      const overlap = overlapInPixels + internalOverlapInPixels;
+      if (overlap && i > 0) currentOffset -= overlap;
       UI.addStyles(tn, { left: `${currentOffset}px` });
       currentOffset += tn.offsetWidth;
 
@@ -483,7 +486,7 @@ function onReady() {
     slides: [],
   };
 
-  for (let i = 1; i < 10; i++)
+  for (let i = 1; i < 22; i++)
     builderSettings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
 
   new ParallaxGallery(parallaxSettings, builderSettings);
