@@ -53,9 +53,17 @@ ul.pxs_slider li {
   justify-content: center;
 }
 
+ul.pxs_thumbnails {
+  isolation: isolate;
+}
+
 ul.pxs_thumbnails li {
   position: absolute;
   top: 0px;
+}
+
+ul.pxs_thumbnails li.selected {
+  z-index: 1;
 }
 
 ul.pxs_thumbnails li img {

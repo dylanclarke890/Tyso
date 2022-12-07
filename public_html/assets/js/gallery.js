@@ -415,7 +415,7 @@ class ParallaxSlider {
     if (fitWithinScreen) {
       const totalOffset = UI.reduce(
         thumbnails.children,
-        (prev, curr) => prev + curr.offsetWidth,
+        (total, curr) => total + curr.offsetWidth,
         0
       );
       const totalSlides = thumbnails.children.length;
