@@ -257,6 +257,7 @@ class ParallaxSlider {
       bg: ".pxs_bg",
       loading: ".pxs_loading",
     },
+    addKeyboardEvents: true,
     autoplay: 0,
     circular: true,
     speed: 850, // ms
@@ -360,36 +361,54 @@ class ParallaxSlider {
       UI.animate(e, [{ left: `${to}px` }], speed, bgEffect);
     });
   }
+
   #addEvents() {
     const { prev, next, thumbnails } = this.elements;
-    const { circular, autoplay } = this.opts;
+    const { circular, autoplay, addKeyboardEvents } = this.opts;
+
+    const onSlideChange = (/** @type {boolean}*/ increment) => {
+      if (increment) {
+        if (++this.slide.current >= this.slide.total) {
+          if (circular) this.slide.current = 0;
+          else {
+            --this.slide.current;
+            return;
+          }
+        }
+      } else {
+        if (--this.slide.current < 0) {
+          if (circular) this.slide.current = this.slide.total - 1;
+          else {
+            ++this.slide.current;
+            return;
+          }
+        }
+      }
+      this.#selectThumbnail(UI.nthChild(thumbnails.children, this.slide.current));
+      this.#slideChanged();
+    };
+
+    if (addKeyboardEvents) {
+      UI.addEvent(window, "keyup", (e) => {
+        switch (e.key) {
+          case "ArrowRight":
+            onSlideChange(true);
+            break;
+          case "ArrowLeft":
+            onSlideChange(false);
+            break;
+          default:
+            break;
+        }
+      });
+    }
 
     UI.addEvent(window, "resize", () => {
       this.#setWidths();
       this.#slideChanged();
     });
-    UI.addEvent(next, "click", () => {
-      if (++this.slide.current >= this.slide.total) {
-        if (circular) this.slide.current = 0;
-        else {
-          --this.slide.current;
-          return;
-        }
-      }
-      this.#selectThumbnail(UI.nthChild(thumbnails.children, this.slide.current));
-      this.#slideChanged();
-    });
-    UI.addEvent(prev, "click", () => {
-      if (--this.slide.current < 0) {
-        if (circular) this.slide.current = this.slide.total - 1;
-        else {
-          ++this.slide.current;
-          return;
-        }
-      }
-      this.#selectThumbnail(UI.nthChild(thumbnails.children, this.slide.current));
-      this.#slideChanged();
-    });
+    UI.addEvent(next, "click", () => onSlideChange(true));
+    UI.addEvent(prev, "click", () => onSlideChange(false));
     UI.forEach(thumbnails.children, (e, i) => {
       UI.addEvent(e, "click", () => {
         this.#selectThumbnail(e);
