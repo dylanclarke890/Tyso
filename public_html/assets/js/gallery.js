@@ -99,6 +99,12 @@ class UI {
   };
 }
 
+/*
+ * 1. CENTER THUMBNAILS
+ * 2. IMAGE WIDTHS VIA SETTINGS
+ * 3. SCALE IMAGES
+ */
+
 class ParallaxSlide {
   constructor({ mainSrc, thumbnailSrc } = {}) {
     this.mainSrc = mainSrc;
