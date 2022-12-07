@@ -100,9 +100,9 @@ class UI {
 }
 
 class ParallaxSlide {
-  constructor({ mainSrc, thumbnailSrc } = {}) {
-    this.mainSrc = mainSrc;
-    this.thumbnailSrc = thumbnailSrc ?? mainSrc;
+  constructor({ slideSrc, thumbnailSrc } = {}) {
+    this.slideSrc = slideSrc;
+    this.thumbnailSrc = thumbnailSrc ?? slideSrc;
   }
 }
 
@@ -159,7 +159,7 @@ class ParallaxBuilder {
     };
 
     for (let i = 0; i < slides.length; i++) {
-      this.mainImages.push(this.#getLoadingImage(slides[i].mainSrc, cb));
+      this.mainImages.push(this.#getLoadingImage(slides[i].slideSrc, cb));
       this.thumbnails.push(this.#getLoadingImage(slides[i].thumbnailSrc, cb));
     }
   }
@@ -481,7 +481,7 @@ function onReady() {
   };
 
   for (let i = 1; i < 22; i++)
-    builderSettings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
+    builderSettings.slides.push(new ParallaxSlide({ slideSrc: `assets/images/gallery/${i}.jpg` }));
 
   new ParallaxGallery(parallaxSettings, builderSettings);
 }
