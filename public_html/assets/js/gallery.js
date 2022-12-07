@@ -106,28 +106,25 @@ class ParallaxSlide {
   }
 }
 
+const DOMElementRefs = {
+  container: ".pxs_container",
+  slider: ".pxs_slider",
+  sliderWrapper: ".pxs_slider_wrapper",
+  thumbnails: ".pxs_thumbnails",
+  prev: ".pxs_prev",
+  next: ".pxs_next",
+  bg: ".pxs_bg",
+  loading: ".pxs_loading",
+  pause: ".pxs_pause",
+  play: ".pxs_play",
+};
+
 class ParallaxBuilder {
   #defaults = {
-    DOMElementRefs: {
-      container: ".pxs_container",
-      slider: ".pxs_slider",
-      sliderWrapper: ".pxs_slider_wrapper",
-      thumbnails: ".pxs_thumbnails",
-      bg: ".pxs_bg",
-      loading: ".pxs_loading",
-      prev: ".pxs_prev",
-      next: ".pxs_next",
-      pause: ".pxs_pause",
-      play: ".pxs_play",
-    },
-    slides: [],
-    scaleImages: true,
-    slideWidth: 400,
-    slideHeight: 400,
-    thumbnailWidth: 50,
-    thumbnailHeight: 50,
     bgLayers: 3,
+    DOMElementRefs,
     onComplete: () => null,
+    slides: [],
   };
 
   constructor(options = {}) {
@@ -138,12 +135,12 @@ class ParallaxBuilder {
 
   #loadingScreen() {
     const loadingDiv = document.createElement("div");
-    loadingDiv.className = UI.getFromDOMQuery(this.opts.DOMElementRefs.loading, "class");
+    loadingDiv.className = UI.getFromDOMQuery(this.opts.DOMElementRefs.loading);
     loadingDiv.innerHTML = "Loading images...";
     document.body.prepend(loadingDiv);
   }
 
-  #loadImage(src, cb) {
+  #getLoadingImage(src, cb) {
     const image = new Image();
     UI.addEvent(image, "load", cb);
     image.src = src;
@@ -162,8 +159,8 @@ class ParallaxBuilder {
     };
 
     for (let i = 0; i < slides.length; i++) {
-      this.mainImages.push(this.#loadImage(slides[i].mainSrc, cb));
-      this.thumbnails.push(this.#loadImage(slides[i].thumbnailSrc, cb));
+      this.mainImages.push(this.#getLoadingImage(slides[i].mainSrc, cb));
+      this.thumbnails.push(this.#getLoadingImage(slides[i].thumbnailSrc, cb));
     }
   }
 
@@ -212,30 +209,20 @@ class ParallaxBuilder {
 
 class ParallaxGallery {
   #defaults = {
-    buildSlides: true,
-    DOMElementRefs: {
-      container: ".pxs_container",
-      slider: ".pxs_slider",
-      sliderWrapper: ".pxs_slider_wrapper",
-      thumbnails: ".pxs_thumbnails",
-      prev: ".pxs_prev",
-      next: ".pxs_next",
-      bg: ".pxs_bg",
-      loading: ".pxs_loading",
-      pause: ".pxs_pause",
-      play: ".pxs_play",
-    },
     addKeyboardEvents: true,
-    autoplay: true,
+    autoplay: false,
     autoplayIntervalSec: 2,
+    buildSlides: true,
     circular: true,
-    speed: 850, // ms
-    overlapInPixels: 0,
+    DOMElementRefs,
+    effects: {
+      bg: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
+      slide: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
+    },
     fitWithinScreen: true,
+    overlapInPixels: 0,
+    speed: 1000, // ms
     thumbRotation: false,
-    effect: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
-    bgEffect: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
-    imageWidth: 400, // in px
   };
 
   #getContainer() {
@@ -319,18 +306,18 @@ class ParallaxGallery {
   }
 
   #slideChanged() {
-    const { speed, effect, bgEffect } = this.opts;
+    const { speed, effects } = this.opts;
     const { slider, bg } = this.elements;
 
     const offset = -window.innerWidth * this.slide.current;
     if (!slider.style.left) UI.addStyles(slider, { left: "0px" });
-    UI.animate(slider, [{ left: `${offset}px` }], speed, effect);
+    UI.animate(slider, [{ left: `${offset}px` }], speed, effects.slide);
 
     const bgLen = bg.children.length;
     UI.forEach(bg.children, (e, i) => {
       const to = offset / Math.pow(2, bgLen - i);
       if (!e.style.left) UI.addStyles(e, { left: "0px" });
-      UI.animate(e, [{ left: `${to}px` }], speed, bgEffect);
+      UI.animate(e, [{ left: `${to}px` }], speed, effects.bg);
     });
   }
 
@@ -419,10 +406,9 @@ class ParallaxGallery {
 
   #setup() {
     const { loading, sliderWrapper, thumbnails } = this.elements;
-    const { imageWidth, fitWithinScreen, thumbRotation } = this.opts;
+    const { fitWithinScreen, thumbRotation } = this.opts;
 
     this.#setWidths();
-    UI.addStyles(thumbnails, { width: imageWidth });
 
     let currentOffset = 0;
     if (fitWithinScreen) {
@@ -468,7 +454,6 @@ class ParallaxGallery {
 }
 
 function onReady() {
-  //#region TIMED CODE
   const settings = {
     buildSlides: true,
     slides: [],
@@ -477,9 +462,6 @@ function onReady() {
     settings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
 
   new ParallaxGallery(settings);
-  //#endregion END OF TIMED CODE
-
-  // console.log(after - now);
 }
 
 document.addEventListener("DOMContentLoaded", onReady);
