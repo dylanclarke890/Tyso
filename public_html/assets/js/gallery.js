@@ -273,7 +273,7 @@ class ParallaxGallery {
     }
   }
 
-  constructor(options = {}) {
+  constructor(options = {}, builderOptions = {}) {
     this.opts = Object.assign({}, this.#defaults, options);
     const setup = () => {
       this.#getContainer();
@@ -281,7 +281,7 @@ class ParallaxGallery {
       this.slide = { current: 0, total: this.elements.slider.children.length };
       this.#preloadImages();
     };
-    if (this.opts.buildSlides) new ParallaxBuilder({ slides: options.slides, onComplete: setup });
+    if (this.opts.buildSlides) new ParallaxBuilder({ ...builderOptions, onComplete: setup });
     else setup();
   }
 
@@ -454,14 +454,18 @@ class ParallaxGallery {
 }
 
 function onReady() {
-  const settings = {
+  const parallaxSettings = {
     buildSlides: true,
+  };
+
+  const builderSettings = {
     slides: [],
   };
-  for (let i = 1; i < 22; i++)
-    settings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
 
-  new ParallaxGallery(settings);
+  for (let i = 1; i < 22; i++)
+    builderSettings.slides.push(new ParallaxSlide({ mainSrc: `assets/images/gallery/${i}.jpg` }));
+
+  new ParallaxGallery(parallaxSettings, builderSettings);
 }
 
 document.addEventListener("DOMContentLoaded", onReady);
