@@ -260,8 +260,8 @@ class ParallaxSlider {
     autoplay: 0,
     circular: true,
     speed: 850, // ms
-    overlapInPixels: 7,
-    centerThumbnails: true,
+    overlapInPixels: 0,
+    fitWithinScreen: true,
     thumbRotation: false,
     effect: "ease-out",
     bgEffect: "ease-out",
@@ -406,18 +406,25 @@ class ParallaxSlider {
 
   #setup() {
     const { loading, sliderWrapper, thumbnails } = this.elements;
-    const { imageWidth, overlapInPixels, centerThumbnails, thumbRotation } = this.opts;
+    const { imageWidth, fitWithinScreen, thumbRotation } = this.opts;
 
     this.#setWidths();
     UI.addStyles(thumbnails, { width: imageWidth });
 
     let currentOffset = 0;
-    if (centerThumbnails) {
-      let totalOffset = 0;
-      UI.forEach(thumbnails.children, (tn, i) => {
-        totalOffset += tn.offsetWidth;
-      });
+    if (fitWithinScreen) {
+      const totalOffset = UI.reduce(
+        thumbnails.children,
+        (prev, curr) => prev + curr.offsetWidth,
+        0
+      );
+      const totalSlides = thumbnails.children.length;
+      let offsetPerSlide = (totalOffset - window.innerWidth) / totalSlides;
+      // accounting for skipping the offset for the first item.
+      offsetPerSlide += offsetPerSlide / totalSlides;
+      this.opts.overlapInPixels = offsetPerSlide;
     }
+    const { overlapInPixels } = this.opts;
     UI.forEach(thumbnails.children, (tn, i) => {
       if (overlapInPixels && i > 0) currentOffset -= overlapInPixels;
       UI.addStyles(tn, { left: `${currentOffset}px` });
