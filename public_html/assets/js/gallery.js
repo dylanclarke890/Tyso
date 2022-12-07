@@ -125,6 +125,8 @@ class ParallaxBuilder {
     DOMElementRefs,
     onComplete: () => null,
     slides: [],
+    slideHeight: 550,
+    thumbnailHeight: 110,
   };
 
   constructor(options = {}) {
@@ -164,8 +166,10 @@ class ParallaxBuilder {
     }
   }
 
+  #buildImage = (src, height) => `<li><img style='height: ${height}px;' src=${src} /></li>`;
+
   #buildHTML() {
-    const { DOMElementRefs, bgLayers, onComplete } = this.opts;
+    const { DOMElementRefs, bgLayers, onComplete, slideHeight, thumbnailHeight } = this.opts;
     const { container, slider, sliderWrapper, thumbnails, prev, next, bg, pause, play } =
       DOMElementRefs;
 
@@ -181,14 +185,10 @@ class ParallaxBuilder {
       </div>
       <div class="${UI.getFromDOMQuery(sliderWrapper)}">
         <ul class="${UI.getFromDOMQuery(slider)}">
-          ${this.mainImages
-            .map((v) => `<li><img style='height: 550px;' src=${v.src} /></li>`)
-            .join("")}
+          ${this.mainImages.map((v) => this.#buildImage(v.src, slideHeight)).join("")}
         </ul>
         <ul class="${UI.getFromDOMQuery(thumbnails)}">
-          ${this.thumbnails
-            .map((v) => `<li><img style='height: 110px;' src=${v.src} /></li>`)
-            .join("")}
+          ${this.thumbnails.map((v) => this.#buildImage(v.src, thumbnailHeight)).join("")}
         </ul>
         <button class="${UI.getFromDOMQuery(next)}"></button>
         <button class="${UI.getFromDOMQuery(prev)}"></button>
@@ -221,7 +221,7 @@ class ParallaxGallery {
     },
     fitWithinScreen: true,
     centerThumbnails: true,
-    overlapInPixels: 5,
+    overlapInPixels: 0,
     speed: 1000, // ms
     thumbRotation: false,
   };
