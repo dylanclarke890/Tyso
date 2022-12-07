@@ -174,26 +174,4 @@ ul.pxs_slider li img {
   width: 180px;
 }
 
-/* END SLIDER STYLE */
-
-@media only screen and (max-device-width: 600px) {
-  .pxs_navigation span.pxs_prev {
-    margin-left: 100px;
-  }
-
-  .pxs_navigation span.pxs_next {
-    margin-right: 70px;
-  }
-
-  ul.pxs_thumbnails {
-    display: none !important;
-  }
-
-  ul.pxs_thumbnails li {
-    display: none !important;
-  }
-
-  ul.pxs_thumbnails li img {
-    display: none !important;
-  }
-}
+/* END SLIDER STYLE *

@@ -98,7 +98,7 @@ ul.pxs_thumbnails li.selected img {
 .pxs_play,
 .pxs_pause {
   position: absolute;
-  left: calc(50% - 25px);;
+  left: calc(50% - 25px);
   bottom: 50%;
   border-radius: 4px;
   cursor: pointer;
