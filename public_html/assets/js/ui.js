@@ -120,7 +120,7 @@ const DOMElementRefs = {
 };
 
 class ParallaxBuilder {
-  #defaults = {
+  static #defaults = {
     bgLayers: 3,
     DOMElementRefs,
     onComplete: () => null,
@@ -130,7 +130,7 @@ class ParallaxBuilder {
   };
 
   constructor(options = {}) {
-    this.opts = Object.assign({}, this.#defaults, options);
+    this.opts = Object.assign({}, ParallaxBuilder.#defaults, options);
     this.#loadingScreen();
     this.#loadImages();
   }
@@ -206,7 +206,7 @@ class ParallaxBuilder {
 }
 
 class ParallaxGallery {
-  #defaults = {
+  static #defaults = {
     addKeyboardEvents: true,
     autoplay: false,
     autoplayIntervalSec: 2,
@@ -273,7 +273,7 @@ class ParallaxGallery {
   }
 
   constructor(options = {}, builderOptions = {}) {
-    this.opts = Object.assign({}, this.#defaults, options);
+    this.opts = Object.assign({}, ParallaxGallery.#defaults, options);
     const setup = () => {
       this.#getContainer();
       this.#getElements();
@@ -464,5 +464,49 @@ class ParallaxGallery {
 
     UI.hide(loading);
     UI.show(sliderWrapper);
+  }
+}
+
+class Modal {
+  static #defaults = {};
+
+  constructor(options = {}) {
+    this.opts = Object.assign({}, Modal.#defaults, options);
+    this.#build();
+  }
+
+  #build() {
+    this.html = `
+      <div class="container">
+        <button data-modal="modal-one">Open Modal</button>
+      </div>
+
+      <div class="modal" id="modal-one">
+        <div class="modal-bg modal-exit"></div>
+        <div class="modal-container">
+          <h1>Test Content</h1>
+          <button class="modal-close modal-exit">X</button>
+        </div>
+      </div>
+    `;
+  }
+
+  addEvents() {
+    const openModalButtons = document.querySelectorAll("[data-modal]");
+
+    openModalButtons.forEach(function (btn) {
+      btn.addEventListener("click", function (event) {
+        event.preventDefault();
+        const modal = document.getElementById(btn.dataset.modal);
+        modal.classList.add("open");
+        const exits = modal.querySelectorAll(".modal-exit");
+        exits.forEach(function (exit) {
+          exit.addEventListener("click", function (event) {
+            event.preventDefault();
+            modal.classList.remove("open");
+          });
+        });
+      });
+    });
   }
 }
