@@ -493,16 +493,17 @@ class Modal {
 
   addEvents() {
     const openModalButtons = document.querySelectorAll("[data-modal]");
+    openModalButtons.forEach((btn) => {
+      UI.addEvent(btn, "click", (e) => {
+        e.preventDefault();
 
-    openModalButtons.forEach(function (btn) {
-      btn.addEventListener("click", function (event) {
-        event.preventDefault();
-        const modal = document.getElementById(btn.dataset.modal);
+        const modal = document.getElementById(btn.getAttribute("data-modal"));
         modal.classList.add("open");
-        const exits = modal.querySelectorAll(".modal-exit");
-        exits.forEach(function (exit) {
-          exit.addEventListener("click", function (event) {
-            event.preventDefault();
+
+        const closeModalButtons = modal.querySelectorAll(".modal-exit");
+        closeModalButtons.forEach((btn) => {
+          UI.addEvent(btn, "click", (e) => {
+            e.preventDefault();
             modal.classList.remove("open");
           });
         });
