@@ -21,30 +21,18 @@ function addEvents() {
     );
   })(document, "script", "twitter-wjs");
 
-  var addthis_share = addthis_share || {};
+  const addthis_share = addthis_share || {};
   addthis_share = {
     passthrough: {
       twitter: { via: "anthonykamanos #TYSO #yoga" },
     },
   };
 
-  function onResize() {
+  UI.addEvent(window, "resize", () => {
     const width = window.innerWidth;
     const emailButt = document.getElementById("emailButt");
     if (width <= 480) emailButt.classList.remove("addthis_inline_follow_toolbox");
-  }
-
-  UI;
-
-  $(window)
-    .resize(function () {
-      console.log("resize called");
-      var width = $(window).width();
-      if (width <= 480) {
-        $("#emailbutt").removeClass("addthis_inline_follow_toolbox");
-      }
-    })
-    .resize(); //trigger the resize event on page load.
+  });
 
   $("#vidModal").on("hidden.bs.modal", function (e) {
     $("#vidModal video").attr("src", $("#vidModal video").attr("src"));
