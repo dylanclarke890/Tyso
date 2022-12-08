@@ -15,6 +15,11 @@
         align-items: center;
         justify-content: center;
       }
+
+      #intro-video {
+        width: 100%;
+        height: auto;
+      }
     </style>
   </head>
   <body>
@@ -23,7 +28,9 @@
     </div>
     <div data-modal="video-modal">
       <div class="modal-content">
-        <video id="intro-video" src="assets/videos/tyso-vid-2.mp4" controls allowfullscreen></video>
+        <div class="modal-header">
+          <video id="intro-video" src="assets/videos/tyso-vid-2.mp4" controls allowfullscreen></video>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary modal-exit">Close</button>
@@ -32,15 +39,16 @@
     </div>
     <script src="assets/js/ui.js"></script>
     <script type="text/javascript">
-      const modal = new Modal({
-        container: document.body,
-        id: "video-modal",
-        closeButton: true,
-        dismissOnExternalClick: true,
-        openOnCreation: false,
-        onOpen: () => console.log("OPENED"),
-        onClose: () => console.log("CLOSED"),
-      });
+      const modals = [];
+      document.querySelectorAll("[data-modal]").forEach((modal) =>
+        modals.push(
+          new Modal({
+            id: modal.getAttribute("data-modal"),
+            onOpen: () => console.log(`OPENED: ${modal.getAttribute("data-modal")}`),
+            onClose: () => console.log(`CLOSED: ${modal.getAttribute("data-modal")}`),
+          })
+        )
+      );
     </script>
   </body>
 </html>

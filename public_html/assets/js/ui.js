@@ -4,7 +4,7 @@ class UI {
     Array.from({ length: 10 }, () => this.#chars[Math.floor(Math.random() * 52)]).join("");
 
   static getHTML = (/** @type {HTMLElement} */ element) => {
-    if (!element) return "";
+    if (!element || !(element instanceof HTMLElement)) return "";
     const container = document.createElement("div");
     container.append(element);
     return container.innerHTML;
@@ -483,9 +483,9 @@ class Modal {
   static #defaults = {
     container: document.body,
     id: "modal1",
-    closeButton: true,
+    closeButton: false,
     dismissOnExternalClick: true,
-    openOnCreation: true,
+    openOnCreation: false,
     onOpen: () => null,
     onClose: () => null,
   };
