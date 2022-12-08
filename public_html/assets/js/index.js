@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", addEvents);
-
 function addEvents() {
   window.twttr = (function (d, s, id) {
     var t,
@@ -20,9 +18,7 @@ function addEvents() {
       })
     );
   })(document, "script", "twitter-wjs");
-
-  const addthis_share = addthis_share || {};
-  addthis_share = {
+  const addthis_share = addthis_share || {
     passthrough: {
       twitter: { via: "anthonykamanos #TYSO #yoga" },
     },
@@ -30,8 +26,8 @@ function addEvents() {
 
   UI.addEvent(window, "resize", () => {
     const width = window.innerWidth;
-    const emailButt = document.getElementById("emailButt");
-    if (width <= 480) emailButt.classList.remove("addthis_inline_follow_toolbox");
+    if (width <= 480)
+      document.getElementById("emailButt").classList.remove("addthis_inline_follow_toolbox");
   });
 
   $("#vidModal").on("hidden.bs.modal", function (e) {
@@ -48,3 +44,5 @@ function addEvents() {
     addthis.toolbox(".addthis_toolbox");
   });
 }
+
+document.addEventListener("DOMContentLoaded", addEvents);
