@@ -18,11 +18,6 @@ function addEvents() {
       })
     );
   })(document, "script", "twitter-wjs");
-  const addthis_share = addthis_share || {
-    passthrough: {
-      twitter: { via: "anthonykamanos #TYSO #yoga" },
-    },
-  };
 
   UI.addEvent(window, "resize", () => {
     const width = window.innerWidth;
