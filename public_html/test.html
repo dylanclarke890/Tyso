@@ -10,34 +10,18 @@
   </head>
   <body>
     <div class="container">
-      <button data-modal="modal-one">Open Modal</button>
-    </div>
-
-    <div class="modal" id="modal-one">
-      <div class="modal-bg modal-exit"></div>
-      <div class="modal-container">
-        <h1>Test Content</h1>
-        <button class="modal-close modal-exit">X</button>
-      </div>
+      <button data-modal="modal1">Open Modal</button>
     </div>
     <script src="assets/js/ui.js"></script>
-    <script>
-      const openModalButtons = document.querySelectorAll("[data-modal]");
-      openModalButtons.forEach((btn) => {
-        UI.addEvent(btn, "click", (e) => {
-          e.preventDefault();
-
-          const modal = document.getElementById(btn.getAttribute("data-modal"));
-          modal.classList.add("open");
-
-          const closeModalButtons = modal.querySelectorAll(".modal-exit");
-          closeModalButtons.forEach((btn) => {
-            UI.addEvent(btn, "click", (e) => {
-              e.preventDefault();
-              modal.classList.remove("open");
-            });
-          });
-        });
+    <script type="text/javascript">
+      const modal = new Modal({
+        container: document.body,
+        id: "modal1",
+        closeButton: true,
+        dismissOnExternalClick: true,
+        openOnCreation: false,
+        onOpen: () => console.log("OPENED"),
+        onClose: () => console.log("CLOSED"),
       });
     </script>
   </body>

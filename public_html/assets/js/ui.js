@@ -468,46 +468,89 @@ class ParallaxGallery {
 }
 
 class Modal {
-  static #defaults = {};
+  static #defaults = {
+    container: document.body,
+    id: "modal1",
+    closeButton: true,
+    dismissOnExternalClick: true,
+    openOnCreation: true,
+    onOpen: () => null,
+    onClose: () => null,
+  };
 
   constructor(options = {}) {
     this.opts = Object.assign({}, Modal.#defaults, options);
     this.#build();
+    this.#append();
+    this.#getElements();
+    this.#addEvents();
+    if (this.opts.openOnCreation) this.open();
   }
 
   #build() {
-    this.html = `
-      <div class="container">
-        <button data-modal="modal-one">Open Modal</button>
-      </div>
+    const { closeButton, dismissOnExternalClick } = this.opts;
 
-      <div class="modal" id="modal-one">
-        <div class="modal-bg modal-exit"></div>
-        <div class="modal-container">
-          <h1>Test Content</h1>
-          <button class="modal-close modal-exit">X</button>
-        </div>
+    this.html = `
+      <div class="modal-bg ${dismissOnExternalClick ? "modal-exit" : ""}"></div>
+      <div class="modal-container">
+        <h1>Test Content</h1>
+        ${closeButton ? `<button class="modal-close modal-exit">X</button>` : ""}
       </div>
     `;
   }
 
-  addEvents() {
-    const openModalButtons = document.querySelectorAll("[data-modal]");
+  #append() {
+    let { container, id } = this.opts;
+    if (!container || !(container instanceof HTMLElement)) container = document.body;
+
+    const modal = document.createElement("div");
+    modal.className = "modal";
+    modal.id = id;
+    modal.innerHTML = this.html;
+
+    container.prepend(modal);
+  }
+
+  #getElements() {
+    const { id } = this.opts;
+
+    const modal = document.getElementById(id);
+    this.elements = {
+      modal,
+      openModalButtons: document.querySelectorAll(`[data-modal=${id}]`),
+      closeModalButtons: modal.querySelectorAll(".modal-exit"),
+    };
+  }
+
+  #addEvents() {
+    const { openModalButtons, closeModalButtons } = this.elements;
+
     openModalButtons.forEach((btn) => {
       UI.addEvent(btn, "click", (e) => {
         e.preventDefault();
-
-        const modal = document.getElementById(btn.getAttribute("data-modal"));
-        modal.classList.add("open");
-
-        const closeModalButtons = modal.querySelectorAll(".modal-exit");
-        closeModalButtons.forEach((btn) => {
-          UI.addEvent(btn, "click", (e) => {
-            e.preventDefault();
-            modal.classList.remove("open");
-          });
-        });
+        this.open();
       });
     });
+
+    closeModalButtons.forEach((btn) => {
+      UI.addEvent(btn, "click", (e) => {
+        e.preventDefault();
+        this.close();
+      });
+    });
+  }
+
+  open() {
+    const { onOpen } = this.opts;
+    const { modal } = this.elements;
+    modal.classList.add("open");
+    onOpen();
+  }
+
+  close() {
+    const { onClose } = this.opts;
+    const { modal } = this.elements;
+    modal.classList.remove("open");
+    onClose();
   }
 }
