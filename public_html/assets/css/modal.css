@@ -6,7 +6,7 @@ a {
 .modal {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 125vh;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -15,7 +15,10 @@ a {
 .modal.open {
   visibility: visible;
   opacity: 1;
-  transition-delay: 0s;
+}
+
+.modal:not(.open) {
+  transform: translate(0, -25%);
 }
 
 .modal-bg {
