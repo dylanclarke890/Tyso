@@ -3,6 +3,13 @@ class UI {
   static uniqueId = () =>
     Array.from({ length: 10 }, () => this.#chars[Math.floor(Math.random() * 52)]).join("");
 
+  static getHTML = (/** @type {HTMLElement} */ element) => {
+    if (!element) return "";
+    const container = document.createElement("div");
+    container.append(element);
+    return container.innerHTML;
+  };
+
   static hide = (/** @type {HTMLElement} */ element) => {
     if (element) element.style.display = "none";
   };
@@ -96,6 +103,11 @@ class UI {
     canvas.width = width;
     canvas.height = height;
     return canvas.getContext(context);
+  };
+
+  static removeFromDOM = (/** @type {HTMLElement} */ element) => {
+    if (!element) return;
+    element.parentElement.removeChild(element);
   };
 }
 
@@ -488,12 +500,14 @@ class Modal {
   }
 
   #build() {
-    const { closeButton, dismissOnExternalClick } = this.opts;
+    const { id, closeButton, dismissOnExternalClick } = this.opts;
+    const content = document.querySelector(`[data-modal=${id}]`);
+    if (content) UI.removeFromDOM(content);
 
     this.html = `
       <div class="modal-bg ${dismissOnExternalClick ? "modal-exit" : ""}"></div>
       <div class="modal-container">
-        <h1>Test Content</h1>
+        ${UI.getHTML(content)}
         ${closeButton ? `<button class="modal-close modal-exit">X</button>` : ""}
       </div>
     `;
@@ -517,7 +531,7 @@ class Modal {
     const modal = document.getElementById(id);
     this.elements = {
       modal,
-      openModalButtons: document.querySelectorAll(`[data-modal=${id}]`),
+      openModalButtons: document.querySelectorAll(`[data-modal-open=${id}]`),
       closeModalButtons: modal.querySelectorAll(".modal-exit"),
     };
   }

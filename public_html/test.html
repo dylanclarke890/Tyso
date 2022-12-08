@@ -7,16 +7,34 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/modal.css" />
     <title>Modal Testing</title>
+    <style>
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <button data-modal="modal1">Open Modal</button>
+      <button class="btn btn-primary" data-modal-open="video-modal">Open Modal</button>
+    </div>
+    <div data-modal="video-modal">
+      <div class="modal-content">
+        <video id="intro-video" src="assets/videos/tyso-vid-2.mp4" controls allowfullscreen></video>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-exit">Close</button>
+        <a href="videos.html" class="btn btn-primary" role="button" target="_blank">Watch More</a>
+      </div>
     </div>
     <script src="assets/js/ui.js"></script>
     <script type="text/javascript">
       const modal = new Modal({
         container: document.body,
-        id: "modal1",
+        id: "video-modal",
         closeButton: true,
         dismissOnExternalClick: true,
         openOnCreation: false,
