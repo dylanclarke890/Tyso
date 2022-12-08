@@ -192,10 +192,8 @@ class ParallaxBuilder {
         </ul>
         <button class="${UI.getFromDOMQuery(next)}"></button>
         <button class="${UI.getFromDOMQuery(prev)}"></button>
-        <div>
-          <button class="${UI.getFromDOMQuery(pause)}" style='display:none;' ></button>
-          <button class="${UI.getFromDOMQuery(play)}"></button>
-        </div>
+        <button class="${UI.getFromDOMQuery(pause)}" style='display:none;' ></button>
+        <button class="${UI.getFromDOMQuery(play)}"></button>
       </div>
     `;
 
@@ -213,6 +211,7 @@ class ParallaxGallery {
     autoplay: false,
     autoplayIntervalSec: 2,
     buildSlides: true,
+    centerThumbnails: true,
     circular: true,
     DOMElementRefs,
     effects: {
@@ -220,12 +219,10 @@ class ParallaxGallery {
       slide: "cubic-bezier(0.66, 0.29, 0.31, 0.95)",
     },
     fitWithinScreen: true,
-    centerThumbnails: true,
     overlapInPixels: 0,
     speed: 1000, // ms
     thumbRotation: false,
   };
-  #initialising = true;
 
   #getContainer() {
     const c = this.opts.container;
@@ -285,7 +282,6 @@ class ParallaxGallery {
     };
     if (this.opts.buildSlides) new ParallaxBuilder({ ...builderOptions, onComplete: setup });
     else setup();
-    this.#initialising = false;
   }
 
   #setWidths() {
@@ -338,7 +334,7 @@ class ParallaxGallery {
       UI.addStyles(tn, { left: `${currentOffset}px` });
       currentOffset += tn.offsetWidth;
 
-      if (this.#initialising && thumbRotation) {
+      if (thumbRotation) {
         const style = `rotate(${Math.floor(Math.random() * 41) - 20}deg)`;
         UI.addStyles(tn, {
           "-moz-transform": style,
@@ -480,8 +476,17 @@ function onReady() {
     slides: [],
   };
 
+  // for (let i = 1; i <= 10; i++)
+  //   builderSettings.slides.push(new ParallaxSlide({ slideSrc: `assets/images/gallery/winter/${i}.jpg` }));
   for (let i = 1; i < 22; i++)
     builderSettings.slides.push(new ParallaxSlide({ slideSrc: `assets/images/gallery/${i}.jpg` }));
+
+  // builderSettings.slides.push(
+  //   ...[
+  //     new ParallaxSlide({ slideSrc: `url-to-rss-here` }),
+  //     new ParallaxSlide({ slideSrc: `another-url-to-rss-here` }),
+  //   ]
+  // );
 
   new ParallaxGallery(parallaxSettings, builderSettings);
 }
