@@ -28,6 +28,14 @@ function addEvents() {
     },
   };
 
+  function onResize() {
+    const width = window.innerWidth;
+    const emailButt = document.getElementById("emailButt");
+    if (width <= 480) emailButt.classList.remove("addthis_inline_follow_toolbox");
+  }
+
+  UI;
+
   $(window)
     .resize(function () {
       console.log("resize called");
