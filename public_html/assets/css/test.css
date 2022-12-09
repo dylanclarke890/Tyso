@@ -1,3 +1,5 @@
+/* #region GENERAL */
+
 html {
   min-height: 100%;
 }
@@ -15,6 +17,10 @@ img {
   height: auto;
   border-style: none;
 }
+
+/* #endregion GENERAL */
+
+/* #region NAVBAR */
 
 #navbar-main {
   background: rgba(255, 255, 255, 0.6);
@@ -43,7 +49,9 @@ img {
   outline-width: 0;
 }
 
-/* INTRO */
+/* #endregion NAVBAR */
+
+/* #region INTRO */
 
 #intro {
   color: white;
@@ -73,7 +81,9 @@ img {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* END INTRO */
+/* #endregion INTRO */
+
+/* #region SOCHERRY */
 
 #sclogodiv {
   position: relative;
@@ -89,3 +99,4 @@ img {
   font-weight: bold;
   font-family: "Dancing Script", cursive;
 }
+/* #endregion SOCHERRY */
