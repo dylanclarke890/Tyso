@@ -86,27 +86,61 @@
     </div>
     <script src="assets/js/ui.js"></script>
     <script type="text/javascript">
-      const videoModal = document.querySelector('[data-modal="video-modal"]');
-      const videoModalSettings = {
-        id: "video-modal",
-        onOpen: () => {
-          const vid = document.getElementById("intro-video");
-          vid.volume = 0.2;
-          vid.play();
-        },
-        onClose: () => {
-          const vid = document.getElementById("intro-video");
-          vid.pause();
-          vid.currentTime = 0;
-        },
-      };
-      const classModal = document.querySelector('[data-modal="class-modal"]');
-      const classModalSettings = {
-        id: "class-modal",
-        closeButton: true,
-      };
+      function onReady() {
+        window.twttr = (function (d, s, id) {
+          var t,
+            js,
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+          return (
+            window.twttr ||
+            (t = {
+              _e: [],
+              ready: function (f) {
+                t._e.push(f);
+              },
+            })
+          );
+        })(document, "script", "twitter-wjs");
 
-      const modals = [new Modal(classModalSettings), new Modal(videoModalSettings)];
+        const videoModal = document.querySelector('[data-modal="video-modal"]');
+        const videoModalSettings = {
+          id: "video-modal",
+          onOpen: () => {
+            const vid = document.getElementById("intro-video");
+            vid.volume = 0.2;
+            vid.play();
+          },
+          onClose: () => {
+            const vid = document.getElementById("intro-video");
+            vid.pause();
+            vid.currentTime = 0;
+          },
+        };
+        const classModal = document.querySelector('[data-modal="class-modal"]');
+        const classModalSettings = {
+          id: "class-modal",
+          closeButton: true,
+        };
+
+        const cm = new Modal(classModalSettings), vm =  new Modal(videoModalSettings);
+
+        UI.addEvent(window, "resize", () => {
+          const width = window.innerWidth;
+          if (width <= 480)
+            document.getElementById("emailButt").classList.remove("addthis_inline_follow_toolbox");
+        });
+
+        UI.addEvent(document.querySelector("a[href='videos.html']"), "click", () => {
+          vm.close();
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", onReady);
     </script>
   </body>
 </html>
