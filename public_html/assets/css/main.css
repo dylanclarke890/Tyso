@@ -113,6 +113,17 @@ h6 {
   text-decoration: none;
 }
 
+.card-group {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.card-group .card {
+    display: table-cell;
+    vertical-align: top;
+}
+
 /* END GENERAL */
 
 /* NAVBAR */

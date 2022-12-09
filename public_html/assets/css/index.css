@@ -1,254 +1,253 @@
-@media (min-width: 700px) {
-  html {
-    min-height: 100%;
-  }
+html {
+  min-height: 100%;
+}
 
-  body {
-    background: url(../images/home-bg.png);
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
+body {
+  background: url(../images/home-bg.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
 
-  .container {
-    margin-top: 12px;
-    position: relative;
-    width: 100%;
-  }
+.container {
+  margin-top: 12px;
+  position: relative;
+  width: 100%;
+}
 
-  nav {
-    font-family: "Oswald", sans-serif;
-    font-size: 28px;
-    letter-spacing: 1px;
-    word-spacing: 1px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.6);
-  }
+nav {
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+}
 
-  .navbar-nav {
-    position: relative;
-    top: 14px;
-  }
+.navbar-nav {
+  position: relative;
+  top: 14px;
+}
 
-  nav a {
-    color: #054516;
-    text-shadow: 1px 1px black;
-  }
+nav a {
+  color: #054516;
+  text-shadow: 1px 1px black;
+}
 
-  .navbar-nav > li {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
+.navbar-nav > li {
+  padding-left: 8px;
+  padding-right: 8px;
+}
 
-  #vidIntro {
-    width: 100%;
-    height: auto;
-  }
+#vidIntro {
+  width: 100%;
+  height: auto;
+}
 
-  .modal-backdrop {
-    background-image: url(../images/rain.gif);
-    background-size: cover;
-  }
+.modal-bg {
+  background-image: url(../images/rain.gif);
+  background-size: cover;
+  background-color: transparent;
+}
 
-  .fuckoff {
-    background: rgba(94, 175, 5, 0.9);
-  }
+.fuckoff {
+  background: rgba(94, 175, 5, 0.9);
+}
 
-  .eatit {
-    background: rgba(67, 250, 245, 0.9);
-  }
+.eatit {
+  background: rgba(67, 250, 245, 0.9);
+}
 
-  .modal-transparent {
-    background: transparent;
-  }
+.modal-transparent {
+  background: transparent;
+}
 
-  .modal-transparent .modal-content {
-    background: transparent;
-  }
+.modal-transparent .modal-content {
+  background: transparent;
+}
 
-  .modImage {
-    width: 100%;
-    height: auto;
-  }
+.modImage {
+  width: 100%;
+  height: auto;
+}
 
-  .fuckoff {
-    padding-bottom: 21px;
-    height: 100%;
-  }
+.fuckoff {
+  padding-bottom: 21px;
+  height: 100%;
+}
 
-  .card-block {
-    text-align: center;
-    font-family: "Oswald", sans-serif;
-    height: 100% !important;
-  }
+.card-block {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  height: 100% !important;
+}
 
-  .card-footer {
-    text-align: center;
-  }
+.card-footer {
+  text-align: center;
+}
 
-  .butt {
-    background: rgba(94, 175, 5, 0.9);
-  }
+.butt {
+  background: rgba(94, 175, 5, 0.9);
+}
 
-  .ass {
-    background: rgba(67, 250, 245, 0.9);
-  }
+.ass {
+  background: rgba(67, 250, 245, 0.9);
+}
 
-  .break {
-    clear: both;
-  }
+.break {
+  clear: both;
+}
 
-  .testiTitle {
-    color: #5cb85c;
-    text-decoration: underline;
-    font-family: "Indie Flower", cursive;
-    font-size: 30px;
-    font-weight: bold;
-  }
+.testiTitle {
+  color: #5cb85c;
+  text-decoration: underline;
+  font-family: "Indie Flower", cursive;
+  font-size: 30px;
+  font-weight: bold;
+}
 
-  .testiFormat {
-    position: relative;
-    left: 14%;
-  }
+.testiFormat {
+  position: relative;
+  left: 14%;
+}
 
-  .testiFooter {
-    background: rgba(92, 184, 92, 0.8);
-    padding: 5px;
-  }
+.testiFooter {
+  background: rgba(92, 184, 92, 0.8);
+  padding: 5px;
+}
 
-  .testimonials {
-    color: black;
-    font-family: "Indie Flower", cursive;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: left;
-  }
+.testimonials {
+  color: black;
+  font-family: "Indie Flower", cursive;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+}
 
-  .testiButt {
-    color: black;
-    text-shadow: 1px 1px black;
-    font-family: "Indie Flower", cursive;
-    font-weight: bold;
-    font-size: 150%;
-    background: rgba(67, 200, 270, 0.4);
-  }
+.testiButt {
+  color: black;
+  text-shadow: 1px 1px black;
+  font-family: "Indie Flower", cursive;
+  font-weight: bold;
+  font-size: 150%;
+  background: rgba(67, 200, 270, 0.4);
+}
 
-  .testiButt:hover {
-    color: white;
-    text-shadow: 1px 1px black;
-    font-family: "Indie Flower", cursive;
-    font-weight: bold;
-    font-size: 150%;
-    background: rgba(67, 200, 310, 1);
-  }
+.testiButt:hover {
+  color: white;
+  text-shadow: 1px 1px black;
+  font-family: "Indie Flower", cursive;
+  font-weight: bold;
+  font-size: 150%;
+  background: rgba(67, 200, 310, 1);
+}
 
-  .signature {
-    color: black;
-    font-family: "Marck Script", cursive;
-    font-size: 26px;
-  }
+.signature {
+  color: black;
+  font-family: "Marck Script", cursive;
+  font-size: 26px;
+}
 
-  .logo {
-    padding: 0;
-    margin: 0;
-    height: 100px;
-  }
+.logo {
+  padding: 0;
+  margin: 0;
+  height: 100px;
+}
 
-  .logomobile {
-    display: none;
-    position: absolute;
-  }
+.logomobile {
+  display: none;
+  position: absolute;
+}
 
-  .blurb {
-    margin: 0 auto;
-    color: white;
-    font-size: 27px;
-    position: relative;
-    width: 780px;
-    background: rgba(67, 200, 310, 0.8);
-    text-shadow: 1px 1px black;
-    font-family: "Marck Script", cursive;
-    top: 170px;
-    letter-spacing: 2px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-  }
+.blurb {
+  margin: 0 auto;
+  color: white;
+  font-size: 27px;
+  position: relative;
+  width: 780px;
+  background: rgba(67, 200, 310, 0.8);
+  text-shadow: 1px 1px black;
+  font-family: "Marck Script", cursive;
+  top: 170px;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
 
-  .blurb p {
-    width: 700px;
-    line-height: 28px;
-    position: relative;
-    word-spacing: -3px;
-  }
+.blurb p {
+  width: 700px;
+  line-height: 28px;
+  position: relative;
+  word-spacing: -3px;
+}
 
-  .blurblist {
-    position: relative;
-    line-height: 28px;
-    text-align: left;
-  }
+.blurblist {
+  position: relative;
+  line-height: 28px;
+  text-align: left;
+}
 
-  .blurblist li {
-    word-spacing: -5px;
-  }
+.blurblist li {
+  word-spacing: -5px;
+}
 
-  .smoosh {
-    word-spacing: -9px;
-  }
+.smoosh {
+  word-spacing: -9px;
+}
 
-  .blurbsign {
-    padding-left: 300px;
-    font-size: 40px;
-  }
+.blurbsign {
+  padding-left: 300px;
+  font-size: 40px;
+}
 
-  .bgcolor {
-    background-color: green;
-  }
+.bgcolor {
+  background-color: green;
+}
 
-  .newfont {
-    font-family: Verdana, Geneva, sans-serif;
-    font-weight: bold;
-  }
+.newfont {
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+}
 
-  #sclogodiv {
-    position: relative;
-    top: 120px;
-    float: left;
-  }
+#sclogodiv {
+  position: relative;
+  top: 120px;
+  float: left;
+}
 
-  #sclogo {
-    height: 90px;
-  }
+#sclogo {
+  height: 90px;
+}
 
-  #sclink {
-    text-decoration: none;
-  }
+#sclink {
+  text-decoration: none;
+}
 
-  #sctext {
-    color: white;
-    font-weight: bold;
-    font-family: "Dancing Script", cursive;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    top: 10px;
-  }
+#sctext {
+  color: white;
+  font-weight: bold;
+  font-family: "Dancing Script", cursive;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  top: 10px;
+}
 
-  .share {
-    text-align: center;
-  }
+.share {
+  text-align: center;
+}
 
-  .floatr {
-    float: right;
-  }
+.floatr {
+  float: right;
+}
 
-  .floatl {
-    float: left;
-  }
+.floatl {
+  float: left;
+}
 
-  #pcontent {
-    z-index: 5000;
-    position: relative;
-    margin: 0 auto;
-  }
+#pcontent {
+  z-index: 5000;
+  position: relative;
+  margin: 0 auto;
 }
