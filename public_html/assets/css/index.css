@@ -1,253 +1,119 @@
+/* #region GENERAL */
+
 html {
   min-height: 100%;
 }
 
 body {
-  background: url(../images/home-bg.png);
+  background: url(../images/backgrounds/collage-large.png);
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
 
-.container {
-  margin-top: 12px;
-  position: relative;
+video,
+img {
   width: 100%;
+  height: auto;
+  border-style: none;
 }
 
-nav {
-  font-family: "Oswald", sans-serif;
-  font-size: 28px;
+/* #endregion GENERAL */
+
+/* #region NAVBAR */
+
+#navbar-main {
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  position: initial;
+  margin: 0.75rem 0 0.75rem 0.75rem;
+}
+
+#navbar-main ul {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  list-style: none;
+  font-size: var(--font-size);
   letter-spacing: 1px;
   word-spacing: 1px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.navbar-nav {
-  position: relative;
-  top: 14px;
-}
-
-nav a {
   color: #054516;
   text-shadow: 1px 1px black;
 }
 
-.navbar-nav > li {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-#vidIntro {
-  width: 100%;
-  height: auto;
-}
-
-.modal-bg {
-  background-image: url(../images/rain.gif);
-  background-size: cover;
-  background-color: transparent;
-}
-
-.fuckoff {
-  background: rgba(94, 175, 5, 0.9);
-}
-
-.eatit {
-  background: rgba(67, 250, 245, 0.9);
-}
-
-.modal-transparent {
-  background: transparent;
-}
-
-.modal-transparent .modal-content {
-  background: transparent;
-}
-
-.modImage {
-  width: 100%;
-  height: auto;
-}
-
-.fuckoff {
-  padding-bottom: 21px;
-  height: 100%;
-}
-
-.card-block {
-  text-align: center;
+#navbar-main ul li a,
+#navbar-main ul li a:focus,
+#navbar-main ul li a:hover {
+  color: #014c8c;
   font-family: "Oswald", sans-serif;
-  height: 100% !important;
 }
 
-.card-footer {
-  text-align: center;
+#navbar-main ul li a:active,
+#navbar-main ul li a:hover {
+  outline-width: 0;
 }
 
-.butt {
-  background: rgba(94, 175, 5, 0.9);
+.content {
+  top: 5rem;
 }
 
-.ass {
-  background: rgba(67, 250, 245, 0.9);
-}
+/* #endregion NAVBAR */
 
-.break {
-  clear: both;
-}
+/* #region INTRO */
 
-.testiTitle {
-  color: #5cb85c;
-  text-decoration: underline;
-  font-family: "Indie Flower", cursive;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.testiFormat {
-  position: relative;
-  left: 14%;
-}
-
-.testiFooter {
-  background: rgba(92, 184, 92, 0.8);
-  padding: 5px;
-}
-
-.testimonials {
-  color: black;
-  font-family: "Indie Flower", cursive;
-  font-size: 22px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.testiButt {
-  color: black;
-  text-shadow: 1px 1px black;
-  font-family: "Indie Flower", cursive;
-  font-weight: bold;
-  font-size: 150%;
-  background: rgba(67, 200, 270, 0.4);
-}
-
-.testiButt:hover {
+#intro {
   color: white;
-  text-shadow: 1px 1px black;
-  font-family: "Indie Flower", cursive;
-  font-weight: bold;
-  font-size: 150%;
-  background: rgba(67, 200, 310, 1);
-}
-
-.signature {
-  color: black;
-  font-family: "Marck Script", cursive;
-  font-size: 26px;
-}
-
-.logo {
-  padding: 0;
-  margin: 0;
-  height: 100px;
-}
-
-.logomobile {
-  display: none;
-  position: absolute;
-}
-
-.blurb {
-  margin: 0 auto;
-  color: white;
-  font-size: 27px;
-  position: relative;
-  width: 780px;
   background: rgba(67, 200, 310, 0.8);
+  font-family: var(--font-primary);
+  font-size: calc(var(--font-size) - 1px);
+  margin-inline: auto;
+  max-width: 810px;
   text-shadow: 1px 1px black;
-  font-family: "Marck Script", cursive;
-  top: 170px;
   letter-spacing: 2px;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
 }
 
-.blurb p {
-  width: 700px;
-  line-height: 28px;
-  position: relative;
-  word-spacing: -3px;
+#three-areas {
+  text-align: center;
 }
 
-.blurblist {
-  position: relative;
-  line-height: 28px;
+#three-areas ol {
+  margin: 1rem 0;
+  display: inline-block;
   text-align: left;
 }
 
-.blurblist li {
-  word-spacing: -5px;
+.text-secondary {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.smoosh {
-  word-spacing: -9px;
-}
+/* #endregion INTRO */
 
-.blurbsign {
-  padding-left: 300px;
-  font-size: 40px;
-}
+/* #region SOCHERRY */
 
-.bgcolor {
-  background-color: green;
-}
-
-.newfont {
-  font-family: Verdana, Geneva, sans-serif;
-  font-weight: bold;
-}
-
-#sclogodiv {
-  position: relative;
-  top: 120px;
-  float: left;
+#so-cherry {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-top-right-radius: 10px;
 }
 
 #sclogo {
   height: 90px;
 }
 
-#sclink {
-  text-decoration: none;
-}
-
 #sctext {
-  color: white;
+  color: rgb(76, 14, 163);
   font-weight: bold;
   font-family: "Dancing Script", cursive;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  top: 10px;
 }
-
-.share {
-  text-align: center;
-}
-
-.floatr {
-  float: right;
-}
-
-.floatl {
-  float: left;
-}
-
-#pcontent {
-  z-index: 5000;
-  position: relative;
-  margin: 0 auto;
-}
+/* #endregion SOCHERRY */
