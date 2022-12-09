@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+UI.onPageReady(() => {
   let thanks = "Thank You!";
   let returnTo = "Return to";
   let homePage = "Homepage";
@@ -22,6 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
       <p>${returnTo} <a href="http://tysoyoga.com/">${homePage}</a></p>
       `;
 
-  const content = document.getElementsByClassName("content");
-  if (content.length) content[0].innerHTML = contentHTML;
+  const content = document.querySelector(".content");
+  if (content) content.innerHTML = contentHTML;
 });
