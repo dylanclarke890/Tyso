@@ -24,6 +24,23 @@ img {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
+  font-size: var(--font-size);
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  color: #054516;
+  text-shadow: 1px 1px black;
+}
+
+#navbar-main ul li a,
+#navbar-main ul li a:focus,
+#navbar-main ul li a:hover {
+  color: #014c8c;
+  font-family: "Oswald", sans-serif;
+}
+
+#navbar-main ul li a:active,
+#navbar-main ul li a:hover {
+  outline-width: 0;
 }
 
 /* INTRO */
