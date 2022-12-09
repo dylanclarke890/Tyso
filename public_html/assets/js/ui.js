@@ -573,6 +573,11 @@ class Modal {
         this.close();
       });
     });
+
+    // TO CHECK
+    // UI.addEvent(document, "keyup", (e) => {
+    //   if (e.code === "ESC") this.close();
+    // })
   }
 
   open() {

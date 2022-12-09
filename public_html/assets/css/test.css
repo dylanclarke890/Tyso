@@ -1,9 +1,12 @@
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+html {
+  min-height: 100%;
+}
+
+body {
+  background: url(../images/backgrounds/collage-large.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 
 video,
@@ -13,8 +16,59 @@ img {
   border-style: none;
 }
 
+#navbar-main {
+  background: rgba(255, 255, 255, 0.6);
+}
+
 #navbar-main ul {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
+}
+
+/* INTRO */
+
+#intro {
+  color: white;
+  background: rgba(67, 200, 310, 0.8);
+  font-family: var(--font-primary);
+  font-size: var(--font-size);
+  margin-inline: auto;
+  max-width: 810px;
+  text-shadow: 1px 1px black;
+  letter-spacing: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#three-areas {
+  text-align: center;
+}
+
+#three-areas ol {
+  margin: 1rem 0;
+  display: inline-block;
+  text-align: left;
+}
+
+.text-secondary {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* END INTRO */
+
+#sclogodiv {
+  position: relative;
+  float: left;
+}
+
+#sclogo {
+  height: 90px;
+}
+
+#sctext {
+  color: white;
+  font-weight: bold;
+  font-family: "Dancing Script", cursive;
 }
