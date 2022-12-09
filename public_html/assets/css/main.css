@@ -1,4 +1,4 @@
-/* GENERAL */
+/* #region GENERAL */
 
 :root {
   --font-primary: "Marck Script", cursive;
@@ -204,9 +204,9 @@ h6 {
   background: rgba(94, 175, 5, 0.9);
 }
 
-/* END GENERAL */
+/* #endregion GENERAL */
 
-/* NAVBAR */
+/* #region NAVBAR */
 
 #navbar {
   display: flex;
@@ -228,11 +228,12 @@ h6 {
 }
 
 .logo {
-  padding: 0;
+  position: fixed;
   top: 1rem;
   left: 0.5rem;
   height: 6.5rem;
-  position: fixed;
+  width: auto;
+  padding: 0;
 }
 
 .content {
@@ -250,4 +251,4 @@ h6 {
   }
 }
 
-/* END NAVBAR */
+/* #endregion NAVBAR */

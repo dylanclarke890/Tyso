@@ -25,7 +25,6 @@ function onReady() {
   };
   new Modal(classModalSettings);
 
-  const videoModal = new Modal(videoModalSettings);
   const videoModalSettings = {
     id: "video-modal",
     onOpen: () => {
@@ -39,6 +38,7 @@ function onReady() {
       vid.currentTime = 0;
     },
   };
+  const videoModal = new Modal(videoModalSettings);
 
   UI.addEvent(document.querySelector("#video-modal a[href='videos.html']"), "click", () =>
     videoModal.close()
