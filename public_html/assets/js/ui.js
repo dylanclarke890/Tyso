@@ -130,6 +130,8 @@ class UI {
   static scrollPercent = () =>
     (document.body.scrollTop + document.documentElement.scrollTop) /
     (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+  static onPageReady = (cb) => UI.addEvent(document, "DOMContentLoaded", cb);
 }
 
 class ParallaxSlide {
