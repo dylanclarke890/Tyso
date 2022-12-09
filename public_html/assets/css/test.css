@@ -24,10 +24,19 @@ img {
 
 #navbar-main {
   background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  position: initial;
+  margin: 0.75rem;
 }
 
 #navbar-main ul {
+  flex-grow: 1;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   list-style: none;
   font-size: var(--font-size);
@@ -47,6 +56,10 @@ img {
 #navbar-main ul li a:active,
 #navbar-main ul li a:hover {
   outline-width: 0;
+}
+
+.content {
+  top: 3rem;
 }
 
 /* #endregion NAVBAR */
