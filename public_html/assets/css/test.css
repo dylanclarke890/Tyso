@@ -98,9 +98,13 @@ img {
 
 /* #region SOCHERRY */
 
-#sclogodiv {
-  position: relative;
-  float: left;
+#so-cherry {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-top-right-radius: 10px;
 }
 
 #sclogo {
@@ -108,7 +112,7 @@ img {
 }
 
 #sctext {
-  color: white;
+  color: rgb(76, 14, 163);
   font-weight: bold;
   font-family: "Dancing Script", cursive;
 }
