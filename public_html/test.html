@@ -86,16 +86,27 @@
     </div>
     <script src="assets/js/ui.js"></script>
     <script type="text/javascript">
-      const modals = [];
-      document.querySelectorAll("[data-modal]").forEach((modal) =>
-        modals.push(
-          new Modal({
-            id: modal.getAttribute("data-modal"),
-            onOpen: () => console.log(`OPENED: ${modal.getAttribute("data-modal")}`),
-            onClose: () => console.log(`CLOSED: ${modal.getAttribute("data-modal")}`),
-          })
-        )
-      );
+      const videoModal = document.querySelector('[data-modal="video-modal"]');
+      const videoModalSettings = {
+        id: "video-modal",
+        onOpen: () => {
+          const vid = document.getElementById("intro-video");
+          vid.volume = 0.2;
+          vid.play();
+        },
+        onClose: () => {
+          const vid = document.getElementById("intro-video");
+          vid.pause();
+          vid.currentTime = 0;
+        },
+      };
+      const classModal = document.querySelector('[data-modal="class-modal"]');
+      const classModalSettings = {
+        id: "class-modal",
+        closeButton: true,
+      };
+
+      const modals = [new Modal(classModalSettings), new Modal(videoModalSettings)];
     </script>
   </body>
 </html>

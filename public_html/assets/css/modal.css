@@ -4,6 +4,7 @@ a {
 }
 
 .modal {
+  isolation: isolate;
   position: fixed;
   width: 100vw;
   height: 125vh;
@@ -40,6 +41,7 @@ a {
   border: 0px;
   font-weight: bold;
   cursor: pointer;
+  z-index: 1;
 }
 
 .modal-container {
