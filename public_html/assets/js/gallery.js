@@ -1,4 +1,4 @@
-function onReady() {
+UI.onPageReady(() => {
   const parallaxSettings = {
     buildSlides: true,
   };
@@ -20,6 +20,4 @@ function onReady() {
   // );
 
   new ParallaxGallery(parallaxSettings, builderSettings);
-}
-
-document.addEventListener("DOMContentLoaded", onReady);
+});
