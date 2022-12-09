@@ -1,4 +1,4 @@
-function onReady() {
+UI.onPageReady(() => {
   window.twttr = (function (d, s, id) {
     var t,
       js,
@@ -53,6 +53,4 @@ function onReady() {
   });
 
   UI.triggerEvent(window, "resize");
-}
-
-document.addEventListener("DOMContentLoaded", onReady);
+});
