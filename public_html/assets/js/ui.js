@@ -109,6 +109,23 @@ class UI {
     if (!element) return;
     element.parentElement.removeChild(element);
   };
+
+  static fullscreen = (/** @type {HTMLElement} */ element, open = true) => {
+    if (open) {
+      if (element.requestFullscreen) element.requestFullscreen();
+      else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
+      else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+      else if (element.msRequestFullscreen) element.msRequestFullscreen();
+      else return false;
+    } else {
+      if (element.exitFullscreen) element.exitFullscreen();
+      else if (element.mozExitFullScreen) element.moxExitFullScreen();
+      else if (element.webkitExitFullscreen) element.webkitExitFullscreen();
+      else if (element.msExitFullscreen) element.msExitFullscreen();
+      else return false;
+    }
+    return true;
+  };
 }
 
 class ParallaxSlide {
