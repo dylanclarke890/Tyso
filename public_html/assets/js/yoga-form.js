@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", addEvents);
-
 class Translator {
   static translations = {
     EN: {
@@ -124,12 +122,12 @@ class Translator {
   }
 }
 
-function addEvents() {
+UI.onPageReady(() => {
   const langOptions = document.getElementsByClassName("lang-option");
   let language = Translator.getLanguage();
 
-  document.getElementById("lang").addEventListener("click", function () {
-    for (let lang of langOptions) {
+  UI.addEvent(document.getElementById("lang"), "click", () => {
+    UI.forEach(langOptions, (lang) => {
       // there's only two translations so this is fine for now
       if (lang.classList.contains("active")) lang.classList.remove("active");
       else {
@@ -138,13 +136,14 @@ function addEvents() {
         Translator.constructHTML(language);
         Translator.saveLanguage(language);
       }
-    }
+    });
   });
 
-  for (let lang of langOptions) {
+  UI.forEach(langOptions, (lang) => {
     if (lang.getAttribute("data-lang") === language) lang.classList.add("active");
     else lang.classList.remove("active");
-  }
+  });
+
   Translator.constructHTML(language);
   Translator.saveLanguage(language);
-}
+});
