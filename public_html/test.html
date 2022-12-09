@@ -127,7 +127,8 @@
           closeButton: true,
         };
 
-        const cm = new Modal(classModalSettings), vm =  new Modal(videoModalSettings);
+        const cm = new Modal(classModalSettings),
+          vm = new Modal(videoModalSettings);
 
         UI.addEvent(window, "resize", () => {
           const width = window.innerWidth;
@@ -135,9 +136,7 @@
             document.getElementById("emailButt").classList.remove("addthis_inline_follow_toolbox");
         });
 
-        UI.addEvent(document.querySelector("a[href='videos.html']"), "click", () => {
-          vm.close();
-        });
+        UI.addEvent(document.querySelector("#video-modal a[href='videos.html']"), "click", () => vm.close());
       }
 
       document.addEventListener("DOMContentLoaded", onReady);
