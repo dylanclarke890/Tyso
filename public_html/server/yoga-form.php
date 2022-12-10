@@ -22,6 +22,10 @@ enum ClassDurationOption
   case Twenty;
 }
 
+
+
+
+
 define("FIELDS", array("full_name", "company_name", "mats_required", "goal_of_class", "class_duration"));
 
 function validatePOSTInput()
