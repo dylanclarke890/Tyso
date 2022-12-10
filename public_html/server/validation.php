@@ -118,7 +118,10 @@ class ValidationResult
 
   public function getResult()
   {
-    return $this->succeeded() ? true : $this->getErrors();
+    $result = new stdClass;
+    $result->success = $this->succeeded();
+    $result->errors = $this->getErrors();
+    return $result;
   }
 
 

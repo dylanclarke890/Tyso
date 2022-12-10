@@ -22,28 +22,39 @@ enum ClassDurationOption:string
   case Twenty = "Twenty";
 }
 
-define("FIELDS", ["full_name", "company_name", "mats_required", "goal_of_class", "class_duration"]);
-
-function validatePOSTInput()
+function validateInput()
 {
   $validation = new ValidationResult();
 
-  foreach (FIELDS as $value) {
-    $inputValue = $_POST[$value];
-    var_dump($inputValue);
-    var_dump($_POST);
-    if (empty($inputValue))
-      $validation->addError("$value is missing");
-    if ($value === "goal_of_class") {
-      $valToEnum = GoalOption::from($inputValue);
-      var_dump($valToEnum);
-    }
+  if (empty($_POST["full_name"])) {
+    $validation->addError("Full name is required.");
+  }
+
+  if (empty($_POST["company_name"])) {
+    $validation->addError("Company name is required.");
+  }
+
+  if (empty($_POST["mats_required"])) {
+    $validation->addError("Amount of mats is required.");
+  }
+
+  $classGoal = $_POST['goal_of_class'];
+  if (empty($classGoal)) {
+    $validation->addError("Goal is required.");
+  } else {
+    $valToEnum = GoalOption::tryFrom($classGoal);
+    if (empty($valToEnum))
+      $validation->addError("$classGoal is not a valid goal.");
+  }
+
+  if (empty($_POST["class_duration"])) {
+    $validation->addError("Duration of classes is required.");
   }
 
   return $validation;
 }
 
-$validation = validatePOSTInput();
+$validation = validateInput();
 
 echo json_encode($validation->getResult());
 ?>
