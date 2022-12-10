@@ -17,10 +17,6 @@ function validatePOSTInput()
 }
 
 $validation = validatePOSTInput();
-die(1);
 
-
-// echo json_encode(FIELDS);
-// echo json_encode($validation->getResult());
-// exit();
+echo json_encode($validation->getResult());
 ?>
