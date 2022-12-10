@@ -4,9 +4,9 @@ declare(strict_types=1);
 class ValidationResult
 {
   public array $errors;
-  public function success()
+  public function success(): bool
   {
-    count($this->errors) === 0;
+    return count($this->errors) === 0;
   }
 }
 
