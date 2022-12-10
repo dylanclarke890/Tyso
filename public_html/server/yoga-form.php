@@ -30,6 +30,8 @@ function validatePOSTInput()
 
   foreach (FIELDS as $value) {
     $inputValue = $_POST[$value];
+    var_dump($inputValue);
+    var_dump($_POST);
     if (empty($inputValue))
       $validation->addError("$value is missing");
     if ($value === "goal_of_class") {
