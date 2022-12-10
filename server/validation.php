@@ -111,9 +111,14 @@ class ValidationResult
    * 
    * @return array
    */
-  public function getErrors()
+  public function getErrors(): array
   {
     return $this->errors;
+  }
+
+  public function getResult(): bool|array
+  {
+    return $this->succeeded() ?? $this->getErrors();
   }
 
 
