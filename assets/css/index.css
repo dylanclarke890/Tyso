@@ -117,3 +117,9 @@ img {
   font-family: "Dancing Script", cursive;
 }
 /* #endregion SOCHERRY */
+
+.modal-bg {
+  background: url(../images/rain.gif);
+  background-size: cover;
+  opacity: 0.5;
+}
