@@ -2,7 +2,7 @@
 declare(strict_types=1);
 include("validation.php");
 
-enum GoalOption
+enum GoalOption:string
 {
   case Balance = "Balance";
   case Force = "Force";
@@ -14,12 +14,12 @@ enum GoalOption
   case MeditationIntro = "MeditationIntro";
 }
 
-enum ClassDurationOption
+enum ClassDurationOption:string
 {
-  case One;
-  case Five;
-  case Ten;
-  case Twenty;
+  case One = "One";
+  case Five = "Five";
+  case Ten = "Ten";
+  case Twenty = "Twenty";
 }
 
 define("FIELDS", array("full_name", "company_name", "mats_required", "goal_of_class", "class_duration"));
