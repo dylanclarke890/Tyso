@@ -29,10 +29,11 @@ function validatePOSTInput()
   $validation = new ValidationResult();
 
   foreach (FIELDS as $value) {
-    if (empty($_POST[$value]))
+    $inputValue = $_POST[$value];
+    if (empty($inputValue))
       $validation->addError("$value is missing");
     if ($value === "goal_of_class") {
-      $valToEnum = GoalOption::from($value);
+      $valToEnum = GoalOption::from($inputValue);
       var_dump($valToEnum);
     }
   }
