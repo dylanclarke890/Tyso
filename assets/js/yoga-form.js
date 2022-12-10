@@ -121,6 +121,7 @@ class Translator {
   }
 }
 
+
 UI.onPageReady(() => {
   AddThisHelper.initGlobals();
   const langOptions = document.getElementsByClassName("lang-option");

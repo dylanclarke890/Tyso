@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 class ValidationResult
 {
-  public array $errors;
-  public bool $success = count($this->errors) === 0;
+  public array $errors = array();
+  public function success()
+  {
+    return count($this->errors) === 0;
+  }
 }
 ?>
