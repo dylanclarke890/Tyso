@@ -76,8 +76,7 @@ class Translator {
     document.title = title;
     document.querySelector("#navbar h1").innerHTML = title;
     const html = `
-      <form action="forms/process.php" method="post">
-        <input type="hidden" name="form_tools_form_id" value="3" />
+      <form action="server/yoga-form.php" method="post">
         <div class="form-input">
           <label>${full_name}</label>
           <input type="text" name="full_name" />
