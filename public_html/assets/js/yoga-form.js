@@ -11,17 +11,17 @@ class Translator {
         { value: "Force", translation: "Physical Strength" },
         { value: "Concentration", translation: "Enhanced Focus" },
         { value: "Conscience", translation: "Fostering Mindfulness" },
-        { value: "Team building", translation: "Team building" },
+        { value: "TeamBuilding", translation: "Team building" },
         { value: "Leadership", translation: "Corporate Leadership Workshop" },
-        { value: "Intro to yoga", translation: "Introduction to Yoga" },
-        { value: "Intro to meditation", translation: "Introduction to Meditation" },
+        { value: "YogaIntro", translation: "Introduction to Yoga" },
+        { value: "MeditationIntro", translation: "Introduction to Meditation" },
       ],
       classes: "Series of classes:",
       classes_options: [
-        { value: "Une classe", translation: "One class" },
-        { value: "5 semaines", translation: "5 weeks" },
-        { value: "10 semaines", translation: "10 weeks" },
-        { value: "20 semaines", translation: "20 weeks" },
+        { value: "One", translation: "One class" },
+        { value: "Five", translation: "5 weeks" },
+        { value: "Ten", translation: "10 weeks" },
+        { value: "Twenty", translation: "20 weeks" },
       ],
       submit: "Submit",
     },
@@ -36,17 +36,17 @@ class Translator {
         { value: "Force", translation: "Force physique" },
         { value: "Concentration", translation: "Amélioration de la concentration" },
         { value: "Conscience", translation: "Travailler sur la pleine conscience" },
-        { value: "Team building", translation: "Activités de 'team building'" },
+        { value: "TeamBuilding", translation: "Activités de 'team building'" },
         { value: "Leadership", translation: "Ateliers sur le leadership en entreprise" },
-        { value: "Intro to yoga", translation: "Introduction au yoga" },
-        { value: "Intro to meditation", translation: "Introduction à la méditation" },
+        { value: "YogaIntro", translation: "Introduction au yoga" },
+        { value: "MeditationIntro", translation: "Introduction à la méditation" },
       ],
       classes: "Séries de classes:",
       classes_options: [
-        { value: "Une classe", translation: "Une classe" },
-        { value: "5 semaines", translation: "5 semaines" },
-        { value: "10 semaines", translation: "10 semaines" },
-        { value: "20 semaines", translation: "20 semaines" },
+        { value: "One", translation: "Une classe" },
+        { value: "Five", translation: "5 semaines" },
+        { value: "Ten", translation: "10 semaines" },
+        { value: "Twenty", translation: "20 semaines" },
       ],
       submit: "Soumettre",
     },
@@ -87,7 +87,7 @@ class Translator {
         </div>
         <div class="form-input">
           <label>${mats}</label>
-          <input type="text" name="mats" autocomplete="off" />
+          <input type="text" name="mats_required" autocomplete="off" />
         </div>
         <div class="center">
           <label>${goals}</label>
@@ -96,7 +96,7 @@ class Translator {
         ${goals_options
           .map(
             (g) =>
-              `<div><input type="checkbox" name="goal[]" value="${g.value}" />${g.translation}</div>`
+              `<div><input type="checkbox" name="goal_of_class" value="${g.value}" />${g.translation}</div>`
           )
           .join("")}
         </div>
@@ -107,7 +107,7 @@ class Translator {
           ${classes_options
             .map(
               (g) =>
-                `<div><input type="checkbox" name="classes[]" value="${g.value}" />${g.translation}</div>`
+                `<div><input type="checkbox" name="class_duration" value="${g.value}" />${g.translation}</div>`
             )
             .join("")}
         </div>
