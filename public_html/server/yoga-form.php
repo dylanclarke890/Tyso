@@ -22,7 +22,7 @@ enum ClassDurationOption:string
   case Twenty = "Twenty";
 }
 
-define("FIELDS", array("full_name", "company_name", "mats_required", "goal_of_class", "class_duration"));
+define("FIELDS", ["full_name", "company_name", "mats_required", "goal_of_class", "class_duration"]);
 
 function validatePOSTInput()
 {
