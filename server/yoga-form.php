@@ -17,10 +17,10 @@ function validatePOSTInput()
 }
 
 $validation = validatePOSTInput();
+die(1);
 
 
-echo ($validation->succeeded() ? "True" : "False");
 // echo json_encode(FIELDS);
 // echo json_encode($validation->getResult());
-exit();
+// exit();
 ?>
