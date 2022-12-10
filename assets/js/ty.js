@@ -1,4 +1,5 @@
 UI.onPageReady(() => {
+  AddThisHelper.initGlobals();
   let thanks = "Thank You!";
   let returnTo = "Return to";
   let homePage = "Homepage";

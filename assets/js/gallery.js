@@ -1,4 +1,5 @@
 UI.onPageReady(() => {
+  AddThisHelper.initGlobals();
   const parallaxSettings = {
     buildSlides: true,
   };

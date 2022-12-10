@@ -596,3 +596,16 @@ class Modal {
     onClose();
   }
 }
+
+class AddThisHelper {
+  static initGlobals() {
+    globalThis.addthis_share = globalThis.addthis_share || {
+      passthrough: {
+        twitter: {
+          via: "anthonykamanos #tysoyoga",
+          text: "This is what ppl r saying about thier TYSO journey",
+        },
+      },
+    };
+  }
+}

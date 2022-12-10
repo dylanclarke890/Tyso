@@ -1,4 +1,5 @@
 UI.onPageReady(() => {
+  AddThisHelper.initGlobals();
   const videos = [
     { src: "assets/videos/tyso-vid-1.mp4", poster: "" },
     { src: "assets/videos/tyso-vid-2.mp4", poster: "assets/images/poster-1.png" },

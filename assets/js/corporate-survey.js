@@ -1,4 +1,5 @@
-$(document).ready(function () {
+UI.onPageReady(() => {
+  AddThisHelper.initGlobals();
   $("#gallery").unitegallery({
     slider_scale_mode: "fit",
     thumb_fixed_size: false,

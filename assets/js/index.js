@@ -1,4 +1,6 @@
 UI.onPageReady(() => {
+  AddThisHelper.initGlobals();
+
   window.twttr = (function (d, s, id) {
     var t,
       js,
