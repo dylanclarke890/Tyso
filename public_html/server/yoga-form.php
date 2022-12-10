@@ -9,8 +9,8 @@ function validatePOSTInput()
   $validation = new ValidationResult();
 
   foreach (FIELDS as $value) {
-    if (!isset($_POST[$value]))
-      $validation->addError("$value isn't set");
+    if (empty($_POST[$value]))
+      $validation->addError("$value is missing");
   }
 
   return $validation;
