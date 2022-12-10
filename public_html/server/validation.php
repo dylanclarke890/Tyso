@@ -116,7 +116,7 @@ class ValidationResult
     return $this->errors;
   }
 
-  public function getResult(): bool|array
+  public function getResult()
   {
     return $this->succeeded() ?? $this->getErrors();
   }
