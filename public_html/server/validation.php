@@ -118,7 +118,7 @@ class ValidationResult
 
   public function getResult()
   {
-    return $this->succeeded() ?? $this->getErrors();
+    return $this->succeeded() ? true : $this->getErrors();
   }
 
 
