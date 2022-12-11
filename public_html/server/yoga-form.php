@@ -16,11 +16,16 @@ class YogaFormModel extends Model
     if ($data === null)
       return;
 
-    $this->setFullName($data["full_name"]);
-    $this->setCompanyName($data["company_name"]);
-    $this->setMatsRequired($data["mats_required"]);
-    $this->setGoalOfClass($data["goal_of_class"]);
-    $this->setClassDuration($data["class_duration"]);
+    if (isset($data["full_name"]))
+      $this->setFullName($data["full_name"]);
+    if (isset($data["company_name"]))
+      $this->setCompanyName($data["company_name"]);
+    if (isset($data["mats_required"]))
+      $this->setMatsRequired($data["mats_required"]);
+    if (isset($data["goal_of_class"]))
+      $this->setGoalOfClass($data["goal_of_class"]);
+    if (isset($data["class_duration"]))
+      $this->setClassDuration($data["class_duration"]);
   }
 
   public function setFullName($name)
