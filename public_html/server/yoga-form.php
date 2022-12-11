@@ -46,34 +46,38 @@ class YogaFormModel extends Model
   public function setGoalOfClass($value)
   {
     $sanitized = $this->sanitizeString($value);
-    $this->goal_of_class = GoalOption::tryFrom($sanitized);
+    $toEnum = GoalOption::tryFrom($sanitized);
+    if ($toEnum !== null)
+      $this->goal_of_class = $toEnum;
   }
 
   public function setClassDuration($value)
   {
     $sanitized = $this->sanitizeString($value);
-    $this->class_duration = ClassDurationOption::tryFrom($sanitized);
+    $toEnum = ClassDurationOption::tryFrom($sanitized);
+    if ($toEnum !== null)
+      $this->class_duration = $toEnum;
   }
 
   public function succeeded()
   {
-    $this->validateProperties();
+    $this->validateModel();
     return parent::succeeded();
   }
 
   public function getValidationResult()
   {
-    $this->validateProperties();
+    $this->validateModel();
     return parent::getValidationResult();
   }
 
   public function getErrors()
   {
-    $this->validateProperties();
+    $this->validateModel();
     return parent::getErrors();
   }
 
-  private function validateProperties()
+  private function validateModel()
   {
     if (empty($this->full_name)) {
       $this->vr->addError("Full name is required");
