@@ -9,7 +9,7 @@ class YogaFormModel extends Model
   private string $full_name;
   private string $company_name;
   private int $mats_required;
-  private GoalOption $goal_of_class;
+  private array $goal_of_class;
   private ClassDurationOption $class_duration;
 
   public function __construct($data = null)
@@ -60,12 +60,14 @@ class YogaFormModel extends Model
     return $this->mats_required;
   }
 
-  public function setGoalOfClass($value)
+  public function setGoalOfClass($arrValue)
   {
-    $sanitized = $this->sanitizeString($value);
-    $toEnum = GoalOption::tryFrom($sanitized);
-    if ($toEnum !== null)
-      $this->goal_of_class = $toEnum;
+    foreach ($arrValue as $value) {
+      $sanitized = $this->sanitizeString($value);
+      $toEnum = GoalOption::tryFrom($sanitized);
+      if ($toEnum !== null)
+        array_push($this->goal_of_class, $toEnum);
+    }
   }
 
   public function getGoalOfClass()
@@ -131,7 +133,7 @@ class YogaFormModel extends Model
     }
 
     if (empty($this->goal_of_class)) {
-      $this->vr->addError("Goal is required.");
+      $this->vr->addError("At least one goal is required.");
     }
 
     if (empty($this->class_duration)) {
@@ -148,7 +150,6 @@ class YogaFormModel extends Model
   }
 }
 
-var_dump($_POST);
 $record = new YogaFormModel($_POST);
 $record->exitIfError();
 
@@ -161,18 +162,22 @@ try {
     full_name VARCHAR(30) NOT NULL,
     company_name VARCHAR(60) NOT NULL,
     mats_required VARCHAR(6) NOT NULL,
-    goal_of_class VARCHAR(30) NOT NULL,
+    goal_of_class VARCHAR(120) NOT NULL,
     class_duration VARCHAR(30) NOT NULL
     )";
 
   $conn->exec($create);
+
+  $goals = implode(",", array_map(function ($n) {
+    return $n->value;
+  }, $record->getGoalOfClass()));
 
   $insert = "INSERT INTO YogaSurveyResponse (
     full_name, company_name, mats_required, goal_of_class, class_duration
     )
   VALUES (
     '{$record->getFullName()}', '{$record->getCompanyName()}', {$record->getMatsRequired()},
-    '{$record->getGoalOfClass()->value}', '{$record->getClassDuration()->value}'
+    '$goals', '{$record->getClassDuration()->value}'
     )";
 
   $conn->exec($insert);
