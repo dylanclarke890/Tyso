@@ -62,6 +62,7 @@ class YogaFormModel extends Model
 
   public function setGoalOfClass($arrValue)
   {
+    $this->goal_of_class = array();
     foreach ($arrValue as $value) {
       $sanitized = $this->sanitizeString($value);
       $toEnum = GoalOption::tryFrom($sanitized);
