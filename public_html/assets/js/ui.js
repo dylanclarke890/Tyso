@@ -146,7 +146,16 @@ class UI {
         body: new FormData(d),
       })
         .then((res) => res.text())
-        .then((data) => cb(parse ? JSON.parse(data) : data));
+        .then((data) => {
+          if (parse) {
+            try {
+              data = JSON.parse(data);
+            } catch {
+              cb(data);
+            }
+          }
+          cb(data);
+        });
     });
   };
 }
