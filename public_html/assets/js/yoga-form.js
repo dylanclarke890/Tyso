@@ -144,8 +144,8 @@ class Translator {
         <div class="checkbox-list">
           ${classes_options
             .map(
-              (g) =>
-                `<div><input type="checkbox" name="class_duration" value="${
+              (g, i) =>
+                `<div><input type="radio" ${i ? "" : "checked"} name="class_duration" value="${
                   g.value
                 }" />${g.translation.translate()}</div>`
             )
