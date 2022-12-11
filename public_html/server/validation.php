@@ -254,7 +254,7 @@ class Model
     return $this->vr->getResult();
   }
 
-  public function sanitizeString(string $data)
+  public function sanitizeString(string|null $data)
   {
     if (empty($data))
       return "";
@@ -264,7 +264,7 @@ class Model
     return $data;
   }
 
-  public function sanitizeInt(int $data)
+  public function sanitizeInt(int|null $data)
   {
     if (empty($data))
       return 0;
