@@ -148,6 +148,7 @@ class YogaFormModel extends Model
   }
 }
 
+var_dump($_POST);
 $record = new YogaFormModel($_POST);
 $record->exitIfError();
 
@@ -179,8 +180,6 @@ try {
 } catch (PDOException $e) {
   $record->vr->addError("Database Error: " . $e->getMessage());
 }
-
-var_dump($_POST["goal_of_class"]);
 
 $record->exitIfError(overrideCheck: true);
 ?>

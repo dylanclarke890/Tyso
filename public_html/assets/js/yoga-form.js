@@ -132,7 +132,7 @@ class Translator {
         ${goals_options
           .map(
             (g) =>
-              `<div><input type="checkbox" name="goal_of_class" value="${
+              `<div><input type="checkbox" name="goal_of_class[]" value="${
                 g.value
               }" />${g.translation.translate()}</div>`
           )
