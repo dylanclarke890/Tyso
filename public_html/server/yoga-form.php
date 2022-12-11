@@ -35,7 +35,7 @@ class YogaFormModel extends Model
 
   public function setMatsRequired($mats)
   {
-    $this->mats_required = $this->sanitizeInt($mats);
+    $this->mats_required = $this->sanitizeInt((int) $mats);
   }
 
   public function setGoalOfClass($value)
