@@ -1,5 +1,6 @@
 <?php
 
+include("config.php");
 include("validation.php");
 
 class EmailModel extends Model
@@ -119,8 +120,10 @@ class EmailModel extends Model
       return;
     }
 
+    global $sendEmailsTo;
+    $message = "Name: {$this->name} \nEmail: {$this->email} \nMessage: {$this->message}";
     try {
-      mail($this->email, "From {$this->name}: {$this->subject}", $this->message);
+      mail($sendEmailsTo, "{$this->name}: {$this->subject}", $message);
     } catch (Exception $e) {
       $this->vr->addError("Error sending email: " . $e->getMessage());
     }
