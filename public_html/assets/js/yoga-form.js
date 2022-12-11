@@ -76,7 +76,7 @@ class Translator {
     document.title = title;
     document.querySelector("#navbar h1").innerHTML = title;
     const html = `
-      <form action="server/yoga-form.php" method="post">
+      <form id="yoga-form" action="server/yoga-form.php" method="post">
         <div class="form-input">
           <label>${full_name}</label>
           <input type="text" name="full_name" />
@@ -118,9 +118,20 @@ class Translator {
     `;
 
     document.querySelector(".content").innerHTML = html;
+    const form = document.getElementById("yoga-form");
+    UI.addEvent(form, "submit", (e) => {
+      e.preventDefault();
+      fetch("server/process.php", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: 78912 }),
+      }).then((response) => response.json());
+    });
   }
 }
-
 
 UI.onPageReady(() => {
   AddThisHelper.initGlobals();
@@ -147,6 +158,4 @@ UI.onPageReady(() => {
 
   Translator.constructHTML(language);
   Translator.saveLanguage(language);
-
-  InfoMessage.error();
 });

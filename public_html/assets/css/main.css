@@ -263,7 +263,7 @@ h6 {
 .message {
   z-index: 1000;
   width: 100vw;
-  height: 50px;
+  height: 75px;
   text-align: center;
   position: fixed;
   top: 0;
@@ -292,7 +292,7 @@ h6 {
 }
 
 .message.hidden {
-  top: -50px;
+  top: -75px;
 }
 
 .hidden {

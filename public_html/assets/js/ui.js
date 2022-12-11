@@ -614,7 +614,7 @@ class AddThisHelper {
   }
 }
 
-class InfoMessage {
+class Message {
   constructor({ message, type, autoShow = true, duration = 3000, removeOnHide = true } = {}) {
     this.message = message;
     this.type = type;
@@ -648,10 +648,18 @@ class InfoMessage {
   }
 
   static success(message = "Success!", opts = {}) {
-    return new InfoMessage({ message, type: "success", ...opts });
+    return new Message({ message, type: "success", ...opts });
   }
 
   static error(message = "Error, please try again.", opts = {}) {
-    return new InfoMessage({ message, type: "error", ...opts });
+    return new Message({ message, type: "error", ...opts });
+  }
+
+  static warning(message = "Warning", opts = {}) {
+    return new Message({ message, type: "warning", ...opts });
+  }
+
+  static info(message = "Info", opts = {}) {
+    return new Message({ message, type: "info", ...opts });
   }
 }
