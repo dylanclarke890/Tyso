@@ -68,6 +68,8 @@ class ValidationResult
    */
   public function succeeded()
   {
+    // Clear out duplicate error messages here.
+    $this->errors = array_unique($this->errors);
     return empty($this->errors);
   }
 
@@ -88,7 +90,7 @@ class ValidationResult
    */
   public function failed()
   {
-    return !empty($this->errors);
+    return !$this->succeeded();
   }
 
 
