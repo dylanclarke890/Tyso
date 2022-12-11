@@ -10,7 +10,7 @@
 
 <body>
   <?php
-    echo '<div class="car-info" style="text-align: center">
+  echo '<div class="car-info" style="text-align: center">
       <p>Benz</p>
       <p>Mercedes</p>
     </div>';
@@ -24,11 +24,22 @@
     </div>';
 
   $arr = array("BIke", "Car", "Truck");
-  echo json_encode($arr);
+  $arrAsStr = json_encode($arr);
+  echo "<h2 id='test-arr'>$arrAsStr<h2>";
   ?>
 
 
-
+  <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", () => {
+    const content = document.getElementById("test-arr");
+    const jsonArr = content.innerText;
+    const arr = JSON.parse(jsonArr);
+    const newContent = document.createElement("h2");
+    newContent.innerText = arr;
+    document.prepend(newContent);
+    console.log(arr);
+  })
+  </script>
 </body>
 
 </html>
