@@ -117,7 +117,7 @@ class YogaFormModel extends Model
 
 $yogaRecord = new YogaFormModel($_POST);
 if ($yogaRecord->succeeded()) {
-  $conn = mysqli_connect($servername, $username, $password);
+  $conn = mysqli_connect($hostname, $username, $password, $dbname);
   $yogaRecord->vr->addError("Unable to connect.");
 }
 
