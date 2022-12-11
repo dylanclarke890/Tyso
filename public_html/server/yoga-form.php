@@ -38,10 +38,10 @@ function validateInput()
     $validation->addError("Amount of mats is required.");
   }
 
-  $classGoal = $_POST['goal_of_class'];
-  if (empty($classGoal)) {
+  if (empty($_POST['goal_of_class'])) {
     $validation->addError("Goal is required.");
   } else {
+    $classGoal = $_POST['goal_of_class'];
     $valToEnum = GoalOption::tryFrom($classGoal);
     if (empty($valToEnum))
       $validation->addError("$classGoal is not a valid goal.");
