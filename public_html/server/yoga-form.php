@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
+include("enums.php");
 include("validation.php");
-include("emums.php");
 
 class YogaFormModel extends Model
 {
