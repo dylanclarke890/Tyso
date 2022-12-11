@@ -665,7 +665,7 @@ class Message {
   }
 
   static error(message = "Error, please try again.", opts = {}) {
-    return new Message({ message, type: "error", ...opts });
+    return new Message({ message, type: "error", duration: 6000, ...opts });
   }
 
   static warning(message = "Warning", opts = {}) {

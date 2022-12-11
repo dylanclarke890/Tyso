@@ -121,7 +121,7 @@ class Translator {
 
     UI.makeFormAJAX(document.getElementById("yoga-form"), (data) => {
       if (data.success) Message.success("Submitted successfully!");
-      else Message.error(data.errors.join(""));
+      else Message.error(data.errors.join(" "));
     });
   }
 }
