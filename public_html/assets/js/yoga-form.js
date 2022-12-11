@@ -119,12 +119,10 @@ class Translator {
 
     document.querySelector(".content").innerHTML = html;
 
-    UI.makeFormAJAX(
-      document.getElementById("yoga-form", (data) => {
-        if (data.success) Message.success();
-        else Message.error(data.errors.join(""));
-      })
-    );
+    UI.makeFormAJAX(document.getElementById("yoga-form"), (data) => {
+      if (data.success) Message.success("Submitted successfully!");
+      else Message.error(data.errors.join(""));
+    });
   }
 }
 
