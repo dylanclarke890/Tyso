@@ -147,4 +147,6 @@ UI.onPageReady(() => {
 
   Translator.constructHTML(language);
   Translator.saveLanguage(language);
+
+  InfoMessage.error();
 });

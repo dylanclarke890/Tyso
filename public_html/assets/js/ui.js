@@ -132,6 +132,10 @@ class UI {
     (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 
   static onPageReady = (cb) => UI.addEvent(document, "DOMContentLoaded", cb);
+
+  static repaintDOM = () => {
+    document.body.getBoundingClientRect();
+  };
 }
 
 class ParallaxSlide {
@@ -607,5 +611,47 @@ class AddThisHelper {
         },
       },
     };
+  }
+}
+
+class InfoMessage {
+  constructor({ message, type, autoShow = true, duration = 3000, removeOnHide = true } = {}) {
+    this.message = message;
+    this.type = type;
+    this.autoShow = autoShow;
+    this.duration = duration;
+    this.removeOnHide = removeOnHide;
+    this.#construct();
+    if (this.autoShow) {
+      UI.repaintDOM();
+      this.show();
+    }
+  }
+
+  #construct() {
+    const infoMsg = document.createElement("div");
+    infoMsg.id = UI.uniqueId();
+    infoMsg.className = `message ${this.type} hidden center-content`;
+    infoMsg.innerText = this.message;
+    this.msg = infoMsg;
+    document.body.append(infoMsg);
+  }
+
+  show() {
+    this.msg.classList.remove("hidden");
+    if (this.duration > 0) setTimeout(() => this.hide(), this.duration);
+  }
+
+  hide() {
+    this.msg.classList.add("hidden");
+    if (this.removeOnHide) document.body.removeChild(infoMsg);
+  }
+
+  static success(message = "Success!", opts = {}) {
+    return new InfoMessage({ message, type: "success", ...opts });
+  }
+
+  static error(message = "Error, please try again.", opts = {}) {
+    return new InfoMessage({ message, type: "error", ...opts });
   }
 }

@@ -204,6 +204,11 @@ h6 {
   background: rgba(94, 175, 5, 0.9);
 }
 
+.center-content {
+  display: grid;
+  place-items: center;
+}
+
 /* #endregion GENERAL */
 
 /* #region NAVBAR */
@@ -252,3 +257,46 @@ h6 {
 }
 
 /* #endregion NAVBAR */
+
+/* #region INFO MESSAGES */
+
+.message {
+  z-index: 1000;
+  width: 100vw;
+  height: 50px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  transition: all 0.5s ease;
+  visibility: visible;
+}
+
+.success {
+  color: #4f8a10;
+  background-color: #dff2bf;
+}
+
+.error {
+  color: #d8000c;
+  background-color: #ffbaba;
+}
+
+.info {
+  color: #00529b;
+  background-color: #bde5f8;
+}
+
+.warning {
+  color: #9f6000;
+  background-color: #feefb3;
+}
+
+.message.hidden {
+  top: -50px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/* #endregion INFO MESSAGES */
