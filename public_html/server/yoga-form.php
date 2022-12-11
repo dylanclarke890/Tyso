@@ -116,7 +116,7 @@ class YogaFormModel extends Model
 
   public function exitIfError(bool $overrideCheck = false)
   {
-    if ($overrideCheck || $this->succeeded())
+    if (!$overrideCheck && $this->succeeded())
       return;
     echo json_encode($this->getValidationResult());
     exit();
