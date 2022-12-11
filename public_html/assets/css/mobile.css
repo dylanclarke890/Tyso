@@ -7,13 +7,13 @@
     color: rgba(194, 250, 260, 1);
     padding: 0;
     margin: 0 auto;
-    background-image: url(image/galaxy.png);
+    background-image: url(../images/mobile/galaxy.png);
     background-size: contain;
   }
 
   #banner-wrapper {
     padding-top: 1px;
-    background-image: url(image/bodybg3b.png);
+    background-image: url(../images/mobile/bodybg3b.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -131,7 +131,7 @@
   #contact {
     background-color: transparent;
     height: 600px;
-    background-image: url(image/ciao.png);
+    background-image: url(../images/mobile/ciao.png);
     background-repeat: no-repeat;
   }
 
@@ -352,7 +352,7 @@
   }
 
   .butt {
-    background-image: url(image/buttbg.png);
+    background-image: url(../images/mobile/buttbg.png);
     background-repeat: no-repeat;
     background-size: cover;
     text-decoration: none;
@@ -501,7 +501,7 @@
   }
 
   #menu-button-inner {
-    background: transparent url(image/menu-bg-zen.png) no-repeat 0 0;
+    background: transparent url(../images/mobile/menu-bg-zen.png) no-repeat 0 0;
   }
 
   #menu-list {
@@ -558,8 +558,8 @@
   }
 
   .aboutli {
-    background: url(image/rainbow.png) no-repeat center, url(image/bfly.png) no-repeat left,
-      url(image/bfly.png) no-repeat right;
+    background: url(../images/mobile/rainbow.png) no-repeat center, url(../images/mobile/bfly.png) no-repeat left,
+      url(../images/mobile/bfly.png) no-repeat right;
     background-size: contain;
     /*background-position:center;
 	background-repeat:no-repeat;*/
@@ -567,7 +567,7 @@
   }
 
   .ytli {
-    background-image: url(image/classbg2.png);
+    background-image: url(../images/mobile/classbg2.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -575,8 +575,8 @@
   }
 
   .myoli {
-    background: url(image/move.png) no-repeat center, url(image/mol_left.png) no-repeat left,
-      url(image/mol_right.png) no-repeat right;
+    background: url(../images/mobile/move.png) no-repeat center, url(../images/mobile/mol_left.png) no-repeat left,
+      url(../images/mobile/mol_right.png) no-repeat right;
     background-size: contain;
     /*background-position:center;
 	background-repeat:no-repeat;*/
@@ -584,7 +584,7 @@
   }
 
   .longli {
-    background: url(image/longevity.png) no-repeat left, url(image/longevity.png) no-repeat right;
+    background: url(../images/mobile/longevity.png) no-repeat left, url(../images/mobile/longevity.png) no-repeat right;
     background-size: contain;
     /*background-position:center;
 	background-repeat:no-repeat;*/
@@ -592,7 +592,7 @@
   }
 
   .hyli {
-    background: url(image/book1.png) no-repeat left, url(image/book1.png) no-repeat right;
+    background: url(../images/mobile/book1.png) no-repeat left, url(../images/mobile/book1.png) no-repeat right;
     background-size: contain;
     /*background-position:center;
 	background-repeat:no-repeat;*/
@@ -600,7 +600,7 @@
   }
 
   .camli {
-    background: url(image/camf.png) no-repeat left, url(image/camm.png) no-repeat right;
+    background: url(../images/mobile/camf.png) no-repeat left, url(../images/mobile/camm.png) no-repeat right;
     background-size: contain;
     /*background-position:center;
 	background-repeat:no-repeat;*/
@@ -608,7 +608,7 @@
   }
 
   .bodyli {
-    background-image: url(image/bodylogo.png);
+    background-image: url(../images/mobile/bodylogo.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -616,7 +616,7 @@
   }
 
   .surveyli {
-    background-image: url(image/surveybutt.png);
+    background-image: url(../images/mobile/surveybutt.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -624,7 +624,7 @@
   }
 
   .vipli {
-    background-image: url(image/vipbutt.png);
+    background-image: url(../images/mobile/vipbutt.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -632,13 +632,13 @@
   }
 
   .watchli {
-    background-image: url(image/sparkbg7.png);
+    background-image: url(../images/mobile/sparkbg7.png);
     background-size: contain;
     background-color: rgba(192, 192, 192, 1);
   }
 
   .testili {
-    background-image: url(image/libg1.png);
+    background-image: url(../images/mobile/libg1.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -646,14 +646,14 @@
   }
 
   .gli {
-    background-image: url(image/gallerybg2.png);
+    background-image: url(../images/mobile/gallerybg2.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-color: rgba(255, 127, 80, 1);
   }
 
   .classli {
-    background-image: url(image/posebg.png);
+    background-image: url(../images/mobile/posebg.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -661,7 +661,7 @@
   }
 
   .foodli {
-    background-image: url(image/foodbg1.png);
+    background-image: url(../images/mobile/foodbg1.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -669,7 +669,7 @@
   }
 
   .conli {
-    background-image: url(image/conbg4.png);
+    background-image: url(../images/mobile/conbg4.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

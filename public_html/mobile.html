@@ -8,91 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
   <link rel="manifest" href="assets/images/icons/site.webmanifest">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
-	<script>
-		jQuery(function ($) {
-			var open = false;
-
-			function resizeMenu() {
-				if ($(this).width() < 768) {
-					if (!open) {
-						$("#menu-list").hide();
-					}
-					$("#menubutt").show();
-					$("#logo").attr("src", "image/newlogo.png");
-				}
-				else if ($(this).width() >= 768) {
-					if (!open) {
-						$("#menu-list").show();
-					}
-					$("#menubutt").hide();
-					$("#title").show();
-					$("#wrapper").removeClass("space");
-					$("#logo").attr("src", "image/symbol3.png");
-				}
-			}
-
-			function setupMenuButton() {
-				$("#menubutt").click(function (e) {
-					e.preventDefault();
-
-					if (open) {
-						$("#menu-list").fadeOut();
-						$("#menubutt").toggleClass("selected");
-						$("#menu-button-inner").addClass("smaller");
-						$("#menu-button-inner").removeClass("bigger");
-						$("#wrapper").removeClass("space");
-						$("#menubutt").removeClass("repo");
-						$("#title").show();
-
-
-
-					}
-					else {
-						$("#menu-list").fadeIn();
-						$("#menubutt").toggleClass("selected");
-						$("#menu-button-inner").addClass("bigger");
-						$("#menu-button-inner").removeClass("smaller");
-						$("#wrapper").addClass("space");
-						$("#menubutt").addClass("repo");
-						$("#title").hide();
-					}
-
-
-
-
-					open = !open;
-
-
-				});
-
-
-
-			}
-
-
-			$(window).resize(resizeMenu);
-
-			resizeMenu();
-			setupMenuButton();
-		});
-
-		$(function () {
-			$(".navlink").click(function () {
-				//or $("#menu").slideUp() if you want it to slide up instead of just disappearing.
-				$("#menu-list").fadeOut();
-				$("#menubutt").toggleClass("selected");
-				$("#menu-button-inner").addClass("smaller");
-				$("#menu-button-inner").removeClass("bigger");
-				$("#wrapper").removeClass("space");
-				$("#menubutt").removeClass("repo");
-				$("#title").show();
-			});
-		});
-	</script>
-	<link href="frank.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="assets/css/mobile.css">
+	<link rel="stylesheet" href="assets/css/mobile.css" type="text/css">
 	<title>TYSO yoga</title>
 </head>
 <body>
@@ -231,13 +147,13 @@
 					</p>
 					<img class="images" src="assets/images/mobile/YT2.jpg" />
 					<div class="longbtt">
-						<a href="#"><img class="btt" src="image/symbol.png" /></a>
+						<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 						<span class="caption">Back to top!</span>
 					</div>
 				</div>
 				<br>
 				<div id="myo">
-					<img class="images" src="image/myokines.png" />
+					<img class="images" src="assets/images/mobile/myokines.png" />
 					<h2>Le yoga et l'exercice sont deux aspects cruciaux pour améliorer la santé et favoriser la guérison des
 						maladies.</h2>
 					<p class="textmed ">
@@ -320,14 +236,14 @@
 						Namaste
 					</p>
 					<div class="longbtt">
-						<a href="#"><img class="btt" src="image/symbol.png" /></a>
+						<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 						<span class="caption">Back to top!</span>
 					</div>
 				</div>
 				<br>
 				<div id="hy1">
 					<h2>Réservez Anthony pour votre prochain événement!</h2><img class="images bookimg wrap"
-						src="image/tytue.png" />
+						src="assets/images/mobile/tytue.png" />
 					<p class="textmed up">
 						Cherchez pour une façon <b>originale</b> d’ajouter du <b>Chi</b> dans votre prochain événement caritatif,
 						ouverture de galerie ou party privé?<br><br>
@@ -343,11 +259,11 @@
 					</p>
 				</div>
 				<div class="longbtt">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 				<div id="hy2">
-					<h2>Camera-ready Intensives </h2><img class="images" src="image/muscle1.png">
+					<h2>Camera-ready Intensives </h2><img class="images" src="assets/images/mobile/muscle1.png">
 					<p class="textmed">
 						Vous avez besoin de perdre du poids rapidement tout comme une vedette de Hollywood?<br><br>Vous venez de
 						décrocher un rôle et vous avez besoin d’apparaître à votre meilleur; vous voulez créer un effet WOW à cette
@@ -370,11 +286,11 @@
 			</div>
 			<div id="about">
 				<div class="longbtt">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 				<h2 class="center">About Anthony</h2>
-				<img class="images" src="image/aboutpic.jpg" />
+				<img class="images" src="assets/images/mobile/aboutpic.jpg" />
 				<p class="text center pad">En tant que professeur de yoga certifié E-RYT500 and ETY500. Anthony Kamanos a eu le
 					privilège d’étudier et de participer aux ateliers de Darby, T.K.V Desikachar, Shanhara, Sivananda, B.K .
 					Iyengar , et beaucoup d’autres étudiants dérivant de la lignée du GURU, Sri Tirumalai Krishnamacharya.</p>
@@ -402,11 +318,11 @@
 			</div>
 			<div id="longevity">
 				<div class="longbtt">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 				<h2 class="center">Longevity</h2>
-				<img class="images" src="image/long1.jpg" />
+				<img class="images" src="assets/images/mobile/long1.jpg" />
 				<div id="longtext">
 					<p class="text center">L’âge est juste un nombre!<br> Faites-le Yoga aussi arbitraire que vous le souhaitez.
 					</p>
@@ -417,83 +333,83 @@
 			</div>
 			<div id="video">
 				<div class="bttdiv">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 				<h2 class="center">Videos</h2>
-				<video controls class="vidcon" poster="image/poster3.png" src="image/tysovid2.mp4" frameborder="0"
+				<video controls class="vidcon" poster="assets/videos/poster-3.png" src="assets/videos/tyso-vid-1.mp4" frameborder="0"
 					allowfullscreen></video>
-				<video controls class="vidcon" poster="image/poster.png" src="image/tysovid003.mp4" frameborder="0"
+				<video controls class="vidcon" poster="assets/videos/poster-1.png" src="assets/videos/tyso-vid-2.mp4" frameborder="0"
 					allowfullscreen></video>
-				<video controls class="vidcon" poster="image/poster2b.png" src="image/gymvid2.mp4" frameborder="0"
+				<video controls class="vidcon" poster="assets/videos/poster-2.png" src="assets/videos/tyso-vid-3.mp4" frameborder="0"
 					allowfullscreen></video>
 			</div>
 			<div id="gallery">
 				<div class="bttdiv">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 				<h2 class="center">Gallery</h2>
 				<div id="galleria" class="galleria">
-					<a href="gallerymo/20.jpg"><img src="gallerymo/thumbs/t20.jpg" data-big="gallerymo/20.jpg"
+					<a href="assets/images/gallery/20.jpg"><img src="assets/images/gallery/20.jpg" data-big="assets/images/gallery/20.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/21.jpg"><img src="gallerymo/thumbs/t21.jpg" data-big="gallerymo/21.jpg"
+					<a href="assets/images/gallery/21.jpg"><img src="assets/images/gallery/21.jpg" data-big="assets/images/gallery/21.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/22.jpg"><img src="gallerymo/thumbs/t22.jpg" data-big="gallerymo/22.jpg"
+					<a href="assets/images/gallery/22.jpg"><img src="assets/images/gallery/22.jpg" data-big="assets/images/gallery/22.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/18.jpg"><img src="gallerymo/thumbs/t18.jpg" data-big="gallerymo/18.jpg"
+					<a href="assets/images/gallery/18.jpg"><img src="assets/images/gallery/18.jpg" data-big="assets/images/gallery/18.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/19.jpg"><img src="gallerymo/thumbs/t19.jpg" data-big="gallerymo/19.jpg"
+					<a href="assets/images/gallery/19.jpg"><img src="assets/images/gallery/19.jpg" data-big="assets/images/gallery/19.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/1.jpg"><img src="gallerymo/thumbs/t1.jpg" data-big="gallerymo/1.jpg" data-title="My title"
+					<a href="assets/images/gallery/1.jpg"><img src="assets/images/gallery/1.jpg" data-big="assets/images/gallery/1.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/2.jpg"><img src="gallerymo/thumbs/t2.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/2.jpg"><img src="assets/images/gallery/2.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/3.jpg"><img src="gallerymo/thumbs/t3.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/3.jpg"><img src="assets/images/gallery/3.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/4.jpg"><img src="gallerymo/thumbs/t4.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/4.jpg"><img src="assets/images/gallery/4.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/5.jpg"><img src="gallerymo/thumbs/t5.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/5.jpg"><img src="assets/images/gallery/5.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/6.jpg"><img src="gallerymo/thumbs/t6.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/6.jpg"><img src="assets/images/gallery/6.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/7.jpg"><img src="gallerymo/thumbs/t7.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/7.jpg"><img src="assets/images/gallery/7.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/8.jpg"><img src="gallerymo/thumbs/t8.jpg" data-big="gallerymo/2.jpg" data-title="My title"
+					<a href="assets/images/gallery/8.jpg"><img src="assets/images/gallery/8.jpg" data-big="assets/images/gallery/2.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/9.jpg"><img src="gallerymo/thumbs/t9.jpg" data-big="gallerymo/1.jpg" data-title="My title"
+					<a href="assets/images/gallery/9.jpg"><img src="assets/images/gallery/9.jpg" data-big="assets/images/gallery/1.jpg" data-title="My title"
 							data-description="My description"/></a>
-					<a href="gallerymo/10.jpg"><img src="gallerymo/thumbs/t10.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/10.jpg"><img src="assets/images/gallery/10.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/11.jpg"><img src="gallerymo/thumbs/t11.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/11.jpg"><img src="assets/images/gallery/11.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/12.jpg"><img src="gallerymo/thumbs/t12.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/12.jpg"><img src="assets/images/gallery/12.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/13.jpg"><img src="gallerymo/thumbs/t13.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/13.jpg"><img src="assets/images/gallery/13.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/14.jpg"><img src="gallerymo/thumbs/t14.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/14.jpg"><img src="assets/images/gallery/14.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/15.jpg"><img src="gallerymo/thumbs/t15.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/15.jpg"><img src="assets/images/gallery/15.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/16.jpg"><img src="gallerymo/thumbs/t16.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/16.jpg"><img src="assets/images/gallery/16.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
-					<a href="gallerymo/17.jpg"><img src="gallerymo/thumbs/t17.jpg" data-big="gallerymo/2.jpg"
+					<a href="assets/images/gallery/17.jpg"><img src="assets/images/gallery/17.jpg" data-big="assets/images/gallery/2.jpg"
 							data-title="My title" data-description="My description"/></a>
 				</div>
 			</div>
 			<div class="spacer"></div>
 			<div id="class">
 				<div class="bttdiv">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 				<div class="center">
 					<h2 class="pritit">Private Classes Privés</h2>
-					<img class="images privimg" src="image/private.jpg" />
+					<img class="images privimg" src="assets/images/mobile/private.jpg" />
 					<p>1 sur 1 sessions <br> Coach de vie inclus</p>
 					<p>1 on 1 sessions <br> Life coaching included</p>
 					<h2 class="pritit">Pop-Up Classes</h2>
-					<img class="images privimg" src="image/popup.png" />
+					<img class="images privimg" src="assets/images/mobile/popup.png" />
 					<p>Invitez vos amis et adoptez une certaine spontanéité!</p>
 					<p>Grab your friends and embrace some spontaneity!</p>
 				</div>
@@ -506,32 +422,22 @@
 			</div>
 			<div class="center">
 				<div class=" conbtt">
-					<a href="#"><img class="btt" src="image/symbol.png" /></a>
+					<a href="#"><img class="btt" src="assets/images/mobile/symbol.png" /></a>
 					<span class="caption">Back to top!</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<footer class="sclogodiv" id="sccontentinfo" role="contentinfo">
-		<a href="../contact-us.html"><img class="sclogo" src="assets/images/icons/so-cherry.png"/><span class="sccaption">2017
+		<a href="contact-us.html?contactId=0"><img class="sclogo" src="assets/images/icons/so-cherry.png"/><span class="sccaption">2017
 				So Cherry Web Design</span></a>
 	</footer>
-	<script>
-		(function () {
-			Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
-			Galleria.run('.galleria');
-		}());
-	</script>
-	<script type="text/javascript">
-		var addthis_share = addthis_share || {}
-		addthis_share = {
-			passthrough:
-			{
-				twitter:
-					{ via: "anthonykamanos #TYSO #yoga" }
-			}
-		} 
-	</script>
+	<!-- #region SCRIPTS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
+	<script src="assets/js/ui.js"></script>
+	<script src="assets/js/mobile.js"></script>
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59725d19fb4b88e1"></script>
+	<!-- #endregion SCRIPTS -->
 </body>
 </html>
