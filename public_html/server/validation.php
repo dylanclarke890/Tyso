@@ -235,7 +235,7 @@ class ValidationException extends \RuntimeException
   }
 }
 
-class Record
+class Model
 {
   public ValidationResult $vr;
 
@@ -257,10 +257,27 @@ class Record
   public function sanitizeString(string $data)
   {
     if (empty($data))
-      return null;
+      return "";
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
+  }
+
+  public function sanitizeInt(int $data)
+  {
+    if (empty($data))
+      return 0;
+    $isValid = filter_var(
+      $data,
+    FILTER_VALIDATE_INT,
+      array('options' => array('min_range' => 1))
+    );
+    return $isValid === false ? 0 : $isValid;
+  }
+
+  public function numberIsWithinRange($int, $min, $max)
+  {
+    return filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" => $min, "max_range" => $max)));
   }
 }

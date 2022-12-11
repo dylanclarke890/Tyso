@@ -3,106 +3,109 @@ declare(strict_types=1);
 include("validation.php");
 include("emums.php");
 
-// class YogaFormRecord extends Record
-// {
-//   private string $full_name;
-//   private string $company_name;
-//   private int $mats_required;
-//   private GoalOption $goal_of_class;
-//   private ClassDurationOption $class_duration;
+class YogaFormModel extends Model
+{
+  private string $full_name;
+  private string $company_name;
+  private int $mats_required;
+  private GoalOption $goal_of_class;
+  private ClassDurationOption $class_duration;
 
-//   public function setFullName($name)
-//   {
-//     $this->full_name = $this->sanitizeString($name);
-//   }
+  public function __construct($data = null)
+  {
+    if ($data === null)
+      return;
 
-//   public function setCompanyName($name)
-//   {
-//     $this->company_name = $this->sanitizeString($name);
-//   }
+    $this->setFullName($data["full_name"]);
+    $this->setCompanyName($data["company_name"]);
+    $this->setMatsRequired($data["mats_required"]);
+    $this->setGoalOfClass($data["goal_of_class"]);
+    $this->setClassDuration($data["class_duration"]);
+  }
 
-//   public function succeeded()
-//   {
-//     $this->validateProperties();
-//     return parent::succeeded();
-//   }
+  public function setFullName($name)
+  {
+    $this->full_name = $this->sanitizeString($name);
+  }
 
-//   public function getValidationResult()
-//   {
-//     $this->validateProperties();
-//     return parent::getValidationResult();
-//   }
+  public function setCompanyName($name)
+  {
+    $this->company_name = $this->sanitizeString($name);
+  }
 
-//   private function validateProperties()
-//   {
-//     if (empty($this->full_name)) {
-//       $this->vr->addError("Full name is required");
-//     }
-//   }
-// }
+  public function setMatsRequired($mats)
+  {
+    $this->mats_required = $this->sanitizeInt($mats);
+  }
 
-// function numberIsWithinRange($int, $min, $max)
-// {
-//   return filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" => $min, "max_range" => $max)));
-// }
+  public function setGoalOfClass($value)
+  {
+    $sanitized = $this->sanitizeString($value);
+    $this->goal_of_class = GoalOption::tryFrom($sanitized);
+  }
 
-// function validateInput()
-// {
-//   $validation = new ValidationResult();
+  public function setClassDuration($value)
+  {
+    $sanitized = $this->sanitizeString($value);
+    $this->class_duration = ClassDurationOption::tryFrom($sanitized);
+  }
 
-//   if (empty($_POST["full_name"])) {
-//     $validation->addError("Full name is required.");
-//   } else {
-//     $name = $_POST["full_name"];
-//     $nameLen = strlen($name);
-//     if (numberIsWithinRange($nameLen, 1, 30) === false) {
-//       $validation->addError("Full name should be between 1 and 30 characters.");
-//     }
-//   }
+  public function succeeded()
+  {
+    $this->validateProperties();
+    return parent::succeeded();
+  }
 
-//   if (empty($_POST["company_name"])) {
-//     $validation->addError("Company name is required.");
-//   } else {
-//     $name = $_POST["company_name"];
-//     $nameLen = strlen($name);
-//     if (numberIsWithinRange($nameLen, 1, 60) === false) {
-//       $validation->addError("Company name should be between 1 and 60 characters.");
-//     }
-//   }
+  public function getValidationResult()
+  {
+    $this->validateProperties();
+    return parent::getValidationResult();
+  }
 
-//   if (empty($_POST["mats_required"])) {
-//     $validation->addError("Amount of mats is required.");
-//   } else {
-//     $matsRequired = $_POST["mats_required"];
-//     if (numberIsWithinRange($matsRequired, 0, 20) === false) {
-//       $validation->addError("Mat amount should be less than 20.");
-//     }
-//   }
+  public function getErrors()
+  {
+    $this->validateProperties();
+    return parent::getErrors();
+  }
 
-//   if (empty($_POST['goal_of_class'])) {
-//     $validation->addError("Goal is required.");
-//   } else {
-//     $duration = $_POST['goal_of_class'];
-//     $valToEnum = GoalOption::tryFrom($duration);
-//     if (empty($valToEnum))
-//       $validation->addError("$duration is not a valid goal.");
-//   }
+  private function validateProperties()
+  {
+    if (empty($this->full_name)) {
+      $this->vr->addError("Full name is required");
+    } else {
+      $nameLen = strlen($this->full_name);
+      if ($this->numberIsWithinRange($nameLen, 1, 30) === false) {
+        $this->vr->addError("Full name should be between 1 and 30 characters.");
+      }
+    }
 
-//   if (empty($_POST["class_duration"])) {
-//     $validation->addError("Duration of classes is required.");
-//   } else {
-//     $duration = $_POST['class_duration'];
-//     $valToEnum = ClassDurationOption::tryFrom($duration);
-//     if (empty($valToEnum))
-//       $validation->addError("$duration is not a valid goal.");
-//   }
+    if (empty($this->company_name)) {
+      $this->vr->addError("Company name is required.");
+    } else {
+      $nameLen = strlen($this->company_name);
+      if ($this->numberIsWithinRange($nameLen, 1, 60) === false) {
+        $this->vr->addError("Company name should be between 1 and 60 characters.");
+      }
+    }
 
-//   return $validation;
-// }
-// $yogaRecord = new YogaFormRecord();
-// $yogaRecord->setFullName($_POST['full_name']);
-// $yogaRecord->setCompanyName($_POST['company_name']);
+    if (empty($this->mats_required)) {
+      $this->vr->addError("Amount of mats is required.");
+    } else if ($this->numberIsWithinRange($this->mats_required, 0, 20) === false) {
+      $this->vr->addError("Mat amount should be less than 20.");
+    }
 
-// echo json_encode($yogaRecord->getValidationResult());
-echo "working";
+
+    if (empty($this->goal_of_class)) {
+      $this->vr->addError("Goal is required.");
+    }
+
+    if (empty($this->class_duration)) {
+      $this->vr->addError("Duration of classes is required.");
+    }
+
+  }
+}
+
+$yogaRecord = new YogaFormModel($_POST);
+echo json_encode($yogaRecord->getValidationResult());
 ?>
