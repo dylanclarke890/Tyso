@@ -15,7 +15,7 @@ jQuery(function ($) {
       $("#menubutt").hide();
       $("#title").show();
       $("#wrapper").removeClass("space");
-      $("#logo").attr("src", "assets/images/web/tyso-icon.png");
+      $("#logo").attr("src", "assets/images/icons/tyso-icon.png");
     }
   }
 
