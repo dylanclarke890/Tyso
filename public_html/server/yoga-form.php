@@ -138,7 +138,7 @@ try {
   company_name VARCHAR(60) NOT NULL,
   mats_required VARCHAR(6) NOT NULL,
   goal_of_class VARCHAR(30) NOT NULL,
-  class_duration VARCHAR(30) NOT NULL,
+  class_duration VARCHAR(30) NOT NULL
   )";
 
   // use exec() because no results are returned
