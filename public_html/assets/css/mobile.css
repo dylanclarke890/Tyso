@@ -1,5 +1,4 @@
 body {
-  /* line-height: 16px => 24px/16px=1.5em */
   font-family: "Architects Daughter", cursive;
   font-size: 1.5em;
   background-color: rgba(34, 135, 55, 0.7);
@@ -550,7 +549,8 @@ video {
 
 .aboutli {
   background: url(../images/mobile/menu/rainbow.png) no-repeat center,
-    url(../images/mobile/menu/bfly.png) no-repeat left, url(../images/mobile/menu/bfly.png) no-repeat right;
+    url(../images/mobile/menu/bfly.png) no-repeat left,
+    url(../images/mobile/menu/bfly.png) no-repeat right;
   background-size: contain;
   /*background-position:center;
 	background-repeat:no-repeat;*/
@@ -611,7 +611,7 @@ video {
 }
 
 .surveyli {
-  background-image: url(../images/mobile/menu/surveybutt.png);
+  background-image: url(../images/mobile/menu/survey.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -619,7 +619,7 @@ video {
 }
 
 .vipli {
-  background-image: url(../images/mobile/menu/vipbutt.png);
+  background-image: url(../images/mobile/menu/tyso-vip.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -627,7 +627,7 @@ video {
 }
 
 .watchli {
-  background-image: url(../images/mobile/menu/sparkbg7.png);
+  background-image: url(../images/mobile/menu/spark.png);
   background-size: contain;
   background-color: rgba(192, 192, 192, 1);
 }
