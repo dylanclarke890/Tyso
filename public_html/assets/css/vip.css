@@ -23,7 +23,7 @@
 }
 
 #section-1 {
-  background-image: url(../images/leaping-girl.png);
+  background-image: url(../images/web/leaping-girl.png);
   text-align: center;
 }
 
@@ -37,7 +37,7 @@
 }
 
 #section-2 {
-  background-image: url(../images/relaxing-guy-2.png);
+  background-image: url(../images/web/relaxing-guy-2.png);
   text-align: right;
 }
 
@@ -47,7 +47,7 @@
 }
 
 #section-3 {
-  background-image: url(../images/relaxing-guy-1.png);
+  background-image: url(../images/web/relaxing-guy-1.png);
 }
 
 #section-3 span:first-of-type {
@@ -61,7 +61,7 @@
 }
 
 #section-4 {
-  background-image: url(../images/beach.png);
+  background-image: url(../images/web/beach.png);
   text-align: center;
 }
 
@@ -76,7 +76,7 @@
 }
 
 #section-5 {
-  background-image: url(../images/guru.png);
+  background-image: url(../images/web/guru.png);
   background-position: right top;
 }
 

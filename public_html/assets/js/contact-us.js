@@ -8,7 +8,7 @@ UI.onPageReady(() => {
 
   const params = new URLSearchParams(window.location.search);
   const subjectId = parseInt(params.get("subjectId") ?? "A");
-  console.log(subjectId);
+
   if (!isNaN(subjectId)) {
     const subject = subjects[subjectId];
     const el = document.querySelector('input[name="subject"]');
