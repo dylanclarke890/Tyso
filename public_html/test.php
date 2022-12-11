@@ -22,7 +22,12 @@
     <p>Fast one</p>
     <p>Hyundai</p>
     </div>';
+
+  $arr = array("BIke", "Car", "Truck");
+  echo json_encode($arr);
   ?>
+
+
 
 </body>
 
