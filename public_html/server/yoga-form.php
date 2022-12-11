@@ -1,25 +1,29 @@
 <?php
 declare(strict_types=1);
 include("validation.php");
+include("emums.php");
 
-enum GoalOption:string
+class YogaFormRecord extends Record
 {
-  case Balance = "Balance";
-  case Force = "Force";
-  case Concentration = "Concentration";
-  case Conscience = "Conscience";
-  case TeamBuilding = "TeamBuilding";
-  case Leadership = "Leadership";
-  case YogaIntro = "YogaIntro";
-  case MeditationIntro = "MeditationIntro";
+  public string $full_name;
+  public string $company_name;
+  public int $mats_required;
+  public GoalOption $goal_of_class;
+  public ClassDurationOption $class_duration;
 }
 
-enum ClassDurationOption:string
+function numberIsWithinRange($int, $min, $max)
 {
-  case One = "One";
-  case Five = "Five";
-  case Ten = "Ten";
-  case Twenty = "Twenty";
+  return filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" => $min, "max_range" => $max)));
+}
+
+function filterPost($input)
+{
+  $safePost = filter_input_array($input, [
+    "id" => FILTER_VALIDATE_INT,
+    "name" => FILTER_SANITIZE_STRING,
+    "email" => FILTER_SANITIZE_EMAIL
+  ]);
 }
 
 function validateInput()
@@ -31,7 +35,7 @@ function validateInput()
   } else {
     $name = $_POST["full_name"];
     $nameLen = strlen($name);
-    if ($nameLen <= 1 || $nameLen >= 30) {
+    if (numberIsWithinRange($nameLen, 1, 30) === false) {
       $validation->addError("Full name should be between 1 and 30 characters.");
     }
   }
@@ -41,8 +45,8 @@ function validateInput()
   } else {
     $name = $_POST["company_name"];
     $nameLen = strlen($name);
-    if ($nameLen <= 1 || $nameLen >= 60) {
-      $validation->addError("Company name should be between 1 and 30 characters.");
+    if (numberIsWithinRange($nameLen, 1, 60) === false) {
+      $validation->addError("Company name should be between 1 and 60 characters.");
     }
   }
 
@@ -50,11 +54,7 @@ function validateInput()
     $validation->addError("Amount of mats is required.");
   } else {
     $matsRequired = $_POST["mats_required"];
-    if (!is_numeric($matsRequired)) {
-      $validation->addError("Mat amount should be a valid number.");
-    }
-    $matsRequired = (int) $matsRequired;
-    if ($matsRequired > 20) {
+    if (numberIsWithinRange($matsRequired, 0, 20) === false) {
       $validation->addError("Mat amount should be less than 20.");
     }
   }

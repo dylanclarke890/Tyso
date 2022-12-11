@@ -234,3 +234,23 @@ class ValidationException extends \RuntimeException
     return new static ($error);
   }
 }
+
+class Record
+{
+  public ValidationResult $vr;
+
+  public function succeeded()
+  {
+    return $this->vr->succeeded();
+  }
+
+  public function getErrors()
+  {
+    return $this->vr->getErrors();
+  }
+
+  public function getResult()
+  {
+    return $this->vr->getResult();
+  }
+}
