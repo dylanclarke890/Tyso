@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png" />
+    <link rel="manifest" href="assets/images/icons/site.webmanifest" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Marck+Script|Oswald:400,300,700"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/contact-us.css" />
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="index.html"><img class="logo" src="assets/images/tyso-logo.png" /></a>
+      <h1 class="text-center">Contact Form</h1>
+    </nav>
+    <div class="content container">
+      <form id="contact-form" action="/server/email.php" method="post">
+        <label for="fname">Name</label>
+        <input type="text" name="name" placeholder="Your name.." />
+
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Your email.." />
+
+        <label for="subject">Subject</label>
+        <input type="text" name="subject" placeholder="Your name.." />
+        <label for="message">Message</label>
+        <textarea name="message" placeholder="Write something.."></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script src="assets/js/ui.js" type="text/javascript"></script>
+    <script src="assets/js/contact-us.js" type="text/javascript"></script>
+  </body>
+</html>
