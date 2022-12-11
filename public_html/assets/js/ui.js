@@ -136,6 +136,7 @@ class UI {
   static repaintDOM = () => {
     document.body.getBoundingClientRect();
   };
+
 }
 
 class ParallaxSlide {

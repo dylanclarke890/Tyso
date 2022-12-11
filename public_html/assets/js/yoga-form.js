@@ -118,17 +118,19 @@ class Translator {
     `;
 
     document.querySelector(".content").innerHTML = html;
-    const form = document.getElementById("yoga-form");
-    UI.addEvent(form, "submit", (e) => {
-      e.preventDefault();
-      fetch("server/process.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: 78912 }),
-      }).then((response) => response.json());
+
+    UI.addEvent(document.getElementById("yoga-form"), "submit", function (event) {
+      event.preventDefault();
+      const d = this;
+      console.log(d);
+      fetch(d.getAttribute("action"), {
+        method: d.getAttribute("method"),
+        body: new FormData(d),
+      })
+        .then((res) => res.text())
+        .then(function (data) {
+          console.log(data);
+        });
     });
   }
 }
