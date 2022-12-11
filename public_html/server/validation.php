@@ -237,7 +237,12 @@ class ValidationException extends \RuntimeException
 
 class Model
 {
-  public ValidationResult $vr = new ValidationResult();
+  public ValidationResult $vr;
+
+  public function __construct()
+  {
+    $this->vr = new ValidationResult();
+  }
 
   public function succeeded()
   {

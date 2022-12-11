@@ -13,6 +13,7 @@ class YogaFormModel extends Model
 
   public function __construct($data = null)
   {
+    parent::__construct();
     if ($data === null)
       return;
 
