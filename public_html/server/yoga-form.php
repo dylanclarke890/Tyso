@@ -28,27 +28,53 @@ function validateInput()
 
   if (empty($_POST["full_name"])) {
     $validation->addError("Full name is required.");
+  } else {
+    $name = $_POST["full_name"];
+    $nameLen = strlen($name);
+    if ($nameLen <= 1 || $nameLen >= 30) {
+      $validation->addError("Full name should be between 1 and 30 characters.");
+    }
   }
 
   if (empty($_POST["company_name"])) {
     $validation->addError("Company name is required.");
+  } else {
+    $name = $_POST["company_name"];
+    $nameLen = strlen($name);
+    if ($nameLen <= 1 || $nameLen >= 60) {
+      $validation->addError("Company name should be between 1 and 30 characters.");
+    }
   }
 
   if (empty($_POST["mats_required"])) {
     $validation->addError("Amount of mats is required.");
+  } else {
+    $matsRequired = $_POST["mats_required"];
+    if (!is_numeric($matsRequired)) {
+      $validation->addError("Mat amount should be a valid number.");
+    }
+    $matsRequired = (int) $matsRequired;
+    if ($matsRequired > 20) {
+      $validation->addError("Mat amount should be less than 20.");
+    }
   }
 
   if (empty($_POST['goal_of_class'])) {
     $validation->addError("Goal is required.");
   } else {
-    $classGoal = $_POST['goal_of_class'];
-    $valToEnum = GoalOption::tryFrom($classGoal);
+    $duration = $_POST['goal_of_class'];
+    $valToEnum = GoalOption::tryFrom($duration);
     if (empty($valToEnum))
-      $validation->addError("$classGoal is not a valid goal.");
+      $validation->addError("$duration is not a valid goal.");
   }
 
   if (empty($_POST["class_duration"])) {
     $validation->addError("Duration of classes is required.");
+  } else {
+    $duration = $_POST['class_duration'];
+    $valToEnum = ClassDurationOption::tryFrom($duration);
+    if (empty($valToEnum))
+      $validation->addError("$duration is not a valid goal.");
   }
 
   return $validation;
