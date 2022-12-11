@@ -45,14 +45,4 @@ UI.onPageReady(() => {
   UI.addEvent(document.querySelector("#video-modal a[href='videos.html']"), "click", () =>
     videoModal.close()
   );
-
-  UI.addEvent(window, "resize", () => {
-    if (window.innerWidth > 480) return;
-
-    const emailBtn = document.getElementById("emailButt");
-    if (emailBtn) emailBtn.classList.remove("addthis_inline_follow_toolbox");
-    else console.error("Could not find an email button element.");
-  });
-
-  UI.triggerEvent(window, "resize");
 });
