@@ -5,25 +5,40 @@ include("emums.php");
 
 class YogaFormRecord extends Record
 {
-  public string $full_name;
-  public string $company_name;
-  public int $mats_required;
-  public GoalOption $goal_of_class;
-  public ClassDurationOption $class_duration;
+  private string $full_name;
+  private string $company_name;
+  private int $mats_required;
+  private GoalOption $goal_of_class;
+  private ClassDurationOption $class_duration;
+
+  public function setFullName($name)
+  {
+    $this->full_name = $this->sanitizeString($name);
+  }
+
+  public function succeeded()
+  {
+    $this->validateProperties();
+    return parent::succeeded();
+  }
+
+  public function getValidationResult()
+  {
+    $this->validateProperties();
+    return parent::getValidationResult();
+  }
+
+  private function validateProperties()
+  {
+    if (empty($this->full_name)) {
+      $this->vr->addError("Full name is required");
+    }
+  }
 }
 
 function numberIsWithinRange($int, $min, $max)
 {
   return filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" => $min, "max_range" => $max)));
-}
-
-function filterPost($input)
-{
-  $safePost = filter_input_array($input, [
-    "id" => FILTER_VALIDATE_INT,
-    "name" => FILTER_SANITIZE_STRING,
-    "email" => FILTER_SANITIZE_EMAIL
-  ]);
 }
 
 function validateInput()
@@ -79,8 +94,8 @@ function validateInput()
 
   return $validation;
 }
+$yogaRecord = new YogaFormRecord();
+$yogaRecord->setFullName($_POST['full_name']);
 
-$validation = validateInput();
-
-echo json_encode($validation->getResult());
+echo json_encode($yogaRecord->getValidationResult());
 ?>

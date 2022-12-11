@@ -249,8 +249,18 @@ class Record
     return $this->vr->getErrors();
   }
 
-  public function getResult()
+  public function getValidationResult()
   {
     return $this->vr->getResult();
+  }
+
+  public function sanitizeString(string $data)
+  {
+    if (empty($data))
+      return null;
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
   }
 }
