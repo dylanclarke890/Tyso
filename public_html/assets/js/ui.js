@@ -660,13 +660,21 @@ class Message {
   }
 
   show() {
+    if (!this.msg) {
+      this.#construct();
+      UI.repaintDOM();
+    }
     this.msg.classList.remove("hidden");
     if (this.duration > 0) setTimeout(() => this.hide(), this.duration);
   }
 
   hide() {
     this.msg.classList.add("hidden");
-    if (this.removeOnHide) document.body.removeChild(infoMsg);
+    if (this.removeOnHide)
+      setTimeout(() => {
+        document.body.removeChild(this.msg);
+        this.msg = null;
+      }, 300);
   }
 
   static success(message = "Success!", opts = {}) {

@@ -123,7 +123,7 @@ class Translator {
         </div>
         <div class="form-input">
           <label>${mats.translate()}</label>
-          <input type="text" name="mats_required" autocomplete="off" />
+          <input type="text" name="mats_required" />
         </div>
         <div class="center">
           <label>${goals.translate()}</label>
@@ -132,7 +132,7 @@ class Translator {
         ${goals_options
           .map(
             (g) =>
-              `<div><input type="checkbox" name="goal_of_class" value="${
+              `<div><input type="checkbox" name="goal_of_class[]" value="${
                 g.value
               }" />${g.translation.translate()}</div>`
           )
