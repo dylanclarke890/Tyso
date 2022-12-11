@@ -1,58 +1,93 @@
+class Translation {
+  constructor(translations = {}) {
+    this.translations = translations;
+  }
+
+  setLanguage(lang) {
+    this.lang = lang;
+  }
+
+  translate = (lang = null) =>
+    this.translations[this.lang] ?? this.translations[lang] ?? this.translations["EN"];
+}
+
 class Translator {
   static translations = {
-    EN: {
-      title: "TYSO Survey",
-      full_name: "Full Name:",
-      company_name: "Company Name:",
-      mats: "Available yoga mats in space:",
-      goals: "What are the goal(s) of the Yoga class?",
-      goals_options: [
-        { value: "Balance", translation: "Body-mind Balance" },
-        { value: "Force", translation: "Physical Strength" },
-        { value: "Concentration", translation: "Enhanced Focus" },
-        { value: "Conscience", translation: "Fostering Mindfulness" },
-        { value: "TeamBuilding", translation: "Team building" },
-        { value: "Leadership", translation: "Corporate Leadership Workshop" },
-        { value: "YogaIntro", translation: "Introduction to Yoga" },
-        { value: "MeditationIntro", translation: "Introduction to Meditation" },
-      ],
-      classes: "Series of classes:",
-      classes_options: [
-        { value: "One", translation: "One class" },
-        { value: "Five", translation: "5 weeks" },
-        { value: "Ten", translation: "10 weeks" },
-        { value: "Twenty", translation: "20 weeks" },
-      ],
-      submit: "Submit",
-    },
-    FR: {
-      title: "TYSO Sondage",
-      full_name: "Nom complet:",
-      company_name: "Nom de l'entreprise:",
-      mats: "Tapis de yoga disponible dans l’espace:",
-      goals: "Quel est l’objectif recherché dans la classe de yoga?",
-      goals_options: [
-        { value: "Balance", translation: "Balance esprit et corps" },
-        { value: "Force", translation: "Force physique" },
-        { value: "Concentration", translation: "Amélioration de la concentration" },
-        { value: "Conscience", translation: "Travailler sur la pleine conscience" },
-        { value: "TeamBuilding", translation: "Activités de 'team building'" },
-        { value: "Leadership", translation: "Ateliers sur le leadership en entreprise" },
-        { value: "YogaIntro", translation: "Introduction au yoga" },
-        { value: "MeditationIntro", translation: "Introduction à la méditation" },
-      ],
-      classes: "Séries de classes:",
-      classes_options: [
-        { value: "One", translation: "Une classe" },
-        { value: "Five", translation: "5 semaines" },
-        { value: "Ten", translation: "10 semaines" },
-        { value: "Twenty", translation: "20 semaines" },
-      ],
-      submit: "Soumettre",
-    },
+    title: new Translation({ EN: "TYSO Survey", FR: "TYSO Sondage" }),
+    full_name: new Translation({ EN: "Full Name:", FR: "Nom complet:" }),
+    company_name: new Translation({ EN: "Company Name:", FR: "Nom de l'entreprise:" }),
+    mats: new Translation({
+      EN: "Available yoga mats in space:",
+      FR: "Tapis de yoga disponible dans l’espace:",
+    }),
+    goals: new Translation({
+      EN: "What are the goal(s) of the Yoga class?",
+      FR: "Quel est l’objectif recherché dans la classe de yoga?",
+    }),
+    goals_options: [
+      {
+        value: "Balance",
+        translation: new Translation({ EN: "Body-mind Balance", FR: "Balance esprit et corps" }),
+      },
+      {
+        value: "Force",
+        translation: new Translation({ EN: "Physical Strength", FR: "Force physique" }),
+      },
+      {
+        value: "Concentration",
+        translation: new Translation({
+          EN: "Enhanced Focus",
+          FR: "Amélioration de la concentration",
+        }),
+      },
+      {
+        value: "Conscience",
+        translation: new Translation({
+          EN: "Fostering Mindfulness",
+          FR: "Travailler sur la pleine conscience",
+        }),
+      },
+      {
+        value: "TeamBuilding",
+        translation: new Translation({ EN: "Team Building", FR: "Activités de 'team building'" }),
+      },
+      {
+        value: "Leadership",
+        translation: new Translation({
+          EN: "Corporate Leadership Workshop",
+          FR: "Ateliers sur le leadership en entreprise",
+        }),
+      },
+      {
+        value: "YogaIntro",
+        translation: new Translation({ EN: "Introduction to Yoga", FR: "Introduction au yoga" }),
+      },
+      {
+        value: "MeditationIntro",
+        translation: new Translation({
+          EN: "Introduction to Meditation",
+          FR: "Introduction à la méditation",
+        }),
+      },
+    ],
+    classes: new Translation({ EN: "Series of classes:", FR: "Séries de classes:" }),
+    classes_options: [
+      { value: "One", translation: new Translation({ EN: "One class", FR: "Une classe" }) },
+      { value: "Five", translation: new Translation({ EN: "5 weeks", FR: "5 semaines" }) },
+      { value: "Ten", translation: new Translation({ EN: "10 weeks", FR: "10 semaines" }) },
+      { value: "Twenty", translation: new Translation({ EN: "20 weeks", FR: "20 semaines" }) },
+    ],
+    submit: new Translation({ EN: "Submit", FR: "Soumettre" }),
   };
+
   static saveLanguage(lang) {
     localStorage.setItem("preferredLanguage", lang);
+    for (let key in Translator.translations) {
+      const firstLevel = Translator.translations[key];
+      if (firstLevel instanceof Translation) firstLevel.setLanguage(lang);
+      // must be an array of options otherwise
+      else for (let option of firstLevel) option.translation.setLanguage(lang);
+    }
   }
 
   static getLanguage() {
@@ -61,7 +96,7 @@ class Translator {
   }
 
   static constructHTML(lang) {
-    if (!Translator.translations[lang]) return;
+    Translator.saveLanguage(lang);
     const {
       title,
       full_name,
@@ -72,47 +107,52 @@ class Translator {
       classes,
       classes_options,
       submit,
-    } = Translator.translations[lang];
-    document.title = title;
-    document.querySelector("#navbar h1").innerHTML = title;
+    } = Translator.translations;
+
+    document.title = title.translate();
+    document.querySelector("#navbar h1").innerHTML = title.translate();
     const html = `
       <form id="yoga-form" action="server/yoga-form.php" method="post">
         <div class="form-input">
-          <label>${full_name}</label>
+          <label>${full_name.translate()}</label>
           <input type="text" name="full_name" />
         </div>
         <div class="form-input">
-          <label>${company_name}</label>
+          <label>${company_name.translate()}</label>
           <input type="text" name="company_name" />
         </div>
         <div class="form-input">
-          <label>${mats}</label>
+          <label>${mats.translate()}</label>
           <input type="text" name="mats_required" autocomplete="off" />
         </div>
         <div class="center">
-          <label>${goals}</label>
+          <label>${goals.translate()}</label>
         </div>
         <div class="checkbox-list">
         ${goals_options
           .map(
             (g) =>
-              `<div><input type="checkbox" name="goal_of_class" value="${g.value}" />${g.translation}</div>`
+              `<div><input type="checkbox" name="goal_of_class" value="${
+                g.value
+              }" />${g.translation.translate()}</div>`
           )
           .join("")}
         </div>
         <div class="center">
-          <label>${classes}</label>
+          <label>${classes.translate()}</label>
         </div>
         <div class="checkbox-list">
           ${classes_options
             .map(
               (g) =>
-                `<div><input type="checkbox" name="class_duration" value="${g.value}" />${g.translation}</div>`
+                `<div><input type="checkbox" name="class_duration" value="${
+                  g.value
+                }" />${g.translation.translate()}</div>`
             )
             .join("")}
         </div>
         <div class="submit-btn">
-          <button type="submit">${submit}</button>
+          <button type="submit">${submit.translate()}</button>
         </div>
       </form>
     `;
@@ -139,7 +179,6 @@ UI.onPageReady(() => {
         lang.classList.add("active");
         language = lang.getAttribute("data-lang");
         Translator.constructHTML(language);
-        Translator.saveLanguage(language);
       }
     });
   });
@@ -150,5 +189,4 @@ UI.onPageReady(() => {
   });
 
   Translator.constructHTML(language);
-  Translator.saveLanguage(language);
 });
