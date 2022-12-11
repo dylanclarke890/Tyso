@@ -37,9 +37,7 @@
 
 
     const newContent = document.createElement("h2");
-    newContent.innerText = {
-      "dave": 3
-    };
+    newContent.innerText = arr.join(" ");
     document.body.prepend(newContent);
     console.log(arr);
   })
