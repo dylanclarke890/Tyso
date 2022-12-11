@@ -119,19 +119,12 @@ class Translator {
 
     document.querySelector(".content").innerHTML = html;
 
-    UI.addEvent(document.getElementById("yoga-form"), "submit", function (event) {
-      event.preventDefault();
-      const d = this;
-      console.log(d);
-      fetch(d.getAttribute("action"), {
-        method: d.getAttribute("method"),
-        body: new FormData(d),
+    UI.makeFormAJAX(
+      document.getElementById("yoga-form", (data) => {
+        if (data.success) Message.success();
+        else Message.error(data.errors.join(""));
       })
-        .then((res) => res.text())
-        .then(function (data) {
-          console.log(data);
-        });
-    });
+    );
   }
 }
 

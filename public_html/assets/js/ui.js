@@ -137,6 +137,18 @@ class UI {
     document.body.getBoundingClientRect();
   };
 
+  static makeFormAJAX = (/** @type {HTMLFormElement} */ form, cb, parse = true) => {
+    UI.addEvent(form, "submit", function (e) {
+      e.preventDefault();
+      const d = this;
+      fetch(d.getAttribute("action"), {
+        method: d.getAttribute("method"),
+        body: new FormData(d),
+      })
+        .then((res) => res.text())
+        .then((data) => cb(parse ? JSON.parse(data) : data));
+    });
+  };
 }
 
 class ParallaxSlide {
