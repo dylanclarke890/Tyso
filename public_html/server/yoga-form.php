@@ -35,14 +35,29 @@ class YogaFormModel extends Model
     $this->full_name = $this->sanitizeString($name);
   }
 
+  public function getFullName()
+  {
+    return $this->full_name;
+  }
+
   public function setCompanyName($name)
   {
     $this->company_name = $this->sanitizeString($name);
   }
 
+  public function getCompanyName()
+  {
+    return $this->company_name;
+  }
+
   public function setMatsRequired($mats)
   {
     $this->mats_required = $this->sanitizeInt((int) $mats);
+  }
+
+  public function getMatsRequired()
+  {
+    return $this->mats_required;
   }
 
   public function setGoalOfClass($value)
@@ -53,12 +68,22 @@ class YogaFormModel extends Model
       $this->goal_of_class = $toEnum;
   }
 
+  public function getGoalOfClass()
+  {
+    return $this->goal_of_class;
+  }
+
   public function setClassDuration($value)
   {
     $sanitized = $this->sanitizeString($value);
     $toEnum = ClassDurationOption::tryFrom($sanitized);
     if ($toEnum !== null)
       $this->class_duration = $toEnum;
+  }
+
+  public function getClassDuration()
+  {
+    return $this->class_duration;
   }
 
   public function succeeded()
@@ -123,16 +148,14 @@ class YogaFormModel extends Model
   }
 }
 
-$yogaRecord = new YogaFormModel($_POST);
-$yogaRecord->exitIfError();
+$record = new YogaFormModel($_POST);
+$record->exitIfError();
 
 try {
   $conn = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  // sql to create table
-  $sql = "CREATE TABLE IF NOT EXISTS YogaSurveyResponse (
+  $create = "CREATE TABLE IF NOT EXISTS YogaSurveyResponse (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(30) NOT NULL,
     company_name VARCHAR(60) NOT NULL,
@@ -141,11 +164,21 @@ try {
     class_duration VARCHAR(30) NOT NULL
     )";
 
-  // use exec() because no results are returned
-  $conn->exec($sql);
+  $conn->exec($create);
+
+  $insert = "INSERT INTO YogaSurveyResponse (
+    full_name, company_name, mats_required, goal_of_class, class_duration
+    )
+  VALUES (
+    '{$record->getFullName()}', '{$record->getCompanyName()}', {$record->getMatsRequired()},
+    '{$record->getGoalOfClass()->value}', '{$record->getClassDuration()->value}'
+    )";
+
+  $conn->exec($insert);
+
 } catch (PDOException $e) {
-  $yogaRecord->vr->addError("Database Error: " . $e->getMessage());
+  $record->vr->addError("Database Error: " . $e->getMessage());
 }
 
-$yogaRecord->exitIfError(overrideCheck: true);
+$record->exitIfError(overrideCheck: true);
 ?>
