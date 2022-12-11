@@ -36,7 +36,7 @@
     const arr = JSON.parse(jsonArr);
     const newContent = document.createElement("h2");
     newContent.innerText = arr;
-    document.prepend(newContent);
+    document.body.prepend(newContent);
     console.log(arr);
   })
   </script>
