@@ -117,5 +117,11 @@ class YogaFormModel extends Model
 }
 
 $yogaRecord = new YogaFormModel($_POST);
+
+if ($yogaRecord->succeeded()) {
+  mail("dylanclarke890@gmail.com", "Success!", "This sent successfully!");
+}
+
 echo json_encode($yogaRecord->getValidationResult());
+
 ?>
