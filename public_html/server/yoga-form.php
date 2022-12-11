@@ -113,19 +113,26 @@ class YogaFormModel extends Model
       $this->vr->addError("Duration of classes is required.");
     }
   }
-}
 
-$yogaRecord = new YogaFormModel($_POST);
-if ($yogaRecord->succeeded()) {
-  try {
-    $conn = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  } catch (PDOException $e) {
-    $yogaRecord->vr->addError("Connection failed: " . $e->getMessage());
+  public function exitIfError(bool $overrideCheck = false)
+  {
+    if ($overrideCheck || $this->succeeded())
+      return;
+    echo json_encode($this->getValidationResult());
+    exit();
   }
 }
 
-echo json_encode($yogaRecord->getValidationResult());
+$yogaRecord = new YogaFormModel($_POST);
+$yogaRecord->exitIfError();
 
+try {
+  $conn = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  $yogaRecord->vr->addError("Connection failed: " . $e->getMessage());
+}
+
+$yogaRecord->exitIfError(overrideCheck: true);
 ?>
