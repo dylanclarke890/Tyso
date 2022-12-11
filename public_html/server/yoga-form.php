@@ -2,6 +2,7 @@
 declare(strict_types=1);
 include("enums.php");
 include("validation.php");
+include("config.php");
 
 class YogaFormModel extends Model
 {
@@ -81,7 +82,7 @@ class YogaFormModel extends Model
   private function validateModel()
   {
     if (empty($this->full_name)) {
-      $this->vr->addError("Full name is required");
+      $this->vr->addError("Full name is required.");
     } else {
       $nameLen = strlen($this->full_name);
       if ($this->numberIsWithinRange($nameLen, 1, 30) === false) {
@@ -104,7 +105,6 @@ class YogaFormModel extends Model
       $this->vr->addError("Mat amount should be less than 20.");
     }
 
-
     if (empty($this->goal_of_class)) {
       $this->vr->addError("Goal is required.");
     }
@@ -112,14 +112,13 @@ class YogaFormModel extends Model
     if (empty($this->class_duration)) {
       $this->vr->addError("Duration of classes is required.");
     }
-
   }
 }
 
 $yogaRecord = new YogaFormModel($_POST);
-
 if ($yogaRecord->succeeded()) {
-  mail("dylanclarke890@gmail.com", "Success!", "This sent successfully!");
+  $conn = mysqli_connect($servername, $username, $password);
+  $yogaRecord->vr->addError("Unable to connect.");
 }
 
 echo json_encode($yogaRecord->getValidationResult());
