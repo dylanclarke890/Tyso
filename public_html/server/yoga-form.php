@@ -117,8 +117,13 @@ class YogaFormModel extends Model
 
 $yogaRecord = new YogaFormModel($_POST);
 if ($yogaRecord->succeeded()) {
-  $conn = mysqli_connect($hostname, $username, $password, $dbname);
-  $yogaRecord->vr->addError("Unable to connect.");
+  try {
+    $conn = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  } catch (PDOException $e) {
+    $yogaRecord->vr->addError("Connection failed: " . $e->getMessage());
+  }
 }
 
 echo json_encode($yogaRecord->getValidationResult());
