@@ -16,6 +16,11 @@ class YogaFormRecord extends Record
     $this->full_name = $this->sanitizeString($name);
   }
 
+  public function setCompanyName($name)
+  {
+    $this->company_name = $this->sanitizeString($name);
+  }
+
   public function succeeded()
   {
     $this->validateProperties();
@@ -96,6 +101,7 @@ function validateInput()
 }
 $yogaRecord = new YogaFormRecord();
 $yogaRecord->setFullName($_POST['full_name']);
+$yogaRecord->setCompanyName($_POST['company_name']);
 
 echo json_encode($yogaRecord->getValidationResult());
 ?>
