@@ -10,38 +10,29 @@
 
 <body>
   <?php
-  echo '<div class="car-info" style="text-align: center">
-      <p>Benz</p>
-      <p>Mercedes</p>
-    </div>';
 
+  $bikeHTML = '<div class="bike-info" style="text-align: center">
+        <p>Fast one</p>
+        <p>Hyundai</p>
+        </div>';
+  $carHTML = '<div class="car-info" style="text-align: center">
+          <p>Benz</p>
+          <p>Mercedes</p>
+        </div>';
+
+  $type = $_GET["type"];
+
+  if (isset($type)) {
+    if ($type === "Bike") {
+      echo $bikeHTML;
+    } else if ($type === "Car") {
+      echo $carHTML;
+    }
+  } else {
+    echo $bikeHTML;
+    echo $carHTML;
+  }
   ?>
-
-  <?php
-  echo '<div class="bike-info" style="text-align: center">
-    <p>Fast one</p>
-    <p>Hyundai</p>
-    </div>';
-
-  $arr = array("BIke", "Car", "Truck");
-  $arrAsStr = json_encode($arr);
-  echo "<h2 id='test-arr'>$arrAsStr<h2>";
-  ?>
-
-
-  <script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", () => {
-    const content = document.getElementById("test-arr");
-    const jsonArr = content.innerText;
-    const arr = JSON.parse(jsonArr);
-
-
-    const newContent = document.createElement("h2");
-    newContent.innerText = arr.join(" ");
-    document.body.prepend(newContent);
-    console.log(arr);
-  })
-  </script>
 </body>
 
 </html>
