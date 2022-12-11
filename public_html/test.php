@@ -34,8 +34,12 @@
     const content = document.getElementById("test-arr");
     const jsonArr = content.innerText;
     const arr = JSON.parse(jsonArr);
+
+
     const newContent = document.createElement("h2");
-    newContent.innerText = arr;
+    newContent.innerText = {
+      "dave": 3
+    };
     document.body.prepend(newContent);
     console.log(arr);
   })
