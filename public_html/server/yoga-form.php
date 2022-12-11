@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
+include("config.php");
 include("enums.php");
 include("validation.php");
-include("config.php");
 
 class YogaFormModel extends Model
 {
@@ -132,14 +132,14 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // sql to create table
-  $sql = "CREATE TABLE YogaSurveyResponse (
-  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  full_name VARCHAR(30) NOT NULL,
-  company_name VARCHAR(60) NOT NULL,
-  mats_required VARCHAR(6) NOT NULL,
-  goal_of_class VARCHAR(30) NOT NULL,
-  class_duration VARCHAR(30) NOT NULL
-  )";
+  $sql = "CREATE TABLE IF NOT EXISTS YogaSurveyResponse (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(30) NOT NULL,
+    company_name VARCHAR(60) NOT NULL,
+    mats_required VARCHAR(6) NOT NULL,
+    goal_of_class VARCHAR(30) NOT NULL,
+    class_duration VARCHAR(30) NOT NULL
+    )";
 
   // use exec() because no results are returned
   $conn->exec($sql);
