@@ -8,8 +8,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png" />
     <link rel="manifest" href="assets/images/icons/site.webmanifest" />
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/main.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/mobile.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/mobile-alt.css" type="text/css" />
     <title>TYSO yoga</title>
   </head>
   <body>
@@ -17,17 +18,13 @@
     <header id="banner-wrapper">
       <div id="banner">
         <img id="logo" src="assets/images/mobile/newlogo.png" title="TYSO logo" />
-        <!-- #region MOBILE COLLAPSE BUTTON -->
-        <nav id="menu-nav">
-          <div id="menubutt" style="display: none">
-            <div id="menu-button-inner" class="smaller"></div>
-          </div>
-        </nav>
-        <!-- #endregion MOBILE COLLAPSE BUTTON -->
+        <div id="menu-btn">
+          <div id="menu-btn-icon" class="smaller"></div>
+        </div>
       </div>
       <nav id="menu-list">
         <ul>
-          <li class="aboutli">
+          <li class="menu-link-about">
             <a href="#about">
               <span class="purple">A</span>
               <span class="blue">b</span>
@@ -76,15 +73,24 @@
             <a href="testimo.html">Testimonials</a>
           </li>
           <li class="conli">
-            <a href="#contact"
-              ><span class="red0">C</span><span class="green">o</span><span class="blue">n</span
-              ><span class="orange">t</span><span class="purple0">a</span><span class="red0">c</span
-              ><span class="green">t</span></a
-            >
+            <a href="#contact">
+              <span class="red0">C</span>
+              <span class="green">o</span>
+              <span class="blue">n</span>
+              <span class="orange">t</span>
+              <span class="purple0">a</span>
+              <span class="red0">c</span>
+              <span class="green">t</span>
+            </a>
           </li>
         </ul>
       </nav>
     </header>
     <!-- #endregion BANNER -->
+
+    <!-- #region SCRIPTS -->
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/mobile-alt.js"></script>
+    <!-- #endregion SCRIPTS -->
   </body>
 </html>
