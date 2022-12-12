@@ -575,34 +575,21 @@ video {
 
 /* #region SO-CHERRY */
 
-footer.sclogodiv {
+#sccontentinfo {
   vertical-align: top;
   display: inline-block;
-  text-align: center;
-}
-
-.sclogo {
-  max-width: 100%;
-  height: 4em;
-  position: relative;
-}
-
-.sccaption {
-  display: block;
-  width: 100%;
-  font-size: 0.8em;
-}
-
-#sccontentinfo {
   text-align: center;
   padding: 2em 1em 1em 1em;
   margin-left: 1.5em;
 }
 
-#contentinfo {
-  text-align: center;
-  padding: 3em 1em 1em 1em;
-  margin: 0 auto;
+.sclogo {
+  height: 4em;
+}
+
+.sccaption {
+  display: block;
+  font-size: 0.8em;
 }
 
 /* #endregion SO-CHERRY */
