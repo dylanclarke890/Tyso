@@ -1,54 +1,39 @@
-jQuery(function ($) {
-  var open = false;
+UI.onPageReady(() => {
+  const title = document.getElementById("title");
+  const menuBtn = document.getElementById("menubutt");
+  const menuBtnInner = document.getElementById("menu-button-inner");
+  const menuList = document.getElementById("menu-list");
+  const logo = document.getElementById("logo");
+  let open = false;
 
-  function resizeMenu() {
-    if ($(this).width() < 768) {
-      if (!open) {
-        $("#menu-list").hide();
-      }
-      $("#menubutt").show();
-      $("#logo").attr("src", "assets/images/mobile/newlogo.png");
-    } else if ($(this).width() >= 768) {
-      if (!open) {
-        $("#menu-list").show();
-      }
-      $("#menubutt").hide();
-      $("#title").show();
-      $("#wrapper").removeClass("space");
-      $("#logo").attr("src", "assets/images/icons/tyso-icon.png");
+  UI.addEvent(window, "resize", () => {
+    if (window.innerWidth < 768) {
+      if (!open) UI.hide(menuList);
+      UI.show(menuBtn);
+      logo.src = "assets/images/mobile/newlogo.png";
+    } else {
+      if (!open) UI.show(menuList);
+      UI.hide(menuBtn);
+      UI.show(title);
+      logo.src = "assets/images/icons/tyso-icon.png";
     }
-  }
+  });
 
-  function setupMenuButton() {
-    $("#menubutt").click(function (e) {
-      e.preventDefault();
+  UI.addEvent(menuBtn, "click", (e) => {
+    e.preventDefault();
+    // $("#menu-list").fadeOut();
+    UI.toggle(menuList);
+    menuBtn.classList.toggle("selected", "repo");
+    menuBtnInner.classList.toggle("smaller", "bigger");
+    document.getElementById("wrapper").classList.toggle("space");
+    UI.toggle(title);
+    open = !open;
+  });
 
-      if (open) {
-        $("#menu-list").fadeOut();
-        $("#menubutt").toggleClass("selected");
-        $("#menu-button-inner").addClass("smaller");
-        $("#menu-button-inner").removeClass("bigger");
-        $("#wrapper").removeClass("space");
-        $("#menubutt").removeClass("repo");
-        $("#title").show();
-      } else {
-        $("#menu-list").fadeIn();
-        $("#menubutt").toggleClass("selected");
-        $("#menu-button-inner").addClass("bigger");
-        $("#menu-button-inner").removeClass("smaller");
-        $("#wrapper").addClass("space");
-        $("#menubutt").addClass("repo");
-        $("#title").hide();
-      }
+  UI.triggerEvent(window, "resize");
+});
 
-      open = !open;
-    });
-  }
-
-  $(window).resize(resizeMenu);
-
-  resizeMenu();
-  setupMenuButton();
+jQuery(function ($) {
   $(".navlink").click(function () {
     //or $("#menu").slideUp() if you want it to slide up instead of just disappearing.
     $("#menu-list").fadeOut();
