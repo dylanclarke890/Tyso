@@ -1,31 +1,88 @@
+/* #region GENERAL */
+
 body {
   font-family: "Architects Daughter", cursive;
   font-size: 1.5em;
   background-color: rgba(34, 135, 55, 0.7);
   color: rgba(194, 250, 260, 1);
-  padding: 0;
-  margin: 0 auto;
+  margin-inline: auto;
   background-image: url(../images/mobile/galaxy.png);
   background-size: contain;
 }
 
-#banner-wrapper {
-  padding-top: 1px;
-  background-image: url(../images/mobile/bodybg3b.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+h2 {
+  font-size: 28px;
+  padding-bottom: 0.5em;
 }
 
-#logobutt-wrapper {
-  display: table;
-  width: 96%;
-  margin: 0.375em auto;
-  /* 6/16 = 0.375em; */
+h3 {
+  text-align: center;
+  padding-bottom: 1em;
 }
 
-#logobutt {
-  display: table-row;
+.center {
+  text-align: center;
 }
+
+.spacer {
+  height: 1em;
+}
+
+.pad {
+  padding: 0 0.3em 0 0.3em;
+}
+
+.text {
+  font-size: 0.8em;
+}
+
+.textmed {
+  font-size: 1em;
+}
+
+.images {
+  max-width: 100%;
+  padding: 0;
+}
+
+.up {
+  position: relative;
+  top: -1em !important;
+  padding-bottom: 0.5em;
+}
+
+.wrap {
+  float: left;
+  margin: 0.3em;
+}
+
+.space {
+  margin-top: 38em;
+}
+
+.back-to-top {
+  height: 2em;
+  position: relative;
+  z-index: 500;
+}
+
+.caption {
+  display: block;
+  width: 100%;
+  font-size: 0.5em;
+}
+
+#content {
+  margin: 0 auto;
+}
+
+#content p {
+  margin: 1em 0;
+}
+
+/* #endregion GENERAL */
+
+/* #region COLOURS */
 
 .red0 {
   color: red;
@@ -63,6 +120,461 @@ body {
   color: yellow;
 }
 
+/* #endregion COLOURS */
+
+/* #region BANNER */
+
+#banner-wrapper {
+  padding-top: 1px;
+  background-image: url(../images/mobile/bodybg3b.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#banner {
+  display: table-row;
+  width: 96%;
+  margin: 0.375em auto;
+}
+
+#logo {
+  max-width: 100%;
+  width: 70%;
+  position: relative;
+  left: -10%;
+  clear: both;
+  float: right;
+}
+
+#menu-nav {
+  display: table-cell;
+  vertical-align: bottom;
+  text-align: right;
+}
+
+#menubutt {
+  vertical-align: bottom;
+  float: right;
+  clear: both;
+  padding: 0.3em;
+  margin: 0.5em 1em;
+  cursor: pointer;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background-color: green;
+  background-image: -moz-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: -webkit-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: -ms-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: -o-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-position: left bottom;
+  background-repeat: repeat-x;
+}
+
+#menubutt.selected,
+#menubutt:active {
+  -moz-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
+  -ms-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
+  -o-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
+  box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
+  background-color: green;
+  background-image: -moz-linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: -webkit-linear-gradient(
+    bottom,
+    rgba(100, 152, 190, 0.5),
+    rgba(30, 82, 120, 0.5)
+  );
+  background-image: linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: -ms-linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+  background-image: -o-linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
+}
+
+#menu-button-inner {
+  background: transparent url(../images/icons/menu-bg-zen.png) no-repeat 0 0;
+  background-size: cover !important;
+}
+
+.bigger {
+  width: 80px;
+  height: 64px;
+}
+
+.smaller {
+  width: 63px;
+  height: 50px;
+}
+
+#menu-list {
+  clear: both;
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(24, 120, 60, 1);
+  -moz-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
+  -webkit-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
+  -ms-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
+  -o-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
+  box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
+}
+
+#menu-list ul {
+  overflow: hidden;
+  position: relative;
+  list-style: none;
+  z-index: 5000;
+}
+
+#menu-list li {
+  float: left;
+  width: 100%;
+  background-size: contain;
+}
+
+#menu-list a {
+  color: #c2daeb;
+  white-space: nowrap;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  line-height: 2.875em;
+  height: 2.875em;
+  padding: 0.375em;
+  -moz-transition: color 0.3s linear, background-color 0.3s linear;
+  -o-transition: color 0.3s linear, background-color 0.3s linear;
+  -webkit-transition: color 0.3s linear, background-color 0.3s linear;
+  -ms-transition: color 0.3s linear, background-color 0.3s linear;
+  transition: color 0.3s linear, background-color 0.3s linear;
+  -moz-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+  -o-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+  -webkit-box-shadow: 0 0 0.2em rgba(24, 150, 90, 1);
+  -ms-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+  box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
+}
+
+#menu-list a:hover,
+#menu-list a:active {
+  color: #fff;
+  background-color: rgba(245, 245, 245, 0.6);
+}
+
+.aboutli {
+  background: url(../images/mobile/menu/rainbow.png) no-repeat center,
+    url(../images/mobile/menu/bfly.png) no-repeat left,
+    url(../images/mobile/menu/bfly.png) no-repeat right;
+  background-color: rgba(176, 224, 230, 1);
+}
+
+.ytli {
+  background-image: url(../images/mobile/menu/classbg2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 100, 0.9);
+}
+
+.myoli {
+  background: url(../images/mobile/menu/move.png) no-repeat center,
+    url(../images/mobile/menu/mol_left.png) no-repeat left,
+    url(../images/mobile/menu/mol_right.png) no-repeat right;
+  background-color: rgba(255, 0, 102, 0.85);
+}
+
+.longli {
+  background: url(../images/mobile/menu/longevity.png) no-repeat left,
+    url(../images/mobile/menu/longevity.png) no-repeat right;
+  background-color: rgba(102, 0, 153, 0.2);
+}
+
+.hyli {
+  background: url(../images/mobile/menu/book1.png) no-repeat left,
+    url(../images/mobile/menu/book1.png) no-repeat right;
+  background-color: rgba(102, 0, 102, 1);
+}
+
+.camli {
+  background: url(../images/mobile/menu/camf.png) no-repeat left,
+    url(../images/mobile/menu/camm.png) no-repeat right;
+  background-color: rgba(204, 153, 0, 1);
+}
+
+.bodyli {
+  background-image: url(../images/mobile/menu/tyso-mind-body-soul.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 191, 255, 0.8);
+}
+
+.surveyli {
+  background-image: url(../images/mobile/menu/survey.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+
+.vipli {
+  background-image: url(../images/mobile/menu/tyso-vip.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.watchli {
+  background-image: url(../images/mobile/menu/spark.png);
+  background-color: rgba(192, 192, 192, 1);
+}
+
+.testili {
+  background-image: url(../images/mobile/menu/libg1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.gli {
+  background-image: url(../images/mobile/menu/gallerybg2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 127, 80, 1);
+}
+
+.classli {
+  background-image: url(../images/mobile/menu/posebg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(147, 112, 219, 1);
+}
+
+.foodli {
+  background-image: url(../images/backgrounds/leaves-border.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(0, 128, 0, 1);
+}
+
+.conli {
+  background-image: url(../images/mobile/menu/conbg4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(245, 245, 245, 1);
+}
+
+/* #endregion BANNER */
+
+/* #region INTRO */
+
+#intro {
+  padding: 0.5em 0.3em 0.3em 0.3em;
+}
+
+.blurbsign {
+  font-size: 1.5em;
+}
+
+.blurb {
+  color: rgba(194, 250, 260, 1);
+  position: relative;
+  margin: 0 auto;
+  font-family: "Marck Script", cursive;
+  top: -2em;
+  padding: 0.2em;
+}
+
+.blurb p {
+  line-height: 1.3em;
+  font-size: 1.3em;
+  font-weight: 500;
+  float: right;
+  position: relative;
+}
+
+.blurblist {
+  float: right;
+  position: relative;
+  top: -1em;
+  padding-bottom: 1.2em;
+  padding-left: 1.3em;
+  font-size: 1.2em;
+}
+
+.blurbbottom {
+  position: relative;
+  top: -1em;
+  text-align: right;
+  width: 70%;
+}
+
+.newfont {
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.list {
+  position: relative;
+  left: -0.4em;
+  line-height: 1.3em;
+}
+
+.bookimg {
+  height: 300px;
+}
+
+/* #endregion INTRO */
+
+/* #region ABOUT */
+
+#about {
+  background-color: transparent;
+  padding-bottom: 1em;
+}
+
+#aboutbutt {
+  margin: 0 auto;
+  position: relative;
+  top: -1em;
+  left: 22vw;
+  clear: both;
+}
+
+#aboutlink {
+  position: relative;
+  left: 25vw;
+  top: 0.3em;
+}
+
+/* #endregion ABOUT */
+
+/* #region LONGEVITY */
+
+#longevity {
+  background-color: transparent;
+  padding-bottom: 1em;
+}
+
+.longbtt {
+  padding-top: 1em;
+  position: relative;
+  left: 40vw;
+  padding-bottom: 1em;
+}
+
+div.longbtt {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+}
+
+#longtext {
+  width: 100%;
+  margin-top: -0.45em;
+}
+
+/* #endregion LONGEVITY */
+
+/* #region VIDEOS */
+
+#video {
+  background-color: transparent;
+  padding-top: 0.4em;
+}
+
+video::-webkit-media-controls-start-playback-button {
+  opacity: 1;
+  background-color: teal;
+  position: relative;
+  top: -5.8em;
+  left: 0.5em;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+}
+
+video {
+  padding: 1em 0 1em 0;
+  position: relative;
+  top: -1em;
+}
+
+.vidcon {
+  object-fit: cover;
+  max-width: 100%;
+}
+
+/* #endregion VIDEOS */
+
+/* #region GALLERY */
+
+.galleria {
+  max-width: 700px;
+  height: 500px;
+  background: transparent;
+  position: relative;
+  top: 0.4em;
+  z-index: 0;
+}
+
+#gallery {
+  height: 600px;
+  background-color: transparent;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 0.4em;
+  padding-bottom: 1.4em;
+}
+
+/* #endregion GALLERY */
+
+/* #region CLASSES */
+
+#class p {
+  position: relative;
+  top: -1em;
+}
+
+.pritit {
+  padding-bottom: 0.5em;
+}
+
+.privimg {
+  height: 300px;
+  padding-bottom: 0;
+  position: relative;
+}
+
+/* #endregion CLASSES */
+
+/* #region CONTACT */
+
+#contact {
+  background-color: transparent;
+  height: 600px;
+  background-image: url(../images/mobile/ciao.png);
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#ebutt {
+  margin-top: 0.5em;
+}
+
+/* #endregion CONTACT */
+
+/* #region SO-CHERRY */
+
 footer.sclogodiv {
   vertical-align: top;
   display: inline-block;
@@ -84,76 +596,61 @@ footer.sclogodiv {
 #sccontentinfo {
   text-align: center;
   padding: 2em 1em 1em 1em;
-  /* 16/16 = 1em */
   margin-left: 1.5em;
 }
 
-#ebutt {
-  margin-top: 0.5em;
+#contentinfo {
+  text-align: center;
+  padding: 3em 1em 1em 1em;
+  margin: 0 auto;
 }
 
-.pritit {
-  padding-bottom: 0.5em;
-}
-
-.privimg {
-  height: 300px;
-  padding-bottom: 0;
-  position: relative;
-}
-
-.up {
-  position: relative;
-  top: -1em !important;
-  padding-bottom: 0.5em;
-}
-
-.wrap {
-  float: left;
-  margin: 0.3em;
-}
-
-.bookimg {
-  height: 300px;
-}
-
-h2 {
-  font-size: 28px;
-  padding-bottom: 0.5em;
-}
-
-#hereye {
-  padding: 0.5em 0.3em 0.3em 0.3em;
-}
-
-#contact {
-  background-color: transparent;
-  height: 600px;
-  background-image: url(../images/mobile/ciao.png);
-  background-repeat: no-repeat;
-}
+/* #endregion SO-CHERRY */
 
 .conbtt {
   padding-top: 1em;
 }
 
-div.conbtt {
+div.conbtt,
+div.bttdiv {
   vertical-align: top;
   display: inline-block;
   text-align: center;
 }
 
-.longbtt {
-  padding-top: 1em;
+.bttdiv {
   position: relative;
   left: 40vw;
   padding-bottom: 1em;
 }
 
-div.longbtt {
-  vertical-align: top;
-  display: inline-block;
-  text-align: center;
+.buttshell {
+  padding: 0.5em 0 0.5em 0;
+}
+
+.butt {
+  background-image: url(../images/mobile/buttbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-decoration: none;
+
+  border-radius: 4em;
+  margin: 0.5em;
+  padding: 0.5em;
+  font-weight: bold;
+  color: rgba(194, 250, 260, 1);
+}
+
+.repo {
+  position: relative;
+  left: -30%;
+}
+
+.repoup {
+  position: relative;
+  top: -1em;
+  left: -0.5em;
+  padding-top: 2em;
 }
 
 @media all and (orientation: landscape) {
@@ -190,7 +687,6 @@ div.longbtt {
 
   #aboutbutt {
     position: relative;
-
     left: 15vw !important;
   }
 
@@ -199,540 +695,4 @@ div.longbtt {
     left: 37vw !important;
     top: 0.5em !important;
   }
-}
-
-#class p {
-  position: relative;
-  top: -1em;
-}
-
-.center {
-  text-align: center;
-}
-
-.pad {
-  padding: 0 0.3em 0 0.3em;
-}
-
-.text {
-  font-size: 0.8em;
-}
-
-.textmed {
-  font-size: 1em;
-}
-
-.images {
-  max-width: 100%;
-  padding: 0;
-}
-
-h3 {
-  text-align: center;
-  padding-bottom: 1em;
-}
-
-#longtext {
-  width: 100%;
-  margin-top: -0.45em;
-}
-
-#about {
-  background-color: transparent;
-
-  padding-bottom: 1em;
-}
-
-#longevity {
-  background-color: transparent;
-
-  padding-bottom: 1em;
-}
-
-.spacer {
-  height: 1em;
-}
-
-div.bttdiv {
-  vertical-align: top;
-  display: inline-block;
-  text-align: center;
-}
-
-.bttdiv {
-  position: relative;
-  left: 40vw;
-  padding-bottom: 1em;
-}
-
-.btt {
-  height: 2em;
-  position: relative;
-
-  z-index: 500;
-}
-
-.caption {
-  display: block;
-  width: 100%;
-  font-size: 0.5em;
-}
-
-.galleria {
-  max-width: 700px;
-  height: 500px;
-  background: transparent;
-  position: relative;
-  top: 0.4em;
-  z-index: 0;
-}
-
-#gallery {
-  height: 600px;
-  background-color: transparent;
-  width: 100%;
-  margin: 0 auto;
-  padding-top: 0.4em;
-  padding-bottom: 1.4em;
-}
-
-#title {
-  display: table-cell;
-  text-align: center;
-}
-
-#logo {
-  max-width: 100%;
-  width: 70%;
-  position: relative;
-  left: -10%;
-
-  clear: both;
-  float: right;
-}
-
-#menu-list li {
-  float: left;
-  width: 100%;
-}
-
-.space {
-  margin-top: 38em;
-  /* 185/24 = 7.7em */
-}
-
-#content {
-  margin: 0 auto;
-}
-
-#content p {
-  margin: 1em 0;
-  /* 16/16 = 1em */
-}
-
-#contentinfo {
-  text-align: center;
-  padding: 3em 1em 1em 1em;
-  /* 16/16 = 1em */
-  margin: 0 auto;
-}
-
-#aboutbutt {
-  margin: 0 auto;
-  position: relative;
-  top: -1em;
-  left: 22vw;
-  clear: both;
-}
-
-.buttshell {
-  padding: 0.5em 0 0.5em 0;
-}
-
-.butt {
-  background-image: url(../images/mobile/buttbg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  text-decoration: none;
-
-  border-radius: 4em;
-  margin: 0.5em;
-  padding: 0.5em;
-  font-weight: bold;
-  color: rgba(194, 250, 260, 1);
-}
-
-#aboutlink {
-  position: relative;
-  left: 25vw;
-  top: 0.3em;
-}
-
-#video {
-  background-color: transparent;
-  padding-top: 0.4em;
-}
-
-video::-webkit-media-controls-start-playback-button {
-  opacity: 1;
-  background-color: teal;
-  position: relative;
-  top: -5.8em;
-  left: 0.5em;
-  padding: 0;
-  margin: 0;
-  border-radius: 50%;
-}
-
-video {
-  padding: 1em 0 1em 0;
-  position: relative;
-  top: -1em;
-}
-
-.vidcon {
-  object-fit: cover;
-  max-width: 100%;
-}
-
-#menu-nav {
-  display: table-cell;
-  vertical-align: bottom;
-  text-align: right;
-}
-
-#menubutt {
-  vertical-align: bottom;
-  float: right;
-  clear: both;
-  padding: 0.3em;
-  /*.5em;  6/16 = 0.375em */
-  margin: 0.5em 1em;
-
-  opacity: 1;
-  cursor: pointer;
-
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  -ms-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  -o-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-
-  background-color: green;
-  background-image: -moz-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: -webkit-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: -ms-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: -o-linear-gradient(top, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-position: left bottom;
-  background-repeat: repeat-x;
-}
-
-#menubutt.selected,
-#menubutt:active {
-  opacity: 1;
-
-  -moz-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
-  -webkit-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
-  -ms-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
-  -o-box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
-  box-shadow: 0 1px 1px rgba(120, 120, 120, 0.2);
-
-  background-color: green;
-  background-image: -moz-linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: -webkit-linear-gradient(
-    bottom,
-    rgba(100, 152, 190, 0.5),
-    rgba(30, 82, 120, 0.5)
-  );
-  background-image: linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: -ms-linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-image: -o-linear-gradient(bottom, rgba(100, 152, 190, 0.5), rgba(30, 82, 120, 0.5));
-  background-position: left bottom;
-  background-repeat: repeat-x;
-
-  /* margin-bottom: -.375em; 6/16 = .375em */
-}
-
-/*#menu-button-inner.selected,
-#menu-button-inner:active,
-	{
-		width:176px;
-		height: 60px;
-	}*/
-.bigger {
-  width: 80px;
-  height: 64px;
-  background-size: cover !important;
-}
-
-.smaller {
-  width: 63px;
-  height: 50px;
-
-  background-size: cover !important;
-}
-
-.repo {
-  position: relative;
-  left: -30%;
-}
-
-#menu-button-inner {
-  background: transparent url(../images/icons/menu-bg-zen.png) no-repeat 0 0;
-}
-
-#menu-list {
-  clear: both;
-  display: none;
-  position: absolute;
-  width: 100%;
-  background-color: rgba(24, 120, 60, 1);
-
-  -moz-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
-  -webkit-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
-  -ms-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
-  -o-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
-  box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
-}
-
-#menu-list ul {
-  overflow: hidden;
-  position: relative;
-  z-index: 5000;
-}
-
-#menu-list a {
-  color: #c2daeb;
-  white-space: nowrap;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-
-  line-height: 2.875em;
-  /* 46/16 = 3.375em */
-  height: 2.875em;
-  /* 46/16 = 3.375em */
-  padding: 0.375em;
-  /* 6/16 = .375em */
-
-  -moz-transition: color 0.3s linear, background-color 0.3s linear;
-  -o-transition: color 0.3s linear, background-color 0.3s linear;
-  -webkit-transition: color 0.3s linear, background-color 0.3s linear;
-  -ms-transition: color 0.3s linear, background-color 0.3s linear;
-  transition: color 0.3s linear, background-color 0.3s linear;
-
-  -moz-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-  -o-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-  -webkit-box-shadow: 0 0 0.2em rgba(24, 150, 90, 1);
-  -ms-box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-  box-shadow: inset 0 0 0.2em rgba(24, 150, 90, 1);
-}
-
-#menu-list a:hover,
-#menu-list a:active {
-  color: #fff;
-  background-color: rgba(245, 245, 245, 0.6);
-}
-
-.aboutli {
-  background: url(../images/mobile/menu/rainbow.png) no-repeat center,
-    url(../images/mobile/menu/bfly.png) no-repeat left,
-    url(../images/mobile/menu/bfly.png) no-repeat right;
-  background-size: contain;
-  /*background-position:center;
-	background-repeat:no-repeat;*/
-  background-color: rgba(176, 224, 230, 1);
-}
-
-.ytli {
-  background-image: url(../images/mobile/menu/classbg2.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: rgba(0, 0, 100, 0.9);
-}
-
-.myoli {
-  background: url(../images/mobile/menu/move.png) no-repeat center,
-    url(../images/mobile/menu/mol_left.png) no-repeat left,
-    url(../images/mobile/menu/mol_right.png) no-repeat right;
-  background-size: contain;
-  /*background-position:center;
-	background-repeat:no-repeat;*/
-  background-color: rgba(255, 0, 102, 0.85);
-}
-
-.longli {
-  background: url(../images/mobile/menu/longevity.png) no-repeat left,
-    url(../images/mobile/menu/longevity.png) no-repeat right;
-  background-size: contain;
-  /*background-position:center;
-	background-repeat:no-repeat;*/
-  background-color: rgba(102, 0, 153, 0.2);
-}
-
-.hyli {
-  background: url(../images/mobile/menu/book1.png) no-repeat left,
-    url(../images/mobile/menu/book1.png) no-repeat right;
-  background-size: contain;
-  /*background-position:center;
-	background-repeat:no-repeat;*/
-  background-color: rgba(102, 0, 102, 1);
-}
-
-.camli {
-  background: url(../images/mobile/menu/camf.png) no-repeat left,
-    url(../images/mobile/menu/camm.png) no-repeat right;
-  background-size: contain;
-  /*background-position:center;
-	background-repeat:no-repeat;*/
-  background-color: rgba(204, 153, 0, 1);
-}
-
-.bodyli {
-  background-image: url(../images/mobile/menu/tyso-mind-body-soul.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: rgba(0, 191, 255, 0.8);
-}
-
-.surveyli {
-  background-image: url(../images/mobile/menu/survey.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: white;
-}
-
-.vipli {
-  background-image: url(../images/mobile/menu/tyso-vip.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.watchli {
-  background-image: url(../images/mobile/menu/spark.png);
-  background-size: contain;
-  background-color: rgba(192, 192, 192, 1);
-}
-
-.testili {
-  background-image: url(../images/mobile/menu/libg1.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.gli {
-  background-image: url(../images/mobile/menu/gallerybg2.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: rgba(255, 127, 80, 1);
-}
-
-.classli {
-  background-image: url(../images/mobile/menu/posebg.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba(147, 112, 219, 1);
-}
-
-.foodli {
-  background-image: url(../images/backgrounds/leaves-border.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba(0, 128, 0, 1);
-}
-
-.conli {
-  background-image: url(../images/mobile/menu/conbg4.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: rgba(245, 245, 245, 1);
-}
-
-#holly {
-  display: none;
-}
-
-.blurb {
-  color: rgba(194, 250, 260, 1);
-
-  position: relative;
-
-  margin: 0 auto;
-  font-family: "Marck Script", cursive;
-  top: -2em;
-  padding: 0.2em;
-}
-
-.blurb p {
-  line-height: 1.3em;
-  font-size: 1.3em;
-  font-weight: 500;
-  float: right;
-  position: relative;
-}
-
-.blurblist {
-  float: right;
-  position: relative;
-  top: -1em;
-  padding-bottom: 1.2em;
-  padding-left: 1.3em;
-  font-size: 1.2em;
-}
-
-li:before {
-  color: red;
-}
-
-.list {
-  position: relative;
-  left: -0.4em;
-  line-height: 1.3em;
-}
-
-.blurbbottom {
-  position: relative;
-  top: -1em;
-  text-align: right;
-  width: 70%;
-}
-
-.newfont {
-  font-family: Verdana, Geneva, sans-serif;
-  font-weight: bold;
-  font-size: 0.8em;
-}
-
-.blurbsign {
-  font-size: 1.5em;
-}
-
-.repoup {
-  position: relative;
-  top: -1em;
-  left: -0.5em;
-  padding-top: 2em;
 }
