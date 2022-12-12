@@ -196,11 +196,11 @@ h6 {
   justify-content: center;
 }
 
-.blue {
+.blue-bg {
   background: rgba(67, 250, 245, 0.9);
 }
 
-.green {
+.green-bg {
   background: rgba(94, 175, 5, 0.9);
 }
 

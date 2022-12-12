@@ -1,9 +1,10 @@
 UI.onPageReady(() => {
-  const title = document.getElementById("title");
-  const menuBtn = document.getElementById("menubutt");
-  const menuBtnInner = document.getElementById("menu-button-inner");
   const menuList = document.getElementById("menu-list");
+  const menuBtn = document.getElementById("menubutt");
   const logo = document.getElementById("logo");
+  const title = document.getElementById("title");
+  const wrapper = document.getElementById("wrapper");
+  const menuBtnInner = document.getElementById("menu-button-inner");
   let open = false;
 
   UI.addEvent(window, "resize", () => {
@@ -11,22 +12,31 @@ UI.onPageReady(() => {
       if (!open) UI.hide(menuList);
       UI.show(menuBtn);
       logo.src = "assets/images/mobile/newlogo.png";
-    } else {
-      if (!open) UI.show(menuList);
-      UI.hide(menuBtn);
-      UI.show(title);
-      logo.src = "assets/images/icons/tyso-icon.png";
+      return;
     }
+    if (!open) UI.show(menuList);
+    UI.hide(menuBtn);
+    UI.show(title);
+    wrapper.classList.remove("space");
+    logo.src = "assets/images/icons/tyso-icon.png";
   });
 
   UI.addEvent(menuBtn, "click", (e) => {
     e.preventDefault();
-    // $("#menu-list").fadeOut();
-    UI.toggle(menuList);
-    menuBtn.classList.toggle("selected", "repo");
-    menuBtnInner.classList.toggle("smaller", "bigger");
-    document.getElementById("wrapper").classList.toggle("space");
-    UI.toggle(title);
+    menuBtn.classList.toggle("selected");
+    if (open) {
+      // $("#menu-list").fadeOut();
+      menuBtn.classList.add("smaller");
+      menuBtn.classList.remove("bigger", "repo");
+      wrapper.classList.remove("space");
+      UI.show(title);
+    } else {
+      // $("#menu-list").fadeIn();
+      menuBtn.classList.remove("smaller");
+      menuBtn.classList.add("bigger", "repo");
+      wrapper.classList.add("space");
+      UI.hide(title);
+    }
     open = !open;
   });
 
