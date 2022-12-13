@@ -43,7 +43,10 @@ UI.onPageReady(() => {
 
   const backToTopBtns = document.getElementsByClassName("back-to-top");
   UI.forEach(backToTopBtns, (btn) => UI.addEvent(btn, "click", () => UI.scrollTo(0)));
-
+  UI.forEach(
+    document.getElementsByClassName("current-year"),
+    (el) => (el.innerText = new Date().getFullYear())
+  );
   Galleria.loadTheme(
     "https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js"
   );
