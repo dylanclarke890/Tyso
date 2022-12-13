@@ -1,3 +1,5 @@
+/* #region GENERAL */
+
 body {
   font-family: "Architects Daughter", cursive;
   font-size: 1.5em;
@@ -12,6 +14,10 @@ video {
   max-width: 100%;
 }
 
+h2 {
+  font-size: 115%;
+}
+
 .break {
   height: 1rem;
   width: 100%;
@@ -20,6 +26,8 @@ video {
 .section {
   padding: 0.5rem;
 }
+
+/* #endregion GENERAL */
 
 /* #region BACK-TO-TOP-BTN */
 
@@ -305,7 +313,7 @@ video {
 
 #intro {
   font-family: "Marck Script", cursive;
-  font-size: calc(var(--font-size) - 1px);
+  font-size: calc(var(--font-size) + 3px);
   margin-inline: auto;
   max-width: 810px;
   text-shadow: 1px 1px black;
@@ -378,5 +386,16 @@ video {
 /* #endregion CLASSES */
 
 /* #region SO-CHERRY */
+
+#so-cherry a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#so-cherry img {
+  max-width: 50%;
+}
 
 /* #endregion SO-CHERRY */
