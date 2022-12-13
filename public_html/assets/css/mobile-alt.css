@@ -311,7 +311,7 @@ h2 {
 
 /* #region INTRO */
 
-#intro {
+.intro {
   font-family: "Marck Script", cursive;
   font-size: calc(var(--font-size) + 3px);
   margin-inline: auto;

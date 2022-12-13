@@ -7,7 +7,8 @@ UI.onPageReady(() => {
   let menuOpen = false;
 
   UI.addStyles(menuList, { opacity: 0, display: "none" });
-  UI.addEvent(menuBtn, "click", () => {
+
+  const toggleMenu = () => {
     menuBtnIcon.classList.toggle("larger");
     if (menuOpen) {
       UI.fadeOut(menuList);
@@ -21,7 +22,8 @@ UI.onPageReady(() => {
       UI.addStyles(menuBtn, { transform: "rotate(180deg)" });
     }
     menuOpen = !menuOpen;
-  });
+  };
+  UI.addEvent(menuBtn, "click", toggleMenu);
 
   let lang;
   switch (navigator.language) {
@@ -46,6 +48,26 @@ UI.onPageReady(() => {
   UI.forEach(
     document.getElementsByClassName("current-year"),
     (el) => (el.innerText = new Date().getFullYear())
+  );
+
+  const goToLinks = document.querySelectorAll("[data-target]");
+  UI.forEach(goToLinks, (link) =>
+    UI.addEvent(link, "click", (e) => {
+      e.preventDefault();
+      toggleMenu();
+
+      let y;
+      const targets = document.querySelectorAll(`.${link.getAttribute("data-target")}`);
+      if (targets.length === 0) return;
+      if (targets.length === 1) y = targets[0].offsetTop;
+      else {
+        const target = UI.filter(targets, (el) => el.getAttribute("data-lang") === lang);
+        console.log(target);
+        y = target[0].offsetTop;
+      }
+      console.log(y);
+      UI.scrollTo(y);
+    })
   );
 
   Galleria.loadTheme(
