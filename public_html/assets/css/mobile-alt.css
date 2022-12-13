@@ -123,6 +123,7 @@ img {
 
 #menu-list {
   position: absolute;
+  left: 0;
   width: 100%;
   background-color: rgba(24, 120, 60, 1);
   -moz-box-shadow: 0 0.2em 0.2em rgba(24, 120, 60, 0.4);
