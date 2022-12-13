@@ -84,8 +84,37 @@ class UI {
     fill = "forwards"
   ) => element.animate(keyframes, { duration: speed, iterations: times, easing: effect, fill });
 
+  static fade = (/** @type {HTMLElement} */ element, type, durationInMs) => {
+    const isIn = type === "in",
+      interval = 50,
+      gap = interval / durationInMs;
+    let opacity = isIn ? 0 : 1;
+
+    if (isIn) {
+      element.style.display = "inline";
+      element.style.opacity = opacity;
+    }
+
+    const fading = setInterval(() => {
+      opacity = isIn ? opacity + gap : opacity - gap;
+      element.style.opacity = opacity;
+
+      if (opacity <= 0) UI.hide(element);
+      if (opacity <= 0 || opacity >= 1) clearInterval(fading);
+    }, interval);
+  };
+
+  static fadeOut = (/** @type {HTMLElement} */ element, durationInMs = 500) =>
+    UI.fade(element, "out", durationInMs);
+
+  static fadeIn = (/** @type {HTMLElement} */ element, durationInMs = 500) =>
+    UI.fade(element, "in", durationInMs);
+
   static addStyles = (/** @type {HTMLElement} */ element, styles) =>
     Object.keys(styles).forEach((s) => (element.style[s] = styles[s]));
+
+  static removeStyles = (/** @type {HTMLElement} */ element, styles) =>
+    styles.forEach((s) => element.style.removeProperty(s));
 
   static getFromDOMQuery = (/** @type {string} */ DOMQuery, type = "class") => {
     switch (type) {
