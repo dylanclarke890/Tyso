@@ -57,13 +57,13 @@ UI.onPageReady(() => {
       toggleMenu();
 
       let y;
-      const targets = document.querySelectorAll(`.${link.getAttribute("data-target")}`);
-      if (targets.length === 0) return;
-      if (targets.length === 1) y = targets[0].offsetTop;
+      const sections = document.querySelectorAll(`.${link.getAttribute("data-target")}`);
+      if (sections.length === 0) return;
+      if (sections.length === 1) y = sections[0].offsetTop; // just one section, no translations.
       else {
-        const target = UI.filter(targets, (el) => el.getAttribute("data-lang") === lang);
-        console.log(target);
-        y = target[0].offsetTop;
+        // section must have multiple translations.
+        const translated = UI.filter(sections, (el) => el.getAttribute("data-lang") === lang);
+        y = translated[0].offsetTop;
       }
       console.log(y);
       UI.scrollTo(y);
