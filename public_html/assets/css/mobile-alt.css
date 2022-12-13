@@ -16,6 +16,10 @@ img {
   width: 100%;
 }
 
+.section {
+  padding: 0.5rem;
+}
+
 /* #region BACK-TO-TOP-BTN */
 
 .back-to-top {
@@ -343,17 +347,10 @@ img {
 /* #endregion WHO-IS-ANTHONY */
 
 /* #region YOGA-THERAPY */
-
-#yoga-therapy {
-  padding: 0.5rem;
-}
-
 /* #endregion YOGA-THERAPY */
 
 /* #region MYOKINES */
-
-#myokines {
-  padding: 0.5rem;
-}
-
 /* #endregion MYOKINES */
+
+/* #region LONGEVITY */
+/* #endregion LONGEVITY */
