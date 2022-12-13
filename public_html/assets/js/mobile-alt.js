@@ -65,7 +65,6 @@ UI.onPageReady(() => {
         const translated = UI.filter(sections, (el) => el.getAttribute("data-lang") === lang);
         y = translated[0].offsetTop;
       }
-      console.log(y);
       UI.scrollTo(y);
     })
   );
