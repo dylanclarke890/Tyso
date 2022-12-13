@@ -1,65 +1,76 @@
 UI.onPageReady(() => {
-  const menuList = document.getElementById("menu-list");
-  const menuBtn = document.getElementById("menubutt");
+  const banner = document.getElementById("banner");
   const logo = document.getElementById("logo");
-  const title = document.getElementById("title");
-  const wrapper = document.getElementById("wrapper");
-  const menuBtnInner = document.getElementById("menu-button-inner");
-  let open = false;
+  const menuBtn = document.getElementById("menu-btn");
+  const menuBtnIcon = document.getElementById("menu-btn-icon");
+  const menuList = document.getElementById("menu-list");
+  let menuOpen = false;
 
-  UI.addEvent(window, "resize", () => {
-    if (window.innerWidth < 768) {
-      if (!open) UI.hide(menuList);
-      UI.show(menuBtn);
-      logo.src = "assets/images/mobile/newlogo.png";
-      return;
-    }
-    if (!open) UI.show(menuList);
-    UI.hide(menuBtn);
-    UI.show(title);
-    wrapper.classList.remove("space");
-    logo.src = "assets/images/icons/tyso-icon.png";
-  });
+  UI.addStyles(menuList, { opacity: 0, display: "none" });
 
-  UI.addEvent(menuBtn, "click", (e) => {
-    e.preventDefault();
-    menuBtn.classList.toggle("selected");
-    if (open) {
-      // $("#menu-list").fadeOut();
-      menuBtn.classList.add("smaller");
-      menuBtn.classList.remove("bigger", "repo");
-      wrapper.classList.remove("space");
-      UI.show(title);
+  const toggleMenu = () => {
+    menuBtnIcon.classList.toggle("larger");
+    if (menuOpen) {
+      UI.fadeOut(menuList);
+      UI.fadeIn(logo);
+      UI.removeStyles(banner, ["justify-content"]);
+      UI.removeStyles(menuBtn, ["transform"]);
     } else {
-      // $("#menu-list").fadeIn();
-      menuBtn.classList.remove("smaller");
-      menuBtn.classList.add("bigger", "repo");
-      wrapper.classList.add("space");
-      UI.hide(title);
+      UI.fadeIn(menuList);
+      UI.fadeOut(logo);
+      UI.addStyles(banner, { justifyContent: "center" });
+      UI.addStyles(menuBtn, { transform: "rotate(180deg)" });
     }
-    open = !open;
-  });
+    menuOpen = !menuOpen;
+  };
+  UI.addEvent(menuBtn, "click", toggleMenu);
 
-  UI.triggerEvent(window, "resize");
-});
+  let lang;
+  switch (navigator.language) {
+    case "fr":
+    case "fr-fr":
+    case "fr-ca":
+      lang = "FR";
+      break;
+    case "en-US":
+    case "en-GB":
+      lang = "EN";
+      break;
+    default:
+      lang = "EN";
+  }
 
-jQuery(function ($) {
-  $(".navlink").click(function () {
-    //or $("#menu").slideUp() if you want it to slide up instead of just disappearing.
-    $("#menu-list").fadeOut();
-    $("#menubutt").toggleClass("selected");
-    $("#menu-button-inner").addClass("smaller");
-    $("#menu-button-inner").removeClass("bigger");
-    $("#wrapper").removeClass("space");
-    $("#menubutt").removeClass("repo");
-    $("#title").show();
-  });
-  (function () {
-    Galleria.loadTheme(
-      "https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js"
-    );
-    Galleria.run(".galleria");
-  })();
+  const elementsToHide = document.querySelectorAll(`[data-lang]:not([data-lang="${lang}"])`);
+  elementsToHide.forEach((e) => UI.hide(e));
 
-  AddThisHelper.initGlobals();
+  const backToTopBtns = document.getElementsByClassName("back-to-top");
+  UI.forEach(backToTopBtns, (btn) => UI.addEvent(btn, "click", () => UI.scrollTo(0)));
+  UI.forEach(
+    document.getElementsByClassName("current-year"),
+    (el) => (el.innerText = new Date().getFullYear())
+  );
+
+  const goToLinks = document.querySelectorAll("[data-target]");
+  UI.forEach(goToLinks, (link) =>
+    UI.addEvent(link, "click", (e) => {
+      e.preventDefault();
+      toggleMenu();
+
+      let y;
+      const sections = document.querySelectorAll(`.${link.getAttribute("data-target")}`);
+      if (sections.length === 0) return;
+      if (sections.length === 1) y = sections[0].offsetTop; // just one section, no translations.
+      else {
+        // section must have multiple translations.
+        const translated = UI.filter(sections, (el) => el.getAttribute("data-lang") === lang);
+        y = translated[0].offsetTop;
+      }
+      UI.scrollTo(y);
+    })
+  );
+
+  Galleria.loadTheme(
+    "https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js"
+  );
+  Galleria.run(".galleria", { responsive: true });
 });
