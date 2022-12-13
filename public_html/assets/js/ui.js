@@ -160,11 +160,11 @@ class UI {
     (document.body.scrollTop + document.documentElement.scrollTop) /
     (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 
+  static scrollTo = (y, behavior = "smooth") => window.scroll({ top: y, behavior });
+
   static onPageReady = (cb) => UI.addEvent(document, "DOMContentLoaded", cb);
 
-  static repaintDOM = () => {
-    document.body.getBoundingClientRect();
-  };
+  static repaintDOM = () => document.body.getBoundingClientRect();
 
   static makeFormAJAX = (/** @type {HTMLFormElement} */ form, cb, parse = true) => {
     UI.addEvent(form, "submit", function (e) {

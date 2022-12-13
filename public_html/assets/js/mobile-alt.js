@@ -40,4 +40,7 @@ UI.onPageReady(() => {
 
   const elementsToHide = document.querySelectorAll(`[data-lang]:not([data-lang="${lang}"])`);
   elementsToHide.forEach((e) => UI.hide(e));
+
+  const backToTopBtns = document.getElementsByClassName("back-to-top");
+  UI.forEach(backToTopBtns, (btn) => UI.addEvent(btn, "click", () => UI.scrollTo(0)));
 });

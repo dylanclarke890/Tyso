@@ -14,7 +14,23 @@ img {
 .break {
   height: 1rem;
   width: 100%;
-} 
+}
+
+.back-to-top {
+  display: inline-block;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.back-to-top img {
+  height: 3rem;
+}
+
+.back-to-top span {
+  width: 100%;
+  display: block;
+  font-size: 0.6em;
+}
 
 /* #region BANNER */
 
