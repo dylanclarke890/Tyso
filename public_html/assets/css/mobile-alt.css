@@ -3,7 +3,18 @@ body {
   font-size: 1.5em;
   background-image: url(../images/mobile/galaxy.png);
   background-size: cover;
+  color: white;
+  text-align: center;
 }
+
+img {
+  max-width: 100%;
+}
+
+.break {
+  height: 1rem;
+  width: 100%;
+} 
 
 /* #region BANNER */
 
@@ -267,7 +278,6 @@ body {
 /* #region INTRO */
 
 #intro {
-  color: white;
   font-family: "Marck Script", cursive;
   font-size: calc(var(--font-size) - 1px);
   margin-inline: auto;
@@ -276,10 +286,6 @@ body {
   letter-spacing: 2px;
   padding: 20px;
   border-radius: 10px;
-  text-align: center;
-}
-
-#three-areas {
   text-align: center;
 }
 
@@ -297,14 +303,14 @@ body {
 
 /* #endregion INTRO */
 
-/* #region ABOUT */
+/* #region WHO-IS-ANTHONY */
 
 .anthony-who {
   background: url(../images/mobile/buttbg.png) no-repeat;
   background-size: cover;
   border-radius: 4em;
   font-weight: bold;
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
   padding: 0.75rem;
 }
 
@@ -313,4 +319,12 @@ body {
   text-decoration: none;
 }
 
-/* #endregion ABOUT */
+/* #endregion WHO-IS-ANTHONY */
+
+/* #region YOGA-THERAPY */
+
+#yoga-therapy {
+  padding: 0.5rem;
+}
+
+/* #endregion YOGA-THERAPY */
