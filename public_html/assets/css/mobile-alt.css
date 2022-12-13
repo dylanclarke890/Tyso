@@ -7,7 +7,7 @@ body {
   text-align: center;
 }
 
-img {
+img, video {
   max-width: 100%;
 }
 
