@@ -2,7 +2,7 @@ body {
   font-family: "Architects Daughter", cursive;
   font-size: 1.5em;
   background-image: url(../images/mobile/galaxy.png);
-  background-size: cover;
+  background-size: contain;
   color: white;
   text-align: center;
 }
